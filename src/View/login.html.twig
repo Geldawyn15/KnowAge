@@ -1,0 +1,36 @@
+{% extends 'layout.html.twig' %}
+{% block title %} Homepage {% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/login_signup.css">
+{% endblock %}
+{% block nav %} {{ parent }} {% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <form action="" method="post">
+
+        <div class="row">
+            <div class="col-md-4 offset-md-2">
+                <h1>S'inscrire</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 offset-md-2">
+                <input type="text" class="form-control" placeholder="Nom">
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" placeholder="Prénom">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 offset-md-2">
+                <input type="text" class="form-control" placeholder="Email">
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" placeholder="password">
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
