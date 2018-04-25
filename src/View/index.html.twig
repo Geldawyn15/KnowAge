@@ -1,7 +1,82 @@
 {% extends 'layout.html.twig' %}
 {% block title %} Homepage {% endblock %}
+{% block stylesheet %} <link rel="stylesheet" href="/assets/css/index.css"> {% endblock %}
 {% block nav %} {{ parent }} {% endblock %}
 
 {% block content %}
+   <div class="container-fluid">
+       <div class="row">
+           <div class="offset-1 col-md-1">
+               <img src="http://via.placeholder.com/140x100">
+           </div>
+           <div class="offset-8 col-md-1">
+               <button class="btn"><img src="http://via.placeholder.com/100x40"></button>
+           </div>
+       </div>
+       <div class="row">
+           <div class="offset-1 col-md-10">
+               <h1 class="text-center">No Age</h1>
+           </div>
+       </div>
+       <div class="row">
+           <div class="offset-1 col-md-10 bg-dark">
+               <h1 class="text-center text-white">TAGLINE</h1>
+           </div>
+       </div>
+       <div class="row">
+           <div class="offset-1 col-md-1">
+               <button class="btn">Je Veux Forme</button>
+           </div>
+           <div class="offset-7 col-md-1">
+               <button class="btn">Je Veux Appredre </button>
+           </div>
+       </div>
+       <div class="row">
+           <div class=" col-md-12 text-center">
+               <form action="">
+                   <input class="Search" type="text" placeholder="Search.." name="search">
+                   <button type="submit"><i class="fas fa-search"></i></button>
+               </form>
+           </div>
+       </div>
 
+       <div class="row text-center">
+           <div class="col-md-4">
+               <img src="http://via.placeholder.com/240x240">
+           </div>
+           <div class="col-md-4">
+               <img src="http://via.placeholder.com/240x240">
+           </div>
+           <div class="col-md-4">
+               <img src="http://via.placeholder.com/240x240">
+           </div>
+       </div>
+       <div class="row text-center">
+           <div class="col-md-4">
+               <img src="http://via.placeholder.com/240x240">
+           </div>
+           <div class="col-md-4">
+               <img src="http://via.placeholder.com/240x240">
+           </div>
+           <div class="col-md-4">
+               <img src="http://via.placeholder.com/240x240">
+           </div>
+       </div>
+       <div class="row text-center">
+           <div class="col-md-4">
+               <img src="http://via.placeholder.com/240x240">
+           </div>
+           <div class="col-md-4">
+               <img src="http://via.placeholder.com/240x240">
+           </div>
+           <div class="col-md-4">
+               <img src="http://via.placeholder.com/240x240">
+           </div>
+       </div>   
+
+
+
+
+
+   </div>
 {% endblock %}
