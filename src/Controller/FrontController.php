@@ -20,9 +20,9 @@ class FrontController extends AbstractController
         return  $this->twig->render('search.html.twig');
     }
 
-    public function login()
+    public function signup()
     {
-        return  $this->twig->render('login.html.twig');
+        return  $this->twig->render('signup.html.twig');
     }
     public function contact()
     {
