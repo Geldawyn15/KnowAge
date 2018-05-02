@@ -3,36 +3,34 @@
 {% block stylesheet %}
     <link rel="stylesheet" href="/assets/css/index.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
-    {% endblock %}
-
-
+{% endblock %}
 
 {% block content %}
    <div class="container-fluid">
        <div class="row">
-           <div class="offset-1 col-md-1">
+           <div class="col" id="logo">
                <img src="http://via.placeholder.com/140x100">
            </div>
-           <div class="offset-8 col-md-1">
-               <button class="loginBtn btn btn-primary">Connect</button>
+           <div class="offset-xl-8 offset-lg-7 offset-md-6 offset-sm-5 offset-xs-6  offset-4 col" id="loginbtn">
+               <a href="/login"  role="button" aria-disabled="true"><button class="loginBtn btn btn-primary">Connect</button></a>
            </div>
        </div>
-       <div class="row">
-           <div class="offset-1 col-md-10">
+       <div class="row" >
+           <div class="offset-xs-2 col-xs-10 offset-md-1 col-md-10">
                <h1 class="text-center display-3">No Age</h1>
            </div>
        </div>
        <div class="row tagline">
-           <div class="offset-1 col-md-10 bg-dark">
+           <div class=" col-xs-1 offset-xs-1 offset-md-2 col-md-8 bg-dark " >
                <h1 class="text-center text-white">TAGLINE</h1>
            </div>
        </div>
        <div class="row" style="padding-bottom: 100px">
-           <div class="offset-1 col-md-1">
-               <button class="btn bottomBtn">Je Veux Forme</button>
+           <div class="offset-1 offset-md-2 col-xs-5">
+               <a href="/landingFormateur"  role="button" aria-disabled="true"> <button class="btn bottomBtn">Je Veux Forme</button></a>
            </div>
-           <div class="offset-7 col-md-1">
-               <button class="btn bottomBtn"style="margin-left: -50px">Je Veux Appredre </button>
+           <div class="offset-xl-4 offset-lg-4 offset-md-2  offset-sm-2 offset-xs-2 col-xs-1 offset-2 col-1">
+               <button class="btn bottomBtn" style="margin-left: -50px">Je Veux Appredre </button>
            </div>
        </div>
        <div class="row" style="padding-bottom: 30px">
@@ -50,49 +48,48 @@
        </div>
 
        <div class="row text-center">
-           <div class="col-md-4 thumb">
+           <div class="col ">
                <img src="http://via.placeholder.com/240x240">
            </div>
-           <div class="col-md-4 thumb">
+           <div class="col ">
                <img src="http://via.placeholder.com/240x240">
            </div>
-           <div class="col-md-4 thumb">
+           <div class="col">
                <img src="http://via.placeholder.com/240x240">
            </div>
        </div>
-       <div class="row text-center thumb2">
-           <div class="col-md-4">
+       <div class="row text-center ">
+           <div class="col">
                <img src="http://via.placeholder.com/240x240">
            </div>
-           <div class="col-md-4 thumb2">
+           <div class="col ">
                <img src="http://via.placeholder.com/240x240">
            </div>
-           <div class="col-md-4 thumb2">
+           <div class="col">
                <img src="http://via.placeholder.com/240x240">
            </div>
        </div>
        <div class="row text-center">
-           <div class="col-md-4">
+           <div class="col">
                <img src="http://via.placeholder.com/240x240">
            </div>
-           <div class="col-md-4">
+           <div class="col">
                <img src="http://via.placeholder.com/240x240">
            </div>
-           <div class="col-md-4">
+           <div class="col">
                <img src="http://via.placeholder.com/240x240">
            </div>
        </div>
        <div class="row" style="padding-top: 100px">
            <div class="col-md-12 text-center">
                <h3>Temp Title</h3>
-
            </div>
        </div>
        <div class="row">
-           <div class="offset-2 col-md-2">
+           <div class="offset-md-2 col-md-4 col">
                <img src="http://via.placeholder.com/140x140">
            </div>
-           <div class="col-md-5">
+           <div class="col-md-5 col">
                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -103,7 +100,7 @@
        </div>
 
        <div class="row">
-           <div class="offset-2 col-md-5">
+           <div class="offset-xs-1 offset-md-2 col-md-4 col ">
                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -111,16 +108,16 @@
                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
                    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
            </div>
-           <div class="offset-1 col-md-2">
+           <div class="offset-md-1 col-md-1 col">
                <img src="http://via.placeholder.com/140x140">
            </div>
        </div>
 
        <div class="row">
-           <div class="offset-2 col-md-2">
+           <div class="offset-md-2 col-md-4 col">
                <img src="http://via.placeholder.com/140x140">
            </div>
-           <div class="col-md-5">
+           <div class="col-md-5 col">
                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -129,10 +126,5 @@
                    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
            </div>
        </div>
-
-
-
-
-
    </div>
 {% endblock %}
