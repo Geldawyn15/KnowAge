@@ -1,45 +1,54 @@
-.tagline
+/*
+[class*="col"]
 {
-    margin-right: 1em;
-    margin-left: 1em;
-
+    border: 2px solid black;
+    border-radius: 6px;
+    line-height: 10px;
 }
 
-/*image hover*/
-.container {
-    position: relative;
-    width: 50%;
+[class*="row"]
+{
+    border: 2px solid black;
+    border-radius: 6px;
+    line-height: 10px;
 }
+*/
+/* Centrage de l'image */
 
-.image {
-    display: block;
-    width: 100%;
-    height: auto;
-}
+   .center-block {
+       display: block;
+       margin-left: auto;
+       margin-right: auto;
+   }
 
-.overlay {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    opacity: 0;
-    transition: .5s ease;
-    background-color: #008CBA;
-}
 
-.container:hover .overlay {
-    opacity: 1;
-}
+   .element {
+   .center-block();
+   }
 
-.text {
-    color: white;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
+
+/* Effet bouton */
+.button {
+    display: inline-block;
+    padding: 15px 25px;
+    cursor: pointer;
     text-align: center;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
 }
+
+.button:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+.video1{
+    margin-left: 5em;
+    margin-right: 5em;
+
+}
+
+
