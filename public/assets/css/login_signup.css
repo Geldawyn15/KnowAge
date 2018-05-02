@@ -1,4 +1,4 @@
-
+/**
 [class*="col"]
 {
     border: 2px solid black;
@@ -42,3 +42,29 @@
 {
     height: 40vh;
 }
+
+.borderTable
+{
+    border-right: 1px solid #1b698e;
+    border-left: 1px solid #1b698e;
+}
+
+.borderMid
+{
+    border-top: 1px solid #1b698e;
+    border-bottom: 1px solid #1b698e;
+}
+
+.borderBot
+{
+    border-left: 1px solid #1b698e;
+    border-right: 1px solid #1b698e;
+}
+
+.borderTop
+{
+    border-left: 1px solid #1b698e;
+    border-right: 1px solid #1b698e;
+}
+
+
