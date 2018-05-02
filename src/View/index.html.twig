@@ -1,10 +1,137 @@
 {% extends 'layout.html.twig' %}
 {% block title %} Homepage {% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/index.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    {% endblock %}
 {% block nav %} {{ parent }} {% endblock %}
 
-
-
 {% block content %}
-    <h1>Items</h1>
-    <p> TEST</p>
+   <div class="container-fluid">
+       <div class="row">
+           <div class="offset-1 col-md-1">
+               <img src="http://via.placeholder.com/140x100">
+           </div>
+           <div class="offset-8 col-md-1">
+               <button class="loginBtn btn btn-primary">Connect</button>
+           </div>
+       </div>
+       <div class="row">
+           <div class="offset-1 col-md-10">
+               <h1 class="text-center display-3">No Age</h1>
+           </div>
+       </div>
+       <div class="row tagline">
+           <div class="offset-1 col-md-10 bg-dark">
+               <h1 class="text-center text-white">TAGLINE</h1>
+           </div>
+       </div>
+       <div class="row" style="padding-bottom: 100px">
+           <div class="offset-1 col-md-1">
+               <button class="btn bottomBtn">Je Veux Forme</button>
+           </div>
+           <div class="offset-7 col-md-1">
+               <button class="btn bottomBtn"style="margin-left: -50px">Je Veux Appredre </button>
+           </div>
+       </div>
+       <div class="row" style="padding-bottom: 30px">
+           <div class=" col-md-12 text-center">
+               <form action="" >
+                   <div class="input-group mb-3">
+                       <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                       <div class="input-group-append">
+                           <button class="btn btn-light-secondary" type="button"> <i class="fas fa-search"></i></button>
+                       </div>
+                   </div>
+               </form>
+
+           </div>
+       </div>
+
+       <div class="row text-center">
+           <div class="col-md-4 thumb">
+               <img src="http://via.placeholder.com/240x240">
+           </div>
+           <div class="col-md-4 thumb">
+               <img src="http://via.placeholder.com/240x240">
+           </div>
+           <div class="col-md-4 thumb">
+               <img src="http://via.placeholder.com/240x240">
+           </div>
+       </div>
+       <div class="row text-center thumb2">
+           <div class="col-md-4">
+               <img src="http://via.placeholder.com/240x240">
+           </div>
+           <div class="col-md-4 thumb2">
+               <img src="http://via.placeholder.com/240x240">
+           </div>
+           <div class="col-md-4 thumb2">
+               <img src="http://via.placeholder.com/240x240">
+           </div>
+       </div>
+       <div class="row text-center">
+           <div class="col-md-4">
+               <img src="http://via.placeholder.com/240x240">
+           </div>
+           <div class="col-md-4">
+               <img src="http://via.placeholder.com/240x240">
+           </div>
+           <div class="col-md-4">
+               <img src="http://via.placeholder.com/240x240">
+           </div>
+       </div>
+       <div class="row" style="padding-top: 100px">
+           <div class="col-md-12 text-center">
+               <h3>Temp Title</h3>
+
+           </div>
+       </div>
+       <div class="row">
+           <div class="offset-2 col-md-2">
+               <img src="http://via.placeholder.com/140x140">
+           </div>
+           <div class="col-md-5">
+               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                   Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                   aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+                   esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                   non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+           </div>
+       </div>
+
+       <div class="row">
+           <div class="offset-2 col-md-5">
+               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                   Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                   aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+                   esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                   non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+           </div>
+           <div class="offset-1 col-md-2">
+               <img src="http://via.placeholder.com/140x140">
+           </div>
+       </div>
+
+       <div class="row">
+           <div class="offset-2 col-md-2">
+               <img src="http://via.placeholder.com/140x140">
+           </div>
+           <div class="col-md-5">
+               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                   Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                   aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+                   esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                   non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+           </div>
+       </div>
+
+
+
+
+
+   </div>
 {% endblock %}
