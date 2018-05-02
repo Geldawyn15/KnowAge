@@ -1,0 +1,30 @@
+
+{% extends 'layout.html.twig' %}
+{% block title %} Landing Page Formation {% endblock %}
+{% block stylesheet %}<link rel="stylesheet" href="/assets/css/landingFormateur.css">{% endblock %}
+{% block nav %} {{ parent }} {% endblock %}
+
+
+
+{% block content %}
+    <div class="container fluid">
+        <div class="row  mt-4 text-center tagline">
+            <div class="col-md-offset-4 bg-dark ">
+                <h1 class="text-center text-white">Pourquoi créer un cours ?</h1>
+            </div>
+        </div>
+
+
+        <div class="row mt-4 align">
+            <div class="col-xs-12">
+              <img src="http://via.placeholder.com/800x400" alt="Video" class="img-responsive image">
+            </div>
+        </div>
+        <div class="row mt-4 bg ">
+            <div class="col-xs-8 col-xs-offset-2">
+                <button class="btn btn-danger btn-block active text-center" role="button" aria-pressed="true" type="submit">Ajouter une formation</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
