@@ -1,13 +1,108 @@
 {% extends 'layout.html.twig' %}
+{% block stylesheet %}<link rel="stylesheet" href="/assets/css/search.css">{% endblock %}
 {% block title %} Recherche {% endblock %}
 
 {% block content %}
 
-<div>
-    <form method="post" action="">
-        <input type="text" id="search" name="search" class="form-control" placeholder="Rechercher une formation" required="required">
-
-
-    </form>
-
+<div class="container">
+    <div class="row">
+        <div class=" col-md-12 text-center">
+            <form action="">
+                <input class="Search" type="text" placeholder="Search.." name="search">
+                <button class="btn btn-danger" type="submit"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+    </div>
 </div>
+
+<h2 class="ml-2"> Résultat de la recherche :</h2>
+
+<section>
+    <div class="container py-3">
+        <div class="card">
+            <div class="row ">
+                <div class="col-md-4">
+                    <img src="https://i.imgur.com/0Xw1zbA.jpg" class="w-100">
+                </div>
+                <div class="col-md-8 px-3">
+                    <div class="card-block px-3">
+                        <h4 class="card-title">Titre de la formation</h4>
+                        <p>Par Johnny BeGood</p>
+                        <p class="card-text">PREMIER PARAGRAPHE DE DESCIRPTION, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                        <p class="card-text">DEUXIEME PARAGRAPHE DE DESCRIPTION, erit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <a href="#" class="btn btn-success">Accéder à la formation</a>
+                        <i id="favorite" class="far fa-heart fa-5x" style="color:Tomato"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<section>
+<div class="container py-3">
+    <div class="card">
+        <div class="row ">
+            <div class="col-md-4">
+                <img src="https://i.imgur.com/logmBS8.jpg" class="w-100">
+            </div>
+            <div class="col-md-8 px-3">
+                <div class="card-block px-3">
+                    <h4 class="card-title">Titre de la formation</h4>
+                    <p>Par Johnny BeGood</p>
+                    <p class="card-text">PREMIER PARAGRAPHE DE DESCIRPTION, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                    <p class="card-text">DEUXIEME PARAGRAPHE DE DESCRIPTION, erit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <a href="#" class="btn btn-success">Accéder à la formation</a>
+                    <i id="favorite" class="far fa-heart fa-5x" style="color:Tomato"></i>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</section>
+
+    <section>
+    <div class="container py-3">
+        <div class="card">
+            <div class="row ">
+                <div class="col-md-4">
+                    <img src="https://i.imgur.com/logmBS8.jpgg" class="w-100">
+                </div>
+                <div class="col-md-8 px-3">
+                    <div class="card-block px-3">
+                        <h4 class="card-title">Titre de la formation</h4>
+                        <p>Par Johnny BeGood</p>
+                        <p class="card-text">PREMIER PARAGRAPHE DE DESCIRPTION, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                        <p class="card-text">DEUXIEME PARAGRAPHE DE DESCRIPTION, erit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <a href="#" class="btn btn-success">Accéder à la formation</a>
+                        <i id="favorite" class="far fa-heart fa-5x" style="color:Tomato"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+    <nav aria-label="pagination">
+        <ul class="pagination">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item active">
+                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
+
+
+{% endblock %}
