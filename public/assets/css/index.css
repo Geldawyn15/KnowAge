@@ -1,6 +1,6 @@
 body {
     background-color:darkgrey;
-    padding-top: 50px;
+
 }
 .container {
     margin: 0;
@@ -52,6 +52,12 @@ body {
 .bottomBtn:hover {
     background: #1100ff;
     text-decoration: none;
+}
+.thumb {
+    padding-bottom: 10px;
+}
+.thumb2 {
+padding-bottom: 5px;
 }
 
 
