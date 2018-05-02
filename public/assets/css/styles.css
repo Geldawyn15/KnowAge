@@ -19,3 +19,21 @@ nav{
         float: right;
     }
 }
+
+footer{
+    background-color: #008CBA;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+footer  a {
+    color: black;
+    margin-left: 5%;
+}
+
+footer p {
+    color: black;
+}
