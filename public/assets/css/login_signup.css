@@ -35,12 +35,17 @@
 */
 .ligne1
 {
-    height: 40vh;
+    height: 20vh;
 }
 
 .ligne2
 {
     height: 40vh;
+}
+
+.ligne3
+{
+    height: 20vh;
 }
 
 .borderTable
@@ -67,4 +72,23 @@
     border-right: 1px solid #1b698e;
 }
 
+.ligneTable1
+{
+    height: 25%;
+}
+
+.ligneTable2
+{
+    height: 25%;
+}
+
+.ligneTable3
+{
+    height: 25%;
+}
+
+.ligneTable4
+{
+    height: 25%;
+}
 
