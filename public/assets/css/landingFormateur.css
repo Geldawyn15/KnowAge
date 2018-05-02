@@ -1,0 +1,54 @@
+/*
+[class*="col"]
+{
+    border: 2px solid black;
+    border-radius: 6px;
+    line-height: 10px;
+}
+
+[class*="row"]
+{
+    border: 2px solid black;
+    border-radius: 6px;
+    line-height: 10px;
+}
+*/
+/* Centrage de l'image */
+
+   .center-block {
+       display: block;
+       margin-left: auto;
+       margin-right: auto;
+   }
+
+
+   .element {
+   .center-block();
+   }
+
+
+/* Effet bouton */
+.button {
+    display: inline-block;
+    padding: 15px 25px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+}
+
+.button:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+.video1{
+    margin-left: 5em;
+    margin-right: 5em;
+
+}
+
+

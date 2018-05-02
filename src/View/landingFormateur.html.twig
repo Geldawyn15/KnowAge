@@ -1,0 +1,27 @@
+
+{% extends 'layout.html.twig' %}
+{% block title %} Landing Page Formation {% endblock %}
+{% block stylesheet %}<link rel="stylesheet" href="/assets/css/landingFormateur.css">{% endblock %}
+{% block nav %} {{ parent }} {% endblock %}
+
+
+
+{% block content %}
+    <div class="container fluid">
+        <div class="row ">
+            <div class="col-md-12 bg-dark ">
+                <h2 class="text-center text-white">Pourquoi créer un cours ?</h2>
+            </div>
+            <!--<img src="http://via.placeholder.com/800x400" alt="Video" class="img-responsive center-block mt-2"> -->
+            <div class="center-block embed-responsive embed-responsive-16by9 mt-4 video1">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="container fluid">
+    <div class="col-md-12 text-center">
+        <button class="btn btn-primary active mt-4 button" role="button" aria-pressed="true" type="submit">Ajouter une formation</button>
+    </div>
+    </div>
+{% endblock %}
+
