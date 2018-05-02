@@ -1,4 +1,4 @@
-/**
+
 [class*="col"]
 {
     border: 2px solid black;
@@ -12,12 +12,12 @@
     border-radius: 6px;
     line-height: 10px;
 }
-*/
+/**
 .positionY
 {
     margin-top: 40vh; /* pousser de la moitié de hauteur de viewport */
-    transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
-}
+/**  transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
+/**}
 
 .positionX
 {
@@ -32,4 +32,5 @@
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
-
+*/
+.ligne1
