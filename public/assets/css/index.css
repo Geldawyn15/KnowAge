@@ -6,6 +6,15 @@ body {
     margin: 0;
 
 }
+@media (max-width: 576px) {
+    #logo{
+        display: none;
+    }
+    #loginbtn{
+        padding-bottom: 30px;
+    }
+    
+}
 .Search {
     width: 95%;
     border-radius: 12px;
@@ -35,6 +44,7 @@ body {
 .tagline {
     padding-top: 20px;
     padding-bottom: 420px;
+
 }
 
 .bottomBtn {
@@ -52,12 +62,6 @@ body {
 .bottomBtn:hover {
     background: #1100ff;
     text-decoration: none;
-}
-.thumb {
-    padding-bottom: 10px;
-}
-.thumb2 {
-padding-bottom: 5px;
 }
 
 
