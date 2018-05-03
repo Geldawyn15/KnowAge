@@ -12,35 +12,20 @@
     border-radius: 6px;
     line-height: 10px;
 }
-/**
-.positionY
-{
-    margin-top: 40vh; /* pousser de la moitié de hauteur de viewport */
-/**  transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
-/**}
-
-.positionX
-{
-    margin-left: 50vw;
-    transform: translateX(-50%);
-}
-
-.border
-{
-    border: #1b698e;
-    border-radius: 20px;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-}
 */
 .ligne1
 {
-    height: 40vh;
+    height: 15vh;
 }
 
 .ligne2
 {
-    height: 40vh;
+    height: 45vh;
+}
+
+.ligne3
+{
+    height: 20vh;
 }
 
 .borderTable
@@ -67,4 +52,32 @@
     border-right: 1px solid #1b698e;
 }
 
+.ligneTable1
+{
+    height: 20%;
+}
+
+.ligneTable2
+{
+    height: 30%;
+}
+
+.ligneTable3
+{
+    height: 30%;
+}
+
+.ligneTable4
+{
+    height: 20%;
+}
+
+form:hover
+{
+
+    background-color: rgba(27, 105, 142,0.1);
+    transition-duration: 0.4s;
+    /*animation: circle 1s;*/
+    transition-timing-function: ease-in;
+}
 
