@@ -15,12 +15,12 @@
 */
 .ligne1
 {
-    height: 20vh;
+    height: 15vh;
 }
 
 .ligne2
 {
-    height: 40vh;
+    height: 45vh;
 }
 
 .ligne3
@@ -54,57 +54,27 @@
 
 .ligneTable1
 {
-    height: 25%;
+    height: 20%;
 }
 
 .ligneTable2
 {
-    height: 25%;
+    height: 30%;
 }
 
 .ligneTable3
 {
-    height: 25%;
+    height: 30%;
 }
 
 .ligneTable4
 {
-    height: 25%;
+    height: 20%;
 }
-/**
-form
-{
-    position: relative;
-}
-
-#circle {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: #1b698e;
-    transition: all .4s linear;
-    transform: translateX(50%);
-
-}
-*/
-
-@keyframes circle {
-    0% {
-        transform: translateX(0px);
-    }
-
-    50% {
-        transform: scale(.15);
-    }
-
-
-}
-
 
 form:hover
 {
 
-    border-radius: ;
     background-color: rgba(27, 105, 142,0.1);
     transition-duration: 0.4s;
     /*animation: circle 1s;*/
