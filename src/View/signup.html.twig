@@ -10,41 +10,57 @@
     <div class="row ligne1 no-gutters ">
         <div class="col-md-6 offset-md-3 borderTop"></div>
     </div>
+
     <div class="row no-gutters borderMid ">
         <div class="col-md-6 offset-md-3">
-            <form action="" method="post" class="borderTable ligne2 centerLigne">
+            <div>
+                <div id="circle"></div>
+                <form action="" method="post" class="borderTable ligne2" id="effect">
 
-                <div class="form-row no-gutters ligneTable1">
-                    <div class="col-md-8 offset-md-2 pt-3">
-                        <h2>S'inscrire</h2>
+                    <div class="form-row no-gutters ligneTable1">
+                        <div class="col-md-8 offset-md-2 pt-3">
+                            <h2>S'inscrire</h2>
+                        </div>
                     </div>
-                </div>
-                <div class="form-row no-gutters ligneTable2">
-                    <div class="col-md-4 offset-md-2">
-                        <input type="text" class="form-control" placeholder="Nom">
+                    <div class="form-row no-gutters ligneTable2">
+                        <div class="col-md-4 offset-md-2">
+                            <input type="text" class="form-control" placeholder="Nom">
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" placeholder="Prénom">
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" placeholder="Prénom">
+                    <div class="form-row no-gutters ligneTable3">
+                        <div class="col-md-4 offset-md-2">
+                            <input type="text" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" placeholder="password">
+                        </div>
                     </div>
-                </div>
-                <div class="form-row no-gutters ligneTable3">
-                    <div class="col-md-4 offset-md-2">
-                        <input type="text" class="form-control" placeholder="Email">
+                    <div class="form-row no-gutters ligneTable4">
+                        <div class="col-md-4 offset-md-2">
+                            <button type="button" class="btn btn-outline-primary px-5">Envoyer</button>
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" placeholder="password">
-                    </div>
-                </div>
-                <div class="form-row no-gutters ligneTable4">
-                    <div class="col-md-4 offset-md-2">
-                        <button type="button" class="btn btn-outline-primary px-5">Envoyer</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
     <div class="row ligne2 no-gutters ">
         <div class="col-md-6 offset-md-3 borderBot"></div>
     </div>
 </div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+/**
+    $('#effect').mouseover(function() {
+        $('#effect').css('background-color', 'rgba(27, 105, 142,0.1)');
+    });
+
+    $('#h1').css("color","red")
+    */
+</script>
 {% endblock %}

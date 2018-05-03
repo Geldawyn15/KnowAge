@@ -12,26 +12,6 @@
     border-radius: 6px;
     line-height: 10px;
 }
-/**
-.positionY
-{
-    margin-top: 40vh; /* pousser de la moitié de hauteur de viewport */
-/**  transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
-/**}
-
-.positionX
-{
-    margin-left: 50vw;
-    transform: translateX(-50%);
-}
-
-.border
-{
-    border: #1b698e;
-    border-radius: 20px;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-}
 */
 .ligne1
 {
@@ -90,5 +70,44 @@
 .ligneTable4
 {
     height: 25%;
+}
+/**
+form
+{
+    position: relative;
+}
+
+#circle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #1b698e;
+    transition: all .4s linear;
+    transform: translateX(50%);
+
+}
+*/
+
+@keyframes circle {
+    0% {
+        transform: translateX(0px);
+    }
+
+    50% {
+        transform: scale(.15);
+    }
+
+
+}
+
+
+form:hover
+{
+
+    border-radius: ;
+    background-color: rgba(27, 105, 142,0.1);
+    transition-duration: 0.4s;
+    /*animation: circle 1s;*/
+    transition-timing-function: ease-in;
 }
 
