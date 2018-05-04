@@ -63,7 +63,7 @@ abstract class AbstractManager
     }
 
     /**
-     * DELETE on row in dataase by ID
+     * DELETE on row in database by ID
      *
      * @param int $id
      */
@@ -91,5 +91,9 @@ abstract class AbstractManager
     public function update(int $id, array $data)
     {
         //TODO : Implements SQL UPDATE request
+    }
+    public function selectAllById(int $id, $field)
+    {
+        return $this->pdoConnection->query('SELECT * FROM ' . $this->table . ' WHERE ' . $field .  ' = ' . $id, \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 }
