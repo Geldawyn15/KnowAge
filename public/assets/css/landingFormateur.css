@@ -15,6 +15,10 @@
 */
 /* Centrage de l'image */
 
+body{
+    margin-bottom: 1em;
+}
+
    .center-block {
        display: block;
        margin-left: auto;
@@ -46,9 +50,69 @@
 }
 
 .video1{
-    margin-left: 5em;
-    margin-right: 5em;
+    margin-left: 0em;
+    margin-right: 0em;
 
 }
+
+.titre{
+    font-size: 2em;
+}
+
+/*Effet Noir et Blanc survol vidéo
+iframe
+{
+    filter: grayscale(1);
+    -webkit-filter: grayscale(1);
+    -moz-filter: grayscale(1);
+    -ms-filter: grayscale(1);
+    -o-filter: grayscale(1);
+
+}
+
+iframe:hover
+    {
+    filter: grayscale(0);
+    -webkit-filter: grayscale(0);
+    -moz-filter: grayscale(0);
+    -o-filter: grayscale(0);
+    -ms-filter: grayscale(0);
+
+}
+*/
+
+
+/*effet survol */
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    transition: .5s ease;
+    background-color: #008CBA;
+    opacity: 0.8;
+}
+
+.video1:hover .overlay {
+    opacity: 1;
+}
+
+.text {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    font-size: 2em;
+
+
+
+}
+
 
 
