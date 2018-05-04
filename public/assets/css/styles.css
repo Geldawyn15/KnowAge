@@ -23,9 +23,11 @@ nav{
 .footer{
     background-color: #008CBA;
     text-align: center;
+
     position:relative;
     height: auto;
     left: 0;
+    position: fixed;
     bottom: 0;
     width: 100%;
 }
