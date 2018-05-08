@@ -1,3 +1,15 @@
+.navbar{
+    -webkit-box-shadow: 0 16px 12px -12px #999;
+    -moz-box-shadow: 0 16px 12px -12px #999;
+    box-shadow: 0 16px 12px -12px #999;
+    font-family: 'Hind Siliguri', sans-serif;
+}
+.nav-item{
+    font-size: 18px;
+}
+.navbar-brand{
+    font-size: 25px;
+}
 nav{
     margin-bottom: 50px;
     width: 100%;
