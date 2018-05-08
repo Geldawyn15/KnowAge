@@ -1,34 +1,30 @@
 body {
     background-color:ghostwhite;
     margin-bottom: 1em;
-
+    font-family: 'Hind Siliguri', sans-serif;
 }
 
-@media (max-width: 576px) {
-    #logo{
+@media (max-width: 769px) {
+
+    .logo{
         display: none;
     }
-    #loginbtn{
-        padding-bottom: 3px;
+    .apprendre{
+        padding-top: 5px;
     }
 
 }
-@media (max-width: 767px) {
-    .large{
-        display: none;
 
-    }
-
+.thumbnail{
+    padding-top: 10px;
 }
-@media (min-width: 767px){
-    .small{
-        display: none;
-    }
-
+.vignette{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+
 .Search {
-    width: 95%;
-    border-radius: 12px;
+    margin-top: 40px;
 }
 .loginBtn {
     background: #68b9f0;
@@ -37,9 +33,9 @@ body {
     background-image: -ms-linear-gradient(top, #68b9f0, #34abf5);
     background-image: -o-linear-gradient(top, #68b9f0, #34abf5);
     background-image: linear-gradient(to bottom, #68b9f0, #34abf5);
-    -webkit-border-radius: 12;
-    -moz-border-radius: 12;
-    border-radius: 12px;
+    -webkit-border-radius: 50;
+    -moz-border-radius: 50;
+    border-radius: 50px;
     font-family: Arial;
     color: #ffffff;
     font-size: 20px;
@@ -52,11 +48,12 @@ body {
     background: #1100ff;
     text-decoration: none;
 }
-    .tagline {
-        padding-top: 2em;
-        padding-bottom: 350px;
+.tagline {
+    padding-top: 2em;
+    padding-bottom: 10px;
 
-    }
+
+}
 
 .bottomBtn {
     -webkit-border-radius: 12;
