@@ -41,7 +41,13 @@
     margin-right: 3%;
 }
 
+@media (max-width: 576px) {
 
+    .addFavorite{
+
+        margin-top: 5%;
+    }
+}
 .pagination{
     float: right;
 }
