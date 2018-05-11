@@ -16,6 +16,7 @@
 /* Centrage de l'image */
 
 body{
+    font-family: 'Hind Siliguri', sans-serif;
     margin-bottom: 1em;
 }
 
@@ -31,7 +32,7 @@ body{
    }
 
 
-/* Effet bouton */
+/* Effet bouton
 .button {
     display: inline-block;
     padding: 15px 25px;
@@ -42,18 +43,64 @@ body{
     border: none;
     border-radius: 15px;
     box-shadow: 0 9px #999;
+    background-color: #008CBA;
+
 }
 
 .button:active {
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
+    display: inline-block;
+    padding: 15px 25px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+
 }
 
-.video1{
-    margin-left: 0em;
-    margin-right: 0em;
+.button:hover {
+    display: inline-block;
+    padding: 15px 25px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    background-color: darkgrey;
+}
+*/
+
+/* Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
 
 }
+
+/* Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+
+}
+
+/* Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+    .video1{
+        margin-left: 7em;
+        margin-right: 7em;
+    }
+
+
+}
+
+/* Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+
+}
+
+
+
 
 .titre{
     font-size: 2em;
@@ -93,12 +140,14 @@ iframe:hover
     height: 100%;
     width: 100%;
     transition: .5s ease;
-    background-color: #008CBA;
+    background-color: darkgrey;
     opacity: 0.8;
 }
 
 .video1:hover .overlay {
-    opacity: 1;
+    opacity: 0;
+    cursor: pointer;
+
 }
 
 .text {
@@ -109,10 +158,18 @@ iframe:hover
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     font-size: 2em;
+}
 
-
+.TagLineDavid{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 }
+
+
+.video1{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 
 
 
