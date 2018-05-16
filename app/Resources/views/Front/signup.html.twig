@@ -1,0 +1,56 @@
+{% extends 'layout.html.twig' %}
+{% block title %} S'inscrire {% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/login_signup.css">
+{% endblock %}
+
+
+{% block content %}
+<div class="container-fluid bg_01">
+    <div class="row ligne1 no-gutters ">
+        <div class="col-md-6 offset-md-3 borderTop"></div>
+    </div>
+
+    <div class="row no-gutters borderMid ligne2 ">
+        <div class="col-md-6 offset-md-3">
+            <form action="" method="post" class="borderTable ligne2" id="effect">
+
+                <div class="form-row no-gutters ligneTable1 align-items-end">
+                    <div class="col-md-8 offset-md-2 typo">
+                        <h2>S'inscrire</h2>
+                    </div>
+                </div>
+                <div class="form-row no-gutters ligneTable2 align-items-center">
+                    <div class="col-md-4 offset-md-2 mt-1">
+                        <input type="text" class="form-control" placeholder="Nom">
+                    </div>
+                    <div class="col-md-4 mt-1">
+                        <input type="text" class="form-control" placeholder="Prénom">
+                    </div>
+                </div>
+                <div class="form-row no-gutters ligneTable3 align-items-center">
+                    <div class="col-md-4 offset-md-2">
+                        <input type="text" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="col-md-4 mt-1">
+                        <input type="text" class="form-control" placeholder="password">
+                    </div>
+                </div>
+                <div class="form-row no-gutters ligneTable4 align-items-start">
+                    <div class="col-md-4 offset-md-6 mt-1">
+                        <a href="#" class="btn  btn-block text-white btn-outline-secondary waves-effect" role="button">Envoyer</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row ligne3 no-gutters ">
+        <div class="col-md-6 offset-md-3 borderBot"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+</script>
+{% endblock %}

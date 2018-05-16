@@ -1,0 +1,123 @@
+/**
+[class*="col"]
+{
+    border: 2px solid black;
+    border-radius: 6px;
+    line-height: 10px;
+}
+
+[class*="row"]
+{
+    border: 2px solid black;
+    border-radius: 6px;
+    line-height: 10px;
+}
+*/
+.ligne1
+{
+    height: 25vh;
+}
+
+.ligne2
+{
+    height: 40vh;
+}
+
+.ligne3
+{
+    height: 15vh;
+}
+
+.borderTable
+{
+    border-right: 1px solid darkslategray;
+    border-left: 1px solid darkslategray;
+}
+
+.borderMid
+{
+    border-top: 1px solid darkslategray;
+    border-bottom: 1px solid darkslategray;
+}
+
+.borderBot
+{
+    border-left: 1px solid darkslategray;
+    border-right: 1px solid darkslategray;
+}
+
+.borderTop
+{
+    border-left: 1px solid darkslategray;
+    border-right: 1px solid darkslategray;
+}
+
+.ligneTable1
+{
+    height: 20%;
+}
+
+.ligneTable2
+{
+    height: 30%;
+}
+
+.ligneTable3
+{
+    height: 30%;
+}
+
+.ligneTable4
+{
+    height: 20%;
+}
+
+.bg_01
+{
+    background-color: #D5D6D2;
+}
+
+h2
+{
+    color: white;
+}
+
+@media all and (max-device-width: 480px)
+{
+    .ligne1
+    {
+        height: 5vh;
+    }
+
+    .ligne2
+    {
+        height: 60vh;
+    }
+
+    .ligne3
+    {
+        height: 5vh;
+    }
+
+    .mobile
+    {
+        margin-top: 2vh;
+        margin-left: 1vh;
+        margin-right: 1vh;
+        width: 95%;
+
+    }
+}
+
+form:hover
+{
+
+    background-color: #2F2E33;
+    transition-duration: 0.4s;
+    /*animation: circle 1s;*/
+    transition-timing-function: ease-in;
+}
+
+.typo {
+    font-family: 'Concert One', cursive;
+    font-size: xx-large}
