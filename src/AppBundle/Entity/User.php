@@ -12,8 +12,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ *
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     /**
      * @var int
@@ -71,13 +72,8 @@ class User implements UserInterface
      */
     private $favoriteFormations;
 
-    /**
-     *
-     */
-    private $roles;
-
-    public function __construct() {
-        $this->roles = array('ROLE_USER');
+    public function __construct()
+    {
     }
 
     /**
@@ -135,7 +131,7 @@ class User implements UserInterface
      */
     public function getFirstName()
     {
-        return $this->firstName;
+        return $this->email;
     }
 
     /**
@@ -159,7 +155,7 @@ class User implements UserInterface
      */
     public function getUsername()
     {
-        return $this->username;
+        return $this->email;
     }
 
     /**
@@ -244,7 +240,7 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        return $this->roles;
+        return ['ROLE_USER'];
     }
 
     public function getSalt()
@@ -256,5 +252,27 @@ class User implements UserInterface
     {
     }
 
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->email,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized, ['allowed_classes' => false]);
+    }
 }
 
