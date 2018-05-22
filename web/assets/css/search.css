@@ -1,0 +1,85 @@
+body {
+
+    background-color: #D5D6D2 ;
+}
+.searchbar{
+    width: 100%;
+    border-radius: 12px;
+    margin-top: 50px;
+    margin-left: 3px;
+}
+
+.title {
+
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+.card{
+    border-color: black;
+    box-shadow: 8px 8px 12px darkslategray;
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+}
+
+.card-title{
+    padding-top: 2%;
+    font-family: 'Hind Siliguri', sans-serif;
+    font-weight: 700;
+    font-size: 2.5em;
+}
+
+.author{
+    font-family: 'Hind Siliguri', sans-serif;
+    font-weight: 300;
+}
+
+.card-text{
+    font-family: 'Hind Siliguri', sans-serif;
+}
+
+#img-formation{
+    height: 100%;
+}
+
+.interact{
+    margin-top: 3%;
+    margin-bottom: 3%;
+    text-align: center;
+}
+
+.seeForm{
+    margin-right: 3%;
+}
+
+@media (max-width: 576px) {
+
+    .addFavorite{
+
+        margin-top: 5%;
+    }
+}
+
+.pagination{
+    float: right;
+
+}
+
+.ti {
+    margin-bottom: 60px;
+}
+
+.title {
+    color: #3A5199;
+}
+
+.btnSearch{
+    background-color: #3A5199;
+}
+
+.typo {
+    font-family: 'Concert One', cursive;
+    font-size: xx-large}
+
+

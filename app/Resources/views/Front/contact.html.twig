@@ -1,0 +1,72 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheet %}<link rel="stylesheet" href="/assets/css/contact.css">{% endblock %}
+{% block title %} Contact {% endblock %}
+
+{% block content %}
+
+
+
+<div class="container" id="ContactUs">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="contactTitle typo">Contactez-nous :</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="containerSmall1">
+                <form>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="input-icon-wrap">
+                                    <span class="input-icon"><span class="fa fa-user"></span></span>
+                                    <input type="text" id="form_name" name="lastname" class="form-control" placeholder="Prenom" required="required">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="input-icon-wrap">
+                                    <span class="input-icon"><span class="fa fa-user"></span></span>
+                                    <input type="text" id="form_lastname" name="firstname" class="form-control" placeholder="Nom" required="required">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="input-icon-wrap">
+                                    <span class="input-icon"><span class="fas fa-envelope"></span></span>
+                                    <input id="form_email" type="email" name="email" class="form-control" placeholder="Votre Email" required="required">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>Votre Message:</h4>
+                    <div>
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <textarea id="form_message" name="message" class="form-control" placeholder="Rédigez votre message ici" rows="6" required="required"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-9 offset-3">
+                        <input id="btn" type="submit" class="bottomBtn btn btn-primary btn-lg round" value="Envoyer message">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

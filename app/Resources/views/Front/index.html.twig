@@ -1,0 +1,180 @@
+{% extends 'layout.html.twig' %}
+{% block title %} Accueil {% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/index.css">
+{% endblock %}
+
+
+
+{% block content %}
+
+    <button class="btn  scroll-top" data-scroll="up" type="button">
+        <i class="fa fa-chevron-up"></i>
+    </button>
+
+    <div class="color3">
+        <div class="container-fluid">
+            <div class="row justify-content-center tagline" style="margin-top: 0;">
+                <div class="col-10" >
+                    <h1 class="text-center tagline" >Lorem ipsum dolor sit amet, consectetur adipiscing elit</h1>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <div class="center-block  embed-responsive embed-responsive-16by9 mt-4">
+                        <iframe width="1525" height="617" src="https://www.youtube.com/embed/Q71zL6S9YYc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="row btnBottom" style="padding-top: 50px; padding-bottom: 100px; margin-bottom: 0">
+                <div class="col-md-6 col-xl-6 d-flex justify-content-end" style="padding-right: 80px ">
+                    <a href="/formateur" role="button" aria-disabled="true"> <button class="bottomBtn btn btn-primary btn-lg round">Je Veux Former</button></a>
+                </div>
+                <div class="col-xs-12 col-md-6 d-flex justify-content-start apprendre">
+                    <a class=" js-scrollTo" href="#Search"> <button type="button" class="bottomBtn btn btn-primary btn-lg round">Je Veux Apprendre </button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container color2" id="Search">
+        <div class="row justify-content-center ">
+            <div class="col-md-5" >
+                <h2 class="text-center typo"> Trouver une formation </h2>
+            </div>
+        </div>
+
+
+        <div class="row justify-content-center Search">
+            <div class="offset-md-1 col-12 text-center">
+                <h3 class="keyword text-left"> Par mots-clés </h3>
+                <form action="" >
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <a href="/search"> <button class="btnSearch btn btn-secondary" type="button"><i class="fas fa-search"></i></button></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="container-fluid toto">
+            <div class="main">
+                <h3 class="text-left category"> Par catégorie </h3>
+            </div>
+            <div class="row">
+                <div class="column nature">
+                    <div class="content">
+                        <img class="img-fluid tofade" src="https://i.imgur.com/xo6cjHe.jpg" alt="Mountains" style="width:100%">
+                        <p class="todisplay"> Famille </p>
+                    </div>
+                </div>
+                <div class="column nature">
+                    <div class="content">
+                        <img class="img-fluid tofade" src="https://i.imgur.com/h9xwpKw.png" alt="Lights" style="width:100%">
+                        <p class="todisplay"> Maison </p>
+                    </div>
+                </div>
+                <div class="column nature">
+                    <div class="content">
+                        <img class="img-fluid tofade" src="https://i.imgur.com/GKacePt.png" alt="Nature" style="width:100%">
+                        <p class="todisplay"> Vacances </p>
+                    </div>
+                </div>
+
+                <div class="column cars">
+                    <div class="content">
+                        <img class="img-fluid tofade" src="https://i.imgur.com/1ko3YmL.png" alt="Car" style="width:100%">
+                        <p class="todisplay"> Robotique </p>
+                    </div>
+                </div>
+                <div class="column cars">
+                    <div class="content">
+                        <img class="img-fluid tofade" src="https://i.imgur.com/1tAXicv.jpg" alt="Car" style="width:100%">
+                        <p class="todisplay"> Marketing </p>
+                    </div>
+                </div>
+                <div class="column cars">
+                    <div class="content">
+                        <img class="img-fluid tofade" src="https://i.imgur.com/WAsBTwe.png" alt="Car" style="width:100%" >
+                        <p class="todisplay"> Commerce international </p>
+                    </div>
+                </div>
+
+                <div class="column people">
+                    <div class="content">
+                        <img class="img-fluid tofade" src="https://i.imgur.com/e6aQJQB.jpg" alt="Car" style="width:100%">
+                        <p class="todisplay"> Biologie </p>
+                    </div>
+                </div>
+                <div class="column people">
+                    <div class="content">
+                        <img class="img-fluid tofade" src="https://i.imgur.com/7frPtS2.jpg" alt="Car" style="width:100%">
+                        <p class="todisplay"> Culture </p>
+                    </div>
+                </div>
+                <div class="column people">
+                    <div class="content">
+                        <img class="img-fluid tofade" src="https://i.imgur.com/QKS81Pm.png" alt="Car" style="width:100%">
+                        <p class="todisplay"> Import/Export </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="container-fluid color3 " style="padding-top: 30px">
+        <div class="container main2">
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <h3 class="text-center typo">Le concept</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 left ">
+                    <img class="img-fluid" src="https://i.imgur.com/qmNiS5M.jpg" width="450" height="160">
+                </div>
+                <div class="col-6">
+                    <p style="text-align: left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+                        esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 left">
+                    <p style="text-align: right">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+                        esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+                <div class="col-6">
+                    <img class="img-fluid" src="https://i.imgur.com/7hwALR7.jpg" width="450" height="160">
+                </div>
+            </div>
+            <div class="row mb-0">
+                <div class="col-6 left">
+                    <img class="img-fluid" src="https://i.imgur.com/VADzyH7.jpg" width="450" height="160">
+                </div>
+                <div class="col-6 " >
+                    <p style="text-align: left  ">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+                        esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
