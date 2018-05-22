@@ -42,22 +42,12 @@ class FrontController extends controller
     }
 
     /**
-    * @Route("/connect", name="login")
+    * @Route("/login", name="login")
      * @Method({"GET", "POST"})
     */
     public function LoginAction()
     {
         return $this->render('Front/login.html.twig');
-    }
-
-    /**
-     * @Route("/inscription", name="signup")
-     * @Method({"GET", "POST"})
-     */
-    public function SignUpAction()
-    {
-        return $this->render('Front/signup.html.twig');
-
     }
 
     /**

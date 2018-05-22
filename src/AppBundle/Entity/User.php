@@ -3,6 +3,9 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
@@ -10,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @var int
@@ -39,9 +42,9 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="nickname", type="string", length=45, unique=true)
+     * @ORM\Column(name="username", type="string", length=45, unique=true)
      */
-    private $nickname;
+    private $username;
 
     /**
      * @var string
@@ -57,12 +60,25 @@ class User
      */
     private $password;
 
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", cascade={"persist"})
      */
     private $favoriteFormations;
 
+    /**
+     *
+     */
+    private $roles;
+
+    public function __construct() {
+        $this->roles = array('ROLE_USER');
+    }
 
     /**
      * Get id
@@ -129,9 +145,9 @@ class User
      *
      * @return User
      */
-    public function setNickname($nickname)
+    public function setUsername($username)
     {
-        $this->nickname = $nickname;
+        $this->username = $username;
 
         return $this;
     }
@@ -141,9 +157,9 @@ class User
      *
      * @return string
      */
-    public function getNickname()
+    public function getUsername()
     {
-        return $this->nickname;
+        return $this->username;
     }
 
     /**
@@ -197,6 +213,22 @@ class User
     /**
      * @return mixed
      */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param mixed $plainPassword
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getFavoriteFormations()
     {
         return $this->favoriteFormations;
@@ -209,5 +241,20 @@ class User
     {
         $this->favoriteFormations = $favoriteFormations;
     }
+
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
 }
 
