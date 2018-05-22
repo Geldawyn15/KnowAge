@@ -43,7 +43,14 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="username", type="string", length=45, unique=true)
+     * @ORM\Column(name="nickName", type="string", length=45)
+     */
+    private $nickName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=45, unique=true, nullable=true)
      */
     private $username;
 
@@ -132,6 +139,22 @@ class User implements UserInterface, \Serializable
     public function getFirstName()
     {
         return $this->email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNickName()
+    {
+        return $this->nickName;
+    }
+
+    /**
+     * @param string $nickName
+     */
+    public function setNickName($nickName)
+    {
+        $this->nickName = $nickName;
     }
 
     /**
@@ -274,5 +297,7 @@ class User implements UserInterface, \Serializable
             // $this->salt
             ) = unserialize($serialized, ['allowed_classes' => false]);
     }
+
+
 }
 

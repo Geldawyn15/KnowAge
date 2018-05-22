@@ -15,7 +15,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends controller
 {
     /**
-     * @Route("/register", name="register")
+     * @Route("/signup", name="signup")
      * @Method({"GET", "POST"})
      */
     public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
