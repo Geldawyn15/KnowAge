@@ -17,7 +17,7 @@ class FrontController extends controller
     }
 
     /**
-     * @Route("/recherche", name="search")
+     * @Route("/search", name="search")
      */
     public function SearchPageAction()
     {
@@ -33,7 +33,7 @@ class FrontController extends controller
     }
 
     /**
-     * @Route("/formateur", name="landingformateur")
+     * @Route("/teacher", name="landingformateur")
      */
     public function landingFormateurAction()
     {
@@ -42,7 +42,7 @@ class FrontController extends controller
     }
 
     /**
-    * @Route("/connection", name="login")
+    * @Route("/connect", name="login")
      * @Method({"GET", "POST"})
     */
     public function LoginAction()
