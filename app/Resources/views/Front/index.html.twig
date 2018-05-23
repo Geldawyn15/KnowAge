@@ -7,7 +7,7 @@
 
 
 {% block content %}
-
+<body id="index">
     <button class="btn  scroll-top" data-scroll="up" type="button">
         <i class="fa fa-chevron-up"></i>
     </button>
@@ -27,11 +27,11 @@
                 </div>
             </div>
             <div class="row btnBottom" style="padding-top: 50px; padding-bottom: 100px; margin-bottom: 0">
-                <div class="col-md-6 col-xl-6 d-flex justify-content-end" style="padding-right: 80px ">
-                    <a href="/teacher" role="button" aria-disabled="true"> <button class="bottomBtn btn btn-primary btn-lg round">Je Veux Former</button></a>
+                <div class=" col-sm-6 col-md-6 col-xl-6 d-flex justify-content-end" style="padding-right: 80px ">
+                    <a href="/teacher" role="button" aria-disabled="true"> <button class="bottomBtn btn btn-primary btn-lg">Je Veux Former</button></a>
                 </div>
-                <div class="col-xs-12 col-md-6 d-flex justify-content-start apprendre">
-                    <a class=" js-scrollTo" href="#Search"> <button type="button" class="bottomBtn btn btn-primary btn-lg round">Je Veux Apprendre </button></a>
+                <div class="col-xs-12 col-sm-6 col-md-6 d-flex justify-content-start apprendre">
+                    <a class=" js-scrollTo" href="#Search"> <button type="button" class="bottomBtn btn btn-primary btn-lg">Je Veux Apprendre </button></a>
                 </div>
             </div>
         </div>
@@ -58,49 +58,49 @@
             </div>
         </div>
         <div class="container-fluid toto">
-            <div class="main">
+            <div id="thumbnails">
                 <h3 class="text-left category"> Par catégorie </h3>
             </div>
-            <div class="row">
-                <div class="column nature">
+            <div class="row thumbs">
+                <div class="column">
                     <div class="content">
                         <img class="img-fluid tofade" src="https://i.imgur.com/xo6cjHe.jpg" alt="Mountains" style="width:100%">
                         <p class="todisplay"> Famille </p>
                     </div>
                 </div>
-                <div class="column nature">
+                <div class="column ">
                     <div class="content">
                         <img class="img-fluid tofade" src="https://i.imgur.com/h9xwpKw.png" alt="Lights" style="width:100%">
                         <p class="todisplay"> Maison </p>
                     </div>
                 </div>
-                <div class="column nature">
+                <div class="column">
                     <div class="content">
                         <img class="img-fluid tofade" src="https://i.imgur.com/GKacePt.png" alt="Nature" style="width:100%">
                         <p class="todisplay"> Vacances </p>
                     </div>
                 </div>
 
-                <div class="column cars">
+                <div class="column">
                     <div class="content">
                         <img class="img-fluid tofade" src="https://i.imgur.com/1ko3YmL.png" alt="Car" style="width:100%">
                         <p class="todisplay"> Robotique </p>
                     </div>
                 </div>
-                <div class="column cars">
+                <div class="column">
                     <div class="content">
                         <img class="img-fluid tofade" src="https://i.imgur.com/1tAXicv.jpg" alt="Car" style="width:100%">
                         <p class="todisplay"> Marketing </p>
                     </div>
                 </div>
-                <div class="column cars">
+                <div class="column">
                     <div class="content">
                         <img class="img-fluid tofade" src="https://i.imgur.com/WAsBTwe.png" alt="Car" style="width:100%" >
                         <p class="todisplay"> Commerce international </p>
                     </div>
                 </div>
 
-                <div class="column people">
+                <div class="column">
                     <div class="content">
                         <img class="img-fluid tofade" src="https://i.imgur.com/e6aQJQB.jpg" alt="Car" style="width:100%">
                         <p class="todisplay"> Biologie </p>
@@ -126,7 +126,7 @@
 
 
     <div class="container-fluid color3 " style="padding-top: 30px">
-        <div class="container main2">
+        <div class="container" id="about">
             <div class="row justify-content-center">
                 <div class="col-8">
                     <h3 class="text-center typo">Le concept</h3>
@@ -173,6 +173,7 @@
             </div>
         </div>
     </div>
+</body>
 
 
 

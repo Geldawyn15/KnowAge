@@ -37,18 +37,17 @@
                 <div class="form-row no-gutters ligneTable3 align-items-center">
                     <div class="col-md-4 offset-md-2 mt-1">
                         {{ form_widget(form.plainPassword) }}
-
                     </div>
                     <div class="col-md-4 mt-1">
                         {{ form_widget(form.plainPassword.second) }}
-                        {{ form_end(form) }}
-                    </div>
 
+                    </div>
                 </div>
                 <div class="form-row no-gutters ligneTable4 align-items-start">
                     <div class="col-md-4 offset-md-6 mt-1">
-                        <button class="btn  btn-block text-white btn-outline-secondary waves-effect" type="submit">Register!</button>
+                        <button class="btn btn-block text-white btn-outline-secondary waves-effect" type="submit">Register!</button>
                     </div>
+                    {{ form_end(form) }}
                 </div>
             </div>
         </div>

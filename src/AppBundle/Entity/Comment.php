@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Commentary
+ * Comment
  *
- * @ORM\Table(name="commentary")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\CommentaryRepository")
+ * @ORM\Table(name="comment")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CommentRepository")
  */
-class Commentary
+class Comment
 {
     /**
      * @var int
@@ -24,19 +24,15 @@ class Commentary
     /**
      * @var string
      *
-     * @ORM\Column(name="commentary", type="string", length=255)
+     * @ORM\Column(name="comment", type="string", length=255)
      */
-    private $commentary;
+    private $comment;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
     private $author_id;
-
-
-
-
 
     /**
      * Get id
@@ -49,27 +45,27 @@ class Commentary
     }
 
     /**
-     * Set commentary
+     * Set comment
      *
-     * @param string $commentary
+     * @param string $comment
      *
-     * @return Commentary
+     * @return Comment
      */
-    public function setCommentary($commentary)
+    public function setComment($comment)
     {
-        $this->commentary = $commentary;
+        $this->comment = $comment;
 
         return $this;
     }
 
     /**
-     * Get commentary
+     * Get comment
      *
      * @return string
      */
-    public function getCommentary()
+    public function getComment()
     {
-        return $this->commentary;
+        return $this->comment;
     }
 
     /**
