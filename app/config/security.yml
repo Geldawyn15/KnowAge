@@ -20,9 +20,10 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        logout:
-            path:    /logout
-            target: /
+
+            logout:
+                path:    /logout
+                target: /
 
         main:
             anonymous: ~
