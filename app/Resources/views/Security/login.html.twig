@@ -11,39 +11,39 @@
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 <div class="container-fluid bg_01">
-    <div class="row ligne1 no-gutters ">
+    <div class="row loginSignupLigne1 no-gutters ">
         <div class="col-md-6 offset-md-3 borderTop"></div>
     </div>
 
-    <div class="row no-gutters borderMid ligne2 ">
+    <div class="row no-gutters borderMid loginSignupLigne2 ">
         <div class="col-md-6 offset-md-3">
-            <form action="{{ path('login') }} " method="post" class="borderTable ligne2" id="effect">
+            <form action="{{ path('login') }} " method="post" class="borderTable ligne2 loginSignupform" id="effect">
 
                 <div class="form-row no-gutters ligneTable1 align-items-end">
                     <div class="col-md-8 offset-md-2 typo">
-                        <h2>Se connecter</h2>
+                        <h2 class="text-white">Se connecter</h2>
                     </div>
                 </div>
                 <div class="form-row no-gutters ligneTable3 align-items-center">
                     <div class="col-md-4 offset-md-2">
-                        <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control mobile" placeholder="Email">
+                        <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control loginSignupMobile" placeholder="Email">
                     </div>
                     <div class="col-md-4 mt-1">
-                        <input type="password" id="password" name="_password" class="form-control mobile" placeholder="Mot de passe">
+                        <input type="password" id="password" name="_password" class="form-control loginSignupMobile" placeholder="Mot de passe">
                     </div>
                 </div>
                 <div class="form-row no-gutters ligneTable4 align-items-start">
                     <div class="col-md-4 offset-md-2 mt-1">
-                        <a href="/signup" class=" btn mobile btn-block text-white btn-outline-secondary waves-effect" role="button">créer son compte</a>
+                        <a href="/signup" class=" btn loginSignupMobile btn-block text-white btn-outline-secondary waves-effect" role="button">créer son compte</a>
                     </div>
                     <div class="col-md-4 mt-1">
-                        <button type="submit" class="btn mobile btn-block text-white btn-outline-secondary waves-effect">Se connecter</button>
+                        <button type="submit" class="btn loginSignupMobile btn-block text-white btn-outline-secondary waves-effect">Se connecter</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    <div class="row ligne3 no-gutters ">
+    <div class="row loginSignupLigne3 no-gutters ">
         <div class="col-md-6 offset-md-3 borderBot"></div>
     </div>
 </div>
