@@ -1,5 +1,5 @@
-body {
-    background-color: blue;
+#index {
+    background-color: #f1f1f1;
 }
 @media (max-width: 769px) {
     .logo{
@@ -67,7 +67,7 @@ body {
 
 .tagline {
     padding-top: 0.5em;
-    padding-bottom: 0px;
+    padding-bottom: 0;
     color: #3A5199;
     font-family: 'Lobster Two', cursive;
 }
@@ -81,7 +81,6 @@ body {
 }
 .bottomBtn {
     display: inline-block;
-    padding: 6px 12px;
     line-height: 1.42857143;
     text-align: center;
     border: 1px solid transparent;
@@ -99,11 +98,6 @@ body {
     background: #33A6CC;
 }
 
-#index {
-    background-color: #f1f1f1;
-}
-
-/* Center website */
 #thumbnails {
     max-width: 1000px;
     margin: auto;
