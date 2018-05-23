@@ -2,14 +2,8 @@
 
 body{
     font-family: 'Hind Siliguri', sans-serif;
-    background-color: #FFFFFF;
+    background-color: #D5D6D2;
 }
-
-
-
-
-
-
 
 
 .textareaCreate {
@@ -18,9 +12,8 @@ body{
     background-color: white;
 }
 
-.containerDavid{
-    margin-right: 1em;
-    margin-left: 1em;
+.FormCreate{
+
     border: 1px solid #D3D3D3;
     border-radius: 0.5em;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -33,7 +26,7 @@ body{
 
 
 
-.FontTagLineDavid{
+.FontTagLine{
     font-family: 'Lobster Two', cursive;
     color:#3A5199;
     font-size:50px;
