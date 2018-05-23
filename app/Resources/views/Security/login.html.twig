@@ -1,0 +1,54 @@
+{% extends 'layout.html.twig' %}
+{% block title %} Se connecter {% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/login_signup.css">
+    <link href="https://fonts.googleapis.com/css?family=Libre+Barcode+39" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+<div class="container-fluid bg_01">
+    <div class="row ligne1 no-gutters ">
+        <div class="col-md-6 offset-md-3 borderTop"></div>
+    </div>
+
+    <div class="row no-gutters borderMid ligne2 ">
+        <div class="col-md-6 offset-md-3">
+            <form action="{{ path('login') }} " method="post" class="borderTable ligne2" id="effect">
+
+                <div class="form-row no-gutters ligneTable1 align-items-end">
+                    <div class="col-md-8 offset-md-2 typo">
+                        <h2>Se connecter</h2>
+                    </div>
+                </div>
+                <div class="form-row no-gutters ligneTable3 align-items-center">
+                    <div class="col-md-4 offset-md-2">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control mobile" placeholder="Email">
+                    </div>
+                    <div class="col-md-4 mt-1">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="_password" class="form-control mobile" placeholder="password">
+                    </div>
+                </div>
+                <div class="form-row no-gutters ligneTable4 align-items-start">
+                    <div class="col-md-4 offset-md-2 mt-1">
+                        <a href="/signup" class=" btn mobile btn-block text-white btn-outline-secondary waves-effect" role="button">créer son compte</a>
+                    </div>
+                    <div class="col-md-4 mt-1">
+                        <button type="submit" class="btn mobile btn-block text-white btn-outline-secondary waves-effect">login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row ligne3 no-gutters ">
+        <div class="col-md-6 offset-md-3 borderBot"></div>
+    </div>
+</div>
+{% endblock %}
+
+

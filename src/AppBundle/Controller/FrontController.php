@@ -17,7 +17,7 @@ class FrontController extends controller
     }
 
     /**
-     * @Route("/recherche", name="search")
+     * @Route("/search", name="search")
      */
     public function SearchPageAction()
     {
@@ -33,7 +33,7 @@ class FrontController extends controller
     }
 
     /**
-     * @Route("/formateur", name="landingformateur")
+     * @Route("/teacher", name="landingformateur")
      */
     public function landingFormateurAction()
     {
@@ -42,22 +42,31 @@ class FrontController extends controller
     }
 
     /**
-    * @Route("/connection", name="login")
+     * @Route("/formation/landingformation", name="formation")
+     * @Method({"GET", "POST"})
+     */
+    public function landingFormation()
+    {
+        return $this->render('Front/landingFormation.html.twig');
+    }
+
+    /**
+     * @Route("/user/profile", name="profile")
+     * @Method({"GET", "POST"})
+     */
+    public function profile()
+    {
+        return $this->render('Front/profile.html.twig');
+
+    }
+
+    /**
+    * @Route("/login", name="login")
      * @Method({"GET", "POST"})
     */
     public function LoginAction()
     {
         return $this->render('Front/login.html.twig');
-    }
-
-    /**
-     * @Route("/inscription", name="signup")
-     * @Method({"GET", "POST"})
-     */
-    public function SignUpAction()
-    {
-        return $this->render('Front/signup.html.twig');
-
     }
 
     /**
@@ -69,4 +78,7 @@ class FrontController extends controller
         return $this->render('Front/create.html.twig');
 
     }
+
+
+
 }

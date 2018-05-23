@@ -3,14 +3,18 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ *
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
      * @var int
@@ -18,7 +22,6 @@ class User
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     *@ORM\ManyToOne(targetEntity="AppBundle\Entity\Favoriteformation", inversedBy="user")
      */
     private $id;
 
@@ -40,9 +43,16 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="nickname", type="string", length=45, unique=true)
+     * @ORM\Column(name="nickName", type="string", length=45)
      */
-    private $nickname;
+    private $nickName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=45, unique=true, nullable=true)
+     */
+    private $username;
 
     /**
      * @var string
@@ -58,12 +68,20 @@ class User
      */
     private $password;
 
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", cascade={"persist"})
      */
     private $favoriteFormations;
 
+    public function __construct()
+    {
+    }
 
     /**
      * Get id
@@ -120,7 +138,23 @@ class User
      */
     public function getFirstName()
     {
-        return $this->firstName;
+        return $this->email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNickName()
+    {
+        return $this->nickName;
+    }
+
+    /**
+     * @param string $nickName
+     */
+    public function setNickName($nickName)
+    {
+        $this->nickName = $nickName;
     }
 
     /**
@@ -130,9 +164,9 @@ class User
      *
      * @return User
      */
-    public function setNickname($nickname)
+    public function setUsername($username)
     {
-        $this->nickname = $nickname;
+        $this->username = $username;
 
         return $this;
     }
@@ -142,9 +176,9 @@ class User
      *
      * @return string
      */
-    public function getNickname()
+    public function getUsername()
     {
-        return $this->nickname;
+        return $this->email;
     }
 
     /**
@@ -198,6 +232,22 @@ class User
     /**
      * @return mixed
      */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param mixed $plainPassword
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getFavoriteFormations()
     {
         return $this->favoriteFormations;
@@ -210,5 +260,44 @@ class User
     {
         $this->favoriteFormations = $favoriteFormations;
     }
+
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->email,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+
 }
 
