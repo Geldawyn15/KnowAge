@@ -1,80 +1,22 @@
-/*
-[class*="col"]
-{
-    border: 2px solid black;
-    border-radius: 6px;
-    line-height: 10px;
-}
 
-[class*="row"]
-{
-    border: 2px solid black;
-    border-radius: 6px;
-    line-height: 10px;
-}
-*/
-/* Centrage de l'image */
 
 body{
     font-family: 'Hind Siliguri', sans-serif;
-    background-color: #ffffff;
+    background-color: #D5D6D2;
 }
 
-
-
-   .center-block {
+.center-block {
        display: block;
        margin-left: auto;
        margin-right: auto;
-   }
+}
 
 
-   .element {
+.element {
    .center-block();
-   }
-
-
-/* Effet bouton
-.button {
-    display: inline-block;
-    padding: 15px 25px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    outline: none;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 9px #999;
-    background-color: #008CBA;
-
 }
 
-.button:active {
-    display: inline-block;
-    padding: 15px 25px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    outline: none;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 9px #999;
 
-}
-
-.button:hover {
-    display: inline-block;
-    padding: 15px 25px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    outline: none;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 9px #999;
-    background-color: darkgrey;
-}
-*/
 
 /* Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
@@ -92,8 +34,6 @@ body{
         margin-left: 15em;
         margin-right: 15em;
     }
-
-
 }
 
 /* Extra large devices (large desktops, 1200px and up)*/
@@ -103,60 +43,7 @@ body{
 
 
 
-
-.titre{
-    font-size: 2em;
-}
-
-
-
-
-/*effet survol */
-/*
-
-.overlay {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    transition: .5s ease;
-    opacity: 0.8;
-}
-
-.video1:hover .overlay {
-    opacity: 1;
-    cursor: pointer;
-
-
-}
-
-.text {
-    color: white;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    font-size: 2em;
-}
-
-
-
-
-
-
-
-
-.plus{
-    font-size: 2em;
-}
-*/
-
-
-.container {
+.containerLandingFormateur {
     position: relative;
     width: 100%;
 }
@@ -181,7 +68,7 @@ body{
 }
 
 
-.container:hover .overlay {
+.blocContainer:hover .overlay {
     bottom: 100%;
 }
 
@@ -197,11 +84,15 @@ body{
 
 
 
-.FontTagLineDavid{
+.TagLine{
     font-family: 'Lobster Two', cursive;
     color:#3A5199;
     font-size: 50px;
 }
+
+
+
+
 
 
 .video1{
@@ -248,7 +139,7 @@ a:hover {
     color:orange;
 }
 
-.Videoo{
+.Video{
     font-weight: bold;
 }
 
@@ -257,11 +148,6 @@ a:hover {
 }
 
 
-
-#threeReasons{
-    text-align:center;
-    display: block;
-}
 
 .buttonFormation{
     background-color: #3A5199;
