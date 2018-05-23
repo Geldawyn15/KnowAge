@@ -1,0 +1,57 @@
+body {
+    background-color: #D5D6D2 ;
+}
+
+.searchbar{
+    border-radius: 12px;
+}
+
+.searchTitle {
+    color: #3A5199;
+}
+
+.formCard{
+    border-color: black;
+    box-shadow: 8px 8px 12px darkslategray;
+    background-color: white;
+}
+
+.formTitle{
+    font-family: 'Hind Siliguri', sans-serif;
+    font-weight: 700;
+    font-size: 2.5em;
+}
+
+.formAuthor{
+    font-family: 'Hind Siliguri', sans-serif;
+    font-weight: 300;
+}
+
+.formText{
+    font-family: 'Hind Siliguri', sans-serif;
+}
+
+#img-formation{
+
+    min-height: 262px;
+    max-height: 262px;
+    min-width: 350px;
+    max-width: 350px;
+}
+
+.paginationForm{
+    float: right;
+}
+
+.btnSearch{
+    background-color: #3A5199;
+}
+
+.typo {
+    font-family: 'Concert One', cursive;
+    font-size: xx-large
+}
+
+.color{
+    background-color: #5eb5e0;
+}

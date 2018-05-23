@@ -1,0 +1,117 @@
+
+            {% extends 'layout.html.twig' %}
+            {% block title %} Créer une formation {% endblock %}
+            {% block stylesheet %}<link rel="stylesheet" href="/assets/css/create.css">{% endblock %}
+
+
+            {% block content %}
+            <body>
+                <div class="container-fluid ">
+                    <div class="row title mt-4 mb-4">
+                        <div class="col-md-12 mt-3">
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <h1 class="text-center FontTagLine">Je crée ma formation</h1>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 container text-center FormCreate ">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Titre</span>
+                                    </div>
+                                    <input type="text" class="form-control ininputCreate" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Description</span>
+                                    </div>
+                                    <textarea class="form-control ininputCreate" aria-label="With textarea"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Mots clés</span>
+                                    </div>
+                                    <input type="text" class="form-control ininputCreate" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="inputGroupSelect01">Domaine</label>
+                                    </div>
+                                    <select class="custom-select" id="inputGroupSelect01">
+                                        <option selected>Choississez un domaine...</option>
+                                        <option value="1">Sport</option>
+                                        <option value="2">Cuisine</option>
+                                        <option value="3">Musique</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="inputGroupSelect02">Difficulté</label>
+                                    </div>
+                                    <select class="custom-select" id="inputGroupSelect02">
+                                        <option selected>Choisissez...</option>
+                                        <option value="1">Débutant</option>
+                                        <option value="2">Intermediairee</option>
+                                        <option value="3">Confirmé</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="inputGroupSelect03">Prix</label>
+                                    </div>
+                                    <select class="custom-select" id="inputGroupSelect03">
+                                        <option selected>Choisissez...</option>
+                                        <option value="1">60€</option>
+                                        <option value="2">30€</option>
+                                        <option value="3">12€</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="inputGroupSelect04">Modèle</label>
+                                    </div>
+                                    <select class="custom-select" id="inputGroupSelect04">
+                                        <option selected>Choisissez...</option>
+                                        <option value="1">Petit</option>
+                                        <option value="2">Moyen</option>
+                                        <option value="3">Grand</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text inputCreate">Upload</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="inputGroupFile01">
+                                        <label class="custom-file-label" for="inputGroupFile01">Choisissez un fichier</label>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-md-12 mb-4 mt-4 text-center">
+                            <button type="button" class="btn btn-primary mt-4 btn-lg round buttonFormation"><i class="far fa-arrow-alt-circle-right"></i> Etape suivante </button>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </body>
+
+            {% endblock %}
