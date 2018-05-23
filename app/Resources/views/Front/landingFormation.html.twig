@@ -1,11 +1,48 @@
 
 {% extends 'layout.html.twig' %}
 {% block title %} Accueil formateur {% endblock %}
-{% block stylesheet %}<link rel="stylesheet" href="/assets/css/landingFormateur.css">{% endblock %}
-
-
+{% block stylesheet %}<link rel="stylesheet" href="/assets/css/landingFormation.css">{% endblock %}
 
 {% block content %}
-    Bonjour
+    <body>
+        <div class="container-fluid">
+            <div class="row mb-4 mt-4 ">
+                <div class="col-md-12 mt-4 mb-4 TagLine">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="text-center TagLine">Aprenez les bases du saut à la perche</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row photo mb-5">
+                <div class="col-md-4 card bg-dark text-white">
+                    <img class="card-img" src="<a href="https://placeholder.com"><img src="http://via.placeholder.com/350x150"></a>" alt="Card image">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Last updated 3 mins ago</p>
+                    </div>
+                </div>
+                    <div class="col-md-8 card text-center cardLandingFormation">
+                        <div class="card-header">
+                            avec Jean Galfione
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">10 heures de vidéo</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                            <a href="#" class="btn btn-primary">Suivre la formation</Suivre></a>
+                        </div>
+                        <div class="card-footer text-muted">
+                            Publiée le 2 avril 2018
+                        </div>
+                    </div>
+            </div>
+    </div>
+    </body>
+
+
+
+
+
 {% endblock %}
 
