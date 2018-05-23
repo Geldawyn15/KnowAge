@@ -42,15 +42,6 @@ class FrontController extends controller
     }
 
     /**
-    * @Route("/login", name="login")
-     * @Method({"GET", "POST"})
-    */
-    public function LoginAction()
-    {
-        return $this->render('Front/login.html.twig');
-    }
-
-    /**
      * @Route("/creation", name="create")
      * @Method({"GET", "POST"})
      */
