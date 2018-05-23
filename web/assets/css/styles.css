@@ -132,7 +132,7 @@ nav{
 
 .loginSignupLigne1
 {
-    height: 25vh;
+    height: 20vh;
 }
 
 .loginSignupLigne2
@@ -142,7 +142,7 @@ nav{
 
 .loginSignupLigne3
 {
-    height: 15vh;
+    height: 20vh;
 }
 
 .borderTable
@@ -168,7 +168,13 @@ nav{
     border-left: 1px solid darkslategray;
     border-right: 1px solid darkslategray;
 }
-
+.loginForm
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
 .ligneTable1
 {
     height: 20%;
@@ -213,15 +219,18 @@ nav{
 
     .loginSignupMobile
     {
-        margin-top: 2vh;
-        margin-left: 1vh;
-        margin-right: 1vh;
-        width: 95%;
+        margin-top: 2rem;
+        margin-left: 1rem;
+        margin-right: 3rem;
 
+    }
+    .signupButtonMargin
+    {
+      margin-top: 1rem;
     }
 }
 
-.loginSignupform:hover
+.loginSignupformHover:hover
 {
 
     background-color: #2F2E33;
