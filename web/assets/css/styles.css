@@ -10,15 +10,15 @@
     -moz-box-shadow: 0 16px 12px -12px #999;
     box-shadow: 0 16px 12px -12px #999;
     font-family: 'Hind Siliguri', sans-serif;
-    background-color: #3A5199;
-    color: #D5D6D2;
+    background-color: rgba(0,0,0,0.5);
+    height: 9rem;
 
 }
 .nav-item{
-    font-size: 18px;
+    font-size: 25px;
 }
 .navbar-brand{
-    font-size: 25px;
+    font-size: 35px;
 }
 nav{
     width: 100%;
