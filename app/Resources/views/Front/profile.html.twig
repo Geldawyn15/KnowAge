@@ -14,10 +14,10 @@
         </div>
 
         <div class="d-flex flex-column ml-5">
-            <div class="d-flex flex-nowrap p-2" ><label> Nom: </label><p class="pl-2"> Noms </p></div>
-            <div class="d-flex flex-nowrap p-2"><label> Prenom: </label><p class="pl-2"> Prenoms </p></div>
-            <div class="d-flex flex-nowrap p-2"><label> Pseudo: </label><p class="pl-2"><p>Psuedo</p></div>
-            <div class="d-flex flex-nowrap p-2"><label> Email: </label><p class="pl-2"><p>Email</p></div>
+            <div class="d-flex p-2" ><label> Nom: </label><p class="pl-2"> {{ app.user.name }} </p></div>
+            <div class="d-flex p-2"><label> Prenom: </label><p class="pl-2"> {{ app.user.firstName }} </p></div>
+            <div class="d-flex p-2"><label> Pseudo: </label><p class="pl-2"><p>{{ app.user.nickname }}</p></div>
+            <div class="d-flex  p-2"><label> Email: </label><p class="pl-2"><p>{{ app.user.email }}</p></div>
         </div>
         <div class="d-flex flex-column ml-5 justify-content-between">
             <div> <button class="btn btn-primary ">Modifier mon Profil</button></div>
@@ -28,7 +28,192 @@
     </div>
 <hr >
 
+<h1>Formation suivees</h1>
+<div class="d-flex justify-content-between ">
+    <div class="d-flex flex-column">
+        <div class="row">
+            <div class="col-6 mt-5">
+                <div class="column">
 
-</body>
+                    <!-- Post-->
+                    <div class="post-module">
+                        <!-- Thumbnail-->
+                        <div class="thumbnail">
+                            <img src="https://i.imgur.com/7Z8rscT.jpg" class="img-responsive" alt=""> </div>
+                        <!-- Post Content-->
+                        <div class="post-content">
+                            <div class="category">Sport</div>
+                            <h1 class="title">Votre premier Take Off</h1>
+                            <h2 class="sub_title">par John Utah</h2>
+                            <p class="description">Se mettre debout sur sa planche est difficile à accomplir pour les débutants, mais avec la bonne méthode et de l’entrainement on y arrive. C’est une moment magique mais il réserve bien des surprises! La qualité du take-off conditionne très souvent la qualité de la prestation sur la vague.
+                            </p>
+                            <div class="post-meta"> <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a><a href="#" class="btn btn-sm btn-outline-secondary waves-effect addFavorite ">Ajouter aux favoris</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 mt-5">
+                <div class="column">
+
+                    <!-- Post-->
+                    <div class="post-module">
+                        <!-- Thumbnail-->
+                        <div class="thumbnail">
+                            <img src="https://i.imgur.com/PrKE64K.jpg?" class="img-responsive" alt=""> </div>
+                        <!-- Post Content-->
+                        <div class="post-content">
+                            <div class="category">Finance</div>
+                            <h1 class="title">How to calcul your import duty</h1>
+                            <h2 class="sub_title">par John Begood</h2>
+                            <p class="description">Import duty is a tax collected on imports and some exports by a country's customs authorities. It is usually based on the imported good's value. Depending on the context, import duty may also be referred to as customs duty, tariff, import tax or import tariff.
+                            </p>
+                            <div class="post-meta"> <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a><a href="#" class="btn btn-sm btn-outline-secondary waves-effect addFavorite ">Ajouter aux favoris</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 mt-5">
+                <div class="column">
+
+                    <!-- Post-->
+                    <div class="post-module">
+                        <!-- Thumbnail-->
+                        <div class="thumbnail">
+                            <img src="https://i.imgur.com/7Z8rscT.jpg" class="img-responsive" alt=""> </div>
+                        <!-- Post Content-->
+                        <div class="post-content">
+                            <div class="category">Sport</div>
+                            <h1 class="title">Votre premier Take Off</h1>
+                            <h2 class="sub_title">par John Utah</h2>
+                            <p class="description">Se mettre debout sur sa planche est difficile à accomplir pour les débutants, mais avec la bonne méthode et de l’entrainement on y arrive. C’est une moment magique mais il réserve bien des surprises! La qualité du take-off conditionne très souvent la qualité de la prestation sur la vague.
+                            </p>
+                            <div class="post-meta"> <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a><a href="#" class="btn btn-sm btn-outline-secondary waves-effect addFavorite ">Ajouter aux favoris</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 mt-5">
+                <div class="column">
+
+                    <!-- Post-->
+                    <div class="post-module">
+                        <!-- Thumbnail-->
+                        <div class="thumbnail">
+                            <img src="https://i.imgur.com/PrKE64K.jpg?" class="img-responsive" alt=""> </div>
+                        <!-- Post Content-->
+                        <div class="post-content">
+                            <div class="category">Finance</div>
+                            <h1 class="title">How to calcul your import duty</h1>
+                            <h2 class="sub_title">par John Begood</h2>
+                            <p class="description">Import duty is a tax collected on imports and some exports by a country's customs authorities. It is usually based on the imported good's value. Depending on the context, import duty may also be referred to as customs duty, tariff, import tax or import tariff.
+                            </p>
+                            <div class="post-meta"> <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a><a href="#" class="btn btn-sm btn-outline-secondary waves-effect addFavorite ">Ajouter aux favoris</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex flex-column">
+        <div class="row">
+            <div class="col-6 mt-5">
+                <div class="column">
+
+                    <!-- Post-->
+                    <div class="post-module">
+                        <!-- Thumbnail-->
+                        <div class="thumbnail">
+                            <img src="https://i.imgur.com/7Z8rscT.jpg" class="img-responsive" alt=""> </div>
+                        <!-- Post Content-->
+                        <div class="post-content">
+                            <div class="category">Sport</div>
+                            <h1 class="title">Votre premier Take Off</h1>
+                            <h2 class="sub_title">par John Utah</h2>
+                            <p class="description">Se mettre debout sur sa planche est difficile à accomplir pour les débutants, mais avec la bonne méthode et de l’entrainement on y arrive. C’est une moment magique mais il réserve bien des surprises! La qualité du take-off conditionne très souvent la qualité de la prestation sur la vague.
+                            </p>
+                            <div class="post-meta"> <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a><a href="#" class="btn btn-sm btn-outline-secondary waves-effect addFavorite ">Ajouter aux favoris</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 mt-5">
+                <div class="column">
+
+                    <!-- Post-->
+                    <div class="post-module">
+                        <!-- Thumbnail-->
+                        <div class="thumbnail">
+                            <img src="https://i.imgur.com/PrKE64K.jpg?" class="img-responsive" alt=""> </div>
+                        <!-- Post Content-->
+                        <div class="post-content">
+                            <div class="category">Finance</div>
+                            <h1 class="title">How to calcul your import duty</h1>
+                            <h2 class="sub_title">par John Begood</h2>
+                            <p class="description">Import duty is a tax collected on imports and some exports by a country's customs authorities. It is usually based on the imported good's value. Depending on the context, import duty may also be referred to as customs duty, tariff, import tax or import tariff.
+                            </p>
+                            <div class="post-meta"> <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a><a href="#" class="btn btn-sm btn-outline-secondary waves-effect addFavorite ">Ajouter aux favoris</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 mt-5">
+                <div class="column">
+
+                    <!-- Post-->
+                    <div class="post-module">
+                        <!-- Thumbnail-->
+                        <div class="thumbnail">
+                            <img src="https://i.imgur.com/7Z8rscT.jpg" class="img-responsive" alt=""> </div>
+                        <!-- Post Content-->
+                        <div class="post-content">
+                            <div class="category">Sport</div>
+                            <h1 class="title">Votre premier Take Off</h1>
+                            <h2 class="sub_title">par John Utah</h2>
+                            <p class="description">Se mettre debout sur sa planche est difficile à accomplir pour les débutants, mais avec la bonne méthode et de l’entrainement on y arrive. C’est une moment magique mais il réserve bien des surprises! La qualité du take-off conditionne très souvent la qualité de la prestation sur la vague.
+                            </p>
+                            <div class="post-meta"> <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a><a href="#" class="btn btn-sm btn-outline-secondary waves-effect addFavorite ">Ajouter aux favoris</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 mt-5">
+                <div class="column">
+
+                    <!-- Post-->
+                    <div class="post-module">
+                        <!-- Thumbnail-->
+                        <div class="thumbnail">
+                            <img src="https://i.imgur.com/PrKE64K.jpg?" class="img-responsive" alt=""> </div>
+                        <!-- Post Content-->
+                        <div class="post-content">
+                            <div class="category">Finance</div>
+                            <h1 class="title">How to calcul your import duty</h1>
+                            <h2 class="sub_title">par John Begood</h2>
+                            <p class="description">Import duty is a tax collected on imports and some exports by a country's customs authorities. It is usually based on the imported good's value. Depending on the context, import duty may also be referred to as customs duty, tariff, import tax or import tariff.
+                            </p>
+                            <div class="post-meta"> <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a><a href="#" class="btn btn-sm btn-outline-secondary waves-effect addFavorite ">Ajouter aux favoris</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 {% endblock %}
