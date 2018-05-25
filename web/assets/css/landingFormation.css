@@ -2,6 +2,7 @@
 #bodyLandingFormation{
     font-family: 'Hind Siliguri', sans-serif;
     background-color: #D5D6D2;
+    margin-top:8em;
 
 }
 
@@ -45,7 +46,26 @@
 .thumbLandingFormation{
 
     color:black;
-    border: solid 0.1em grey;
+    border-radius: 15px;
+    border: solid 0.2em white;
+
+}
+
+.thumbLandingFormation:hover{
+
+    border: solid 0.2em grey;
+    background-color: rgba(0, 0, 0, 0.5);
+    color:white;
+
+}
+
+.thumbLandingFormationbottom{
+    border: solid 0.2em white;
+}
+
+
+.thumbLandingFormationbottom:hover{
+    border: solid 0.2em grey;
     border-radius: 15px;
 }
 
@@ -59,6 +79,7 @@
 
 .TransparencyLandingFormation{
     background-color: rgba(0, 0, 0, 0.5);
+
 }
 
 
@@ -73,19 +94,13 @@
     font-size:1em;
 }
 
-.thumbLandingFormation:hover{
-    background-color: rgba(0, 0, 0, 0.5);
-    color:white;
-    transition-duration: 0.4s;
-
-}
 
 .sucessColor{
     color:green;
 }
 
 .sucessColor:hover{
-    color:white;
+    color:black;
     transition-duration: 0.4s;
 }
 
@@ -95,10 +110,9 @@
 }
 
 .dangerColor:hover{
-    color:white;
-    transition-duration: 0.4s;
-}
+    color:black;
 
+}
 
 .starColor{
     color:yellow;
@@ -106,7 +120,7 @@
 }
 
 .starColor:hover{
-    color:white;
+    color:black;
     transition-duration: 0.4s;
 }
 
