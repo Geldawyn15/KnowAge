@@ -17,20 +17,13 @@ class FrontController extends controller
         return $this->render('Front/index.html.twig');
     }
 
+
     /**
      * @Route("/search", name="search")
      */
-    public function Search2PageAction()
-    {
-        return $this->render('Front/search.html.twig');
-    }
-
-    /**
-     * @Route("/search2", name="search")
-     */
     public function SearchPageAction()
     {
-        return $this->render('Front/search2.html.twig');
+        return $this->render('Front/search.html.twig');
     }
 
     /**
@@ -74,6 +67,7 @@ class FrontController extends controller
     /**
      * @Route("/creation", name="create")
      * @Method({"GET", "POST"})
+     *
      */
     public function CreateAction()
     {
