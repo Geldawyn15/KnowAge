@@ -1,7 +1,12 @@
 
-body{
+#bodyLandingFormation{
     font-family: 'Hind Siliguri', sans-serif;
     background-color: #D5D6D2;
+
+}
+
+.height{
+    min-height:100vh;
 }
 
 
@@ -24,10 +29,124 @@ body{
 }
 
 .cardLandingFormation{
-    margin:auto;
+    margin-right:1em;
 }
 
-.test{
-    margin-left:30px;
+.FormateurName{
+    color:red;
 }
 
+.noteLandingFormation{
+    color:black;
+    border-top: solid 0.3em grey;
+
+}
+
+.thumbLandingFormation{
+
+    color:black;
+    border: solid 0.1em grey;
+    border-radius: 15px;
+}
+
+.noteCol{
+    border-color: #6c6159;
+}
+
+.author{
+    color:red;
+}
+
+.TransparencyLandingFormation{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+.textLandingFormation{
+    font-size:1.2em;
+    margin-left:2em;
+    margin-right:2em;
+}
+
+.blocAuthor{
+    margin-right:2em;
+    font-size:1em;
+}
+
+.thumbLandingFormation:hover{
+    background-color: rgba(0, 0, 0, 0.5);
+    color:white;
+    transition-duration: 0.4s;
+
+}
+
+.sucessColor{
+    color:green;
+}
+
+.sucessColor:hover{
+    color:white;
+    transition-duration: 0.4s;
+}
+
+.dangerColor{
+    color:red;
+    transition-duration: 0.4s;
+}
+
+.dangerColor:hover{
+    color:white;
+    transition-duration: 0.4s;
+}
+
+
+.starColor{
+    color:yellow;
+    transition-duration: 0.4s;
+}
+
+.starColor:hover{
+    color:white;
+    transition-duration: 0.4s;
+}
+
+.colortext{
+    color:grey;
+}
+
+/* Medium devices (tablets, 768px and up)*/
+@media (max-width: 768px) {
+    .textDisplay{
+        display:none;
+    }
+}
+
+
+.buttonFormation{
+    background-color: #3A5199;
+    border-radius: 24px;
+}
+
+.blurOver:hover .todisplay{
+    -webkit-filter: blur(0px); /* Safari 6.0 - 9.0 */
+    filter: blur(0px);
+    width: 100%;
+    font-size: 3rem;
+}
+
+.blurOver:hover .tofade{
+    -webkit-filter: blur(0px); /* Safari 6.0 - 9.0 */
+    filter: blur(4px);
+}
+
+.todisplay {
+    display: none;
+}
+
+.enSavoirPlus{
+    font-size:1.2em;
+}
+
+.modalLandingFormation{
+    font-size: 1.2em;
+}
