@@ -3,7 +3,31 @@
 {% block stylesheet %}<link rel="stylesheet" href="/assets/css/profile.css">{% endblock %}
 
 {% block content %}
-<body>
+<body id="profile">
+    <div class="d-flex justify-content-start">
+        <div class="d-flex flex-column justify-content-center ml-5">
+            <div class="ml-1"><img src="http://via.placeholder.com/180x180"></div>
+            <div class="d-flex mt-2">
+                <button class="btn btn-primary mr-1">Etudiant</button>
+                <button class="btn btn-primary ml-1">Formateur</button>
+            </div>
+        </div>
+
+        <div class="d-flex flex-column ml-5">
+            <div class="d-flex flex-nowrap p-2" ><label> Nom: </label><p class="pl-2"> Noms </p></div>
+            <div class="d-flex flex-nowrap p-2"><label> Prenom: </label><p class="pl-2"> Prenoms </p></div>
+            <div class="d-flex flex-nowrap p-2"><label> Pseudo: </label><p class="pl-2"><p>Psuedo</p></div>
+            <div class="d-flex flex-nowrap p-2"><label> Email: </label><p class="pl-2"><p>Email</p></div>
+        </div>
+        <div class="d-flex flex-column ml-5 justify-content-between">
+            <div> <button class="btn btn-primary ">Modifier mon Profil</button></div>
+            <div> <button class="btn btn-primary ">Mes Formations</button></div>
+            <div> <button class="btn btn-primary ">Mes Formateurs</button></div>
+        </div>
+
+    </div>
+<hr >
+
 
 </body>
 
