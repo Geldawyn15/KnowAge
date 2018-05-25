@@ -171,7 +171,6 @@
     color: #f2b202;
 }
 
-
 body {
     background-color: #D5D6D2 ;
 }
@@ -183,11 +182,6 @@ body {
 
 .searchTitle {
     color: #3A5199;
-}
-
-
-.paginationForm{
-    float: right;
 }
 
 .btnSearch{
