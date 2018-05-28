@@ -1,9 +1,64 @@
 {% extends 'layout.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block title %} Update Profil {% endblock %}
 {% block stylesheet %}<link rel="stylesheet" href="/assets/css/updateProfile.css">{% endblock %}
 
 {% block content %}
-<div class="container-fluid">
-    
-</div>
+    <body id="updateProfile">
+    <div class="container-fluid ">
+        {{ form_start(form) }}
+        <div class="row title mt-4 mb-4">
+            <div class="col-md-12 mt-3">
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <h1 class="text-center FontTagLine">Update Votre profil</h1>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="mb-3 container text-center">
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Nom</span>
+                        </div>
+
+                        {{ form_widget(form.name) }}
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Prenom</span>
+                        </div>
+                        {{ form_widget(form.firstName) }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Pseudo</span>
+                        </div>
+                        {{ form_widget(form.nickname) }}
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text">Email</label>
+                        </div>
+                        {{ form_widget(form.email) }}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-md-12 mb-4 mt-4 text-center">
+                <button type="submit" class="btn btn-primary mt-4 btn-lg round" ><i class="far fa-save"></i> Update</button>
+            </div>
+        </div>
+        {{ form_end(form) }}
+        <hr>
+    </div>
 {% endblock %}
