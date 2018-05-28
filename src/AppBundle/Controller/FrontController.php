@@ -51,19 +51,7 @@ class FrontController extends controller
     {
         return $this->render('Front/landingFormation.html.twig');
     }
-
-    /**
-     * @Route("/user/profile", name="profile")
-     * @Method({"GET", "POST"})
-     * @Security("has_role('ROLE_USER')")
-     */
-    public function profile()
-    {
-        return $this->render('Front/profile.html.twig');
-
-    }
-
-
+    
     /**
      * @Route("/creation", name="create")
      * @Method({"GET", "POST"})
@@ -74,7 +62,5 @@ class FrontController extends controller
         return $this->render('Front/create.html.twig');
 
     }
-
-
 
 }
