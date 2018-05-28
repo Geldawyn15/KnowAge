@@ -196,3 +196,8 @@ body {
 .color{
     background-color: #5eb5e0;
 }
+
+.btn:focus,.btn:active, .btn {
+    box-shadow: none;
+    background: none;
+}
