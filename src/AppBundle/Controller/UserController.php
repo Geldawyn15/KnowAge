@@ -18,7 +18,18 @@ class UserController extends controller
      */
     public function profile()
     {
-        return $this->render('Front/profile.html.twig');
+        return $this->render('User/profile.html.twig');
+
+    }
+
+    /**
+     * @Route("/user/updateprofile", name="update_profile")
+     * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function updateProfile()
+    {
+        return $this->render('User/updateProfile.html.twig');
 
     }
 
