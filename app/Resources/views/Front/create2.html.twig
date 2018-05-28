@@ -65,7 +65,7 @@
                             <span class="input-group-text inputCreate">Upload</span>
                         </div>
                         <div class="custom-file">
-                            {{ form_widget(form.picture) }}
+
                         </div>
                     </div>
                 </div>
@@ -74,7 +74,8 @@
 
         <div class="row ">
             <div class="col-md-12 mb-4 mt-4 text-center">
-                <button type="button" class="btn btn-primary mt-4 btn-lg round buttonFormation"><i class="far fa-arrow-alt-circle-right"></i> Etape suivante </button>
+                <button type="submit" class="btn btn-primary mt-4 btn-lg round buttonFormation"><i class="far fa-arrow-alt-circle-right"></i> Etape suivante </button>
+                {{ form_end(form) }}
             </div>
         </div>
         <hr>
