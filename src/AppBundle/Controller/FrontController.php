@@ -47,7 +47,7 @@ class FrontController extends controller
      * @Route("/formation/landingformation", name="formation")
      * @Method({"GET", "POST"})
      */
-    public function landingFormation()
+    public function landingFormationAction()
     {
         return $this->render('Front/landingFormation.html.twig');
     }
