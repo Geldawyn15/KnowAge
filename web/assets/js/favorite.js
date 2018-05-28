@@ -12,10 +12,10 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('.favoriteSearch').on('click', function() { // Au clic sur un élément
         var element = document.getElementById("favoriteSearch");
-        if(element.classList == "far fa-heart fa-3x"){
-            return element.classList = "fas fa-heart fa-3x";
+        if(element.classList == "far fa-heart fa-2x"){
+            return element.classList = "fas fa-heart fa-2x";
         } else {
-            return  element.classList = "far fa-heart fa-3x";
+            return  element.classList = "far fa-heart fa-2x";
         }
     });
 });

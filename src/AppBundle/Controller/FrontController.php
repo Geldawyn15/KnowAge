@@ -2,10 +2,15 @@
 
 namespace AppBundle\Controller;
 
+
+use AppBundle\Entity\Formation;
+use AppBundle\Form\addFormationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class FrontController extends controller
 {
@@ -69,9 +74,15 @@ class FrontController extends controller
      * @Method({"GET", "POST"})
      *
      */
-    public function CreateAction()
+    public function CreateAction(Request $request)
     {
-        return $this->render('Front/create.html.twig');
+        $formation = new Formation();
+        $form = $this->createForm(addFormationType::class, $formation);
+        $form->handleRequest($request);
+
+        return $this->render('Front/create2.html.twig', array(
+            'form'=>$form->createView()
+        ));
 
     }
 
