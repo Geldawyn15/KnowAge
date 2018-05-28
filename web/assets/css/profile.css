@@ -160,7 +160,7 @@ hr:before {
     box-shadow: none;
 }
 
-#favorite {
+.favorite {
     color: #880000;
 }
 

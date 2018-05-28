@@ -1,6 +1,7 @@
 $(document).ready(function() {
     $('.favorite').on('click', function() { // Au clic sur un élément
-        var element = document.getElementById("favorite");
+        var clicked = this;
+        var element = clicked.querySelector("i");
         if(element.classList == "far fa-heart fa-5x"){
             return element.classList = "fas fa-heart fa-5x";
         } else {
@@ -11,7 +12,8 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $('.favoriteSearch').on('click', function() { // Au clic sur un élément
-        var element = document.getElementById("favoriteSearch");
+        var clicked = this;
+        var element = clicked.querySelector("i");
         if(element.classList == "far fa-heart fa-2x"){
             return element.classList = "fas fa-heart fa-2x";
         } else {
