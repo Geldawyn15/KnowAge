@@ -65,8 +65,18 @@ class FrontController extends controller
     public function CreateAction(Request $request)
     {
         $formation = new Formation();
+
         $form = $this->createForm(addFormationType::class, $formation);
         $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($formation);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('search');
+        }
 
         return $this->render('Front/create2.html.twig', array(
             'form'=>$form->createView()
