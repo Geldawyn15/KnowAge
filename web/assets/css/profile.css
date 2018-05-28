@@ -153,6 +153,15 @@ hr:before {
     opacity: 1 !important;
 }
 
+.btn {
+    background: none;
+}
+.btn:focus,.btn:active {
+    box-shadow: none;
+}
+
+
+
 
 
 
