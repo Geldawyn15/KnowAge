@@ -24,34 +24,34 @@ class Formation
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=45)
+     * @ORM\Column(name="title", type="string", length=45, nullable=true)
      */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_at", type="datetime")
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
      */
     private $createdAt;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="price", type="integer")
+     * @ORM\Column(name="price", type="integer", nullable=true)
      */
     private $price;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $author;
 
@@ -64,6 +64,11 @@ class Formation
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag")
      */
     private $tags;
+
+    /**
+    * @ORM\Column(name="picture", type="string")
+    */
+    private $picture;
 
     /**
      * Get id
@@ -217,6 +222,22 @@ class Formation
     public function setTags($tags)
     {
         $this->tags = $tags;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * @param mixed $picture
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
     }
 }
 
