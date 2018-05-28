@@ -3,124 +3,182 @@
 {% block title %} Recherche {% endblock %}
 
 {% block content %}
-
-<body>
-<div class="container">
-    <div class="row searchbar pt-3 mt-5">
-        <div class="col-md-12 text-center">
-            <form action="" >
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Johnny" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                        <button class="btnSearch btn btn-secondary" type="button"> <i class="fas fa-search"></i></button>
+    <body>
+   <div class="container">
+        <div class="row searchbar pt-3 ">
+            <div class="col-md-12 text-center">
+                <form action="" >
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Johnny" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btnSearch btn btn-secondary" type="button"> <i class="fas fa-search"></i></button>
+                        </div>
                     </div>
-                </div>
-            </form>
-
-        </div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row ">
-        <div class="col-md-5" >
-            <h2 class="searchTitle text-center mb-3 mt-5 typo"> Résultat de la recherche :</h2>
-        </div>
-    </div>
-</div>
-
-<section>
-    <div class="container py-3 search-result">
-        <div class="formCard mb-3 ">
-            <div class="row ">
-                <div class="col-md-4 picture" >
-                    <img src="https://i.imgur.com/7Z8rscT.jpg"  id="img-formation">
-                </div>
-                <div class="col-md-8 px-3">
-                    <div class="card-block px-3">
-                        <h4 class="formTitle pt-2">Votre premier Take Off </h4>
-                        <p class="formAuthor">Par Johnny Utah</p>
-                        <p class="formText">Se mettre debout sur sa planche est difficile à accomplir pour les débutants, mais avec la bonne méthode et de l’entrainement on y arrive. C’est une moment magique mais il réserve bien des surprises! La qualité du take-off conditionne très souvent la qualité de la prestation sur la vague.</p>
-                    </div>
-                    <div class="interact mt-4 mb-4 text-center">
-                        <a href="#" class="btn btn-outline-secondary waves-effect mr-3">Voir la formation</a>
-
-                        <a href="#" class="btn btn-outline-secondary waves-effect addFavorite ">Ajouter aux favoris</a>
-                    </div>
-                </div>
+                </form>
 
             </div>
         </div>
     </div>
-    </div>
-</section>
 
-<section>
-<div class="container py-3 search-result ">
-    <div class="formCard mb-3">
+    <div class="container">
         <div class="row ">
-            <div class="col-md-4" id="img-formation" >
-                <img src="https://i.imgur.com/PrKE64K.jpg?" id="img-formation" >
-            </div>
-            <div class="col-md-8 px-3">
-                <div class="card-block px-3">
-                    <h4 class="formTitle pt-2">How to calcul your import duty</h4>
-                    <p class="formAuthor">Par Johnny BeGood</p>
-                    <p class="formText">Import duty is a tax collected on imports and some exports by a country's customs authorities. It is usually based on the imported good's value. Depending on the context, import duty may also be referred to as customs duty, tariff, import tax or import tariff. </p>
-                </div>
-                <div class="interact mt-4 mb-4 text-center">
-                    <a href="#" class="btn btn-outline-secondary waves-effect mr-3">Voir la formation</a>
-                    <a href="#" class="btn btn-outline-secondary waves-effects addFavorite ">Ajouter aux favoris</a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-</section>
-
-<section>
-    <div class="container py-3 search-result ">
-        <div class="formCard mb-3">
-            <div class="row ">
-                <div class="col-md-4" id="img-formation">
-                    <img src="https://i.imgur.com/i6PNrrd.png" id="img-formation" >
-                </div>
-                <div class="col-md-8 px-3">
-                    <div class="card-block px-3">
-                        <h4 class="formTitle pt-2">Le responsive et Bootstrap</h4>
-                        <p class="formAuthor">Par John Doe</p>
-                        <p class="formText">Ce cours va vous guider dans la découverte de cette puissante boîte à outils. Bootstrap, kit CSS créé par les développeurs de Twitter, est devenu en peu de temps le framework CSS de référence. Vous allez découvrir pas à pas comment construire rapidement et facilement des sites web esthétiques et responsives.</p>
-                    </div>
-                    <div class="interact mt-4 mb-4 text-center">
-                        <a href="#" class="btn btn-outline-secondary waves-effect mr-3">Voir la formation</a>
-                        <a href="#" class="btn btn-outline-secondary waves-effect addFavorite">Ajouter aux favoris</a>
-                    </div>
-                </div>
-
+            <div class="col-md-5" >
+                <h2 class="searchTitle text-center mb-5 mt-5 typo"> Résultat de la recherche :</h2>
             </div>
         </div>
     </div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 mt-5">
+            <div class="column">
+
+                <!-- Post-->
+                <div class="post-module">
+                    <!-- Thumbnail-->
+                    <div class="thumbnail">
+                        <img src="https://i.imgur.com/7Z8rscT.jpg" class="img-responsive" alt=""> </div>
+                    <!-- Post Content-->
+                    <div class="post-content">
+                        <div class="category">Sport</div>
+                        <h1 class="title">Votre premier Take Off</h1>
+                        <h2 class="sub_title">par John Utah</h2>
+                        <p class="description">Se mettre debout sur sa planche est difficile à accomplir pour les débutants, mais avec la bonne méthode et de l’entrainement on y arrive. C’est une moment magique mais il réserve bien des surprises! La qualité du take-off conditionne très souvent la qualité de la prestation sur la vague.
+                    </p>
+                            <div class="post-meta"> <a href="#" class="btn btn-sm btn-outline-primary waves-effect mr-3">Voir la formation</a><a href="#" class="btn btn-sm btn-outline-primary waves-effect addFavorite ">Ajouter aux favoris</a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div><div class="col-md-4 mt-5">
+            <div class="column">
+
+                <!-- Post-->
+                <div class="post-module">
+                    <!-- Thumbnail-->
+                    <div class="thumbnail">
+                        <img src="https://i.imgur.com/PrKE64K.jpg?" class="img-responsive" alt=""> </div>
+                    <!-- Post Content-->
+                    <div class="post-content">
+                        <div class="category">Finance</div>
+                        <h1 class="title">How to calcul your import duty</h1>
+                        <h2 class="sub_title">par John Begood</h2>
+                        <p class="description">Import duty is a tax collected on imports and some exports by a country's customs authorities. It is usually based on the imported good's value. Depending on the context, import duty may also be referred to as customs duty, tariff, import tax or import tariff.
+                        </p>
+                            <div class="post-meta"> <a href="#" class="btn btn-sm btn-outline-primary waves-effect mr-3">Voir la formation</a><a href="#" class="btn btn-sm btn-outline-primary waves-effect addFavorite ">Ajouter aux favoris</a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-5">
+            <div class="column">
+
+                <!-- Post-->
+                <div class="post-module">
+                    <!-- Thumbnail-->
+                    <div class="thumbnail">
+                        <img src="https://i.imgur.com/i6PNrrd.png" class="img-responsive" alt=""> </div>
+                    <!-- Post Content-->
+                    <div class="post-content">
+                        <div class="category">Technologie</div>
+                        <h1 class="title">Le responsive et Bootstrap</h1>
+                        <h2 class="sub_title">Par John Doe</h2>
+                        <p class="description">Ce cours va vous guider dans la découverte de cette puissante boîte à outils. Bootstrap, kit CSS créé par les développeurs de Twitter, est devenu en peu de temps le framework CSS de référence. Vous allez découvrir pas à pas comment construire rapidement et facilement des sites web esthétiques et responsives.
+                    </p>
+                            <div class="post-meta"> <a href="#" class="btn btn-sm btn-outline-primary waves-effect mr-3">Voir la formation</a><a href="#" class="btn btn-sm btn-outline-primary waves-effect addFavorite ">Ajouter aux favoris</a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-4 mt-5">
+            <div class="column">
+
+                <!-- Post-->
+                <div class="post-module">
+                    <!-- Thumbnail-->
+                    <div class="thumbnail">
+                        <img src="https://i.imgur.com/7Z8rscT.jpg" class="img-responsive" alt=""> </div>
+                    <!-- Post Content-->
+                    <div class="post-content">
+                        <div class="category">Sport</div>
+                        <h1 class="title">Votre premier Take Off</h1>
+                        <h2 class="sub_title">par John Utah</h2>
+                        <p class="description">Se mettre debout sur sa planche est difficile à accomplir pour les débutants, mais avec la bonne méthode et de l’entrainement on y arrive. C’est une moment magique mais il réserve bien des surprises! La qualité du take-off conditionne très souvent la qualité de la prestation sur la vague.
+                    </p>
+                            <div class="post-meta"> <a href="#" class="btn btn-sm btn-outline-primary waves-effect mr-3">Voir la formation</a><a href="#" class="btn btn-sm btn-outline-primary waves-effect addFavorite ">Ajouter aux favoris</a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-5">
+            <div class="column">
+
+                <!-- Post-->
+                <div class="post-module">
+                    <!-- Thumbnail-->
+                    <div class="thumbnail">
+                        <img src="https://i.imgur.com/PrKE64K.jpg?" class="img-responsive" alt=""> </div>
+                    <!-- Post Content-->
+                    <div class="post-content">
+                        <div class="category">Finance</div>
+                        <h1 class="title">How to calcul your import duty</h1>
+                        <h2 class="sub_title">par John Begood</h2>
+                        <p class="description">Import duty is a tax collected on imports and some exports by a country's customs authorities. It is usually based on the imported good's value. Depending on the context, import duty may also be referred to as customs duty, tariff, import tax or import tariff.
+                        </p>
+                            <div class="post-meta"> <a href="#" class="btn btn-sm btn-outline-primary waves-effect mr-3">Voir la formation</a><a href="#" class="btn btn-sm btn-outline-primary waves-effect addFavorite ">Ajouter aux favoris</a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-5">
+            <div class="column">
+
+                <!-- Post-->
+                <div class="post-module">
+                    <!-- Thumbnail-->
+                    <div class="thumbnail">
+                        <img src="https://i.imgur.com/i6PNrrd.png" class="img-responsive" alt=""> </div>
+                    <!-- Post Content-->
+                    <div class="post-content">
+                        <div class="category">Technologie</div>
+                        <h1 class="title">Le responsive et Bootstrap</h1>
+                        <h2 class="sub_title">Par John Doe</h2>
+                        <p class="description">Ce cours va vous guider dans la découverte de cette puissante boîte à outils. Bootstrap, kit CSS créé par les développeurs de Twitter, est devenu en peu de temps le framework CSS de référence. Vous allez découvrir pas à pas comment construire rapidement et facilement des sites web esthétiques et responsives.
+                    </p>
+                            <div class="post-meta"> <a href="#" class="btn btn-sm btn-outline-primary waves-effect mr-3">Voir la formation</a><a href="#" class="btn btn-sm btn-outline-primary waves-effect addFavorite ">Ajouter aux favoris</a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
-</section>
-    <div class="container ti mb-5">
-    <nav aria-label="pagination">
-        <ul class="pagination paginationForm">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item active">
-                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-            </li>
-        </ul>
-    </nav>
+
+
+    <div class="container mb-5 mt-5 ">
+        <nav aria-label="pagination ">
+            <ul class="pagination paginationForm justify-content-end">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item active">
+                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
     </div>
-</body>
 
 {% endblock %}
