@@ -88,4 +88,14 @@ class FrontController extends controller
 
     }
 
+    /**
+     * @Route("/formation", name="HomepageFormation")
+     * @Method({"GET", "POST"})
+     */
+    public function HomepageFormationAction()
+    {
+
+        return $this->render('Front/formation.html.twig');
+    }
+
 }
