@@ -28,8 +28,8 @@ class addFormationType extends AbstractType
                     '15 Euros' => '15',
                     '30 Euros' => '30',
                     '40 Euros' => '40',
-                )));
-            //->add('picture', FileType::class);
+                )))
+            ->add('picture', FileType::class);
 
     }
 
