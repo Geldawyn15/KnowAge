@@ -62,11 +62,11 @@ class FrontController extends controller
      * @Method({"GET", "POST"})
      *
      */
-    public function CreateAction(Request $request)
+    public function createAction(Request $request)
     {
         $formation = new Formation();
 
-        $form = $this->createForm(addFormationType::class, $formation);
+        $form = $this->createForm('AppBundle\Form\addFormationType', $formation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
