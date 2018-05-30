@@ -1,0 +1,87 @@
+{% extends 'layout.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block title %} Créer une formation {% endblock %}
+{% block stylesheet %}<link rel="stylesheet" href="/assets/css/create.css">{% endblock %}
+
+
+{% block content %}
+    <body>
+    <div class="container-fluid ">
+        <div class="row title mt-4 mb-4">
+            <div class="col-md-12 mt-3">
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <h1 class="text-center FontTagLine">Je crée ma formation</h1>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="mb-3 container text-center FormCreate ">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Titre</span>
+                        </div>
+                        {{ form_start(form) }}
+                        {{ form_widget(form.title) }}
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Description</span>
+                        </div>
+                        {{ form_widget(form.description) }}
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Mots clés</span>
+                        </div>
+
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Catégorie</label>
+                        </div>
+                        {{ form_widget(form.category) }}
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect03">Prix</label>
+                        </div>
+                        {{ form_widget(form.price) }}
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text inputCreate">Upload</span>
+                        </div>
+                        <div class="custom-file">
+                            {{ form_widget(form.picture) }}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-md-12 mb-4 mt-4 text-center">
+                <button type="submit" class="btn btn-primary mt-4 btn-lg round buttonFormation"><i class="far fa-arrow-alt-circle-right"></i> Etape suivante </button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+        <hr>
+    </div>
+    </body>
+
+{% endblock %}
