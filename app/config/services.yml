@@ -33,6 +33,8 @@ services:
         class: AppBundle\Service\ImgUploader
         arguments: ['%images_directory%']
 
+    Claviska\SimpleImage: ~
+
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:
