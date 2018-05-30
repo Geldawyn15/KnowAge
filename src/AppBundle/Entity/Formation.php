@@ -74,6 +74,32 @@ class Formation
     */
     private $picture;
 
+
+    /**
+     * @var string
+     * @Assert\NotBlank()
+     * @ORM\Column(name="content", type="string", nullable=true)
+     */
+    private $content;
+
+    /**
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param string $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+    }
+
+
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
