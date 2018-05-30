@@ -3,12 +3,14 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Formation;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 
 class addFormationType extends AbstractType
 {
@@ -17,20 +19,17 @@ class addFormationType extends AbstractType
         $builder
             ->add('title', TextType::class)
             ->add('description', TextType::class)
-            ->add('tags', TextType::class)
-            ->add('categories', ChoiceType::class, array(
-                'choices'  => array(
-                    'Sport' => 'sport',
-                    'Cuisine' => 'Cuisine',
-                    'Life Style' => 'Life Style',
-                )))
+            //->add('tags', addFormationTagType::class)
+            ->add('category' ,EntityType::class, array(
+                'class'  => 'AppBundle:Category'
+            ))
             ->add('price',ChoiceType::class, array(
                 'choices'  => array(
-                    '15 Euros' => '15 Euros',
-                    '30 Euros' => '30 Euros',
-                    '40 Euros' => '40 Euros',
-                )))
-            ->add('picture', FileType::class);
+                    '15 Euros' => '15',
+                    '30 Euros' => '30',
+                    '40 Euros' => '40',
+                )));
+            //->add('picture', FileType::class);
 
     }
 
