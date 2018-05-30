@@ -2,7 +2,9 @@
 
 namespace AppBundle\Controller;
 
+
 use AppBundle\Entity\User;
+use AppBundle\Entity\formation;
 use AppBundle\Form\UpdateProfileType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -22,8 +24,12 @@ class UserController extends controller
      */
     public function profileAction()
     {
-        return $this->render('User/profile.html.twig');
 
+        $em = $this->getDoctrine()->getManager();
+        $formations = $em->getRepository('AppBundle:Formation')->findBy(['author' => '3']);
+        return $this->render('User/profile.html.twig', array(
+        'formations' => $formations,
+    ));
     }
 
     /**
@@ -33,7 +39,6 @@ class UserController extends controller
      */
     public function updateProfileAction(Request $request)
     {
-
         $user = $this->getUser();
         $form = $this->createForm(updateProfileType::class, $user);
         $form->handleRequest($request);
