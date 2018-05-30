@@ -71,6 +71,10 @@ class FrontController extends controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $picture = $formation->getPicture();
+            $fileName = 'image.png';
+
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($formation);
             $entityManager->flush();
