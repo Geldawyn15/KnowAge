@@ -93,10 +93,28 @@ class FrontController extends controller
      * @Route("/formation", name="HomepageFormation")
      * @Method({"GET", "POST"})
      */
-    public function HomepageFormationAction()
+    public function HomepageFormationAction(request $request)
     {
+        $formation = new Formation();
 
-        return $this->render('Front/formation.html.twig');
+        $form = $this->createForm('AppBundle\Form\FormationType', $formation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($formation);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('formation');
+        }
+
+
+
+        return $this->render('Front/formation.html.twig', array(
+            'form'=>$form->createView()
+        ));
     }
 
 }
