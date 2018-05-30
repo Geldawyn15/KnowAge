@@ -69,7 +69,7 @@ class Formation
     private $tags;
 
     /**
-     *@Assert\File(mimeTypes={ "image/png" })
+     *@Assert\File(mimeTypes={ "image/jpeg" })
     * @ORM\Column(name="picture", type="string",nullable=true)
     */
     private $picture;
@@ -81,22 +81,6 @@ class Formation
      * @ORM\Column(name="content", type="string", nullable=true)
      */
     private $content;
-
-    /**
-     * @return string
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /**
-     * @param string $content
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-    }
 
 
 

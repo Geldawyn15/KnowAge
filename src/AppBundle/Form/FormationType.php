@@ -24,6 +24,8 @@ class FormationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('title')
+            ->add('id')
             ->add('content', CKEditorType::class, array(
             'config' => array(
                 'uiColor' => '#ffffff',
