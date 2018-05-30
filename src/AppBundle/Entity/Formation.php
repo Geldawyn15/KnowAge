@@ -2,7 +2,10 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Formation
@@ -23,14 +26,14 @@ class Formation
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="title", type="string", length=45, nullable=true)
      */
     private $title;
 
     /**
      * @var string
-     *
+     *@Assert\NotBlank()
      * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;
@@ -56,9 +59,9 @@ class Formation
     private $author;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Category")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category")
      */
-    private $categories;
+    private $category;
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag")
@@ -66,9 +69,15 @@ class Formation
     private $tags;
 
     /**
-    * @ORM\Column(name="picture", type="string")
+     *@Assert\File(mimeTypes={ "image/jpeg" })
+    * @ORM\Column(name="picture", type="string",nullable=true)
     */
     private $picture;
+
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -195,22 +204,6 @@ class Formation
     /**
      * @return mixed
      */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
-
-    /**
-     * @param mixed $categories
-     */
-    public function setCategories($categories)
-    {
-        $this->categories = $categories;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getTags()
     {
         return $this->tags;
@@ -239,5 +232,22 @@ class Formation
     {
         $this->picture = $picture;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+    }
+
 }
 
