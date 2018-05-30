@@ -1,8 +1,9 @@
 <?php
 namespace AppBundle\Service;
 
+use claviska\SimpleImage;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use \claviska\SimpleImage;
+
 
 class ImgUploader
 {
@@ -10,15 +11,14 @@ class ImgUploader
 
     private $simpleimage;
 
-    public function __construct($targetDir,SimpleImage $simpleImage)
+    public function __construct($targetDir,SimpleImage $simpleimage)
     {
         $this->targetDir = $targetDir;
-        $this->simpleimage = $simpleImage;
+        $this->simpleimage = $simpleimage;
     }
 
     public function upload(UploadedFile $file)
     {
-
         $fileName = md5(uniqid()).'.'.$file->guessExtension();
 
         $file->move($this->getTargetDir(), $fileName);
