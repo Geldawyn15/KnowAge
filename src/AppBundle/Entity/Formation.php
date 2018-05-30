@@ -69,8 +69,8 @@ class Formation
     private $tags;
 
     /**
-     * @Assert\NotBlank()
-    * @ORM\Column(name="picture", type="string")
+     *
+    * @ORM\Column(name="picture", type="string",nullable=true)
     */
     private $picture;
 
