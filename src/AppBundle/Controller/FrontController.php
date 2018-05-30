@@ -5,6 +5,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Formation;
 use AppBundle\Form\addFormationType;
+use AppBundle\Service\ImgUpload;
+use AppBundle\Service\ImgUploader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -62,7 +64,7 @@ class FrontController extends controller
      * @Method({"GET", "POST"})
      *
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, ImgUploader $imgUpload)
     {
         $formation = new Formation();
 
@@ -72,8 +74,7 @@ class FrontController extends controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $picture = $formation->getPicture();
-            $fileName = 'image.png';
-
+            $formation->setPicture($imgUpload->upload($picture));
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($formation);
