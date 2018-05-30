@@ -1,7 +1,11 @@
 #profile{
-    padding-top: 10rem;
+    padding-top: 12rem;
     background-color: #D5D6D2;
 }
+.formation {
+    margin-bottom: 5rem;
+}
+
 hr {
     overflow: visible; /* For IE */
     height: 30px;
@@ -163,6 +167,9 @@ hr:before {
 
 .favorite {
     color: #880000;
+}
+.profileinfo {
+    font-size: 20px ;
 }
 
 
