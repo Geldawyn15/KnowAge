@@ -9,21 +9,23 @@ class ImgUploader
 {
     private $targetDir;
 
-    private $simpleimage;
+    private $simpleImage;
 
-    public function __construct($targetDir,SimpleImage $simpleimage)
+    public function __construct($targetDir,SimpleImage $simpleImage)
     {
         $this->targetDir = $targetDir;
-        $this->simpleimage = $simpleimage;
+        $this->simpleImage = $simpleImage;
     }
 
     public function upload(UploadedFile $file)
     {
-        $fileName = md5(uniqid()).'.'.$file->guessExtension();
+        $fileName =  md5(uniqid()).'.'.$file->guessExtension();
 
-        $file->move($this->getTargetDir(), $fileName);
+        $file->move($this->getTargetDir(), $file->getRealPath(). $fileName);
 
-        return $fileName;
+        //$fileName = $file->getBasename(). md5(uniqid()).'.'.$file->guessExtension();
+
+        return $this->getTargetDir().'/'. $fileName;
     }
 
     public function getTargetDir()
