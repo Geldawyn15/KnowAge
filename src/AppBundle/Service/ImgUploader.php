@@ -11,25 +11,36 @@ class ImgUploader
 
     private $simpleImage;
 
-    public function __construct($targetDir,SimpleImage $simpleImage)
+    private $publicPath;
+
+    public function __construct($targetDir, $publicPath, SimpleImage $simpleImage)
     {
         $this->targetDir = $targetDir;
         $this->simpleImage = $simpleImage;
+        $this->publicPath = $publicPath;
     }
 
     public function upload(UploadedFile $file)
     {
         $fileName =  md5(uniqid()).'.'.$file->guessExtension();
 
-        $file->move($this->getTargetDir(), $file->getRealPath(). $fileName);
+        $file->move($this->getTargetDir(),  $fileName);
 
         //$fileName = $file->getBasename(). md5(uniqid()).'.'.$file->guessExtension();
 
-        return $this->getTargetDir().'/'. $fileName;
+        return $this->getPublicPath().'/'.$fileName;
     }
 
     public function getTargetDir()
     {
         return $this->targetDir;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPublicPath()
+    {
+        return $this->publicPath;
     }
 }
