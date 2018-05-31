@@ -91,7 +91,7 @@ class FrontController extends controller
 
     /**
      * @Route("/formation", name="HomepageFormation")
-     * @Method({"GET", "POST"})
+     * @Method({"GET", "POST"})composer install
      */
     public function HomepageFormationAction(request $request)
     {

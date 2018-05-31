@@ -26,7 +26,7 @@ class UserController extends controller
     {
 
         $em = $this->getDoctrine()->getManager();
-        $formations = $em->getRepository('AppBundle:Formation')->findBy(['author' => '3']);
+        $formations = $em->getRepository('AppBundle:Formation')->findBy(['author' => '8']);
         return $this->render('User/profile.html.twig', array(
         'formations' => $formations,
     ));

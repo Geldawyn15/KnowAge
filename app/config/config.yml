@@ -8,6 +8,7 @@ imports:
 parameters:
     locale: en
     images_directory: '%kernel.root_dir%/../web/upload/imageformation'
+    public_path: '/upload/imageformation'
 
 framework:
     #esi: ~

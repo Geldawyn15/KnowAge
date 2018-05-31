@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -77,7 +78,6 @@ class Formation
 
     /**
      * @var string
-     * @Assert\NotBlank()
      * @ORM\Column(name="content", type="string", nullable=true)
      */
     private $content;
@@ -244,7 +244,7 @@ class Formation
     }
 
     /**
-     * @return mixed
+     * @return string | UploadedFile
      */
     public function getPicture()
     {
