@@ -78,7 +78,6 @@ class Formation
 
     /**
      * @var string
-     * @Assert\NotBlank()
      * @ORM\Column(name="content", type="string", nullable=true)
      */
     private $content;
