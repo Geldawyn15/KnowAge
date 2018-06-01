@@ -12,6 +12,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
 
 
 class FrontController extends controller
@@ -122,23 +124,31 @@ class FrontController extends controller
     /**
      * Displays a form to edit an existing formation entity.
      *
-     * @Route("/formation/2/edit", name="Formation_edit")
+     * @Route("/formation/{formation_id}/edit", name="formation_edit", requirements={"formation_id": "\d+"})
+     * @ParamConverter("formation", options={"mapping": {"formation_id": "id"}})
      * @Method({"GET", "POST"})
      */
     public function EditFormationAction(request $request, Formation $formation)
     {
 
+
         $editForm = $this->createForm('AppBundle\Form\FormationType', $formation);
+
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('Formation_edit', array('id' => $formation->getId()));
+            $entitymanager = $this->getDoctrine()->getManager();
+            $entitymanager->persist($formation);
+            $entitymanager->flush();
+
+
+            return $this->redirectToRoute('Front/formation_edit.html.twig', array(
+                'edit_form' => $editForm->createView(),
+            ));
         }
 
         return $this->render('Front/formation_edit.html.twig', array(
-            'formation' => $formation,
             'edit_form' => $editForm->createView(),
 
         ));
