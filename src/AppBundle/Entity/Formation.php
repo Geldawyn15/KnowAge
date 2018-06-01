@@ -70,7 +70,7 @@ class Formation
     private $tags;
 
     /**
-     *@Assert\File(mimeTypes={ "image/jpeg" })
+     *@Assert\File(mimeTypes={ "image/png" })
     * @ORM\Column(name="picture", type="string",nullable=true)
     */
     private $picture;

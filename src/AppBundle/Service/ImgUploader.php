@@ -27,7 +27,7 @@ class ImgUploader
 
         $this->simpleImage
             ->fromFile($file)
-            ->resize(50, 50)
+            ->bestFit(100, 100)
             ->toFile($file->getRealPath());
 
         $file->move($this->getTargetDir(),  $fileName);
