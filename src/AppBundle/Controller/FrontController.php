@@ -98,9 +98,11 @@ class FrontController extends controller
         $formation = new Formation();
 
         $form = $this->createForm('AppBundle\Form\FormationType', $formation);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
 
 
             $entityManager = $this->getDoctrine()->getManager();
