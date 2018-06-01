@@ -22,11 +22,16 @@ class ImgUploader
 
     public function upload(UploadedFile $file)
     {
+
         $fileName =  md5(uniqid()).'.'.$file->guessExtension();
+
+        $this->simpleImage
+            ->fromFile($file)
+            ->resize(50, 50)
+            ->toFile($file->getRealPath());
 
         $file->move($this->getTargetDir(),  $fileName);
 
-        //$fileName = $file->getBasename(). md5(uniqid()).'.'.$file->guessExtension();
 
         return $this->getPublicPath().'/'.$fileName;
     }
