@@ -26,7 +26,7 @@ class FormationController extends controller
     /**
      * @Route("/creation", name="create")
      * @Method({"GET", "POST"})
-     *
+     * @Security("has_role('ROLE_USER')")
      */
     public function createAction(Request $request, ImgUploader $imgUpload)
     {
@@ -54,8 +54,9 @@ class FormationController extends controller
     }
 
     /**
-     * @Route("/formation", name="HomepageFormation")
+     * @Route("/creation2", name="HomepageFormation")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
      */
     public function create2Action(request $request)
     {
