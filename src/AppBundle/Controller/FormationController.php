@@ -54,7 +54,7 @@ class FormationController extends controller
     }
 
     /**
-     * @Route("/formation", name="HomepageFormation")
+     * @Route("/creation2", name="HomepageFormation")
      * @Method({"GET", "POST"})
      */
     public function create2Action(request $request)
