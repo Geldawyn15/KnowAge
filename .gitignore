@@ -3,7 +3,7 @@
 *.cache
 app/db.php
 .idea/
-
+/web/upload/*
 /.web-server-pid
 /app/config/parameters.yml
 /build/
