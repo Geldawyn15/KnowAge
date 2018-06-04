@@ -20,13 +20,9 @@ class UserController extends controller
     public function profilAction()
     {
         $em = $this->getDoctrine()->getManager();
-<<<<<<< HEAD
-            $formations = $em->getRepository('AppBundle:Formation')->findBy(['author' => '3']);
-        return $this->render('User/profile.html.twig', array(
-=======
-        $formations = $em->getRepository('AppBundle:Formation')->findBy(['author' => '8']);
+
+            $formations = $em->getRepository('AppBundle:Formation')->findBy(['author' => '8']);
         return $this->render('User/profil.html.twig', array(
->>>>>>> 32daccdc685f8b3f0bc69abb6634f9d9a4e90ce3
         'formations' => $formations,
         ));
     }
