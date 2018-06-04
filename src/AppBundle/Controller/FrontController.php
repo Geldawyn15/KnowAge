@@ -14,9 +14,14 @@ class FrontController extends controller
     /**
      * @Route("/", name="homepage")
      */
-    public function homepageAction()
+    public function homepageAction(Request $request)
     {
-        return $this->render('Front/index.html.twig');
+        $form = $this->createForm('AppBundle\Form\SearchFormationType');
+        $form->handleRequest($request);
+
+        return $this->render('Front/index.html.twig', array(
+            'form'=>$form->createView()
+        ));
     }
 
     /**

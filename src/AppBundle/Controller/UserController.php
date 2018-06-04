@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends controller
 {
+
     /**
      * @Route("/user/profil", name="profil")
      * @Method({"GET", "POST"})
@@ -19,11 +20,13 @@ class UserController extends controller
      */
     public function profilAction()
     {
+        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
-            $formations = $em->getRepository('AppBundle:Formation')->findBy(['author' => '8']);
+
+        $formationsCree = $em->getRepository('AppBundle:Formation')->findBy(['author' => $user]);
         return $this->render('User/profil.html.twig', array(
-        'formations' => $formations,
+            'formationscree' => $formationsCree,
         ));
     }
 
