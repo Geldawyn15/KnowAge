@@ -20,7 +20,24 @@ class ImgUploader
         $this->publicPath = $publicPath;
     }
 
-    public function upload(UploadedFile $file)
+    public function uploadFormationPicture(UploadedFile $file)
+    {
+
+        $fileName =  md5(uniqid()).'.'.$file->guessExtension();
+
+        $this->simpleImage
+            ->fromFile($file)
+            ->bestFit(100, 100)
+            ->toFile($file->getRealPath());
+
+        $file->move($this->getTargetDir(),  $fileName);
+
+
+        return $this->getPublicPath().'/'.$fileName;
+    }
+
+
+    public function uploadProfilPicture(UploadedFile $file)
     {
 
         $fileName =  md5(uniqid()).'.'.$file->guessExtension();

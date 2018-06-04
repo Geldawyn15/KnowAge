@@ -27,14 +27,12 @@ class Formation
 
     /**
      * @var string
-     * @Assert\NotBlank()
      * @ORM\Column(name="title", type="string", length=45, nullable=true)
      */
     private $title;
 
     /**
      * @var string
-     *@Assert\NotBlank()
      * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;
@@ -70,8 +68,11 @@ class Formation
     private $tags;
 
     /**
-     *@Assert\File(mimeTypes={ "image/png" })
-    * @ORM\Column(name="picture", type="string",nullable=true)
+     * @Assert\Image(
+     *     mimeTypes={"image/png"},
+     *     mimeTypesMessage= " Merci de choisir une image au fichier .jpeg ou .png")
+     *
+     * @ORM\Column(name="picture", type="string",nullable=true)
     */
     private $picture;
 

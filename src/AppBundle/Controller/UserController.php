@@ -2,9 +2,6 @@
 
 namespace AppBundle\Controller;
 
-
-use AppBundle\Entity\User;
-use AppBundle\Entity\formation;
 use AppBundle\Form\UpdateProfileType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -15,8 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends controller
 {
-
-
     /**
      * @Route("/user/profil", name="profil")
      * @Method({"GET", "POST"})
@@ -25,10 +20,15 @@ class UserController extends controller
     public function profilAction()
     {
         $em = $this->getDoctrine()->getManager();
+<<<<<<< HEAD
             $formations = $em->getRepository('AppBundle:Formation')->findBy(['author' => '3']);
         return $this->render('User/profile.html.twig', array(
+=======
+        $formations = $em->getRepository('AppBundle:Formation')->findBy(['author' => '8']);
+        return $this->render('User/profil.html.twig', array(
+>>>>>>> 32daccdc685f8b3f0bc69abb6634f9d9a4e90ce3
         'formations' => $formations,
-    ));
+        ));
     }
 
     /**
