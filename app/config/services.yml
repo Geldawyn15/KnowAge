@@ -35,6 +35,9 @@ services:
 
     claviska\SimpleImage: ~
 
+    AppBundle\Service\Mailer:
+            class: AppBundle\Service\Mailer
+
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:
