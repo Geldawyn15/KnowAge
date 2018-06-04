@@ -24,9 +24,8 @@ class UserController extends controller
      */
     public function profileAction()
     {
-
         $em = $this->getDoctrine()->getManager();
-        $formations = $em->getRepository('AppBundle:Formation')->findBy(['author' => '8']);
+            $formations = $em->getRepository('AppBundle:Formation')->findBy(['author' => '3']);
         return $this->render('User/profile.html.twig', array(
         'formations' => $formations,
     ));

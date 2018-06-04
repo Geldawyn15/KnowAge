@@ -30,7 +30,12 @@ class FrontController extends controller
      */
     public function SearchPageAction()
     {
-        return $this->render('Front/search.html.twig');
+        $searchWord = 'author';
+        $em = $this->getDoctrine()->getManager();
+        $formations = $em->getRepository('AppBundle:Formation')->findBy([$searchWord => '3']);
+        return $this->render('Front/search.html.twig', array(
+        'formations' => $formations,
+        ));
     }
 
     /**
