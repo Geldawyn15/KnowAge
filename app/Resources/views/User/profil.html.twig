@@ -30,38 +30,38 @@
 
         </div>
 <hr >
-
-<h1>Formation cree</h1>
-<div class="container formation">
-    <div class="d-flex flex-column">
-        {% for formation in formations %}
-        {% if loop.index is odd %}
-        <div class="row">
-            {% endif %}
-        <div class="col-6 mt-5">
-            <div class="column">
-                <!-- Post-->
-                <div class="post-module">
-                    <!-- Thumbnail-->
-                    <div class="thumbnail">
-                        <img src="{{ formation.picture }}" class="img-responsive" alt=""> </div>
-                    <!-- Post Content-->
-                    <div class="post-content">
-                        <div class="category">{{ formation.category }}</div>
-                        <h1 class="title">{{ formation.id }} - {{ formation.title}}</h1>
-                        <h2 class="sub_title">par John Begood</h2>
-                        <p class="description"> {{ formation.description }}</p>
-                        <div class="post-meta"> <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a><a href="#" class="btn btn-sm btn-outline-secondary waves-effect addFavorite ">Ajouter aux favoris</a>
+<div id="cree">
+    <h1>Formation cree</h1>
+    <div class="container formation">
+        <div class="d-flex flex-column">
+            {% for formationcree in formationscree %}
+            {% if loop.index is odd %}
+            <div class="row">
+                {% endif %}
+            <div class="col-6 mt-5">
+                <div class="column">
+                    <!-- Post-->
+                    <div class="post-module">
+                        <!-- Thumbnail-->
+                        <div class="thumbnail">
+                            <img src="{{ formationcree.picture }}" class="img-responsive" alt=""> </div>
+                        <!-- Post Content-->
+                        <div class="post-content">
+                            <div class="category">{{ formationcree.category }}</div>
+                            <h1 class="title">{{ formationcree.id }} - {{ formationcree.title}}</h1>
+                            <h2 class="sub_title">{{ formationcree.author.firstname}} {{ formationcree.author.name}}</h2>
+                            <p class="description"> {{ formationcree.description }}</p>
+                            <div class="post-meta"> <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a><a href="#" class="btn btn-sm btn-outline-secondary waves-effect addFavorite ">Ajouter aux favoris</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+                {% if loop.index is even or loop.last %}
+                    </div>
+                {% endif %}
+            {% endfor %}
         </div>
-            {% if loop.index is even or loop.last %}
-                </div>
-            {% endif %}
-        {% endfor %}
     </div>
 </div>
-
 {% endblock %}

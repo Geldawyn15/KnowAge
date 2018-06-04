@@ -21,6 +21,17 @@ class Paiement
      */
     private $id;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Formation")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $formation;
 
     /**
      * Get id
