@@ -27,6 +27,36 @@
             </div>
         </div>
     </div>
+<div class="container">
+    {% for formation in formations %}
+    {% if  loop.index0  % 3 == 0 %}
+    <div class="row">
+        {% endif %}
+        <div class="col-md-4 mt-5">
+            <div class="column">
+                <!-- Post-->
+                <div class="post-module">
+                    <!-- Thumbnail-->
+                    <div class="thumbnail">
+                        <img src="https://i.imgur.com/7Z8rscT.jpg" class="img-responsive" alt=""> </div>
+                    <!-- Post Content-->
+                    <div class="post-content">
+                        <div class="category">{{ formation.category }}</div>
+                        <h1 class="title">{{ formation.title }}</h1>
+                        <h2 class="sub_title">par John Utah</h2>
+                        <p class="description"> {{ formation.description }}</p>
+                        <div class="post-meta"> <a href="#" class="btn btn-sm btn-outline-primary waves-effect mr-3">Voir la formation</a><button class="favoriteSearch btn"><i id="favoriteSearch" class="far fa-heart bg-tomato fa-2x"  style="color:Tomato"> </i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if loop.index % 3 == 0 %}
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
 
 <div class="container">
     <div class="row">
@@ -50,7 +80,8 @@
                     </div>
                 </div>
             </div>
-        </div><div class="col-md-4 mt-5">
+        </div>
+        <div class="col-md-4 mt-5">
             <div class="column">
 
                 <!-- Post-->
