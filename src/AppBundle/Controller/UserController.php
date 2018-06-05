@@ -22,12 +22,13 @@ class UserController extends controller
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
+
+
         $formationsCree = $em->getRepository('AppBundle:Formation')->findBy(['author' => $user]);
         $formationsSuivee = $em->getRepository('AppBundle:Paiement')->findBy(['userid' => $user]);
         return $this->render('User/profil.html.twig', array(
             'formationscree' => $formationsCree,
             'formationssuivee' => $formationsSuivee,
-
         ));
     }
 
