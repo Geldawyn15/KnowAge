@@ -82,4 +82,12 @@ class FormationController extends controller
         ));
     }
 
+    /**
+     * @Route("/teacher", name="landingformateur")
+     */
+    public function landingFormateurAction()
+    {
+        return $this->render('Front/landingFormateur.html.twig');
+    }
+
 }

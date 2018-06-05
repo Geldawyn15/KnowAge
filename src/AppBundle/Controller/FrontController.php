@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Formation;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,35 +18,27 @@ class FrontController extends controller
      */
     public function homepageAction(Request $request)
     {
-        $form = $this->createForm('AppBundle\Form\SearchFormationType');
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $datas = $form->getData();
-
-            $repository = $this->getDoctrine()->getRepository(Formation::class);
-            $formations = $repository->findFormation($datas);
-
-            return $this->redirectToRoute('search', array(
-                'formations' => $formations,
-            ));
-        }
-
-        return $this->render('Front/index.html.twig', array(
-            'form'=>$form->createView()
-        ));
+        return $this->render('Front/index.html.twig');
     }
+
 
     /**
      * @Route("/search", name="search")
+     * @Method({"GET", "POST"})
      */
-    public function searchPageAction()
+    public function searchPageAction(Request $request )
     {
-        $searchWord = 'author';
-        $em = $this->getDoctrine()->getManager();
-        return $this->render('Front/search.html.twig');
+
+        $search = $request->query->get('search');
+        $repository = $this->getDoctrine()->getRepository(Formation::class);
+        $formations = $repository->findFormation($search);
+
+
+        return $this->render('Front/search.html.twig', array(
+            'formations' => $formations,
+        ));
     }
+
 
     /**
      * @Route("/contact", name="contact")
@@ -74,11 +67,5 @@ class FrontController extends controller
         ));
     }
 
-    /**
-     * @Route("/teacher", name="landingformateur")
-     */
-    public function landingFormateurAction()
-    {
-        return $this->render('Front/landingFormateur.html.twig');
-    }
+
 }
