@@ -83,6 +83,13 @@ class Formation
      */
     private $content;
 
+
+
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+    }
+
     /**
      * @return string
      */
@@ -92,7 +99,7 @@ class Formation
     }
 
     /**
-     * @param string $content
+     * @param string
      */
     public function setContent($content)
     {
@@ -101,10 +108,7 @@ class Formation
 
 
 
-    public function __construct()
-    {
-        $this->tags = new ArrayCollection();
-    }
+
 
     /**
      * Get id

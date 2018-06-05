@@ -82,4 +82,29 @@ class FormationController extends controller
         ));
     }
 
+    /**
+     * Displays a form to edit an existing formation entity.
+     *
+     * @Route("/formation/{id}/edit", name="formation_edit")
+     * @Method({"GET", "POST"})
+     */
+    public function editFormationAction(Request $request, Formation $formation)
+    {
+
+        $editForm = $this->createForm('AppBundle\Form\FormationType', $formation);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('formation_edit', array('id' => $formation->getId()));
+        }
+
+        return $this->render('Front/formation_edit.html.twig', array(
+            'formation' => $formation,
+            'edit_form' => $editForm->createView(),
+        ));
+    }
+
+
 }

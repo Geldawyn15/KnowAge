@@ -10,6 +10,7 @@ use AppBundle\Service\Mailer;
 
 
 
+
 class FrontController extends controller
 {
     /**
@@ -67,12 +68,16 @@ class FrontController extends controller
 
             $mailer->sendContactMail($message, $email);
 
+
             return $this->redirectToRoute('search');
      }
         return $this->render('Front/contact.html.twig', array(
             'form'=>$form->createView()
+
         ));
     }
+
+
 
     /**
      * @Route("/teacher", name="landingformateur")
@@ -81,4 +86,5 @@ class FrontController extends controller
     {
         return $this->render('Front/landingFormateur.html.twig');
     }
+
 }
