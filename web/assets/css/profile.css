@@ -172,6 +172,16 @@ hr:before {
     font-size: 20px ;
 }
 
+#cree {
+    display: none;
+}
+
+#bought {
+    display: block;
+}
+
+
+
 
 
 
