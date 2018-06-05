@@ -68,8 +68,11 @@ class Formation
     private $tags;
 
     /**
-     *@Assert\File(mimeTypes={ "image/jpeg" })
-    * @ORM\Column(name="picture", type="string",nullable=true)
+     * @Assert\Image(
+     *     mimeTypes={"image/png"},
+     *     mimeTypesMessage= " Merci de choisir une image au fichier .jpeg ou .png")
+     *
+     * @ORM\Column(name="picture", type="string",nullable=true)
     */
     private $picture;
 
