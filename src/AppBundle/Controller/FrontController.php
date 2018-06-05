@@ -13,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-
+use Symfony\Component\HttpFoundation\Response;
 
 
 class FrontController extends controller
@@ -138,14 +138,12 @@ class FrontController extends controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
-            $entitymanager = $this->getDoctrine()->getManager();
-            $entitymanager->persist($formation);
-            $entitymanager->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $entityManager->flush();
 
 
-            return $this->redirectToRoute('Front/formation_edit.html.twig', array(
-                'edit_form' => $editForm->createView(),
-            ));
+            return new Response('modf');
         }
 
         return $this->render('Front/formation_edit.html.twig', array(
