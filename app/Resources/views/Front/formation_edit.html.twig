@@ -7,12 +7,13 @@
     <body id="bodyEditFormation">
     <h1>Formation edit</h1>
 
-    <ul>
-        <li>
-            <a href="">Back to the list</a>
-        </li>
+    {{ form_start(edit_form) }}
+    {{ form_widget(edit_form) }}
+    <input type="submit" value="Create" />
+    {{ form_end(edit_form) }}
 
-    </ul>
+
+
 
     </body>
 {% endblock %}

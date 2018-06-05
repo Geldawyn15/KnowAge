@@ -27,14 +27,12 @@ class Formation
 
     /**
      * @var string
-     * @Assert\NotBlank()
      * @ORM\Column(name="title", type="string", length=45, nullable=true)
      */
     private $title;
 
     /**
      * @var string
-     *@Assert\NotBlank()
      * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;

@@ -12,6 +12,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
 
 
 class FrontController extends controller
@@ -84,45 +86,34 @@ class FrontController extends controller
         }
 
         return $this->render('Front/create2.html.twig', array(
-            'form'=>$form->createView()
+            'form' => $form->createView()
         ));
 
     }
 
+
     /**
-     * @Route("/formation", name="HomepageFormation")
-     * @Method({"GET", "POST"})composer install
+     * Displays a form to edit an existing formation entity.
+     *
+     * @Route("/formation/{id}/edit", name="formation_edit")
+     * @Method({"GET", "POST"})
      */
-    public function HomepageFormationAction(request $request)
+    public function editFormationAction(Request $request, Formation $formation)
     {
-        $formation = new Formation();
 
-        $form = $this->createForm('AppBundle\Form\FormationType', $formation);
+        $editForm = $this->createForm('AppBundle\Form\FormationType', $formation);
+        $editForm->handleRequest($request);
 
-        $form->handleRequest($request);
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-
-
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($formation);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('formation');
+            return $this->redirectToRoute('formation_edit', array('id' => $formation->getId()));
         }
 
-
-
-        return $this->render('Front/formation.html.twig', array(
-            'form'=>$form->createView()
+        return $this->render('Front/formation_edit.html.twig', array(
+            'formation' => $formation,
+            'edit_form' => $editForm->createView(),
         ));
-
-
-        
-
-
-
-
+    }
 
 }
