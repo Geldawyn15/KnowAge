@@ -11,6 +11,7 @@ use AppBundle\Service\Mailer;
 
 
 
+
 class FrontController extends controller
 {
     /**
@@ -26,7 +27,7 @@ class FrontController extends controller
      * @Route("/search", name="search")
      * @Method({"GET", "POST"})
      */
-    public function searchPageAction(Request $request )
+    public function searchPageAction(Request $request)
     {
 
         $search = $request->query->get('search');
@@ -60,12 +61,13 @@ class FrontController extends controller
 
             $mailer->sendContactMail($message, $email);
 
+
             return $this->redirectToRoute('search');
-     }
+        }
         return $this->render('Front/contact.html.twig', array(
-            'form'=>$form->createView()
+            'form' => $form->createView()
+
         ));
     }
-
 
 }

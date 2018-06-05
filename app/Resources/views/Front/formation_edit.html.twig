@@ -4,13 +4,16 @@
 {% block stylesheet %}<link rel="stylesheet" href="/assets/css/formation.css">{% endblock %}
 
 {% block content %}
-    <body id="bodyLandingFormation">
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <input type="submit" value="Create" />
-    {{ form_end(form) }}
+    <body id="bodyEditFormation">
+    <h1>Formation edit</h1>
 
-    <a href="{{ path('formation') }}">Back to the list</a>
+    {{ form_start(edit_form) }}
+    {{ form_widget(edit_form) }}
+    <input type="submit" value="Create" />
+    {{ form_end(edit_form) }}
+
+
+
 
     </body>
 {% endblock %}
