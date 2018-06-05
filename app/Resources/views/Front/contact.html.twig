@@ -1,4 +1,5 @@
 {% extends 'layout.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block stylesheet %}<link rel="stylesheet" href="/assets/css/contact.css">{% endblock %}
 {% block title %}Contact{% endblock %}
 
@@ -16,21 +17,23 @@
     <div class="row">
         <div class="col-md-12">
             <div class="containerSmall1">
-                <form>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
+                                {{ form_start(form) }}
                                 <div class="input-icon-wrap">
-                                    <span class="input-icon"><span class="fa fa-user"></span></span>
-                                    <input type="text" id="form_name" name="lastname" class="form-control" placeholder="Prenom" required="required">
+                                    <span class="input-icon"><span class="fa fa-user"></span>
+                                    {{ form_label(form.firstname) }}
+                                    {{ form_widget(form.firstname) }}
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <div class="input-icon-wrap">
-                                    <span class="input-icon"><span class="fa fa-user"></span></span>
-                                    <input type="text" id="form_lastname" name="firstname" class="form-control" placeholder="Nom" required="required">
+                                    <span class="input-icon"><span class="fa fa-user"></span>
+                                        {{ form_label(form.name) }}
+                                        {{ form_widget(form.name) }}
                                 </div>
                             </div>
                         </div>
@@ -40,8 +43,9 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <div class="input-icon-wrap">
-                                    <span class="input-icon"><span class="fas fa-envelope"></span></span>
-                                    <input id="form_email" type="email" name="email" class="form-control" placeholder="Votre Email" required="required">
+                                    <span class="input-icon"><span class="fas fa-envelope"></span>
+                                    {{ form_label(form.email) }}
+                                    {{ form_widget(form.email) }}
                                 </div>
                             </div>
                         </div>
@@ -53,7 +57,7 @@
 
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <textarea id="form_message" name="message" class="form-control" placeholder="Rédigez votre message ici" rows="6" required="required"></textarea>
+                                    {{ form_widget(form.message) }}
                                 </div>
                             </div>
                         </div>
@@ -62,8 +66,7 @@
                     <div class="col-md-9 offset-3">
                         <input id="btn" type="submit" class="bottomBtn btn btn-primary btn-lg round" value="Envoyer message">
                     </div>
-
-                </form>
+                                {{ form_end(form) }}
             </div>
         </div>
     </div>

@@ -47,14 +47,15 @@
         <div class="row justify-content-center Search">
             <div class="offset-md-1 col-12 text-center">
                 <h3 class="keyword text-left"> Par mots-clés </h3>
-                <form action="" >
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
+                        <!-- <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2"> -->
+                        {{ form_start(form) }}
+                        {{ form_widget(form.search) }}
+                        <div class="input-group-append text-align-center">
                             <a href="/search"> <button class="btnSearch btn btn-secondary" type="button"><i class="fas fa-search"></i></button></a>
+                            {{ form_end(form) }}
                         </div>
                     </div>
-                </form>
             </div>
         </div>
         <div class="container-fluid">

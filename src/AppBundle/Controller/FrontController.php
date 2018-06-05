@@ -2,18 +2,16 @@
 
 namespace AppBundle\Controller;
 
-
 use AppBundle\Entity\Formation;
-use AppBundle\Form\addFormationType;
-use AppBundle\Service\ImgUpload;
-use AppBundle\Service\ImgUploader;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
+
+use AppBundle\Service\Mailer;
+
+
 
 
 class FrontController extends controller
@@ -21,26 +19,63 @@ class FrontController extends controller
     /**
      * @Route("/", name="homepage")
      */
-    public function HomepageAction()
+    public function homepageAction(Request $request)
     {
-        return $this->render('Front/index.html.twig');
-    }
+        $form = $this->createForm('AppBundle\Form\SearchFormationType');
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $datas = $form->getData();
+
+            $repository = $this->getDoctrine()->getRepository(Formation::class);
+            $formations = $repository->findFormation($datas);
+
+            return $this->redirectToRoute('search', array(
+                'formations' => $formations,
+            ));
+        }
+
+        return $this->render('Front/index.html.twig', array(
+            'form'=>$form->createView()
+        ));
+    }
 
     /**
      * @Route("/search", name="search")
      */
-    public function SearchPageAction()
+    public function searchPageAction()
     {
+        $searchWord = 'author';
+        $em = $this->getDoctrine()->getManager();
         return $this->render('Front/search.html.twig');
     }
 
     /**
      * @Route("/contact", name="contact")
+     *
      */
-    public function ContactAction()
+    public function contactAction(Request $request, Mailer $mailer)
     {
-        return $this->render('Front/contact.html.twig');
+        $form = $this->createForm('AppBundle\Form\ContactType');
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = $form->getData();
+
+            $firstname = $data['firstname'];
+            $name = $data['name'];
+            $email = $data['email'];
+            $message = $data['message'];
+
+            $mailer->sendContactMail($message, $email);
+
+            return $this->redirectToRoute('search');
+     }
+        return $this->render('Front/contact.html.twig', array(
+            'form'=>$form->createView()
+        ));
     }
 
     /**
@@ -49,108 +84,5 @@ class FrontController extends controller
     public function landingFormateurAction()
     {
         return $this->render('Front/landingFormateur.html.twig');
-
     }
-
-    /**
-     * @Route("/formation/landingformation", name="formation")
-     * @Method({"GET", "POST"})
-     */
-    public function landingFormationAction()
-    {
-        return $this->render('Front/landingFormation.html.twig');
-    }
-
-    /**
-     * @Route("/creation", name="create")
-     * @Method({"GET", "POST"})
-     *
-     */
-    public function createAction(Request $request, ImgUploader $imgUpload)
-    {
-        $formation = new Formation();
-
-        $form = $this->createForm('AppBundle\Form\addFormationType', $formation);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $picture = $formation->getPicture();
-            $formation->setPicture($imgUpload->upload($picture));
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($formation);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('search');
-        }
-
-        return $this->render('Front/create2.html.twig', array(
-            'form'=>$form->createView()
-        ));
-
-    }
-
-    /**
-     * @Route("/formation", name="HomepageFormation")
-     * @Method({"GET", "POST"})composer install
-     */
-    public function HomepageFormationAction(request $request)
-    {
-        $formation = new Formation();
-
-        $form = $this->createForm('AppBundle\Form\FormationType', $formation);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($formation);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('formation');
-        }
-
-
-
-        return $this->render('Front/formation.html.twig', array(
-            'form'=>$form->createView()
-        ));
-    }
-
-    /**
-     * Displays a form to edit an existing formation entity.
-     *
-     * @Route("/formation/{formation_id}/edit", name="formation_edit", requirements={"formation_id": "\d+"})
-     * @ParamConverter("formation", options={"mapping": {"formation_id": "id"}})
-     * @Method({"GET", "POST"})
-     */
-    public function EditFormationAction(request $request, Formation $formation)
-    {
-
-
-        $editForm = $this->createForm('AppBundle\Form\FormationType', $formation);
-
-        $editForm->handleRequest($request);
-
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-
-            $entityManager = $this->getDoctrine()->getManager();
-
-            $entityManager->flush();
-
-
-            return new Response('modf');
-        }
-
-        return $this->render('Front/formation_edit.html.twig', array(
-            'edit_form' => $editForm->createView(),
-
-        ));
-    }
-
-
 }

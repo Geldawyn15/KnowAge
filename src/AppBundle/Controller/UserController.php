@@ -2,9 +2,6 @@
 
 namespace AppBundle\Controller;
 
-
-use AppBundle\Entity\User;
-use AppBundle\Entity\formation;
 use AppBundle\Form\UpdateProfileType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -16,28 +13,31 @@ use Symfony\Component\HttpFoundation\Request;
 class UserController extends controller
 {
 
-
     /**
-     * @Route("/user/profile", name="profile")
+     * @Route("/user/profil", name="profil")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
      */
-    public function profileAction()
+    public function profilAction()
     {
-
+        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
-        $formations = $em->getRepository('AppBundle:Formation')->findBy(['author' => '8']);
-        return $this->render('User/profile.html.twig', array(
-        'formations' => $formations,
-    ));
+
+
+        $formationsCree = $em->getRepository('AppBundle:Formation')->findBy(['author' => $user]);
+        $formationsSuivee = $em->getRepository('AppBundle:Paiement')->findBy(['userid' => $user]);
+        return $this->render('User/profil.html.twig', array(
+            'formationscree' => $formationsCree,
+            'formationssuivee' => $formationsSuivee,
+        ));
     }
 
     /**
-     * @Route("/user/updateprofile", name="update_profile")
+     * @Route("/user/updateprofil", name="update_profil")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
      */
-    public function updateProfileAction(Request $request)
+    public function updateProfilAction(Request $request)
     {
         $user = $this->getUser();
         $form = $this->createForm(updateProfileType::class, $user);
@@ -46,9 +46,9 @@ class UserController extends controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            return $this->redirectToRoute('profile');
+            return $this->redirectToRoute('profil');
         }
-        return $this->render('User/updateProfile.html.twig', array(
+        return $this->render('User/updateProfil.html.twig', array(
             'form'=>$form->createView()
         ));
 
