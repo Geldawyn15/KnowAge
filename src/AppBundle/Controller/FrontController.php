@@ -2,11 +2,12 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use AppBundle\Entity\Formation;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\Mailer;
+
 
 
 class FrontController extends controller
@@ -18,6 +19,18 @@ class FrontController extends controller
     {
         $form = $this->createForm('AppBundle\Form\SearchFormationType');
         $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $datas = $form->getData();
+
+            $repository = $this->getDoctrine()->getRepository(Formation::class);
+            $formations = $repository->findFormation($datas);
+
+            return $this->redirectToRoute('search', array(
+                'formations' => $formations,
+            ));
+        }
 
         return $this->render('Front/index.html.twig', array(
             'form'=>$form->createView()
@@ -31,10 +44,7 @@ class FrontController extends controller
     {
         $searchWord = 'author';
         $em = $this->getDoctrine()->getManager();
-        $formations = $em->getRepository('AppBundle:Formation')->findBy([$searchWord => '3']);
-        return $this->render('Front/search.html.twig', array(
-        'formations' => $formations,
-        ));
+        return $this->render('Front/search.html.twig');
     }
 
     /**
@@ -59,8 +69,6 @@ class FrontController extends controller
 
             return $this->redirectToRoute('search');
      }
-
-
         return $this->render('Front/contact.html.twig', array(
             'form'=>$form->createView()
         ));
@@ -72,6 +80,5 @@ class FrontController extends controller
     public function landingFormateurAction()
     {
         return $this->render('Front/landingFormateur.html.twig');
-
     }
 }
