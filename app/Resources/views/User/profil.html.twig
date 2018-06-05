@@ -8,8 +8,8 @@
         <div class="d-flex flex-column justify-content-center ml-5">
             <div class="ml-1"><img src="/assets/images/jonpls.jpg" style="height: 180px; width: 180px;"></div>
             <div class="d-flex mt-2">
-                <button class="btn btn-outline-primary waves-effect mr-1">Etudiant</button>
-                <button class="btn btn-outline-primary waves-effect ml-1">Formateur</button>
+                <button id="formationToggle1" class="btn btn-outline-primary waves-effect mr-1">Etudiant</button>
+                <button id="formationToggle2" class="btn btn-outline-primary waves-effect ml-1 ">Formateur</button>
             </div>
         </div>
 
@@ -30,8 +30,8 @@
 
         </div>
 <hr >
-<div id="cree">
-    <h1>Formation cree</h1>
+<div id="cree" >
+    <h1>Formation Cree</h1>
     <div class="container formation">
         <div class="d-flex flex-column">
             {% for formationcree in formationscree %}
@@ -51,7 +51,7 @@
                             <h1 class="title">{{ formationcree.id }} - {{ formationcree.title}}</h1>
                             <h2 class="sub_title">{{ formationcree.author.firstname}} {{ formationcree.author.name}}</h2>
                             <p class="description"> {{ formationcree.description }}</p>
-                            <div class="post-meta"> <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a><a href="#" class="btn btn-sm btn-outline-secondary waves-effect addFavorite ">Ajouter aux favoris</a>
+                            <div class="post-meta"> <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a><button class="favoriteSearch btn"><i id="favoriteSearch" class="far fa-heart bg-tomato fa-2x"  style="color:Tomato"> </i></button>
                             </div>
                         </div>
                     </div>
@@ -64,4 +64,43 @@
         </div>
     </div>
 </div>
+
+<div id="bought">
+    <h1>Formation Suivee</h1>
+    <div class="container formation">
+        <div class="d-flex flex-column">
+            {% for formationsuivee in formationssuivee %}
+                {% if loop.index is odd %}
+                    <div class="row">
+                {% endif %}
+                <div class="col-6 mt-5">
+                    <div class="column">
+                        <!-- Post-->
+                        <div class="post-module">
+                            <!-- Thumbnail-->
+                            <div class="thumbnail">
+                                <img src="{{ formationsuivee.formationid.picture }}" class="img-responsive" alt=""> </div>
+                            <!-- Post Content-->
+                            <div class="post-content">
+                                <div class="category">{{ formationsuivee.formationid.category }}</div>
+                                <h1 class="title">{{ formationsuivee.formationid.id }} - {{ formationsuivee.formationid.title}}</h1>
+                                <h2 class="sub_title">{{ formationsuivee.formationid.author.firstname}} {{ formationsuivee.formationid.author.name}}</h2>
+                                <p class="description"> {{ formationsuivee.formationid.description }}</p>
+                                <div class="post-meta"> <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a><button class="favoriteSearch btn"><i id="favoriteSearch" class="far fa-heart bg-tomato fa-2x"  style="color:Tomato"> </i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if loop.index is even or loop.last %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
 {% endblock %}
+
+
+
