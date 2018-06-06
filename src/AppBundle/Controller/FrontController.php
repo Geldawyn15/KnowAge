@@ -29,8 +29,7 @@ class FrontController extends controller
      */
     public function searchPageAction(Request $request)
     {
-
-        $searchs = explode(' ',rtrim($request->query->get('search')));
+        $searchs = explode(' ', trim($request->query->get('search')));
 
         $repository = $this->getDoctrine()->getRepository(Formation::class);
         $formations = $repository->findFormation($searchs);

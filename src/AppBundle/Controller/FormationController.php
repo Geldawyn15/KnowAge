@@ -37,8 +37,12 @@ class FormationController extends controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $user = $this->getUser();
+
             $picture = $formation->getPicture();
             $formation->setPicture($imgUpload->uploadFormationPicture($picture));
+            $formation->setCreatedAt(new \DateTime());
+            $formation->setAuthor($user);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($formation);
