@@ -2,11 +2,7 @@
 
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\Formation;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use http\Env\Request;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * FormationRepository
@@ -17,14 +13,29 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 class FormationRepository extends EntityRepository
 {
 
-    public function findFormation($datas)
+    public function findFormation(array $searchs)
     {
-         return $query = $this->createQueryBuilder('a')
-            ->where('a.title LIKE :title')
-            ->orWhere('a.description LIKE :description')
-            ->setParameter('title', '%'.$datas['search'].'%')
-            ->setParameter('description', '%'.$datas['search'].'%')
-            ->getQuery()
-            ->getResult();
+
+        $query = $this->createQueryBuilder('a');
+
+        foreach ($searchs as $search) {
+
+            $query->orWhere('a.title LIKE :title')
+                   ->orWhere('a.description LIKE :description');
+
+            $query->setParameter('title', '%' . $search . '%')
+                   ->setParameter('description', '%' . $search . '%');
+
+            $formation[] = $query->getQuery()->getResult();
+    }
+
+        foreach ($formation as $toto) {
+
+            foreach ($toto as $tata) {
+
+                $result[] = $tata;
+            }
+        }
+            return $result;
     }
 }
