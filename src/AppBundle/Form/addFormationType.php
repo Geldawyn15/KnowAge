@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use AppBundle\Entity\Formation;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -48,6 +49,12 @@ class addFormationType extends AbstractType
                 'constraints' => array(
                     new NotBlank()
                 )
+            ))
+            ->add('created_at', HiddenType::class, array(
+                'data' => new \DateTime()
+            ))
+            ->add('author_id', HiddenType::class, array(
+                'data'=> get_current_user()
             ));
     }
 

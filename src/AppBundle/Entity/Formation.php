@@ -68,10 +68,6 @@ class Formation
     private $tags;
 
     /**
-     * @Assert\Image(
-     *     mimeTypes={"image/png"},
-     *     mimeTypesMessage= " Merci de choisir une image au fichier .jpeg ou .png")
-     *
      * @ORM\Column(name="picture", type="string",nullable=true)
     */
     private $picture;
@@ -83,6 +79,13 @@ class Formation
      */
     private $content;
 
+
+
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+    }
+
     /**
      * @return string
      */
@@ -92,7 +95,7 @@ class Formation
     }
 
     /**
-     * @param string $content
+     * @param string
      */
     public function setContent($content)
     {
@@ -101,10 +104,7 @@ class Formation
 
 
 
-    public function __construct()
-    {
-        $this->tags = new ArrayCollection();
-    }
+
 
     /**
      * Get id

@@ -82,4 +82,52 @@ class FormationController extends controller
         ));
     }
 
+    /**
+
+     * @Route("/teacher", name="landingformateur")
+     */
+    public function landingFormateurAction()
+    {
+        return $this->render('Front/landingFormateur.html.twig');
+    }
+
+
+
+     /**
+     * @Route("/formation/{id}/edit", name="formation_edit")
+     * @Method({"GET", "POST"})
+     */
+    public function editFormationAction(Request $request, Formation $formation)
+    {
+
+        $editForm = $this->createForm('AppBundle\Form\FormationType', $formation);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('formation_edit', array('id' => $formation->getId()));
+        }
+
+        return $this->render('Formation/formation_edit.html.twig', array(
+            'formation' => $formation,
+            'edit_form' => $editForm->createView(),
+        ));
+    }
+
+    /**
+     * Finds and displays a formation entity.
+     *
+     * @Route("/formation/{id}", name="formation_show")
+     * @Method("GET")
+     */
+    public function showAction(Formation $formation)
+    {
+
+        return $this->render('Formation/FormationAbonne.html.twig', array(
+            'formation' => $formation,
+
+        ));
+    }
+
 }
