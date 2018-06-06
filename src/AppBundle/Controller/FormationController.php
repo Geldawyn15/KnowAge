@@ -110,7 +110,12 @@ class FormationController extends controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            //afficher les messages
+            $this->addFlash('success', 'Votre formation est enregistrée avec succès');
+
+
             return $this->redirectToRoute('formation_edit', array('id' => $formation->getId()));
+
         }
 
         return $this->render('Formation/formation_edit.html.twig', array(

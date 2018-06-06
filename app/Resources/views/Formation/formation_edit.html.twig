@@ -4,13 +4,23 @@
 {% block stylesheet %}<link rel="stylesheet" href="/assets/css/formation.css">{% endblock %}
 
 {% block content %}
-    <body id="bodyEditFormation">
+    <h2 id="bodyEditFormation">
+    <h2>{% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </h2>
     <h1>Formation edit</h1>
 
     {{ form_start(edit_form) }}
     {{ form_widget(edit_form) }}
     <input type="submit" value="Create" />
     {{ form_end(edit_form) }}
+
+
 
 
 
