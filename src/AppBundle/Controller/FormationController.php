@@ -58,35 +58,6 @@ class FormationController extends controller
     }
 
     /**
-     * @Route("/creation2", name="HomepageFormation")
-     * @Method({"GET", "POST"})
-     * @Security("has_role('ROLE_USER')")
-     */
-    public function create2Action(Request $request)
-    {
-        $formation = new Formation();
-
-        $form = $this->createForm('AppBundle\Form\FormationType', $formation);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($formation);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('formation');
-        }
-
-
-
-        return $this->render('Formation/create2.html.twig', array(
-            'form'=>$form->createView()
-        ));
-    }
-
-    /**
      * @Route("/teacher", name="landingformateur")
      */
     public function landingFormateurAction()
@@ -111,10 +82,12 @@ class FormationController extends controller
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('creation_formation', array('id' => $formation->getId()));
-
             //afficher les messages
             $this->addFlash('success', 'Votre formation est enregistrée avec succès');
+
+            return $this->redirectToRoute('creation_formation', array('id' => $formation->getId()));
+
+
 
         }
 

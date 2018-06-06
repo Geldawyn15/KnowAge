@@ -1,11 +1,14 @@
 
 {% extends 'layout.html.twig' %}
 {% block title %} Accueil formateur {% endblock %}
-{% block stylesheet %}<link rel="stylesheet" href="/assets/css/formation.css">{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/formation.css">
+{% endblock %}
 
 {% block content %}
-    <h2 id="bodyEditFormation">
-    <h2>{% for label, messages in app.flashes %}
+    <h2 id="bodyEditFormation"></h2>
+    <h2>
+        {% for label, messages in app.flashes %}
             {% for message in messages %}
                 <div class="alert alert-{{ label }}">
                     {{ message }}
@@ -20,11 +23,5 @@
     <input type="submit" value="Create" />
     {{ form_end(edit_form) }}
 
-
-
-
-
-
-    </body>
 {% endblock %}
 

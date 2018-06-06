@@ -4,6 +4,7 @@
     font-family: 'Hind Siliguri', sans-serif;
 }
 
+/* **************** start Footer / nav ************** */
 .navbar{
     width: 100%;
     -webkit-box-shadow: 0 16px 12px -12px #999;
@@ -73,7 +74,6 @@ nav{
     margin: 0;
 }
 
-/* Footer links */
 
 .footer-distributed p.footer-links{
     font-size:18px;
@@ -129,7 +129,9 @@ nav{
     }
 }
 
-/* **************** début page login et signup ************** */
+/* **************** end Footer / nav ************** */
+
+/* **************** start login et signup ************** */
 
 .loginSignupLigne1
 {
@@ -245,3 +247,27 @@ nav{
     font-size: xx-large}
 
 /* **************** Fin page login et signup **************** */
+
+/* **************** start Search **************** */
+/* **************** end Search **************** */
+
+/* **************** start profile **************** */
+/* **************** end profile **************** */
+
+/* **************** start landingFormation **************** */
+/* **************** end landingFormation **************** */
+
+/* **************** start teacher **************** */
+/* **************** end teacher **************** */
+
+/* **************** start index **************** */
+/* **************** end index **************** */
+
+/* **************** start formation **************** */
+/* **************** end formation **************** */
+
+/* **************** start formation **************** */
+/* **************** end formation **************** */
+
+/* **************** start formation **************** */
+/* **************** end formation **************** */
