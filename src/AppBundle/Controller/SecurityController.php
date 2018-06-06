@@ -55,4 +55,17 @@ class SecurityController extends controller
             'error'         => $error,
         ));
     }
+
+    /**
+     * @Route("/login", name="login")
+     */
+    public function LostPasswordAction(Request $request, AuthenticationUtils $authenticationUtils)
+    {
+
+
+        return $this->render('Security/login.html.twig', array(
+            'last_username' => $lastUsername,
+            'error'         => $error,
+        ));
+    }
 }
