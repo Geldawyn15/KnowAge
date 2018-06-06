@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * User
@@ -60,6 +61,18 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="email", type="string", length=45, unique=true)
      */
     private $email;
+
+    /**
+     * @ORM\Column(name= "profilePic", type="string", nullable=true, length=500,  )
+     */
+    private $profilePic;
+
+    /**
+     * @Assert\Image(
+     *     mimeTypes={"image/png"},
+     *     mimeTypesMessage= " Merci de choisir une image  .jpeg ou .png")
+     */
+    private $profilePicFile;
 
     /**
      * @var string
@@ -296,6 +309,38 @@ class User implements UserInterface, \Serializable
             // see section on salt below
             // $this->salt
             ) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+    /**
+     *@return string
+     */
+    public function getProfilePic()
+    {
+        return $this->profilePic;
+    }
+
+    /**
+     * @param mixed $profilePic
+     */
+    public function setProfilePic($profilePic)
+    {
+        $this->profilePic = $profilePic;
+    }
+
+    /**
+     * @return mixed | UploadedFile
+     */
+    public function getProfilePicFile()
+    {
+        return $this->profilePicFile;
+    }
+
+    /**
+     * @param mixed $profilePicFile
+     */
+    public function setProfilePicFile($profilePicFile)
+    {
+        $this->profilePicFile = $profilePicFile;
     }
 
 

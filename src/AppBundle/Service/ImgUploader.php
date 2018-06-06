@@ -27,11 +27,10 @@ class ImgUploader
 
         $this->simpleImage
             ->fromFile($file)
-            ->bestFit(100, 100)
+            ->bestFit(180, 180)
             ->toFile($file->getRealPath());
 
         $file->move($this->getTargetDir(),  $fileName);
-
 
         return $this->getPublicPath().'/'.$fileName;
     }
@@ -52,6 +51,7 @@ class ImgUploader
 
         return $this->getPublicPath().'/'.$fileName;
     }
+
 
     public function getTargetDir()
     {
