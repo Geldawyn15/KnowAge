@@ -18,24 +18,14 @@ class FormationRepository extends EntityRepository
 
         $query = $this->createQueryBuilder('a');
 
-        foreach ($searchs as $search) {
+        foreach ($searchs as $i => $search) {
 
-            $query->orWhere('a.title LIKE :title')
-                   ->orWhere('a.description LIKE :description');
-
-            $query->setParameter('title', '%' . $search . '%')
-                   ->setParameter('description', '%' . $search . '%');
-
-            $formation[] = $query->getQuery()->getResult();
-    }
-
-        foreach ($formation as $toto) {
-
-            foreach ($toto as $tata) {
-
-                $result[] = $tata;
-            }
+            $query->orWhere('a.title LIKE :title'.$i)
+                  ->orWhere('a.description LIKE :description'.$i)
+                  ->setParameter('title'.$i, '%' . $search . '%')
+                  ->setParameter('description'.$i, '%' . $search . '%');
         }
-            return $result;
+
+        return $query->getQuery()->execute();
     }
 }

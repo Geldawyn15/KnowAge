@@ -37,8 +37,12 @@ class FormationController extends controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $user = $this->getUser();
+
             $picture = $formation->getPicture();
             $formation->setPicture($imgUpload->uploadFormationPicture($picture));
+            $formation->setCreatedAt(new \DateTime());
+            $formation->setAuthor($user);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($formation);
@@ -102,11 +106,16 @@ class FormationController extends controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
+
             $entityManager = $this->getDoctrine()->getManager();
 
             $entityManager->flush();
 
             return $this->redirectToRoute('creation_formation', array('id' => $formation->getId()));
+
+            //afficher les messages
+            $this->addFlash('success', 'Votre formation est enregistrée avec succès');
+
         }
 
         return $this->render('Formation/creation_formation.html.twig', array(

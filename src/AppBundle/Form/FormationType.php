@@ -30,7 +30,7 @@ class FormationType extends AbstractType
                 'uiColor' => '#ffffff',
 
                 //...switch the toolbar configuration by using the full, standard or basic
-                'toolbar' => 'full'
+                'toolbar' => 'standard'
 
             ),
         ));

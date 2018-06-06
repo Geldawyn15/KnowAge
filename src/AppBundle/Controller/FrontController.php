@@ -26,14 +26,10 @@ class FrontController extends controller
      */
     public function searchPageAction(Request $request)
     {
+        $searchs = explode(' ', trim($request->query->get('search')));
 
-        $searchs = $request->query->get('search');
-        $searchs = explode(' ', $searchs);
         $repository = $this->getDoctrine()->getRepository(Formation::class);
         $formations = $repository->findFormation($searchs);
-
-        //dump($formations);die;
-
 
         return $this->render('Front/search.html.twig', array(
             'formations' => $formations,
