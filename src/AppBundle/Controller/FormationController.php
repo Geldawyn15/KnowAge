@@ -58,7 +58,7 @@ class FormationController extends controller
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
      */
-    public function create2Action(request $request)
+    public function create2Action(Request $request)
     {
         $formation = new Formation();
 
@@ -85,7 +85,7 @@ class FormationController extends controller
     /**
      * Displays a form to edit an existing formation entity.
      *
-     * @Route("/formation/{id}/edit", name="formation_edit")
+     * @Route("/creation/{id}/edit", name="creation_formation")
      * @Method({"GET", "POST"})
      */
     public function editFormationAction(Request $request, Formation $formation)
@@ -95,12 +95,15 @@ class FormationController extends controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('formation_edit', array('id' => $formation->getId()));
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('creation_formation', array('id' => $formation->getId()));
         }
 
-        return $this->render('Formation/formation_edit.html.twig', array(
+        return $this->render('Formation/creation_formation.html.twig', array(
             'formation' => $formation,
             'edit_form' => $editForm->createView(),
         ));
