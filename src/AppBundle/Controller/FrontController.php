@@ -6,13 +6,7 @@ use AppBundle\Entity\Formation;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\HttpFoundation\Response;
-
 use AppBundle\Service\Mailer;
-
-
-
 
 class FrontController extends controller
 {
@@ -71,10 +65,12 @@ class FrontController extends controller
 
             $mailer->sendContactMail($message, $email);
 
+
             return $this->redirectToRoute('search');
      }
         return $this->render('Front/contact.html.twig', array(
             'form'=>$form->createView()
+
         ));
     }
 
@@ -85,4 +81,5 @@ class FrontController extends controller
     {
         return $this->render('Front/landingFormateur.html.twig');
     }
+
 }

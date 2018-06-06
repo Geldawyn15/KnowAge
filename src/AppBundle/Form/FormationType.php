@@ -28,7 +28,10 @@ class FormationType extends AbstractType
             ->add('content', CKEditorType::class, array(
             'config' => array(
                 'uiColor' => '#ffffff',
-                //...
+
+                //...switch the toolbar configuration by using the full, standard or basic
+                'toolbar' => 'full'
+
             ),
         ));
 
