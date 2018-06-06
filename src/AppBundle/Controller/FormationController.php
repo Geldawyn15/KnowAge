@@ -100,11 +100,25 @@ class FormationController extends controller
             return $this->redirectToRoute('formation_edit', array('id' => $formation->getId()));
         }
 
-        return $this->render('Front/formation_edit.html.twig', array(
+        return $this->render('Formation/formation_edit.html.twig', array(
             'formation' => $formation,
             'edit_form' => $editForm->createView(),
         ));
     }
 
+    /**
+     * Finds and displays a formation entity.
+     *
+     * @Route("/formation/{id}", name="formation_show")
+     * @Method("GET")
+     */
+    public function showAction(Formation $formation)
+    {
+
+        return $this->render('Formation/FormationAbonne.html.twig', array(
+            'formation' => $formation,
+
+        ));
+    }
 
 }
