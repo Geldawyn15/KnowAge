@@ -21,21 +21,20 @@ class FormationRepository extends EntityRepository
         foreach ($searchs as $search) {
 
             $query->orWhere('a.title LIKE :title')
-                   ->orWhere('a.description LIKE :description');
-
-            $query->setParameter('title', '%' . $search . '%')
-                   ->setParameter('description', '%' . $search . '%');
+                  ->orWhere('a.description LIKE :description')
+                  ->setParameter('title', '%' . $search . '%')
+                  ->setParameter('description', '%' . $search . '%');
 
             $formation[] = $query->getQuery()->getResult();
     }
 
-        foreach ($formation as $toto) {
+        foreach ($formation as $formation) {
 
-            foreach ($toto as $tata) {
+            foreach ($formation as $result) {
 
-                $result[] = $tata;
+                $results[] = $result;
             }
         }
-            return $result;
+            return $results;
     }
 }
