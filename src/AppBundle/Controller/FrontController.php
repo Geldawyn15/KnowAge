@@ -30,9 +30,12 @@ class FrontController extends controller
     public function searchPageAction(Request $request)
     {
 
-        $search = $request->query->get('search');
+        $searchs = $request->query->get('search');
+        $searchs = explode(' ', $searchs);
         $repository = $this->getDoctrine()->getRepository(Formation::class);
-        $formations = $repository->findFormation($search);
+        $formations = $repository->findFormation($searchs);
+
+        //dump($formations);die;
 
 
         return $this->render('Front/search.html.twig', array(
@@ -62,7 +65,7 @@ class FrontController extends controller
             $mailer->sendContactMail($message, $email);
 
 
-            return $this->redirectToRoute('search');
+            return $this->redirectToRoute('con');
         }
         return $this->render('Front/contact.html.twig', array(
             'form' => $form->createView()
