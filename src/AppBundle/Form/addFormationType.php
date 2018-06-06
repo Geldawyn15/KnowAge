@@ -49,12 +49,6 @@ class addFormationType extends AbstractType
                 'constraints' => array(
                     new NotBlank()
                 )
-            ))
-            ->add('created_at', HiddenType::class, array(
-                'data' => new \DateTime()
-            ))
-            ->add('author_id', HiddenType::class, array(
-                'data'=> get_current_user()
             ));
     }
 
