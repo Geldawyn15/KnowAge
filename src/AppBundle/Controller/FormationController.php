@@ -83,8 +83,17 @@ class FormationController extends controller
     }
 
     /**
-     * Displays a form to edit an existing formation entity.
-     *
+
+     * @Route("/teacher", name="landingformateur")
+     */
+    public function landingFormateurAction()
+    {
+        return $this->render('Front/landingFormateur.html.twig');
+    }
+
+
+
+     /**
      * @Route("/formation/{id}/edit", name="formation_edit")
      * @Method({"GET", "POST"})
      */

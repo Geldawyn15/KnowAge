@@ -5,7 +5,7 @@ class Mailer
 {
     protected $mailer;
     protected $templating;
-    private $from = 'romainp1@hotmail.com';
+    private $from = 'romain.poilpret@gmail.com';
     private $to = 'romain.poilpret@gmail.com';
 
 
