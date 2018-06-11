@@ -82,6 +82,11 @@ class User implements UserInterface, \Serializable
     private $password;
 
     /**
+     * @var string
+     */
+    private $newPassword;
+
+    /**
      * @Assert\NotBlank()
      * @Assert\Length(max=4096)
      */
@@ -341,6 +346,22 @@ class User implements UserInterface, \Serializable
     public function setProfilePicFile($profilePicFile)
     {
         $this->profilePicFile = $profilePicFile;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNewPassword()
+    {
+        return $this->newPassword;
+    }
+
+    /**
+     * @param string $newPassword
+     */
+    public function setNewPassword(string $newPassword)
+    {
+        $this->newPassword = $newPassword;
     }
 
 
