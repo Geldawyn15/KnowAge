@@ -49,9 +49,11 @@ class UserController extends controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             if ($user->getprofilePicFile()) {
-                if ($user->getprofilePic()) {
+                if (!empty($user->getprofilePic())) {
                     $oldProfilePic = $user->getprofilePic();
-                    unlink(__DIR__ .  '/../../../web' .$oldProfilePic);
+                    if (file_exists(__DIR__ .  '/../../../web' .$oldProfilePic)) {
+                        unlink(__DIR__ . '/../../../web' . $oldProfilePic);
+                    }
                 }
                 $profilePic = $user->getprofilePicFile();
                 $user->setprofilePic($imgUpload->uploadProfilPicture($profilePic));
