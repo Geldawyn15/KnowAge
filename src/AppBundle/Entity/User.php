@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class User implements UserInterface, \Serializable
 {
+
     /**
      * @var int
      *
