@@ -13,35 +13,23 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 
-class UpdateProfileType extends AbstractType
+class UpdatePasswordType extends AbstractType
 {
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         $builder
-            ->add('nickname', TextType::class)
-            ->add('email', EmailType::class)
-            ->add('name', TextType::class, array(
-                'required' => false,
-            ))
-            ->add('firstName', TextType::class, array(
-                'required' => false,
-            ))
-            ->add('profilePicFile', FileType::class, array(
-                'required' => false,
-            ))
+            ->add('newPassword', PasswordType::class)
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Mot de passe'),
-                'second_options' => array('label' => 'Répéter le mot de passe'),
+                'first_options'  => array('label' => ' Anciene Mot de passe'),
+                'second_options' => array('label' => 'Répéter le anciene mot de passe'),
             ));
     }
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => User::class,
         ));
     }
-
 }
