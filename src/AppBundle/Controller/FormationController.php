@@ -58,7 +58,7 @@ class FormationController extends controller
     }
 
     /**
-     * @Route("/teacher", name="landingformateur")
+     * @Route("/formateur", name="landingformateur")
      */
     public function landingFormateurAction()
     {
