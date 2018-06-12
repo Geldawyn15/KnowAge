@@ -5,18 +5,20 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Formation;
 use AppBundle\Form\addFormationType;
 use AppBundle\Service\ImgUploader;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-
+use Twig\Node\Expression\GetAttrExpression;
 
 
 class FormationController extends controller
 {
+
     /**
-     * @Route("/formation/landingformation", name="formation")
+     * @Route("/show", name="show")
      * @Method({"GET", "POST"})
      */
     public function landingFormationAction()
@@ -48,9 +50,10 @@ class FormationController extends controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($formation);
             $entityManager->flush();
-            $_SESSION['idForm'] = $formation->getId();
 
-            return $this->redirectToRoute('create2');
+            return $this->redirectToRoute('create2', array(
+                'id' => $formation->getId()
+            ));
         }
 
         return $this->render('Formation/create.html.twig', array(
@@ -60,30 +63,30 @@ class FormationController extends controller
     }
 
     /**
-     * @Route("/creation2", name="create2")
+     * @Route("/creation2/{id}", name="create2")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
      */
-    public function create2Action(Request $request)
+    public function create2Action(Request $request, Formation $formation, $id)
     {
-        if ($_SESSION['idForm']) {
 
-            $idFormation = $_SESSION['idForm'];
+        if ($formation->getAuthor() == $this->getUser()) {
+
+            $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
+
+            $form = $this->createForm('AppBundle\Form\FormationType', $formation);
+            $form->handleRequest($request);
         }
 
-        $formation = $this->getDoctrine()->getRepository(Formation::class)->find($idFormation);
-
-        $form = $this->createForm('AppBundle\Form\FormationType', $formation);
-        $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($formation);
             $entityManager->flush();
 
-            return $this->redirectToRoute('formation');
+            return $this->redirectToRoute('formation_show', array(
+                'id' => $id
+            ));
         }
 
         return $this->render('Formation/create2.html.twig', array(

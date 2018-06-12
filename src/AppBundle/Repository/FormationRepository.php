@@ -24,6 +24,7 @@ class FormationRepository extends EntityRepository
                   ->orWhere('a.description LIKE :description'.$i)
                   ->setParameter('title'.$i, '%' . $search . '%')
                   ->setParameter('description'.$i, '%' . $search . '%');
+
         }
 
         return $query->getQuery()->execute();
