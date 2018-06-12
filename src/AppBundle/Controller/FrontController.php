@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Formation;
+use Knp\Bundle\PaginatorBundle\KnpPaginatorBundle;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -30,11 +31,17 @@ class FrontController extends controller
     public function searchPageAction(Request $request)
     {
 
-
         $searchs = explode(' ', trim($request->query->get('search')));
 
         $repository = $this->getDoctrine()->getRepository(Formation::class);
         $formations = $repository->findFormation($searchs);
+
+        $paginator  = $this->get('knp_paginator');
+        $formations = $paginator->paginate(
+            $formations,
+            $request->query->getInt('page', 1),
+            3
+        );
 
         return $this->render('Front/search.html.twig', array(
             'formations' => $formations,
