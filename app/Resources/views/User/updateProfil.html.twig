@@ -6,7 +6,7 @@
 {% block content %}
     <body id="updateProfile">
     <div class="container-fluid ">
-        {{ form_start(form) }}
+        }
         <div class="row title mt-4 mb-4">
             <div class="col-md-12 mt-3">
                 <div class="row">
@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="mb-3 container text-center">
-
+            {{ form_start(form) }
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <div class="input-group mb-3">
@@ -28,7 +28,7 @@
 
                         {{ form_widget(form.name) }}
                     </div>
-                    <div class="input-group">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">Prenom</span>
                         </div>
@@ -47,7 +47,16 @@
                             <label class="input-group-text">Email</label>
                         </div>
                         {{ form_widget(form.email) }}
-
+                    </div>
+                    <div class="input-group mb-3">
+                        {{ form_widget(form.profilePicFile) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 offset-3">
+                    <div>
+                        {{ form_widget(form.plainPassword) }}
                     </div>
                 </div>
             </div>
@@ -61,4 +70,5 @@
         {{ form_end(form) }}
         <hr>
     </div>
+
 {% endblock %}

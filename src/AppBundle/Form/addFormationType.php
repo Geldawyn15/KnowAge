@@ -48,7 +48,8 @@ class addFormationType extends AbstractType
             ->add('picture', FileType::class, array(
                 'constraints' => array(
                     new NotBlank()
-                )
+                ),
+                'mimeTypes' => ['image/png', 'image/jpg']
             ));
     }
 
