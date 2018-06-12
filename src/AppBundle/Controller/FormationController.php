@@ -48,8 +48,9 @@ class FormationController extends controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($formation);
             $entityManager->flush();
+            $_SESSION['idForm'] = $formation->getId();
 
-            return $this->redirectToRoute('search');
+            return $this->redirectToRoute('create2');
         }
 
         return $this->render('Formation/create.html.twig', array(
@@ -59,13 +60,18 @@ class FormationController extends controller
     }
 
     /**
-     * @Route("/creation2", name="HomepageFormation")
+     * @Route("/creation2", name="create2")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
      */
-    public function create2Action(request $request)
+    public function create2Action(Request $request)
     {
-        $formation = new Formation();
+        if ($_SESSION['idForm']) {
+
+            $idFormation = $_SESSION['idForm'];
+        }
+
+        $formation = $this->getDoctrine()->getRepository(Formation::class)->find($idFormation);
 
         $form = $this->createForm('AppBundle\Form\FormationType', $formation);
         $form->handleRequest($request);
@@ -80,15 +86,13 @@ class FormationController extends controller
             return $this->redirectToRoute('formation');
         }
 
-
-
         return $this->render('Formation/create2.html.twig', array(
             'form'=>$form->createView()
         ));
     }
 
-    /**
 
+    /**
      * @Route("/teacher", name="landingformateur")
      */
     public function landingFormateurAction()
@@ -97,46 +101,19 @@ class FormationController extends controller
     }
 
 
-
-     /**
-     * @Route("/formation/{id}/edit", name="formation_edit")
-     * @Method({"GET", "POST"})
-     */
-    public function editFormationAction(Request $request, Formation $formation)
-    {
-
-        $editForm = $this->createForm('AppBundle\Form\FormationType', $formation);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            //afficher les messages
-            $this->addFlash('success', 'Votre formation est enregistrée avec succès');
-
-
-            return $this->redirectToRoute('formation_edit', array('id' => $formation->getId()));
-
-        }
-
-        return $this->render('Formation/formation_edit.html.twig', array(
-            'formation' => $formation,
-            'edit_form' => $editForm->createView(),
-        ));
-    }
-
     /**
      * Finds and displays a formation entity.
      *
      * @Route("/formation/{id}", name="formation_show")
      * @Method("GET")
      */
-    public function showAction(Formation $formation)
+    public function showAction(Formation $formation, $id)
     {
+
+        $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
 
         return $this->render('Formation/FormationAbonne.html.twig', array(
             'formation' => $formation,
-
         ));
     }
 
