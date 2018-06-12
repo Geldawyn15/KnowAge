@@ -1,12 +1,17 @@
 <?php
 namespace AppBundle\Service;
 
+use AppBundle\Entity\User;
+use AppBundle\Entity\Formation;
+
 class Mailer
 {
     protected $mailer;
     protected $templating;
     private $from = 'romain.poilpret@gmail.com';
     private $to = 'romain.poilpret@gmail.com';
+    private $toAdmin = 'pellecuer.david@gmail.com';
+
 
 
     public function __construct(\Swift_Mailer $mailer, \Twig_Environment $templating)
@@ -47,6 +52,20 @@ class Mailer
     public function getTo()
     {
         return $this->to;
+    }
+
+
+
+    public function sendInapropriateContent(user $user, formation $formation)
+    {
+        $from = $user->getEmail() . " " . $user->getNickName();
+        $to = $this->getTo();
+        $subject = 'Un utilisateur a signalé un contenu inaproprié';
+        $body = 'la formation' .
+        ->;
+
+
+        $this->sendMail($from, $to, $subject);
     }
 
 }
