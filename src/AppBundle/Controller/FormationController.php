@@ -22,30 +22,6 @@ use Twig\Node\Expression\GetAttrExpression;
  */
 class FormationController extends controller
 {
-    
-    /**
-     * @Route("/    landingformation/{id}", name="landingformation")
-     * @Method({"GET", "POST"})
-     */
-    public function landingFormationAction(Formation $formation)
-    {
-        $titleFormation = $formation->getTitle();
-        $authorFormation = $formation->getAuthor()->getNickName();
-        $descriptionFormation = $formation->getDescription();
-        $dateYMDHIS = $formation->getCreatedAt()->format('Y-m-d');
-        $pictureFormation = $formation->getPicture();
-        $shortText = $formation->shortText();
-
-
-        return $this->render('Formation/landingFormation.html.twig', array(
-            'titleFormation' => $titleFormation,
-            'authorFormation' => $authorFormation,
-            'descriptionFormation' => $descriptionFormation,
-            'dateYMD' => $dateYMDHIS,
-            'pictureFormation' => $pictureFormation,
-            'shortText' => $shortText
-        ));
-    }
 
     /**
      * @Route("/new", name="new")
@@ -127,12 +103,15 @@ class FormationController extends controller
      */
     public function showAction(Request $request, Formation $formation, $id)
     {
+
         $form = $this->createForm(ContactTeacherType::class);
         $form->handleRequest($request);
+        $shortText = $formation->shortText(250);
 
         return $this->render('Formation/show.html.twig', array(
             'formation' => $formation,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'shortText' => $shortText
         ));
     }
 
@@ -141,7 +120,7 @@ class FormationController extends controller
      */
     public function landingFormateurAction()
     {
-        return $this->render('Formation/Formateur.html.twig');
+        return $this->render('Formation/formateur.html.twig');
     }
 
 
