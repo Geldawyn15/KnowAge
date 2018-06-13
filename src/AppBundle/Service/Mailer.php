@@ -41,6 +41,14 @@ class Mailer
         $this->sendMail($subject, $body, $to, $reply);
     }
 
+    public function sendTeacherMail($to, $message, $object, $reply)
+    {
+        $body = $this->templating->render('Mail/teacherMail.html.twig', array(
+            'message' => $message,
+            'object' => $object,
+        ));
+        $this->sendMail($object, $body, $to, $reply);
+    }
 
 
 }

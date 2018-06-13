@@ -7,6 +7,7 @@ use AppBundle\Form\addFormationType;
 use AppBundle\Form\ContactTeacherType;
 use AppBundle\Form\FormationType;
 use AppBundle\Service\ImgUploader;
+use AppBundle\Service\Mailer;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -123,12 +124,28 @@ class FormationController extends controller
      * Finds and displays a formation entity.
      *
      * @Route("/show/{id}", name="formation_show")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
-    public function showAction(Request $request, Formation $formation, $id)
+    public function showAction(Request $request, Formation $formation, Mailer $mailer, $id)
     {
         $form = $this->createForm(ContactTeacherType::class);
         $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = $form->getData();
+
+            $email = $data['email'];
+            $subject = $data['objet'];
+            $message = $data['message'];
+            $to = $formation->getAuthor()->getEmail();
+
+            $mailer->sendTeacherMail('romain.poilpret@gmail.com', $message, $subject, $email);
+
+            return $this->redirectToRoute('formation_show', array(
+                'id' => $id,
+            ));
+        }
 
         return $this->render('Formation/show.html.twig', array(
             'formation' => $formation,
@@ -143,6 +160,5 @@ class FormationController extends controller
     {
         return $this->render('Formation/Formateur.html.twig');
     }
-
 
 }
