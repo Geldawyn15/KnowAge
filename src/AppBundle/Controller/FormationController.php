@@ -13,7 +13,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+
+use AppBundle\Service\Mailer;
 use Twig\Node\Expression\GetAttrExpression;
+
 
 /**
  * Formation controller.
@@ -48,7 +51,7 @@ class FormationController extends controller
             $entityManager->persist($formation);
             $entityManager->flush();
 
-            return $this->redirectToRoute('new2', array(
+            return $this->redirectToRoute('create2', array(
                 'id' => $formation->getId()
             ));
         }
@@ -84,15 +87,21 @@ class FormationController extends controller
             $entityManager->persist($formation);
             $entityManager->flush();
 
+            //afficher les messages
+            $this->addFlash('success', 'Votre formation est enregistrée avec succès');
+
+
             return $this->redirectToRoute('formation_show', array(
                 'id' => $id
             ));
         }
 
         return $this->render('Formation/new2.html.twig', array(
-            'form'=>$form->createView()
+            'form'=>$form->createView(),
+            'id' => $id,
         ));
     }
+
 
 
     /**
@@ -121,7 +130,27 @@ class FormationController extends controller
     public function landingFormateurAction()
     {
         return $this->render('Formation/formateur.html.twig');
+
+
+    }
+
+    /**
+     * Signals an inaproriate content in formation
+     *
+     * @Route("/formation/{idFormation}", name="signalFormation")
+     * * @Method("GET")
+     */
+    public function signalFormationAction($idFormation)
+    {
+
+        return $this->redirectToRoute('Formation/Formateur.html.twig', array(
+            'idFormation' => $idFormation,
+        ));
+
     }
 
 
+
+
 }
+
