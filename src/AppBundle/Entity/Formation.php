@@ -285,9 +285,9 @@ class Formation
      *
      * @return string
      */
-    public function shortText()
+    public function shortText($lenght)
     {
-        return $shortText = substr($this->description, 0, 270);
+        return $shortText = substr($this->getDescription(), 0, $lenght);
     }
 
 }
