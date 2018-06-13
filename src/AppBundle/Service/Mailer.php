@@ -33,7 +33,7 @@ class Mailer
     public function sendContactMail($message, $reply)
     {
 
-        $to = $this->getTo();
+        $to = $this->to;
         $subject = 'Demande de contact';
         $body = $this->templating->render('Mail/contactMail.html.twig', array(
             'message' => $message
@@ -41,12 +41,6 @@ class Mailer
         $this->sendMail($subject, $body, $to, $reply);
     }
 
-    /**
-     * @return string
-     */
-    public function getTo()
-    {
-        return $this->to;
-    }
+
 
 }

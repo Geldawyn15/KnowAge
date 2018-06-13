@@ -31,7 +31,7 @@ class ImgUploader
             ->bestFit(Formation::PICTURE_WIDTH, Formation::PICTURE_HEIGHT)
             ->toFile($file->getRealPath());
 
-        $file->move($this->getTargetDir(),  $fileName);
+        $file->move($this->targetDir,  $fileName);
 
         return $this->getPublicPath().'/'.$fileName;
     }
@@ -50,20 +50,6 @@ class ImgUploader
         $file->move($this->getTargetDir(),  $fileName);
 
 
-        return $this->getPublicPath().'/'.$fileName;
-    }
-
-
-    public function getTargetDir()
-    {
-        return $this->targetDir;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPublicPath()
-    {
-        return $this->publicPath;
+        return $this->publicPath.'/'.$fileName;
     }
 }
