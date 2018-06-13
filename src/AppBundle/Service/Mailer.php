@@ -10,7 +10,6 @@ class Mailer
     protected $templating;
     private $from = 'romain.poilpret@gmail.com';
     private $to = 'romain.poilpret@gmail.com';
-    private $toAdmin = 'pellecuer.david@gmail.com';
 
 
 
@@ -20,7 +19,7 @@ class Mailer
         $this->templating = $templating;
     }
 
-    protected function sendMail($subject, $body, $to, $reply)
+    protected function sendMail($subject, $body, $to)
     {
         $mail = \Swift_Message::newInstance();
 
@@ -28,7 +27,6 @@ class Mailer
             ->setFrom($this->from)
             ->setTo($to)
             ->setSubject($subject)
-            ->setReplyTo($reply)
             ->setBody($body)
             ->setContentType('text/html');
 
@@ -44,6 +42,22 @@ class Mailer
             'message' => $message
         ));
         $this->sendMail($subject, $body, $to, $reply);
+    }
+
+    public function signalFormationMail($message, $choice, $formation, $user)    {
+
+        $subject = 'Un utilisateur a signalé un contenu inaproprié pour une formation';
+        $body = $this->templating->render('Mail/signalMail.html.twig', array(
+            'message' => $message,
+            'choice' => $choice,
+            'formation' => $formation,
+            'user' =>$user,
+        ));
+
+        $to = 'pellecuer.david@gmail.com';
+
+
+        $this->sendMail($subject, $body, $to);
     }
 
 

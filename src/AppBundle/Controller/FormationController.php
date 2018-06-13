@@ -137,14 +137,42 @@ class FormationController extends controller
     /**
      * Signals an inaproriate content in formation
      *
-     * @Route("/formation/{idFormation}", name="signalFormation")
-     * * @Method("GET")
+     * @Route("/{id}", name="signalFormation")
+     * * @Method({"GET", "POST"})
      */
-    public function signalFormationAction($idFormation)
+    public function signalFormationAction(formation $formation, Request $request, Mailer $mailer, $id)
     {
+        //Récupère les variables
+        $user = $this->getUser();
 
-        return $this->redirectToRoute('Formation/Formateur.html.twig', array(
-            'idFormation' => $idFormation,
+
+
+        //traite le formulaire
+        $form = $this->createForm('AppBundle\Form\SignalFormationType');
+        $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $data = $form->getData();
+
+                $message = $data['message'];
+                $choice = $data['choices'];
+
+                $mailer->signalFormationMail($message, $choice, $formation, $user);
+
+
+                //afficher les messages
+                $messageFlash = 'L\'administrateur a été informé d\'un contenu inaproprié pour cette formation';
+                $this->addFlash('success', $messageFlash);
+
+                return $this->redirectToRoute('formation_show', array (
+                    'id' => $id
+                ));
+
+                }
+
+        return $this->render('Formation/signalFormation.html.twig', array (
+            'id' => $id,
+            'form'=>$form->createView(),
         ));
 
     }
