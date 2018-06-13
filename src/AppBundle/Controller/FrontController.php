@@ -78,12 +78,4 @@ class FrontController extends controller
         ));
     }
 
-    /**
-     * @Route("/formation", name="formation")
-     */
-    public function homepageFormationAction(Request $request)
-    {
-        return $this->render('Formation/landingFormation.html.twig');
-    }
-
 }
