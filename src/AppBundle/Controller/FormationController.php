@@ -106,6 +106,9 @@ class FormationController extends controller
             $entityManager->persist($formation);
             $entityManager->flush();
 
+            //afficher les messages
+            $this->addFlash('success', 'Votre formation est enregistrée avec succès');
+
             return $this->redirectToRoute('formation_show', array(
                 'id' => $id
             ));
@@ -141,9 +144,27 @@ class FormationController extends controller
      */
     public function landingFormateurAction()
     {
-        return $this->render('Formation/Formateur.html.twig');
+        return $this->render('Formation/formateur.html.twig');
 
     }
+
+    /**
+     * Signals an inaproriate content in formation
+     *
+     * @Route("/formation/{idFormation}", name="signalFormation")
+     * * @Method("GET")
+     */
+    public function signalFormationAction($idFormation)
+    {
+
+        return $this->redirectToRoute('Formation/Formateur.html.twig', array(
+            'idFormation' => $idFormation,
+        ));
+
+
+    }
+
+
 
 
 }
