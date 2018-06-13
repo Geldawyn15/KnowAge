@@ -4,6 +4,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Formation;
 use AppBundle\Form\addFormationType;
+use AppBundle\Form\ContactTeacherType;
+use AppBundle\Form\FormationType;
 use AppBundle\Service\ImgUploader;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -22,7 +24,7 @@ class FormationController extends controller
 {
     
     /**
-     * @Route("/landingformation/{id}", name="landingformation")
+     * @Route("/    landingformation/{id}", name="landingformation")
      * @Method({"GET", "POST"})
      */
     public function landingFormationAction(Formation $formation)
@@ -54,7 +56,7 @@ class FormationController extends controller
     {
         $formation = new Formation();
 
-        $form = $this->createForm('AppBundle\Form\addFormationType', $formation);
+        $form = $this->createForm(addFormationType::class, $formation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -96,7 +98,7 @@ class FormationController extends controller
 
             $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
 
-            $form = $this->createForm('AppBundle\Form\FormationType', $formation);
+            $form = $this->createForm(FormationType::class, $formation);
             $form->handleRequest($request);
 
 
@@ -123,11 +125,14 @@ class FormationController extends controller
      * @Route("/show/{id}", name="formation_show")
      * @Method("GET")
      */
-    public function showAction(Formation $formation, $id)
+    public function showAction(Request $request, Formation $formation, $id)
     {
+        $form = $this->createForm(ContactTeacherType::class);
+        $form->handleRequest($request);
 
         return $this->render('Formation/show.html.twig', array(
             'formation' => $formation,
+            'form' => $form->createView()
         ));
     }
 
