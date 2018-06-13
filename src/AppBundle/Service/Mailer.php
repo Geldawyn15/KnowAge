@@ -44,6 +44,7 @@ class Mailer
         $this->sendMail($subject, $body, $to, $reply);
     }
 
+
     public function signalFormationMail($message, $choice, $formation, $user)    {
 
         $subject = 'Un utilisateur a signalé un contenu inaproprié pour une formation';
@@ -53,12 +54,20 @@ class Mailer
             'formation' => $formation,
             'user' =>$user,
         ));
-
         $to = 'pellecuer.david@gmail.com';
-
 
         $this->sendMail($subject, $body, $to);
     }
 
+
+
+    public function sendTeacherMail($to, $message, $object, $reply)
+    {
+        $body = $this->templating->render('Mail/teacherMail.html.twig', array(
+            'message' => $message,
+            'object' => $object,
+        ));
+        $this->sendMail($object, $body, $to, $reply);
+    }
 
 }
