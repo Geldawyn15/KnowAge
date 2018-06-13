@@ -20,7 +20,30 @@ use Twig\Node\Expression\GetAttrExpression;
  */
 class FormationController extends controller
 {
+    
+    /**
+     * @Route("/landingformation/{id}", name="landingformation")
+     * @Method({"GET", "POST"})
+     */
+    public function landingFormationAction(Formation $formation)
+    {
+        $titleFormation = $formation->getTitle();
+        $authorFormation = $formation->getAuthor()->getNickName();
+        $descriptionFormation = $formation->getDescription();
+        $dateYMDHIS = $formation->getCreatedAt()->format('Y-m-d');
+        $pictureFormation = $formation->getPicture();
+        $shortText = $formation->shortText();
 
+
+        return $this->render('Formation/landingFormation.html.twig', array(
+            'titleFormation' => $titleFormation,
+            'authorFormation' => $authorFormation,
+            'descriptionFormation' => $descriptionFormation,
+            'dateYMD' => $dateYMDHIS,
+            'pictureFormation' => $pictureFormation,
+            'shortText' => $shortText
+        ));
+    }
 
     /**
      * @Route("/new", name="new")

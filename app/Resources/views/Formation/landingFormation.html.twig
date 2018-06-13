@@ -8,13 +8,13 @@
         <div class="container-fluid height">
             <div class="row justify-content-center">
                 <div class="col-md-9 mt-4 mb-4">
-                    <h1 class="text-center TagLine">Aprenez les bases du saut à la perche</h1>
+                    <h1 class="text-center TagLine">{{ titleFormation }}</h1>
                 </div>
             </div>
             <div class="row justify-content-center mb-2">
                 <div class="col-md-9">
                     <div class="card bg-dark text-white blurOver">
-                        <img class="card-img rounded tofade" src="https://static.ladepeche.fr/content/media/image/zoom/2009/06/22/200906220705.jpg" alt="Card image">
+                        <img class="card-img rounded tofade" src="{{ pictureFormation }}" alt="Card image">
                             <div class="card-img-overlay d-flex flex-column justify-content-center align-items-end noteLandingFormation">
                                 <div class="col-1 mt-1 mb-1 thumbLandingFormation">
                                     <h3 class=" text-center"><i class="fab fa-facebook-square"></i></h3>
@@ -37,7 +37,7 @@
                         <div class="card-header">
                             <ul class="nav nav-tabs card-header-tabs">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="#">Du meme auteur</a>
+                                    <a class="nav-link active" href="">Formation</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">FAQ</a>
@@ -100,23 +100,18 @@
                         </div>
                         <div class="card-body">
 
-                            <h1 class="card-title">3 heures de vidéos pour tout comprendre </h1>
+                            <h1 class="card-title">{{ titleFormation }} </h1>
                             <hr>
-                            <p class="card-text text-justify textLandingFormation">Lorem ipsum nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. t in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede.Maecenas adipiscing ante non diam sodales hendrerit.</a>
+                            <p class="card-text text-justify textLandingFormation">{{ shortText }}...</a>
                             </p>
                             <!--Collapse start-->
                             <div class="collapse" id="collapseExample">
-                                <div class="card card-body enSavoirPlus">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                                    Ut velit mauris, egestas sed, gravida nec, ornare ut, mi. Aenean ut orci vel massa suscipit pulvinar. Nulla sollicitudin. Fusce varius, ligula non tempus aliquam, nunc turpis ullamcorper nibh, in tempus sapien eros vitae ligula. Pellentesque rhoncus nunc et augue. Integer id felis. Curabitur aliquet pellentesque diam. Integer quis metus vitae elit lobortis egestas. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi vel erat non mauris convallis vehicula. Nulla et sapien. Integer tortor tellus, aliquam faucibus, convallis id, congue eu, quam. Mauris ullamcorper felis vitae erat. Proin feugiat, augue non elementum posuere, metus purus iaculis lectus, et tristique ligula justo vitae magna.
-                                    Aliquam convallis sollicitudin purus. Praesent aliquam, enim at fermentum mollis, ligula massa adipiscing nisl, ac euismod nibh nisl eu lectus. Fusce vulputate sem at sapien. Vivamus leo. Aliquam euismod libero eu enim. Nulla nec felis sed leo placerat imperdiet. Aenean suscipit nulla in justo. Suspendisse cursus rutrum augue. Nulla tincidunt tincidunt mi. Curabitur iaculis, lorem vel rhoncus faucibus, felis magna fermentum augue, et ultricies lacus lorem varius purus. Curabitur eu amet.
-                                </div>
+                                <div class="card card-body enSavoirPlus">{{ descriptionFormation }}</div>
                             </div>
                             <!--Collapse end-->
                             <p class="card-text text-right blocAuthor">
-                                <a href="#"><span class="text-capitalize author">Par renault</span><span class="text-uppercase author"> Lavilenie</span></a>
-                                <span class=""> | </span>
-                                <span class="publicationdate">Publiée le 12 avril 2018</span>
+                                <a href="#"><span class="text-capitalize author">Par {{ authorFormation }}</span></a>
+                                <span class="publicationdate">Publiée le {{ dateYMD }}</span>
                             </p>
 
                             <div class="row justify-content-around align-items-center mt-4">
