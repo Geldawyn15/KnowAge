@@ -7,15 +7,15 @@ use AppBundle\Form\addFormationType;
 use AppBundle\Form\ContactTeacherType;
 use AppBundle\Form\FormationType;
 use AppBundle\Service\ImgUploader;
-use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Service\Mailer;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-
 use AppBundle\Service\Mailer;
-use Twig\Node\Expression\GetAttrExpression;
+
 
 
 /**
@@ -108,14 +108,30 @@ class FormationController extends controller
      * Finds and displays a formation entity.
      *
      * @Route("/show/{id}", name="formation_show")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
-    public function showAction(Request $request, Formation $formation, $id)
+    public function showAction(Request $request, Formation $formation, Mailer $mailer, $id)
     {
 
         $form = $this->createForm(ContactTeacherType::class);
         $form->handleRequest($request);
         $shortText = $formation->shortText(250);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = $form->getData();
+
+            $email = $data['email'];
+            $subject = $data['objet'];
+            $message = $data['message'];
+            $to = $formation->getAuthor()->getEmail();
+
+            $mailer->sendTeacherMail('romain.poilpret@gmail.com', $message, $subject, $email);
+
+            return $this->redirectToRoute('formation_show', array(
+                'id' => $id,
+            ));
+        }
 
         return $this->render('Formation/show.html.twig', array(
             'formation' => $formation,
@@ -146,11 +162,6 @@ class FormationController extends controller
         return $this->redirectToRoute('Formation/Formateur.html.twig', array(
             'idFormation' => $idFormation,
         ));
-
     }
-
-
-
-
 }
 
