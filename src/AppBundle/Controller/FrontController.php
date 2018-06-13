@@ -77,4 +77,6 @@ class FrontController extends controller
         return $this->render('Formation/landingFormation.html.twig');
     }
 
+
+
 }

@@ -14,7 +14,6 @@
             <div class="row justify-content-center mb-2">
                 <div class="col-md-9">
                     <div class="card bg-dark text-white blurOver">
-                       {{ formation.content|raw }}
                     </div>
                 </div>
                 <div class="col-md-9">
@@ -87,8 +86,8 @@
 
                             <h1 class="card-title">3 heures de vidéos pour tout comprendre </h1>
                             <hr>
-                            <p class="card-text text-justify textLandingFormation">Lorem ipsum nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. t in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede.Maecenas adipiscing ante non diam sodales hendrerit.</a>
-                            </p>
+                            <p class="card-text text-justify textLandingFormation">{{ formation.content|raw }}</p>
+
                             <!--Collapse start-->
                             <div class="collapse" id="collapseExample">
                                 <div class="card card-body enSavoirPlus">

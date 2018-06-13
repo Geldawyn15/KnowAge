@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Service\Mailer;
 
 
 class FormationController extends controller
@@ -97,46 +98,34 @@ class FormationController extends controller
 
 
 
-     /**
-     * @Route("/formation/{id}/edit", name="formation_edit")
-     * @Method({"GET", "POST"})
-     */
-    public function editFormationAction(Request $request, Formation $formation)
-    {
-
-        $editForm = $this->createForm('AppBundle\Form\FormationType', $formation);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            //afficher les messages
-            $this->addFlash('success', 'Votre formation est enregistrée avec succès');
-
-
-            return $this->redirectToRoute('formation_edit', array('id' => $formation->getId()));
-
-        }
-
-        return $this->render('Formation/formation_edit.html.twig', array(
-            'formation' => $formation,
-            'edit_form' => $editForm->createView(),
-        ));
-    }
-
     /**
      * Finds and displays a formation entity.
      *
      * @Route("/formation/{id}", name="formation_show")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
-    public function showAction(Formation $formation)
+    public function showAction(request $request, mailer $mailer, Formation $formation)
+    {
+
+            return $this->render('Formation/FormationAbonne.html.twig', array(
+                'formation' => $formation,
+        ));
+    }
+
+    /**
+     * Display.
+     *
+     * @Route("/formation/{id}", name="formation_show")
+     * @Method({"GET", "POST"})
+     */
+    public function showAction(request $request, mailer $mailer, Formation $formation)
     {
 
         return $this->render('Formation/FormationAbonne.html.twig', array(
             'formation' => $formation,
-
         ));
     }
 
+
 }
+

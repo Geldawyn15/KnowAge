@@ -38,7 +38,7 @@ class Mailer
     public function sendContactMail($message, $reply)
     {
 
-        $to = $this->getTo();
+        $to = 'romain.poilpret@gmail.com';
         $subject = 'Demande de contact';
         $body = $this->templating->render('Mail/contactMail.html.twig', array(
             'message' => $message
@@ -46,26 +46,16 @@ class Mailer
         $this->sendMail($subject, $body, $to, $reply);
     }
 
-    /**
-     * @return string
-     */
-    public function getTo()
-    {
-        return $this->to;
-    }
 
-
-
-    public function sendInapropriateContent(user $user, formation $formation)
+    public function sendInapropriateContent(user $user, $message)
     {
         $from = $user->getEmail() . " " . $user->getNickName();
-        $to = $this->getTo();
         $subject = 'Un utilisateur a signalé un contenu inaproprié';
-        $body = 'la formation' .
-        ->;
-
-
-        $this->sendMail($from, $to, $subject);
+        $to = 'pellecuer.david@gmail.com';
+        $body = $this->templating->render('Mail/contactMail.html.twig', array(
+            'message' => $message
+        ));
+        $this->sendMail($subject, $body, $to, $from);
     }
 
 }
