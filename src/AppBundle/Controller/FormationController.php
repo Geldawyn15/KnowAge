@@ -22,30 +22,6 @@ class FormationController extends controller
 {
 
     /**
-     * @Route("/landingformation/{id}", name="landingformation")
-     * @Method({"GET", "POST"})
-     */
-    public function landingFormationAction(Formation $formation)
-    {
-        $titleFormation = $formation->getTitle();
-        $authorFormation = $formation->getAuthor()->getNickName();
-        $descriptionFormation = $formation->getDescription();
-        $dateYMDHIS = $formation->getCreatedAt()->format('Y-m-d');
-        $pictureFormation = $formation->getPicture();
-        $shortText = $formation->shortText();
-
-
-        return $this->render('Formation/landingFormation.html.twig', array(
-            'titleFormation' => $titleFormation,
-            'authorFormation' => $authorFormation,
-            'descriptionFormation' => $descriptionFormation,
-            'dateYMD' => $dateYMDHIS,
-            'pictureFormation' => $pictureFormation,
-            'shortText' => $shortText
-        ));
-    }
-
-    /**
      * @Route("/new", name="new")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
@@ -103,7 +79,7 @@ class FormationController extends controller
             $entityManager->persist($formation);
             $entityManager->flush();
 
-            return $this->redirectToRoute('show', array(
+            return $this->redirectToRoute('formation_show', array(
                 'id' => $id
             ));
         }
@@ -124,9 +100,11 @@ class FormationController extends controller
     {
 
         $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
+        $shortText = $formation->shortText(250);
 
         return $this->render('Formation/show.html.twig', array(
             'formation' => $formation,
+            'shortText' => $shortText
         ));
     }
 
@@ -135,7 +113,7 @@ class FormationController extends controller
      */
     public function landingFormateurAction()
     {
-        return $this->render('Formation/Formateur.html.twig');
+        return $this->render('Formation/formateur.html.twig');
     }
 
 
