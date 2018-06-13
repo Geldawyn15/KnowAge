@@ -13,21 +13,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Twig\Node\Expression\GetAttrExpression;
 
-
+/**
+ * Formation controller.
+ *
+ * @Route("formation")
+ */
 class FormationController extends controller
 {
 
-    /**
-     * @Route("/show", name="show")
-     * @Method({"GET", "POST"})
-     */
-    public function landingFormationAction()
-    {
-        return $this->render('Formation/landingFormation.html.twig');
-    }
 
     /**
-     * @Route("/creation", name="create")
+     * @Route("/new", name="new")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
      */
@@ -51,19 +47,19 @@ class FormationController extends controller
             $entityManager->persist($formation);
             $entityManager->flush();
 
-            return $this->redirectToRoute('create2', array(
+            return $this->redirectToRoute('new2', array(
                 'id' => $formation->getId()
             ));
         }
 
-        return $this->render('Formation/create.html.twig', array(
+        return $this->render('Formation/new.html.twig', array(
             'form'=>$form->createView()
         ));
 
     }
 
     /**
-     * @Route("/creation2/{id}", name="create2")
+     * @Route("/new2/{id}", name="create2")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
      */
@@ -84,30 +80,21 @@ class FormationController extends controller
             $entityManager->persist($formation);
             $entityManager->flush();
 
-            return $this->redirectToRoute('formation_show', array(
+            return $this->redirectToRoute('show', array(
                 'id' => $id
             ));
         }
 
-        return $this->render('Formation/create2.html.twig', array(
+        return $this->render('Formation/new2.html.twig', array(
             'form'=>$form->createView()
         ));
     }
 
 
     /**
-     * @Route("/teacher", name="landingformateur")
-     */
-    public function landingFormateurAction()
-    {
-        return $this->render('Front/landingFormateur.html.twig');
-    }
-
-
-    /**
      * Finds and displays a formation entity.
      *
-     * @Route("/formation/{id}", name="formation_show")
+     * @Route("/show/{id}", name="formation_show")
      * @Method("GET")
      */
     public function showAction(Formation $formation, $id)
@@ -115,9 +102,18 @@ class FormationController extends controller
 
         $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
 
-        return $this->render('Formation/FormationAbonne.html.twig', array(
+        return $this->render('Formation/show.html.twig', array(
             'formation' => $formation,
         ));
     }
+
+    /**
+     * @Route("/formateur", name="formateur")
+     */
+    public function landingFormateurAction()
+    {
+        return $this->render('Formation/Formateur.html.twig');
+    }
+
 
 }

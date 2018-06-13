@@ -14,12 +14,16 @@ use AppBundle\Service\ImgUploader;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-
+/**
+ * User controller.
+ *
+ * @Route("user")
+ */
 class UserController extends controller
 {
 
     /**
-     * @Route("/user/profil", name="profil")
+     * @Route("/profil", name="profil")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
      */
@@ -37,7 +41,7 @@ class UserController extends controller
     }
 
     /**
-     * @Route("/user/updateprofil", name="update_profil")
+     * @Route("/updateprofil", name="update_profil")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
      */
@@ -74,7 +78,7 @@ class UserController extends controller
     }
 
     /**
-     * @Route("/user/updatepassword", name="update_password")
+     * @Route("/updatepassword", name="update_password")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
      */
