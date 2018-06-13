@@ -1,0 +1,160 @@
+
+{% extends 'layout.html.twig' %}
+{% block title %} Accueil formateur {% endblock %}
+{% block stylesheet %}<link rel="stylesheet" href="/assets/css/landingFormation.css">{% endblock %}
+
+{% block content %}
+    <body id="bodyLandingFormation">
+    <div class="container-fluid height">
+        <div class="row justify-content-center">
+            <div class="col-md-9 mt-4 mb-4">
+                <h1 class="text-center TagLine"> {{ formation.title }}</h1>
+            </div>
+        </div>
+        <div class="row justify-content-center mb-2">
+            <div class="col-md-9">
+                <div class="card bg-dark text-white blurOver">
+                    <img class="card-img rounded tofade" src="{{ formation.picture }}" alt="Card image">
+                    <div class="card-img-overlay d-flex flex-column justify-content-center align-items-end noteLandingFormation">
+                        <div class="col-1 mt-1 mb-1 thumbLandingFormation">
+                            <h3 class=" text-center"><i class="fab fa-facebook-square"></i></h3>
+                        </div>
+                        <div class="col-1 mt-1 mb-1 thumbLandingFormation">
+                            <h3 class="text-center"><i class="fab fa-twitter-square"></i></h3>
+                        </div>
+                        <div class="col-1 mt-1 mb-1 thumbLandingFormation">
+                            <h3 class="text-center"><i class="fab fa-linkedin"></i></h3>
+                        </div>
+                        <div class="col-1 mt-1 mb-1 thumbLandingFormation">
+                            <h3 class="text-center"><i class="fab fa-viadeo-square"></i></h3>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="card text-center mb-5">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Du meme auteur</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">FAQ</a>
+                            </li>
+                            <!--Modal button start-->
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Contacter</a>
+                            </li>
+                            <!--Modal button end-->
+                        </ul>
+                        <!--Modal start-->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modalLandingFormation" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Coordonnées</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <address>
+                                            <iframe
+                                                    width="90%"
+                                                    height="100%"
+                                                    frameborder="0" style="border:0"
+                                                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC8CMzoNwcBmM4s3c6KdscbXevbvBoJW30&q=Space+Needle,Seattle+WA" allowfullscreen>
+                                            </iframe>
+                                            <p class="font-weight-bold">Studio Bagel<br></p>
+                                            1355 Market St, Suite 900<br>
+                                            San Francisco, CA 94103<br>
+                                            P: (123) 456-7890<br>
+                                            <p class="font-weight-bold">Renaud Lavilenie<br></p>
+                                            first.last@example.com<br><br>
+                                        </address>
+                                        <hr>
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Envoyer un message</h5>
+                                        </div>
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="recipient-name" class="col-form-label">Titre:</label>
+                                                <input type="text" class="form-control" id="recipient-name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="message-text" class="col-form-label">Message:</label>
+                                                <textarea class="form-control" id="message-text"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                        <button type="button" class="btn btn-primary">Envoyer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Modal end-->
+
+                    </div>
+                    <div class="card-body">
+
+                        <h1 class="card-title">3 heures de vidéos pour tout comprendre </h1>
+                        <hr>
+                        <p class="card-text text-justify textLandingFormation"> {{ formation.description }} </p>
+                        </p>
+                        <!--Collapse start-->
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body enSavoirPlus">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                                Ut velit mauris, egestas sed, gravida nec, ornare ut, mi. Aenean ut orci vel massa suscipit pulvinar. Nulla sollicitudin. Fusce varius, ligula non tempus aliquam, nunc turpis ullamcorper nibh, in tempus sapien eros vitae ligula. Pellentesque rhoncus nunc et augue. Integer id felis. Curabitur aliquet pellentesque diam. Integer quis metus vitae elit lobortis egestas. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi vel erat non mauris convallis vehicula. Nulla et sapien. Integer tortor tellus, aliquam faucibus, convallis id, congue eu, quam. Mauris ullamcorper felis vitae erat. Proin feugiat, augue non elementum posuere, metus purus iaculis lectus, et tristique ligula justo vitae magna.
+                                Aliquam convallis sollicitudin purus. Praesent aliquam, enim at fermentum mollis, ligula massa adipiscing nisl, ac euismod nibh nisl eu lectus. Fusce vulputate sem at sapien. Vivamus leo. Aliquam euismod libero eu enim. Nulla nec felis sed leo placerat imperdiet. Aenean suscipit nulla in justo. Suspendisse cursus rutrum augue. Nulla tincidunt tincidunt mi. Curabitur iaculis, lorem vel rhoncus faucibus, felis magna fermentum augue, et ultricies lacus lorem varius purus. Curabitur eu amet.
+                            </div>
+                        </div>
+                        <!--Collapse end-->
+                        <p class="card-text text-right blocAuthor">
+                            <a href="#"><span class="text-capitalize author">Par {{ formation.author.name }} {{ formation.author.firstName}} </a>
+                            <span class=""> | </span>
+                            <span class="publicationdate">Publiée le {{  formation.createdAt | date('d M Y') }}</span>
+                        </p>
+
+                        <div class="row justify-content-around align-items-center mt-4">
+                            <div class="col-3 mb-4 mt-4">
+                                <button class="btn-lg btn-primary btn-block buttonFormation" type="button">
+                                    Commencer
+                                </button>
+                            </div>
+                            <div class="col-3 mb-4 mt-4   ">
+                                <button class="btn-lg btn-primary btn-block buttonFormation" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    En savoir plus
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-left align-items-end mt-4 border-bottom-2 noteLandingFormation">
+                            <div class="col-3 mt-1 mb-1">
+                                <h5 class="mt-1 textDisplay">Note : </h5>
+                                <h3 class="starColor"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"><i class="far fa-star"></i></i><i class="far fa-star"></i></h3>
+                            </div>
+                            <div class="col-3 mt-1 mb-1 thumbLandingFormationbottom">
+                                <h5 class="mt-1 textDisplay">J'aime : </h5>
+                                <h3 class="sucessColor"><i class="fas fa-thumbs-up"></i></h3>
+                            </div>
+                            <div class="col-3 mt-1 mb-1 thumbLandingFormationbottom  ">
+                                <h5 class="mt-1 textDisplay">J'aime pas : </h5>
+                                <h3 class="dangerColor"><i class="fas fa-thumbs-down"></i></h3>
+                            </div>
+                            <div class="col-3 mt-1 mb-1 thumbLandingFormationbottom">
+                                <h5 class="mt-1 textDisplay">Laissez un avis : </h5>
+                                <h3><i class="fas fa-eye"></i></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+{% endblock %}
+

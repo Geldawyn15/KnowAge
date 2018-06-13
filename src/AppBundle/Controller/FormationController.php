@@ -5,27 +5,51 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Formation;
 use AppBundle\Form\addFormationType;
 use AppBundle\Service\ImgUploader;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+
 use AppBundle\Service\Mailer;
+use Twig\Node\Expression\GetAttrExpression;
 
 
+/**
+ * Formation controller.
+ *
+ * @Route("formation")
+ */
 class FormationController extends controller
 {
+    
     /**
-     * @Route("/formation/landingformation", name="formation")
+     * @Route("/landingformation/{id}", name="landingformation")
      * @Method({"GET", "POST"})
      */
-    public function landingFormationAction()
+    public function landingFormationAction(Formation $formation)
     {
-        return $this->render('Formation/landingFormation.html.twig');
+        $titleFormation = $formation->getTitle();
+        $authorFormation = $formation->getAuthor()->getNickName();
+        $descriptionFormation = $formation->getDescription();
+        $dateYMDHIS = $formation->getCreatedAt()->format('Y-m-d');
+        $pictureFormation = $formation->getPicture();
+        $shortText = $formation->shortText();
+
+
+        return $this->render('Formation/landingFormation.html.twig', array(
+            'titleFormation' => $titleFormation,
+            'authorFormation' => $authorFormation,
+            'descriptionFormation' => $descriptionFormation,
+            'dateYMD' => $dateYMDHIS,
+            'pictureFormation' => $pictureFormation,
+            'shortText' => $shortText
+        ));
     }
 
     /**
-     * @Route("/creation", name="create")
+     * @Route("/new", name="new")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
      */
@@ -49,51 +73,47 @@ class FormationController extends controller
             $entityManager->persist($formation);
             $entityManager->flush();
 
-            return $this->redirectToRoute('search');
+            return $this->redirectToRoute('new2', array(
+                'id' => $formation->getId()
+            ));
         }
 
-        return $this->render('Formation/create.html.twig', array(
+        return $this->render('Formation/new.html.twig', array(
             'form'=>$form->createView()
         ));
 
     }
 
     /**
-     * @Route("/creation2", name="HomepageFormation")
+     * @Route("/new2/{id}", name="create2")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
      */
-    public function create2Action(request $request)
+    public function create2Action(Request $request, Formation $formation, $id)
     {
-        $formation = new Formation();
 
-        $form = $this->createForm('AppBundle\Form\FormationType', $formation);
-        $form->handleRequest($request);
+        if ($formation->getAuthor() == $this->getUser()) {
+
+            $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
+
+            $form = $this->createForm('AppBundle\Form\FormationType', $formation);
+            $form->handleRequest($request);
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
-
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($formation);
             $entityManager->flush();
 
-            return $this->redirectToRoute('formation');
+            return $this->redirectToRoute('show', array(
+                'id' => $id
+            ));
         }
 
-
-
-        return $this->render('Formation/create2.html.twig', array(
+        return $this->render('Formation/new2.html.twig', array(
             'form'=>$form->createView()
         ));
-    }
-
-    /**
-
-     * @Route("/teacher", name="landingformateur")
-     */
-    public function landingFormateurAction()
-    {
-        return $this->render('Front/landingFormateur.html.twig');
     }
 
 
@@ -101,29 +121,27 @@ class FormationController extends controller
     /**
      * Finds and displays a formation entity.
      *
-     * @Route("/formation/{id}", name="formation_show")
-     * @Method({"GET", "POST"})
+     * @Route("/show/{id}", name="formation_show")
+     * @Method("GET")
      */
-    public function showAction(request $request, mailer $mailer, Formation $formation)
+    public function showAction(Formation $formation, $id)
     {
 
-            return $this->render('Formation/FormationAbonne.html.twig', array(
-                'formation' => $formation,
+        $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
+
+        return $this->render('Formation/show.html.twig', array(
+            'formation' => $formation,
+
         ));
     }
 
     /**
-     * Display.
-     *
-     * @Route("/formation/{id}", name="formation_show")
-     * @Method({"GET", "POST"})
+     * @Route("/formateur", name="formateur")
      */
-    public function showAction(request $request, mailer $mailer, Formation $formation)
+    public function landingFormateurAction()
     {
+        return $this->render('Formation/Formateur.html.twig');
 
-        return $this->render('Formation/FormationAbonne.html.twig', array(
-            'formation' => $formation,
-        ));
     }
 
 

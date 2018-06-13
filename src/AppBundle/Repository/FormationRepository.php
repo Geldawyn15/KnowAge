@@ -3,6 +3,9 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Knp\Bundle\PaginatorBundle\KnpPaginatorBundle;
+use Symfony\Component\HttpFoundation\Request;
+
 
 /**
  * FormationRepository
@@ -24,8 +27,8 @@ class FormationRepository extends EntityRepository
                   ->orWhere('a.description LIKE :description'.$i)
                   ->setParameter('title'.$i, '%' . $search . '%')
                   ->setParameter('description'.$i, '%' . $search . '%');
-        }
 
-        return $query->getQuery()->execute();
+        }
+        return $query;
     }
 }
