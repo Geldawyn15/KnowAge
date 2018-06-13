@@ -42,27 +42,27 @@
         <div class="collapse navbar-collapse  " id="navbarSupportedContent">
             <ul class="nav navbar-nav justify-content-end ">
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/ ">Accueil<span class="sr-only">(current)</span></a>
+                    <a class="nav-link text-white" href="{{ path('homepage') }} ">Accueil<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/search">Recherche<span class="sr-only">(current)</span></a>
+                    <a class="nav-link text-white" href="{{ path('search') }}">Recherche<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/contact">Contact<span class="sr-only">(current)</span></a>
+                    <a class="nav-link text-white" href="{{ path('contact') }}">Contact<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link text-white" href="/user/profil">Mon Profil<span class="sr-only">(current)</span></a>
+                    <a class="nav-link text-white" href="{{ path('profil') }}">Mon Profil<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/creation">Ajouter une Formation<span class="sr-only">(current)</span></a>
+                    <a class="nav-link text-white" href="{{ path('new') }}">Ajouter une Formation<span class="sr-only">(current)</span></a>
                 </li>
                 {% if app.user %}
                     <li class="nav-item loginbtn ">
-                        <a href="/logout" role="button" aria-disabled="true"><button class="loginBtn text-white btn btn-outline-secondary waves-effect btn-lg">Se déconnecter</button></a>
+                        <a href="{{ path('logout') }}" role="button" aria-disabled="true"><button class="loginBtn text-white btn btn-outline-secondary waves-effect btn-lg">Se déconnecter</button></a>
                     </li>
                 {% else %}
                     <li class="nav-item loginbtn ">
-                        <a href="/login" role="button" aria-disabled="true"><button class="loginBtn text-white btn btn-outline-secondary waves-effect btn-lg">Se Connecter</button></a>
+                        <a href="{{ path('login') }}" role="button" aria-disabled="true"><button class="loginBtn text-white btn btn-outline-secondary waves-effect btn-lg">Se Connecter</button></a>
                     </li>
                 {% endif %}
 
