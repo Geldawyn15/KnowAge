@@ -38,7 +38,11 @@ class Mailer
     public function sendContactMail($message, $reply)
     {
 
+<<<<<<< HEAD
         $to = 'romain.poilpret@gmail.com';
+=======
+        $to = $this->to;
+>>>>>>> 1962e7a6da4a2dd496ad9a186a6a6662e6cb8253
         $subject = 'Demande de contact';
         $body = $this->templating->render('Mail/contactMail.html.twig', array(
             'message' => $message
@@ -47,6 +51,7 @@ class Mailer
     }
 
 
+<<<<<<< HEAD
     public function sendInapropriateContent(user $user, $message)
     {
         $from = $user->getEmail() . " " . $user->getNickName();
@@ -57,5 +62,7 @@ class Mailer
         ));
         $this->sendMail($subject, $body, $to, $from);
     }
+=======
+>>>>>>> 1962e7a6da4a2dd496ad9a186a6a6662e6cb8253
 
 }

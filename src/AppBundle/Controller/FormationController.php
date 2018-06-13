@@ -4,6 +4,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Formation;
 use AppBundle\Form\addFormationType;
+use AppBundle\Form\ContactTeacherType;
+use AppBundle\Form\FormationType;
 use AppBundle\Service\ImgUploader;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -25,7 +27,7 @@ class FormationController extends controller
 {
     
     /**
-     * @Route("/landingformation/{id}", name="landingformation")
+     * @Route("/    landingformation/{id}", name="landingformation")
      * @Method({"GET", "POST"})
      */
     public function landingFormationAction(Formation $formation)
@@ -57,7 +59,7 @@ class FormationController extends controller
     {
         $formation = new Formation();
 
-        $form = $this->createForm('AppBundle\Form\addFormationType', $formation);
+        $form = $this->createForm(addFormationType::class, $formation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -85,20 +87,23 @@ class FormationController extends controller
     }
 
     /**
-     * @Route("/new2/{id}", name="create2")
+     * @Route("/new2/{id}", name="new2")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
      */
     public function create2Action(Request $request, Formation $formation, $id)
     {
 
-        if ($formation->getAuthor() == $this->getUser()) {
+        if ($formation->getAuthor() != $this->getUser()) {
+
+            throw $this->createNotFoundException('Vous n\'êtes pas autorisé à accéder à cette page');
+        }
 
             $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
 
-            $form = $this->createForm('AppBundle\Form\FormationType', $formation);
+            $form = $this->createForm(FormationType::class, $formation);
             $form->handleRequest($request);
-        }
+
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -108,6 +113,7 @@ class FormationController extends controller
 
             //afficher les messages
             $this->addFlash('success', 'Votre formation est enregistrée avec succès');
+
 
             return $this->redirectToRoute('formation_show', array(
                 'id' => $id
@@ -128,14 +134,14 @@ class FormationController extends controller
      * @Route("/show/{id}", name="formation_show")
      * @Method("GET")
      */
-    public function showAction(Formation $formation, $id)
+    public function showAction(Request $request, Formation $formation, $id)
     {
-
-        $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
+        $form = $this->createForm(ContactTeacherType::class);
+        $form->handleRequest($request);
 
         return $this->render('Formation/show.html.twig', array(
             'formation' => $formation,
-
+            'form' => $form->createView()
         ));
     }
 
