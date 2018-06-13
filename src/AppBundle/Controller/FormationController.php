@@ -4,6 +4,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Formation;
 use AppBundle\Form\addFormationType;
+use AppBundle\Form\ContactTeacherType;
+use AppBundle\Form\FormationType;
 use AppBundle\Service\ImgUploader;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -30,7 +32,7 @@ class FormationController extends controller
     {
         $formation = new Formation();
 
-        $form = $this->createForm('AppBundle\Form\addFormationType', $formation);
+        $form = $this->createForm(addFormationType::class, $formation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -65,13 +67,16 @@ class FormationController extends controller
     public function create2Action(Request $request, Formation $formation, $id)
     {
 
-        if ($formation->getAuthor() == $this->getUser()) {
+        if ($formation->getAuthor() != $this->getUser()) {
+
+            throw $this->createNotFoundException('Vous n\'êtes pas autorisé à accéder à cette page');
+        }
 
             $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
 
-            $form = $this->createForm('AppBundle\Form\FormationType', $formation);
+            $form = $this->createForm(FormationType::class, $formation);
             $form->handleRequest($request);
-        }
+
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -96,14 +101,16 @@ class FormationController extends controller
      * @Route("/show/{id}", name="formation_show")
      * @Method("GET")
      */
-    public function showAction(Formation $formation, $id)
+    public function showAction(Request $request, Formation $formation, $id)
     {
 
-        $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
+        $form = $this->createForm(ContactTeacherType::class);
+        $form->handleRequest($request);
         $shortText = $formation->shortText(250);
 
         return $this->render('Formation/show.html.twig', array(
             'formation' => $formation,
+            'form' => $form->createView(),
             'shortText' => $shortText
         ));
     }
