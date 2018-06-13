@@ -73,7 +73,7 @@ class FormationController extends controller
             $entityManager->persist($formation);
             $entityManager->flush();
 
-            return $this->redirectToRoute('new2', array(
+            return $this->redirectToRoute('create2', array(
                 'id' => $formation->getId()
             ));
         }
@@ -106,13 +106,14 @@ class FormationController extends controller
             $entityManager->persist($formation);
             $entityManager->flush();
 
-            return $this->redirectToRoute('show', array(
+            return $this->redirectToRoute('formation_show', array(
                 'id' => $id
             ));
         }
 
         return $this->render('Formation/new2.html.twig', array(
-            'form'=>$form->createView()
+            'form'=>$form->createView(),
+            'id' => $id,
         ));
     }
 
