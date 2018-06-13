@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+    <h3>l'utilisateur {{ user.firstName }} {{ user.name }} a signalé un contenu inaproprié :</h3>
+        <p>Formation concernée '{{ formation.title }}'.</p>
+        <p>Motif : {{ choice }}</p>
+        <p>Message de l'utilisateur : {{ message }}</p>
+
+
+
+{% endblock %}

@@ -50,12 +50,16 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">FAQ</a>
-                            </li>
+                            </li>  
                             <!--Modal button start-->
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Contacter</a>
                             </li>
                             <!--Modal button end-->
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('signalFormation', {'id': formation.id}) }}">Signaler</a>
+                            </li>
+
                         </ul>
                         <!--Modal start-->
                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
