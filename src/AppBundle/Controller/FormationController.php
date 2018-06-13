@@ -20,7 +20,7 @@ use Twig\Node\Expression\GetAttrExpression;
  */
 class FormationController extends controller
 {
-    
+
     /**
      * @Route("/landingformation/{id}", name="landingformation")
      * @Method({"GET", "POST"})
@@ -82,7 +82,7 @@ class FormationController extends controller
     }
 
     /**
-     * @Route("/new2/{id}", name="create2")
+     * @Route("/new2/{id}", name="new2")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
      */
