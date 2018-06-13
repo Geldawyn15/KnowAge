@@ -17,6 +17,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Formation
 {
+
+    const PICTURE_WIDTH = 1111;
+    const PICTURE_HEIGHT = 716;
     /**
      * @var int
      *

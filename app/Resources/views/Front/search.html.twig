@@ -7,19 +7,26 @@
    <div class="container">
         <div class="row searchbar pt-3 ">
             <div class="col-md-12 text-center">
-                <form action="" >
+                <div class="input-group mb-3">
+                    <form method="Get" action="/search">
+                        <input type="text" id="search" name="search" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append text-align-center">
+                            <a> <button class="btnSearch btn btn-secondary" type="submit"><i class="fas fa-search"></i></button></a>
+                        </div>
+                    </form>
+                </div>
+               <!-- <form action="" >
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Johnny" aria-label="Recipient's username" aria-describedby="basic-addon2">
                         <div class="input-group-append">
                             <button class="btnSearch btn btn-primary" type="button"> <i class="fas fa-search"></i></button>
                         </div>
                     </div>
-                </form>
+                </form> !-->
 
             </div>
         </div>
     </div>
-
     <div class="container">
         <div class="row ">
             <div class="col-md-5" >
@@ -38,42 +45,29 @@
                 <div class="post-module">
                     <!-- Thumbnail-->
                     <div class="thumbnail">
-                        <img src="https://i.imgur.com/7Z8rscT.jpg" class="img-responsive" alt=""> </div>
+                        <img src="{{  formation.picture }}" class="img-responsive" alt=""> </div>
                     <!-- Post Content-->
                     <div class="post-content">
                         <div class="category">{{ formation.category }}</div>
                         <h1 class="title">{{ formation.title }}</h1>
-                        <h2 class="sub_title">par John Utah</h2>
-                        <p class="description"> {{ formation.description }}</p>
-                        <div class="post-meta"> <a href="#" class="btn btn-sm btn-outline-primary waves-effect mr-3">Voir la formation</a><button class="favoriteSearch btn"><i id="favoriteSearch" class="far fa-heart bg-tomato fa-2x"  style="color:Tomato"> </i></button>
+                        <h2 class="sub_title">par {{ formation.author.name }} {{  formation.author.firstName}}</h2>
+                        <p class="description"> {{  formation.description }}</p>
+                        <div class="post-meta"> <a href="/formation/{{  formation.id }}" class="btn btn-sm btn-outline-primary waves-effect mr-3">Voir la formation</a><button class="favoriteSearch btn"><i id="favoriteSearch" class="far fa-heart bg-tomato fa-2x"  style="color:Tomato"> </i></button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         {% if loop.index % 3 == 0 %}
-            </div>
+
         {% endif %}
     {% endfor %}
+    </div>
 
 </div>
 
-<div class="container mb-5 mt-5 ">
-    <nav aria-label="pagination ">
-        <ul class="pagination paginationForm justify-content-end">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item active">
-                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-            </li>
-        </ul>
-    </nav>
+<div class="container">
+   {{ knp_pagination_render(formations) }}
 </div>
 
 {% endblock %}
