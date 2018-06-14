@@ -180,6 +180,14 @@ hr:before {
     display: block;
 }
 
+#favoriteFormation {
+    display: none;
+}
+#favoriteFormateur {
+    display: none;
+}
+
+
 
 
 
