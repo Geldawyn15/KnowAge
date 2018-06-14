@@ -1,4 +1,5 @@
 {% extends 'layout.html.twig' %}
+
 {% block title %} Profil {% endblock %}
 {% block stylesheet %}<link rel="stylesheet" href="/assets/css/profile.css">{% endblock %}
 
@@ -45,7 +46,7 @@
     <h1>Formation Cree</h1>
     <div class="container formation">
         <div class="d-flex flex-column">
-            {% for formationcree in formationscree %}
+            {% for formationcreated in formationscreated %}
             {% if loop.index is odd %}
             <div class="row">
                 {% endif %}
@@ -55,16 +56,16 @@
                     <div class="post-module">
                         <!-- Thumbnail-->
                         <div class="thumbnail">
-                            <img src="{{ formationcree.picture }}" class="img-responsive" alt=""> </div>
+                            <img src="{{ formationcreated.picture }}" class="img-responsive" alt=""> </div>
                         <!-- Post Content-->
                         <div class="post-content">
-                            <div class="category">{{ formationcree.category }}</div>
-                            <h1 class="title">{{ formationcree.id }} - {{ formationcree.title}}</h1>
-                            <h2 class="sub_title">{{ formationcree.author.firstname}} {{ formationcree.author.name}}</h2>
-                            <p class="description"> {{ formationcree.description }}</p>
+                            <div class="category">{{ formationcreated.category }}</div>
+                            <h1 class="title">{{ formationcreated.id }} - {{ formationcreated.title}}</h1>
+                            <h2 class="sub_title">{{ formationcreated.author.firstname}} {{ formationcreated.author.name}}</h2>
+                            <p class="description"> {{ formationcreated.description }}</p>
                             <div class="post-meta">
                                 <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a>
-                                <button class="favoriteSearch btn" name=" {{ formationcree.id }} "><i id="favoriteSearch"   class="far fa-heart bg-tomato fa-2x"  style="color:Tomato"> </i></button>
+
                             </div>
                         </div>
                     </div>
@@ -82,7 +83,7 @@
     <h1>Formation Suivee</h1>
     <div class="container formation">
         <div class="d-flex flex-column">
-            {% for formationsuivee in formationssuivee %}
+            {% for paiement in paiements %}
                 {% if loop.index is odd %}
                     <div class="row">
                 {% endif %}
@@ -92,16 +93,23 @@
                         <div class="post-module">
                             <!-- Thumbnail-->
                             <div class="thumbnail">
-                                <img src="{{ formationsuivee.formationid.picture }}" class="img-responsive" alt=""> </div>
+                                <img src="{{ paiement.formation.picture }}" class="img-responsive" alt=""> </div>
                             <!-- Post Content-->
                             <div class="post-content">
-                                <div class="category">{{ formationsuivee.formationid.category }}</div>
-                                <h1 class="title">{{ formationsuivee.formationid.id }} - {{ formationsuivee.formationid.title}}</h1>
-                                <h2 class="sub_title">{{ formationsuivee.formationid.author.firstname}} {{ formationsuivee.formationid.author.name}}</h2>
-                                <p class="description"> {{ formationsuivee.formationid.description }}</p>
+                                <div class="category">{{ paiement.formation.category }}</div>
+                                <h1 class="title">{{ paiement.formation.title}}</h1>
+                                <h2 class="sub_title">{{ paiement.formation.author.firstname}} {{ paiement.formation.author.name}}</h2>
+                                <p class="description"> {{ paiement.formation.description }}</p>
                                 <div class="post-meta">
                                     <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a>
-                                    <button class="favoriteSearch btn" name=" {{ formationsuivee.formationid.id }}><i id="favoriteSearch" class="far fa-heart bg-tomato fa-2x"  style="color:Tomato"> </i></button>
+                                    <button class="favoriteSearch btn" data-formation-id="{{ paiement.formation.id }}">
+                                        {% if user.isFormationFavorited(paiement.formation) %}
+                                            <i id="favoriteSearch" class="fas fa-heart fa-2x"  style="color:Tomato"> </i>
+                                        {% else %}
+                                            <i id="favoriteSearch" class="far fa-heart fa-2x"  style="color:Tomato"> </i>
+                                        {% endif %}
+
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +123,32 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function() {
+        $('.favoriteSearch').click(function() {
+            var icon = $(this).find("i");
+            if (icon.hasClass("far")) {
+                $.get( '/user/favorite', {
+                    formationId: $(this).attr('data-formation-id'),
+                    favorited: false
+                });
+                return icon.removeClass("far").addClass("fas");
+            } else {
+                $.get( '/user/favorite', {
+                    formationId: $(this).attr('data-formation-id'),
+                    favorited: true
+                });
+                return icon.removeClass("fas").addClass("far");
+            }
+
+
+
+
+        });
+    });
+</script>
 {% endblock %}
+
 
 
 

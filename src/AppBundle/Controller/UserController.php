@@ -11,7 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\ImgUploader;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
@@ -27,16 +27,18 @@ class UserController extends controller
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
      */
-    public function profilAction()
+    public function profilAction(Request $request)
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
-        $formationsCree = $em->getRepository('AppBundle:Formation')->findBy(['author' => $user]);
-        $formationsSuivee = $em->getRepository('AppBundle:Paiement')->findBy(['userid' => $user]);
+        $formationsCreated = $em->getRepository('AppBundle:Formation')->findBy(['author' => $user]);
+        $paiements = $em->getRepository('AppBundle:Paiement')->findBy(['user' => $user]);
+
         return $this->render('User/profil.html.twig', array(
-            'formationscree' => $formationsCree,
-            'formationssuivee' => $formationsSuivee,
+            'formationscreated' => $formationsCreated,
+            'paiements' => $paiements,
+            'user' => $user,
         ));
     }
 
@@ -102,6 +104,31 @@ class UserController extends controller
         return $this->render('User/updatePassword.html.twig', array(
             'form'=>$form->createView()
         ));
+    }
+
+    /**
+     * @Route("/favorite", name="favorite")
+     * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function favoriteAction(Request $request)
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+
+        if ($request->query->get('formationId')) {
+            $formationId = $request->query->get('formationId');
+            $favorited  = $request->query->get('favorited');
+            $formation = $em->getRepository('AppBundle:Formation')->findBy(['id' => $formationId]);
+            if ($favorited == 'false') {
+                $user->addFavoriteFormation($formation[0]);
+            } elseif ($favorited) {
+                $user->removeFavoriteFormation($formation[0]);
+            }
+        }
+
+        $em->flush();
+        return new Response();
     }
 
 

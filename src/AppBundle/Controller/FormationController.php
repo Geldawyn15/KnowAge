@@ -9,13 +9,16 @@ use AppBundle\Form\addFormationType;
 use AppBundle\Form\ContactTeacherType;
 use AppBundle\Form\FormationType;
 use AppBundle\Service\ImgUploader;
-use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Service\Mailer;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Twig\Node\Expression\GetAttrExpression;
+
+
+
 
 /**
  * Formation controller.
@@ -50,7 +53,7 @@ class FormationController extends controller
             $entityManager->persist($formation);
             $entityManager->flush();
 
-            return $this->redirectToRoute('new2', array(
+            return $this->redirectToRoute('create2', array(
                 'id' => $formation->getId()
             ));
         }
@@ -86,29 +89,51 @@ class FormationController extends controller
             $entityManager->persist($formation);
             $entityManager->flush();
 
+            //afficher les messages
+            $this->addFlash('success', 'Votre formation est enregistrée avec succès');
+
+
             return $this->redirectToRoute('formation_show', array(
                 'id' => $id
             ));
         }
 
         return $this->render('Formation/new2.html.twig', array(
-            'form'=>$form->createView()
+            'form'=>$form->createView(),
+            'id' => $id,
         ));
     }
+
 
 
     /**
      * Finds and displays a formation entity.
      *
      * @Route("/show/{id}", name="formation_show")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
-    public function showAction(Request $request, Formation $formation, $id)
+    public function showAction(Request $request, Formation $formation, Mailer $mailer, $id)
     {
 
         $form = $this->createForm(ContactTeacherType::class);
         $form->handleRequest($request);
         $shortText = $formation->shortText(250);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = $form->getData();
+
+            $email = $data['email'];
+            $subject = $data['objet'];
+            $message = $data['message'];
+            $to = $formation->getAuthor()->getEmail();
+
+            $mailer->sendTeacherMail('romain.poilpret@gmail.com', $message, $subject, $email);
+
+            return $this->redirectToRoute('formation_show', array(
+                'id' => $id,
+            ));
+        }
 
         return $this->render('Formation/show.html.twig', array(
             'formation' => $formation,
@@ -123,6 +148,8 @@ class FormationController extends controller
     public function landingFormateurAction()
     {
         return $this->render('Formation/formateur.html.twig');
+
+
     }
 
     /**
@@ -153,4 +180,46 @@ class FormationController extends controller
         return $this->redirectToRoute('homepage');
     }
 
+    /**
+     * Signals an inaproriate content in formation
+     *
+     * @Route("/{id}", name="signalFormation")
+     * * @Method({"GET", "POST"})
+     */
+    public function signalFormationAction(formation $formation, Request $request, Mailer $mailer, $id)
+    {
+        //Récupère les variables
+        $user = $this->getUser();
+
+
+
+        //traite le formulaire
+        $form = $this->createForm('AppBundle\Form\SignalFormationType');
+        $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $data = $form->getData();
+
+                $message = $data['message'];
+                $choice = $data['choices'];
+
+                $mailer->signalFormationMail($message, $choice, $formation, $user);
+
+
+                //afficher les messages
+                $messageFlash = 'L\'administrateur a été informé d\'un contenu inaproprié pour cette formation';
+                $this->addFlash('success', $messageFlash);
+
+                return $this->redirectToRoute('formation_show', array (
+                    'id' => $id
+                ));
+
+                }
+
+        return $this->render('Formation/signalFormation.html.twig', array (
+            'id' => $id,
+            'form'=>$form->createView(),
+        ));
+    }
 }
+
