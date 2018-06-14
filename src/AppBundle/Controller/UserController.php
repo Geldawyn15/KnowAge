@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Form\ForgotPasswordType;
 use AppBundle\Form\InitializePasswordType;
+use AppBundle\Form\ResetPasswordType;
 use AppBundle\Form\UpdatePasswordType;
 use AppBundle\Form\UpdateProfileType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -14,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\ImgUploader;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Lock\Store\RedisStore;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use AppBundle\Entity\User;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -166,7 +168,7 @@ class UserController extends controller
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
 
-                $url = $this->generateUrl('initializePassword', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
+                $url = $this->generateUrl('resetPassword', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
 
                 $subject = 'Mot de passe perdu, NoAge';
                 $to = $userPasswordLost->getEmail();
@@ -190,13 +192,13 @@ class UserController extends controller
     }
 
     /**
-     * @Route("/initializepassword/{token}", name="initializePassword")
+     * @Route("/resetpassword/{token}", name="resetPassword")
      * @Method({"GET", "POST"})
      */
 
-    public function initializePassword ($token, Request $request, UserPasswordEncoderInterface $encoder)
+    public function resetPassword ($token, Request $request, UserPasswordEncoderInterface $encoder)
     {
-        $form = $this->createForm(InitializePasswordType::class);
+        $form = $this->createForm(ResetPasswordType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -223,7 +225,7 @@ class UserController extends controller
         }
 
 
-        return $this->render('User/initializePassword.html.twig', array(
+        return $this->render('User/resetPassword.html.twig', array(
             'form'=>$form->createView()
         ));
 

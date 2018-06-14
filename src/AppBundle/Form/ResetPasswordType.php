@@ -14,7 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 
 
-class InitializePasswordType extends abstractType
+class ResetPasswordType extends abstractType
 {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
