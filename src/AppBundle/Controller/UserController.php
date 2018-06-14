@@ -98,6 +98,8 @@ class UserController extends controller
             $entityManager->persist($user);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Mot de passe changé');
+
             return $this->redirectToRoute('profil');
         }
 
