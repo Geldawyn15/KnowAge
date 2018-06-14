@@ -159,25 +159,42 @@ class FormationController extends controller
      */
     public function landingFormateurAchat(Formation $formation)
     {
-        if ($formation->getAuthor() !== $user = $this->getUser()) {
+        $entityManager = $this->getDoctrine()->getManager();
+        $verfifPaiement = $this->getDoctrine()->getRepository(Paiement::class)->findBy([
+            'user' => $this->getUser(),
+            'formation' => $formation,
+            ]);
 
-            $entityManager = $this->getDoctrine()->getManager();
+        if ($formation->getAuthor() !== ($user = $this->getUser()) && !$verfifPaiement)  {
 
             $paiement = new Paiement();
-            $paiement->setUserid($user);
-            $paiement->setFormationid($formation);
+            $paiement->setUser($user);
+            $paiement->setFormation($formation);
 
             $entityManager->persist($paiement);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Formation achetée !');
 
             return $this->redirectToRoute('formation_show', array(
                 'id' => $formation->getId()));
 
         }
 
+        elseif ($formation->getAuthor() == $this->getUser()) {
 
-        return $this->redirectToRoute('homepage');
+
+            $this->addFlash('danger', 'Vous ne pouvez pas acheter votre formation!');
+
+            return $this->redirectToRoute('formation_show', ['id' => $formation->getId()]);
+        }
+
+        elseif ($verfifPaiement) {
+
+            $this->addFlash('danger', 'Formation déjà achetée!');
+
+            return $this->redirectToRoute('formation_show', ['id' => $formation->getId()]);
+        }
     }
 
     /**
