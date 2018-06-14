@@ -94,6 +94,14 @@ class User implements UserInterface, \Serializable
      */
     private $plainPassword;
 
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="token", type="string", nullable=true, unique=true)     *
+     */
+    private $token;
+
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", cascade={"persist"})
      */
@@ -383,6 +391,22 @@ class User implements UserInterface, \Serializable
     public function setNewPassword(string $newPassword)
     {
         $this->newPassword = $newPassword;
+    }
+
+    /**
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param string $token
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
     }
 
 
