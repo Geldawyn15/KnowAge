@@ -55,7 +55,7 @@ class Paiement
     /**
      * @param mixed $user
      */
-    public function setUser($user): void
+    public function setUser($user)
     {
         $this->user = $user;
     }
@@ -71,7 +71,7 @@ class Paiement
     /**
      * @param mixed $formation
      */
-    public function setFormation($formation): void
+    public function setFormation($formation)
     {
         $this->formation = $formation;
     }

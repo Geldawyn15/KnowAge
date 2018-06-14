@@ -38,11 +38,11 @@ class UserController extends controller
         $em = $this->getDoctrine()->getManager();
 
         $formationsCreated = $em->getRepository('AppBundle:Formation')->findBy(['author' => $user]);
-        $paiements = $em->getRepository('AppBundle:Paiement')->findBy(['user' => $user]);
+        $payments = $em->getRepository('AppBundle:Paiement')->findBy(['user' => $user]);
 
         return $this->render('User/profil.html.twig', array(
             'formationscreated' => $formationsCreated,
-            'paiements' => $paiements,
+            'payments' => $payments,
             'user' => $user,
         ));
     }
@@ -102,6 +102,8 @@ class UserController extends controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Mot de passe changé');
 
             return $this->redirectToRoute('profil');
         }

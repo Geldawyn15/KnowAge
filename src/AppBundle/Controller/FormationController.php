@@ -3,6 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Formation;
+use AppBundle\Entity\Paiement;
+use AppBundle\Entity\User;
 use AppBundle\Form\addFormationType;
 use AppBundle\Form\ContactTeacherType;
 use AppBundle\Form\FormationType;
@@ -110,7 +112,7 @@ class FormationController extends controller
      * @Route("/show/{id}", name="formation_show")
      * @Method({"GET", "POST"})
      */
-    public function showAction(Request $request, Formation $formation, Mailer $mailer, $id)
+    public function showAction(Request $request, Formation $formation, Mailer $mailer)
     {
 
         $form = $this->createForm(ContactTeacherType::class);
@@ -129,7 +131,7 @@ class FormationController extends controller
             $mailer->sendTeacherMail('romain.poilpret@gmail.com', $message, $subject, $email);
 
             return $this->redirectToRoute('formation_show', array(
-                'id' => $id,
+                'id' => $formation->getId(),
             ));
         }
 
@@ -148,6 +150,51 @@ class FormationController extends controller
         return $this->render('Formation/formateur.html.twig');
 
 
+    }
+
+    /**
+     * @Route("/achat/{id}", name="formation_Achat")
+     * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function landingFormateurAchat(Formation $formation)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $verfifPaiement = $this->getDoctrine()->getRepository(Paiement::class)->findBy([
+            'user' => $this->getUser(),
+            'formation' => $formation,
+            ]);
+
+        if ($formation->getAuthor() !== ($user = $this->getUser()) && !$verfifPaiement)  {
+
+            $paiement = new Paiement();
+            $paiement->setUser($user);
+            $paiement->setFormation($formation);
+
+            $entityManager->persist($paiement);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Formation achetée !');
+
+            return $this->redirectToRoute('formation_show', array(
+                'id' => $formation->getId()));
+
+        }
+
+        elseif ($formation->getAuthor() == $this->getUser()) {
+
+
+            $this->addFlash('danger', 'Vous ne pouvez pas acheter votre formation!');
+
+            return $this->redirectToRoute('formation_show', ['id' => $formation->getId()]);
+        }
+
+        elseif ($verfifPaiement) {
+
+            $this->addFlash('danger', 'Formation déjà achetée!');
+
+            return $this->redirectToRoute('formation_show', ['id' => $formation->getId()]);
+        }
     }
 
     /**

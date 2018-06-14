@@ -33,7 +33,7 @@ class ImgUploader
 
         $file->move($this->targetDir,  $fileName);
 
-        return $this->getPublicPath().'/'.$fileName;
+        return $this->publicPath.'/'.$fileName;
     }
 
 
@@ -47,7 +47,7 @@ class ImgUploader
             ->bestFit(100, 100)
             ->toFile($file->getRealPath());
 
-        $file->move($this->getTargetDir(),  $fileName);
+        $file->move($this->targetDir,  $fileName);
 
 
         return $this->publicPath.'/'.$fileName;
