@@ -112,7 +112,7 @@ class FormationController extends controller
      * @Route("/show/{id}", name="formation_show")
      * @Method({"GET", "POST"})
      */
-    public function showAction(Request $request, Formation $formation, Mailer $mailer, $id)
+    public function showAction(Request $request, Formation $formation, Mailer $mailer)
     {
 
         $form = $this->createForm(ContactTeacherType::class);
@@ -131,7 +131,7 @@ class FormationController extends controller
             $mailer->sendTeacherMail('romain.poilpret@gmail.com', $message, $subject, $email);
 
             return $this->redirectToRoute('formation_show', array(
-                'id' => $id,
+                'id' => $formation->getId(),
             ));
         }
 
