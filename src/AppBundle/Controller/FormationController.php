@@ -3,6 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Formation;
+use AppBundle\Entity\Paiement;
+use AppBundle\Entity\User;
 use AppBundle\Form\addFormationType;
 use AppBundle\Form\ContactTeacherType;
 use AppBundle\Form\FormationType;
@@ -123,5 +125,32 @@ class FormationController extends controller
         return $this->render('Formation/formateur.html.twig');
     }
 
+    /**
+     * @Route("/achat/{id}", name="formation_Achat")
+     * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function landingFormateurAchat(Formation $formation)
+    {
+        if ($formation->getAuthor() !== $user = $this->getUser()) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $paiement = new Paiement();
+            $paiement->setUserid($user);
+            $paiement->setFormationid($formation);
+
+            $entityManager->persist($paiement);
+            $entityManager->flush();
+
+
+            return $this->redirectToRoute('formation_show', array(
+                'id' => $formation->getId()));
+
+        }
+
+
+        return $this->redirectToRoute('homepage');
+    }
 
 }
