@@ -33,7 +33,7 @@ class ImgUploader
 
         $file->move($this->targetDir,  $fileName);
 
-        return $this->getPublicPath().'/'.$fileName;
+        return $this->publicPath.'/'.$fileName;
     }
 
 

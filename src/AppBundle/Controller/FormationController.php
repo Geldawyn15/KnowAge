@@ -8,15 +8,11 @@ use AppBundle\Form\ContactTeacherType;
 use AppBundle\Form\FormationType;
 use AppBundle\Service\ImgUploader;
 use AppBundle\Service\Mailer;
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Service\Mailer;
-
-
 
 /**
  * Formation controller.
@@ -51,7 +47,7 @@ class FormationController extends controller
             $entityManager->persist($formation);
             $entityManager->flush();
 
-            return $this->redirectToRoute('create2', array(
+            return $this->redirectToRoute('new2', array(
                 'id' => $formation->getId()
             ));
         }
