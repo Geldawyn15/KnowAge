@@ -18,8 +18,8 @@
         <div class="d-flex flex-column justify-content-center ml-5">
             <div class="ml-1"><img src="{{ app.user.profilePic }} " style="height: 180px; width: 180px;"></div>
             <div class="d-flex mt-2">
-                <button id="formationToggle1" class="btn btn-outline-primary waves-effect mr-1">Etudiant</button>
-                <button id="formationToggle2" class="btn btn-outline-primary waves-effect ml-1 ">Formateur</button>
+                <button id="formationShowBought" class="btn btn-outline-primary waves-effect mr-1">Etudiant</button>
+                <button id="formationShowCreated" class="btn btn-outline-primary waves-effect ml-1">Formateur</button>
             </div>
         </div>
 
@@ -42,8 +42,8 @@
                     </a>
                 </div>
             </div>
-            <div> <button class="btn btn-outline-primary waves-effect ">Mes Formations</button></div>
-            <div> <button class="btn btn-outline-primary waves-effect ">Mes Formateurs</button></div>
+            <div> <button id="showFavoriteFormation" class="btn btn-outline-primary waves-effect ">Mes Formations</button></div>
+            <div> <button id="showFavoriteFormateur" class="btn btn-outline-primary waves-effect ">Mes Formateurs</button></div>
         </div>
         <div class="d-flex flex-column ml-5 justify-content-center">
 
@@ -92,7 +92,7 @@
     <h1>Formation Suivee</h1>
     <div class="container formation">
         <div class="d-flex flex-column">
-            {% for paiement in paiements %}
+            {% for payment in payments %}
                 {% if loop.index is odd %}
                     <div class="row">
                 {% endif %}
@@ -102,17 +102,61 @@
                         <div class="post-module">
                             <!-- Thumbnail-->
                             <div class="thumbnail">
-                                <img src="{{ paiement.formation.picture }}" class="img-responsive" alt=""> </div>
+                                <img src="{{ payment.formation.picture }}" class="img-responsive" alt=""> </div>
                             <!-- Post Content-->
                             <div class="post-content">
-                                <div class="category">{{ paiement.formation.category }}</div>
-                                <h1 class="title">{{ paiement.formation.title}}</h1>
-                                <h2 class="sub_title">{{ paiement.formation.author.firstname}} {{ paiement.formation.author.name}}</h2>
-                                <p class="description"> {{ paiement.formation.description }}</p>
+                                <div class="category">{{ payment.formation.category }}</div>
+                                <h1 class="title">{{ payment.formation.title}}</h1>
+                                <h2 class="sub_title">{{ payment.formation.author.firstname}} {{ payment.formation.author.name}}</h2>
+                                <p class="description"> {{ payment.formation.description }}</p>
                                 <div class="post-meta">
                                     <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a>
-                                    <button class="favoriteSearch btn" data-formation-id="{{ paiement.formation.id }}">
-                                        {% if user.isFormationFavorited(paiement.formation) %}
+                                    <button class="favoriteSearch btn" data-formation-id="{{ payment.formation.id }}">
+                                        {% if user.isFormationFavorited(payment.formation) %}
+                                            <i id="favoriteSearch" class="fas fa-heart fa-2x"  style="color:Tomato"> </i>
+                                        {% else %}
+                                            <i id="favoriteSearch" class="far fa-heart fa-2x"  style="color:Tomato"> </i>
+                                        {% endif %}
+
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if loop.index is even or loop.last %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div id="favoriteFormation">
+    <h1>Formation Favori</h1>
+    <div class="container formation">
+        <div class="d-flex flex-column">
+            {% for payment in payments %}
+                {% if loop.index is odd %}
+                    <div class="row">
+                {% endif %}
+                <div class="col-6 mt-5">
+                    <div class="column">
+                        <!-- Post-->
+                        <div class="post-module">
+                            <!-- Thumbnail-->
+                            <div class="thumbnail">
+                                <img src="{{ payment.formation.picture }}" class="img-responsive" alt=""> </div>
+                            <!-- Post Content-->
+                            <div class="post-content">
+                                <div class="category">{{ payment.formation.category }}</div>
+                                <h1 class="title">{{ payment.formation.title}}</h1>
+                                <h2 class="sub_title">{{ payment.formation.author.firstname}} {{ payment.formation.author.name}}</h2>
+                                <p class="description"> {{ payment.formation.description }}</p>
+                                <div class="post-meta">
+                                    <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a>
+                                    <button class="favoriteSearch btn" data-formation-id="{{ payment.formation.id }}">
+                                        {% if user.isFormationFavorited(payment.formation) %}
                                             <i id="favoriteSearch" class="fas fa-heart fa-2x"  style="color:Tomato"> </i>
                                         {% else %}
                                             <i id="favoriteSearch" class="far fa-heart fa-2x"  style="color:Tomato"> </i>
