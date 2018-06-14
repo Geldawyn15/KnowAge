@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -108,6 +109,7 @@ class User implements UserInterface, \Serializable
 
     public function __construct()
     {
+        $this->favoriteFormations = new ArrayCollection();
     }
 
     /**
@@ -287,6 +289,24 @@ class User implements UserInterface, \Serializable
     {
         $this->favoriteFormations = $favoriteFormations;
     }
+
+    /**
+     * @param mixed $favoriteFormation
+     */
+    public function addFavoriteFormation($favoriteFormation)
+    {
+        $this->favoriteFormations[] = $favoriteFormation;
+    }
+    public function removeFavoriteFormation($favoriteFormation)
+    {
+        $this->favoriteFormations->removeElement($favoriteFormation);
+    }
+
+    public function isFormationFavorited(Formation $formation)
+    {
+        return $this->favoriteFormations->contains($formation);
+    }
+
 
     public function getRoles()
     {
