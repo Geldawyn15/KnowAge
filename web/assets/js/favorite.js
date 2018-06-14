@@ -1,20 +1,14 @@
-$(document).ready(function() {
-    $('.favorite').on('click', function() { // Au clic sur un élément
-        var clicked = this;
-        var element = clicked.querySelector("i");
-        if(element.classList == "far fa-heart fa-5x"){
-            return element.classList = "fas fa-heart fa-5x";
-        } else {
-            return  element.classList = "far fa-heart fa-5x";
-        }
-    });
-});
 
 $(document).ready(function() {
-    $('.favoriteSearch').on('click', function() { // Au clic sur un élément
+    $('.favoriteSearch').on('click', function() {
         var clicked = this;
-        var element = clicked.querySelector("i");
+        var element = this.querySelector("i");
         if(element.classList == "far fa-heart fa-2x"){
+            $.post( {{ path('profil') }}, { formationId: clicked.attr('name'), hasclass: false })
+        .done(function( data ) {
+                alert( "Data Loaded: " + data );
+            });
+            alert("this has been clicked");
             return element.classList = "fas fa-heart fa-2x";
         } else {
             return  element.classList = "far fa-heart fa-2x";

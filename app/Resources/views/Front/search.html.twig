@@ -52,7 +52,10 @@
                         <h1 class="title">{{ formation.title }}</h1>
                         <h2 class="sub_title">par {{ formation.author.name }} {{  formation.author.firstName}}</h2>
                         <p class="description"> {{  formation.description }}</p>
-                        <div class="post-meta"> <a href="{{ path('formation_show', {id: formation.id}) }}" class="btn btn-sm btn-outline-primary waves-effect mr-3">Voir la formation</a><button class="favoriteSearch btn"><i id="favoriteSearch" class="far fa-heart bg-tomato fa-2x"  style="color:Tomato"> </i></button>
+
+                        <div class="post-meta">
+                            <a href="/formation/{{  formation.id }}" class="btn btn-sm btn-outline-primary waves-effect mr-3">Voir la formation</a>
+                            <button class="favoriteSearch btn" name=" {{ formation.id }} "><i id="favoriteSearch" class="far fa-heart bg-tomato fa-2x"  style="color:Tomato"> </i></button>
                         </div>
                     </div>
                 </div>
