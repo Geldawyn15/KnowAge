@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\AppBundle;
+use AppBundle\Form\ForgotPasswordType;
 use AppBundle\Form\UpdatePasswordType;
 use AppBundle\Form\UpdateProfileType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -13,6 +14,8 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\ImgUploader;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use AppBundle\Entity\User;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * User controller.
@@ -100,6 +103,57 @@ class UserController extends controller
         }
 
         return $this->render('User/updatePassword.html.twig', array(
+            'form'=>$form->createView()
+        ));
+    }
+
+
+    /**
+     * @Route("/forgotpassword", name="forgotPassword")
+     * @Method({"GET", "POST"})
+     */
+    public function forgotpassword(Request $request)
+    {
+        $form = $this->createForm(ForgotPasswordType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = $form->getData();
+            $email = $data['email'];
+
+            $userPasswordLost = $this->getDoctrine()
+                ->getRepository(User:: class)
+                ->findOneBy([
+                'email' => $email
+            ]);
+
+            //if mail exists
+            if ($userPasswordLost) {
+                $token = uniqid();
+                $userPasswordLost->setToken($token);
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+
+            } else {
+                //flash message le mail n'éxiste pas
+                $this->addFlash('success', 'Nous n\'avons pas trouvé d\'utilisateur avec cet email, merci de rééssayer')
+            }
+
+
+
+            //generate Url
+            $url = $this->generateUrl('forgotPassword', array('slug' => '$token'), UrlGeneratorInterface::ABSOLUTE_URL);
+
+
+
+
+
+            return $this->redirectToRoute('profil');
+        }
+
+
+        return $this->render('User/forgotPassword.html.twig', array(
             'form'=>$form->createView()
         ));
     }

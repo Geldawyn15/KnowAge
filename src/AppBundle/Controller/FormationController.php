@@ -161,8 +161,6 @@ class FormationController extends controller
         //Récupère les variables
         $user = $this->getUser();
 
-
-
         //traite le formulaire
         $form = $this->createForm('AppBundle\Form\SignalFormationType');
         $form->handleRequest($request);
