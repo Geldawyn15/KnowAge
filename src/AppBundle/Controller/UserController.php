@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\AppBundle;
 use AppBundle\Form\ForgotPasswordType;
+use AppBundle\Form\InitializePasswordType;
 use AppBundle\Form\UpdatePasswordType;
 use AppBundle\Form\UpdateProfileType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -16,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use AppBundle\Entity\User;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use AppBundle\Service\Mailer;
 
 /**
  * User controller.
@@ -139,7 +141,7 @@ class UserController extends controller
      * @Route("/forgotpassword", name="forgotPassword")
      * @Method({"GET", "POST"})
      */
-    public function forgotpassword(Request $request)
+    public function forgotpassword(Request $request, Mailer $mailer)
     {
         $form = $this->createForm(ForgotPasswordType::class);
         $form->handleRequest($request);
@@ -162,27 +164,67 @@ class UserController extends controller
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
 
+                $url = $this->generateUrl('initializePassword', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
+
+                $subject = 'Mot de passe perdu, NoAge';
+                $to = $userPasswordLost->getEmail();
+                $mailer->sendForgotPasswordMail($to, $subject, $url);
+
+                $this->addFlash('success', 'Consultez votre boite mail. Un message vous a été envoyé avec un lien pour réinitialiser votre mot de passe  ');
+
+
+
             } else {
-                //flash message le mail n'éxiste pas
-                $this->addFlash('success', 'Nous n\'avons pas trouvé d\'utilisateur avec cet email, merci de rééssayer')
+                $this->addFlash('danger', 'Nous n\'avons pas trouvé d\'utilisateur avec cet email, merci de rééssayer');
+
+                return $this->redirectToRoute('forgotPassword');
             }
-
-
-
-            //generate Url
-            $url = $this->generateUrl('forgotPassword', array('slug' => '$token'), UrlGeneratorInterface::ABSOLUTE_URL);
-
-
-
-
-
-            return $this->redirectToRoute('profil');
         }
 
 
         return $this->render('User/forgotPassword.html.twig', array(
             'form'=>$form->createView()
         ));
+    }
+
+    /**
+     * @Route("/initializepassword/{token}", name="initializePassword")
+     * @Method({"GET", "POST"})
+     */
+
+    public function resetPassword ($token, Request $request, UserPasswordEncoderInterface $encoder)
+    {
+        $form = $this->createForm(InitializePasswordType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = $form->getData();
+            $plainPassword = $data['newPassword'];
+            $user = $this->getDoctrine()
+                ->getRepository(User:: class)
+                ->findOneBy([
+                    'token' => $token
+                ]);
+
+            $encoded = $encoder->encodePassword($user, $plainPassword);
+
+            $user->setPassword($encoded);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Votre mot de passe a été mis à jour');
+
+
+            return $this->redirectToRoute('homepage');
+        }
+
+
+        return $this->render('User/initializePassword.html.twig', array(
+            'form'=>$form->createView()
+        ));
+
     }
 
 
