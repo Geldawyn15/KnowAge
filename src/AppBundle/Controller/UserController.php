@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\AppBundle;
+
 use AppBundle\Form\ForgotPasswordType;
 use AppBundle\Form\InitializePasswordType;
 use AppBundle\Form\UpdatePasswordType;
@@ -194,7 +194,7 @@ class UserController extends controller
      * @Method({"GET", "POST"})
      */
 
-    public function resetPassword ($token, Request $request, UserPasswordEncoderInterface $encoder)
+    public function initializePassword ($token, Request $request, UserPasswordEncoderInterface $encoder)
     {
         $form = $this->createForm(InitializePasswordType::class);
         $form->handleRequest($request);
