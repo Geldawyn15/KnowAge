@@ -2,10 +2,12 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * User
@@ -16,6 +18,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, \Serializable
 {
+
     /**
      * @var int
      *
@@ -62,6 +65,18 @@ class User implements UserInterface, \Serializable
     private $email;
 
     /**
+     * @ORM\Column(name= "profilePic", type="string", nullable=true, length=500,  )
+     */
+    private $profilePic;
+
+    /**
+     * @Assert\Image(
+     *     mimeTypes={"image/png"},
+     *     mimeTypesMessage= " Merci de choisir une image  .jpeg ou .png")
+     */
+    private $profilePicFile;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=255)
@@ -69,10 +84,23 @@ class User implements UserInterface, \Serializable
     private $password;
 
     /**
+     * @var string
+     */
+    private $newPassword;
+
+    /**
      * @Assert\NotBlank()
      * @Assert\Length(max=4096)
      */
     private $plainPassword;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="token", type="string", nullable=true, unique=true)     *
+     */
+    private $token;
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", cascade={"persist"})
@@ -81,6 +109,7 @@ class User implements UserInterface, \Serializable
 
     public function __construct()
     {
+        $this->favoriteFormations = new ArrayCollection();
     }
 
     /**
@@ -138,7 +167,7 @@ class User implements UserInterface, \Serializable
      */
     public function getFirstName()
     {
-        return $this->email;
+        return $this->firstName;
     }
 
     /**
@@ -261,6 +290,24 @@ class User implements UserInterface, \Serializable
         $this->favoriteFormations = $favoriteFormations;
     }
 
+    /**
+     * @param mixed $favoriteFormation
+     */
+    public function addFavoriteFormation($favoriteFormation)
+    {
+        $this->favoriteFormations[] = $favoriteFormation;
+    }
+    public function removeFavoriteFormation($favoriteFormation)
+    {
+        $this->favoriteFormations->removeElement($favoriteFormation);
+    }
+
+    public function isFormationFavorited(Formation $formation)
+    {
+        return $this->favoriteFormations->contains($formation);
+    }
+
+
     public function getRoles()
     {
         return ['ROLE_USER'];
@@ -296,6 +343,70 @@ class User implements UserInterface, \Serializable
             // see section on salt below
             // $this->salt
             ) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+    /**
+     *@return string
+     */
+    public function getProfilePic()
+    {
+        return $this->profilePic;
+    }
+
+    /**
+     * @param mixed $profilePic
+     */
+    public function setProfilePic($profilePic)
+    {
+        $this->profilePic = $profilePic;
+    }
+
+    /**
+     * @return mixed | UploadedFile
+     */
+    public function getProfilePicFile()
+    {
+        return $this->profilePicFile;
+    }
+
+    /**
+     * @param mixed $profilePicFile
+     */
+    public function setProfilePicFile($profilePicFile)
+    {
+        $this->profilePicFile = $profilePicFile;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNewPassword()
+    {
+        return $this->newPassword;
+    }
+
+    /**
+     * @param string $newPassword
+     */
+    public function setNewPassword(string $newPassword)
+    {
+        $this->newPassword = $newPassword;
+    }
+
+    /**
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param string $token
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
     }
 
 

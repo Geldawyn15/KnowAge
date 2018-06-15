@@ -34,7 +34,7 @@ class SecurityController extends controller
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('search');
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->render('Security/signup.html.twig',
@@ -55,4 +55,6 @@ class SecurityController extends controller
             'error'         => $error,
         ));
     }
+
+
 }

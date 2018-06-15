@@ -21,9 +21,7 @@ security:
             security: false
 
 
-            logout:
-                path:    /logout
-                target: /
+
 
         main:
             anonymous: ~
@@ -31,6 +29,13 @@ security:
                 login_path: login
                 check_path: login
                 provider: our_db_provider
+            logout:
+                            path:    /logout
+                            target: /
+            remember_me:
+                            secret:   '%secret%'
+                            lifetime: 604800 # 1 week in seconds
+                            path:     /
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate

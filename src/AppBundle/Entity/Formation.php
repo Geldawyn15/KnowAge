@@ -2,7 +2,12 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Formation
@@ -12,6 +17,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Formation
 {
+
+    const PICTURE_WIDTH = 1111;
+    const PICTURE_HEIGHT = 716;
     /**
      * @var int
      *
@@ -23,47 +31,84 @@ class Formation
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=45)
+     * @ORM\Column(name="title", type="string", length=45, nullable=true)
      */
     private $title;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(type="text")
      */
     private $description;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_at", type="datetime")
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
      */
     private $createdAt;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="price", type="integer")
+     * @ORM\Column(name="price", type="integer", nullable=true)
      */
     private $price;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $author;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Category")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category")
      */
-    private $categories;
+    private $category;
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag")
      */
     private $tags;
+
+    /**
+     * @ORM\Column(name="picture", type="string",nullable=true)
+    */
+    private $picture;
+
+
+    /**
+     * @var string
+     * @ORM\Column(name="content", type="string", nullable=true)
+     */
+    private $content;
+
+
+
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param string
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+    }
+
+
+
+
 
     /**
      * Get id
@@ -190,22 +235,6 @@ class Formation
     /**
      * @return mixed
      */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
-
-    /**
-     * @param mixed $categories
-     */
-    public function setCategories($categories)
-    {
-        $this->categories = $categories;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getTags()
     {
         return $this->tags;
@@ -218,5 +247,50 @@ class Formation
     {
         $this->tags = $tags;
     }
+
+    /**
+     * @return string | UploadedFile
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * @param mixed $picture
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+    }
+
+
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function shortText($lenght)
+    {
+        return $shortText = substr($this->getDescription(), 0, $lenght);
+    }
+
 }
 

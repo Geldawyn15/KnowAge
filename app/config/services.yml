@@ -29,6 +29,15 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
+    AppBundle\Service\ImgUploader:
+        class: AppBundle\Service\ImgUploader
+        arguments: ['%images_directory%', '%public_path%']
+
+    claviska\SimpleImage: ~
+
+    AppBundle\Service\Mailer:
+            class: AppBundle\Service\Mailer
+
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:

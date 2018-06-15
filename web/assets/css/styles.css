@@ -10,14 +10,15 @@
     -moz-box-shadow: 0 16px 12px -12px #999;
     box-shadow: 0 16px 12px -12px #999;
     font-family: 'Hind Siliguri', sans-serif;
-    background-color: #3A5199;
-    color: #D5D6D2;
+    background-color: rgba(0,0,0,0.5);
+    height: 9rem;
+
 }
 .nav-item{
-    font-size: 18px;
+    font-size: 25px;
 }
 .navbar-brand{
-    font-size: 25px;
+    font-size: 35px;
 }
 nav{
     width: 100%;
@@ -127,3 +128,120 @@ nav{
         line-height: 1.8;
     }
 }
+
+/* **************** début page login et signup ************** */
+
+.loginSignupLigne1
+{
+    height: 20vh;
+}
+
+.loginSignupLigne2
+{
+    height: 40vh;
+}
+
+.loginSignupLigne3
+{
+    height: 20vh;
+}
+
+.borderTable
+{
+    border-right: 1px solid darkslategray;
+    border-left: 1px solid darkslategray;
+}
+
+.borderMid
+{
+    border-top: 1px solid darkslategray;
+    border-bottom: 1px solid darkslategray;
+}
+
+.borderBot
+{
+    border-left: 1px solid darkslategray;
+    border-right: 1px solid darkslategray;
+}
+
+.borderTop
+{
+    border-left: 1px solid darkslategray;
+    border-right: 1px solid darkslategray;
+}
+.loginForm
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+.ligneTable1
+{
+    height: 20%;
+}
+
+.ligneTable2
+{
+    height: 30%;
+}
+
+.ligneTable3
+{
+    height: 30%;
+}
+
+.ligneTable4
+{
+    height: 20%;
+}
+
+.bg_01
+{
+    background-color: #D5D6D2;
+}
+
+@media all and (max-device-width: 480px)
+{
+    .loginSignupLigne1
+    {
+        height: 5vh;
+    }
+
+    .loginSignupLigne2
+    {
+        height: 60vh;
+    }
+
+    .loginSignupLigne3
+    {
+        height: 5vh;
+    }
+
+    .loginSignupMobile
+    {
+        margin-top: 2rem;
+        margin-left: 1rem;
+        margin-right: 3rem;
+
+    }
+    .signupButtonMargin
+    {
+      margin-top: 1rem;
+    }
+}
+
+.loginSignupformHover:hover
+{
+
+    background-color: #2F2E33;
+    transition-duration: 0.4s;
+    /*animation: circle 1s;*/
+    transition-timing-function: ease-in;
+}
+
+.typo {
+    font-family: 'Concert One', cursive;
+    font-size: xx-large}
+
+/* **************** Fin page login et signup **************** */

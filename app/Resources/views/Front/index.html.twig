@@ -7,14 +7,21 @@
 
 
 {% block content %}
-<body id="index">
+<body id="index" >
     <button class="btn  scroll-top" data-scroll="up" type="button">
         <i class="fa fa-chevron-up"></i>
     </button>
-
     <div class="color3">
         <div class="container-fluid">
             <div class="row justify-content-center tagline" style="margin-top: 0;">
+                <div>{% for label, messages in app.flashes %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ label }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
                 <div class="col-10" >
                     <h1 class="text-center tagline" >Lorem ipsum dolor sit amet, consectetur adipiscing elit</h1>
                 </div>
@@ -47,21 +54,21 @@
         <div class="row justify-content-center Search">
             <div class="offset-md-1 col-12 text-center">
                 <h3 class="keyword text-left"> Par mots-clés </h3>
-                <form action="" >
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <a href="/search"> <button class="btnSearch btn btn-secondary" type="button"><i class="fas fa-search"></i></button></a>
-                        </div>
+                        <form method="Get" action="{{ path('search') }}">
+                            <input type="text" id="search" name="search" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <div class="input-group-append text-align-center">
+                                <a> <button class="btnSearch btn btn-secondary" type="submit"><i class="fas fa-search"></i></button></a>
+                            </div>
+                        </form>
                     </div>
-                </form>
             </div>
         </div>
-        <div class="container-fluid toto">
+        <div class="container-fluid">
             <div id="thumbnails">
                 <h3 class="text-left category"> Par catégorie </h3>
             </div>
-            <div class="row thumbs">
+            <div class="row">
                 <div class="column">
                     <div class="content">
                         <img class="img-fluid tofade" src="https://i.imgur.com/xo6cjHe.jpg" alt="Mountains" style="width:100%">
@@ -106,13 +113,13 @@
                         <p class="todisplay"> Biologie </p>
                     </div>
                 </div>
-                <div class="column people">
+                <div class="column">
                     <div class="content">
                         <img class="img-fluid tofade" src="https://i.imgur.com/7frPtS2.jpg" alt="Car" style="width:100%">
                         <p class="todisplay"> Culture </p>
                     </div>
                 </div>
-                <div class="column people">
+                <div class="column">
                     <div class="content">
                         <img class="img-fluid tofade" src="https://i.imgur.com/QKS81Pm.png" alt="Car" style="width:100%">
                         <p class="todisplay"> Import/Export </p>

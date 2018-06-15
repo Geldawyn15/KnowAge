@@ -2,15 +2,18 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: knpPaginatorConfig.yml}
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: fr
+    images_directory: '%kernel.root_dir%/../web/upload/imageformation'
+    public_path: '/upload/imageformation'
 
 framework:
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+    translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -65,3 +68,12 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+
+# app/config/config.yml
+# switch the toolbar configuration by using the full, standard or basic
+# or configure it your widget:
+fos_ck_editor:
+    configs:
+        my_config:
+            toolbar: full
