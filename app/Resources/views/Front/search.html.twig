@@ -83,15 +83,15 @@
        $('.favoriteSearch').click(function() {
            var icon = $(this).find("i");
            if (icon.hasClass("far")) {
-               $.get( '/user/favorite', {
+               $.get('/user/favorite', {
                    formationId: $(this).attr('data-formation-id'),
-                   favorited: false
+                   favorited: 0
                });
                return icon.removeClass("far").addClass("fas");
            } else {
-               $.get( '/user/favorite', {
+               $.get('/user/favorite', {
                    formationId: $(this).attr('data-formation-id'),
-                   favorited: true
+                   favorited: 1
                });
                return icon.removeClass("fas").addClass("far");
            }
