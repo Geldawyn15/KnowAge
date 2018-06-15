@@ -34,15 +34,19 @@
                 </div>
                 <div class="form-row no-gutters ligneTable4 align-items-start">
                     <div class="col-md-4 offset-md-2 mt-1 px-3">
-                        <a href="/signup" class=" btn btn-block text-white btn-outline-secondary waves-effect" role="button">créer son compte</a>
+                        <a href="{{ path('signup') }}" class=" btn btn-block text-white btn-outline-secondary waves-effect" role="button">créer son compte</a>
                     </div>
                     <div class="col-md-4 mt-1 px-3">
                         <button type="submit" class="btn btn-block text-white btn-outline-secondary waves-effect">Se connecter</button>
                     </div>
-                    <div class="col-md-4 mt-1 px-3">
+                    <div class="col-md-4 offset-md-2 mt-1 px-3">
                         <input type="checkbox" id="remember_me" name="_remember_me"  />
                         <label for="remember_me">Se souvenir de moi</label>
                     </div>
+                    <div class="col-md-4 mt-1 px-3">
+                        <a href="{{ path('forgotPassword') }}">Mot de passe oublié</a>
+                    </div>
+
 
                 </div>
             </form>

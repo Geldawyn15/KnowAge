@@ -4,7 +4,11 @@
 
 
     <h3>l'utilisateur {{ user.firstName }} {{ user.name }} a signalé un contenu inaproprié :</h3>
-        <p>Formation concernée '{{ formation.title }}'.</p>
+            <p>Formation concernée '{{ formation.title }}'.</p>
+            <p>Auteur de la formation : {{ formation.author.firstname }} {{ formation.author.name }} </p>
+            <p>Contactez le formateur :  {{ formation.author.email }}</p>
+            <p>Contactez l'utilisateur qui a signalé la formation : {{ user.email }}</p>
+
         <p>Motif : {{ choice }}</p>
         <p>Message de l'utilisateur : {{ message }}</p>
 

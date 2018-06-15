@@ -6,14 +6,15 @@
 
 {% block content %}
     <body id="bodyLandingFormation">
-    <h2>{% for label, messages in app.flashes %}
+    <div class = "text-center">
+        {% for label, messages in app.flashes %}
             {% for message in messages %}
                 <div class="alert alert-{{ label }}">
                     {{ message }}
                 </div>
             {% endfor %}
         {% endfor %}
-    </h2>   
+    </div>
     <div class="container-fluid height">
         <div class="row justify-content-center">
             <div class="col-md-9 mt-4 mb-4">
@@ -72,26 +73,28 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                            {{ form_start(form) }}
-                                            <div class="form-group">
-                                                {{ form_label(form.email) }}
-                                                {{ form_widget(form.email) }}
-                                            </div>
-                                            <div class="form-group">
-                                                {{ form_label(form.objet) }}
-                                                {{ form_widget(form.objet) }}
-                                            </div>
-                                            <div class="form-group">
-                                                {{ form_label(form.message) }}
-                                                {{ form_widget(form.message) }}
-                                            </div>
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Envoyer un message</h5>
+                                        </div>
+                                        {{ form_start(form) }}
+                                        <div class="form-group">
+                                            {{ form_label(form.email) }}
+                                            {{ form_widget(form.email) }}
+                                        </div>
+                                        <div class="form-group">
+                                            {{ form_label(form.objet) }}
+                                            {{ form_widget(form.objet) }}
+                                        </div>
+                                        <div class="form-group">
+                                            {{ form_label(form.message) }}
+                                            {{ form_widget(form.message) }}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                            <input type="submit" class="btn btn-primary" value="Envoyez"/>
+                                        </div>
+                                        {{ form_end(form) }}
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                                        <input type="submit" class="btn btn-primary"></input>
-
-                                    </div>
-                                            {{ form_end(form) }}
                                 </div>
                             </div>
                         </div>
@@ -117,9 +120,9 @@
 
                         <div class="row justify-content-around align-items-center mt-4">
                             <div class="col-3 mb-4 mt-4">
-                                <button class="btn-lg btn-primary btn-block buttonFormation" type="button">
-                                    Commencer
-                                </button>
+                                <div>
+                                    <a href="{{ path('formation_Achat', {'id': formation.id}) }}">Acheter maintenant</a>
+                                </div>
                             </div>
                             <div class="col-3 mb-4 mt-4   ">
                                 <button class="btn-lg btn-primary btn-block buttonFormation" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">

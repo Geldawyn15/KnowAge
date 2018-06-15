@@ -30,6 +30,8 @@ class FrontController extends controller
      */
     public function searchPageAction(Request $request)
     {
+        $user = $this->getUser();
+        $searchs = explode(' ', trim($request->query->get('search')));
         if ($request->query->get('search')) {
 
             $searchs = explode(' ', trim($request->query->get('search')));
@@ -47,6 +49,7 @@ class FrontController extends controller
 
         return $this->render('Front/search.html.twig', array(
             'formations' => $formations,
+            'user' => $user,
         ));
     }
 
@@ -78,6 +81,30 @@ class FrontController extends controller
             'form' => $form->createView()
 
         ));
+    }
+
+    /**
+     * @Route("/favorite", name="favorite")
+     * @Method({"GET", "POST"})
+     */
+    public function favoriteAction(Request $request)
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+
+        if ($request->query->get('formationId')) {
+            $formationId = $request->query->get('formationId');
+            $favorited  = $request->query->get('favorited');
+            $formation = $em->getRepository('AppBundle:Formation')->findBy(['id' => $formationId]);
+            if ($favorited == 'false') {
+                $user->addFavoriteFormation($formation[0]);
+            } elseif ($favorited) {
+                $user->removeFavoriteFormation($formation[0]);
+            }
+        }
+
+        $em->flush();
+        return new Response();
     }
 
 }
