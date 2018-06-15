@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -17,6 +18,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class User implements UserInterface, \Serializable
 {
+
     /**
      * @var int
      *
@@ -92,6 +94,14 @@ class User implements UserInterface, \Serializable
      */
     private $plainPassword;
 
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="token", type="string", nullable=true, unique=true)     *
+     */
+    private $token;
+
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", cascade={"persist"})
      */
@@ -99,6 +109,7 @@ class User implements UserInterface, \Serializable
 
     public function __construct()
     {
+        $this->favoriteFormations = new ArrayCollection();
     }
 
     /**
@@ -279,6 +290,24 @@ class User implements UserInterface, \Serializable
         $this->favoriteFormations = $favoriteFormations;
     }
 
+    /**
+     * @param mixed $favoriteFormation
+     */
+    public function addFavoriteFormation($favoriteFormation)
+    {
+        $this->favoriteFormations[] = $favoriteFormation;
+    }
+    public function removeFavoriteFormation($favoriteFormation)
+    {
+        $this->favoriteFormations->removeElement($favoriteFormation);
+    }
+
+    public function isFormationFavorited(Formation $formation)
+    {
+        return $this->favoriteFormations->contains($formation);
+    }
+
+
     public function getRoles()
     {
         return ['ROLE_USER'];
@@ -362,6 +391,22 @@ class User implements UserInterface, \Serializable
     public function setNewPassword(string $newPassword)
     {
         $this->newPassword = $newPassword;
+    }
+
+    /**
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param string $token
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
     }
 
 

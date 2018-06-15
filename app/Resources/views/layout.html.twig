@@ -17,7 +17,6 @@
     <script src="/assets/js/scroll.js"></script>
     <script src="/assets/js/search.js"></script>
     <script src="/assets/js/fluid.js"></script>
-    <script src="/assets/js/favorite.js"></script>
     <script src="/assets/js/profileFormations.js"></script>
 
 
@@ -25,7 +24,9 @@
     <link rel="stylesheet" href="/assets/css/styles.css">
     {% block stylesheet %}{% endblock %}
     <link rel="icon" href="/assets/images/favicon.png">
+    {% block javascript %}{% endblock %}
 </head>
+<body>
 
 
 <nav class="navbar navbar-expand-lg fixed-top" data-spy="affix" data-offset-top="    ">
@@ -42,36 +43,27 @@
         <div class="collapse navbar-collapse  " id="navbarSupportedContent">
             <ul class="nav navbar-nav justify-content-end ">
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/ ">Accueil<span class="sr-only">(current)</span></a>
+                    <a class="nav-link text-white" href="{{ path('homepage') }} ">Accueil<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/search">Recherche<span class="sr-only">(current)</span></a>
+                    <a class="nav-link text-white" href="{{ path('search') }}">Recherche<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/contact">Contact<span class="sr-only">(current)</span></a>
+                    <a class="nav-link text-white" href="{{ path('contact') }}">Contact<span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Profil
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/user/profil">Mon Profil</a>
-                        <a class="dropdown-item" href="#">Mes Formations</a>
-                        <a class="dropdown-item" href="#">Mes Formateurs</a>
-                        <a class="dropdown-item" href="/create">Ajouter un Formation</a>
-                        <div class="dropdown-divider"></div>
-                    </div>
+                <li class="nav-item ">
+                    <a class="nav-link text-white" href="{{ path('profil') }}">Mon Profil<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ path('create') }}">Ajouter une Formation<span class="sr-only">(current)</span></a>
+                    <a class="nav-link text-white" href="{{ path('new') }}">Ajouter une Formation<span class="sr-only">(current)</span></a>
                 </li>
                 {% if app.user %}
                     <li class="nav-item loginbtn ">
-                        <a href="/logout" role="button" aria-disabled="true"><button class="loginBtn text-white btn btn-outline-secondary waves-effect btn-lg">Se déconnecter</button></a>
+                        <a href="{{ path('logout') }}" role="button" aria-disabled="true"><button class="loginBtn text-white btn btn-outline-secondary waves-effect btn-lg">Se déconnecter</button></a>
                     </li>
                 {% else %}
                     <li class="nav-item loginbtn ">
-                        <a href="/login" role="button" aria-disabled="true"><button class="loginBtn text-white btn btn-outline-secondary waves-effect btn-lg">Se Connecter</button></a>
+                        <a href="{{ path('login') }}" role="button" aria-disabled="true"><button class="loginBtn text-white btn btn-outline-secondary waves-effect btn-lg">Se Connecter</button></a>
                     </li>
                 {% endif %}
 
@@ -85,7 +77,7 @@
 {% block content %}{% endblock %}
 
 
-{% block javascript %}{% endblock %}
+
 
 <footer class="footer-distributed">
 
@@ -100,9 +92,9 @@
     <div class="footer-left">
 
         <p class="footer-links">
-            <a href="/">Accueil</a>
+            <a href="{{ path('homepage') }}">Accueil</a>
             ·
-            <a href="/contact">Contact</a>
+            <a href="{{ path('contact') }}">Contact</a>
             ·
             <a href="#">Mentions légales</a>
             ·

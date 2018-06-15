@@ -1,0 +1,37 @@
+{% extends 'layout.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block title %} Signaler une formation Inapropriée {% endblock %}
+{% block stylesheet %}<link rel="stylesheet" href="/assets/css/landingFormation.css">{% endblock %}
+
+
+{% block content %}
+    <body id = "bodyforgotSignalFormation">
+        <div class="container-fluid mt-4">
+            <div class="row justify-content-center">
+                <div class="col-md-12 mt-4 text-center">
+                    <h1>Signalez un contenu inaproprié</h1>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-12 text-center">
+                    <div class="input-group justify-content-center">
+                        {{ form_start(form) }}
+                        {{ form_row(form.message, {'label': 'Précisez en quelques lignes pourquoi le contenu de cette formation est inaproprié'}) }}
+                    </div>
+                    <div class="input-group justify-content-center">
+                        {{ form_row(form.choices, {'label': 'Séléctionnez une option'}) }}
+                    </div>
+
+                    <div class="input-group justify-content-center">
+                        <button type="submit" class="btn btn-primary mt-4 btn-lg round buttonFormation">Envoyer</button>
+                    </div>
+                    <div class="input-group justify-content-center">
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </body>
+
+{% endblock %}
