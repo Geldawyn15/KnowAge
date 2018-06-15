@@ -25,14 +25,14 @@ class Paiement
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $userid;
+    private $user;
 
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Formation")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $formationid;
+    private $formation;
 
     /**
      * Get id
@@ -47,33 +47,33 @@ class Paiement
     /**
      * @return mixed
      */
-    public function getUserid()
+    public function getUser()
     {
-        return $this->userid;
+        return $this->user;
     }
 
     /**
-     * @param mixed $userid
+     * @param mixed $user
      */
-    public function setUserid($userid): void
+    public function setUser($user): void
     {
-        $this->userid = $userid;
+        $this->user = $user;
     }
 
     /**
      * @return mixed
      */
-    public function getFormationid()
+    public function getFormation()
     {
-        return $this->formationid;
+        return $this->formation;
     }
 
     /**
-     * @param mixed $formationid
+     * @param mixed $formation
      */
-    public function setFormationid($formationid): void
+    public function setFormation($formation): void
     {
-        $this->formationid = $formationid;
+        $this->formation = $formation;
     }
 }
 
