@@ -4,15 +4,6 @@
 {% block stylesheet %}<link rel="stylesheet" href="/assets/css/profile.css">{% endblock %}
 
 {% block content %}
-<h2>
-    {% for label, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="alert alert-{{ label }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endfor %}
-</h2>
 <body id="profile">
     <div class="d-flex justify-content-between">
         <div class="d-flex flex-column justify-content-center ml-5">

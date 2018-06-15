@@ -184,14 +184,15 @@ class FormationController extends controller
         elseif ($formation->getAuthor() == $this->getUser()) {
 
 
-            $this->addFlash('danger', 'Vous ne pouvez pas acheter votre formation!');
+            $this->addFlash('error', 'Vous ne pouvez pas acheter votre formation!');
 
             return $this->redirectToRoute('formation_show', ['id' => $formation->getId()]);
         }
 
         elseif ($verfifPaiement) {
 
-            $this->addFlash('danger', 'Formation déjà achetée!');
+
+            $this->addFlash('error', 'Formation déjà achetée!');
 
             return $this->redirectToRoute('formation_show', ['id' => $formation->getId()]);
         }

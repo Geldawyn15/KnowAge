@@ -64,6 +64,7 @@ class UserController extends controller
             if ($user->getprofilePicFile()) {
                 if (!empty($user->getprofilePic())) {
                     $oldProfilePic = $user->getprofilePic();
+
                     if (file_exists(__DIR__ .  '/../../../web' .$oldProfilePic)) {
                         unlink(__DIR__ . '/../../../web' . $oldProfilePic);
                     }
@@ -179,7 +180,7 @@ class UserController extends controller
 
 
             } else {
-                $this->addFlash('danger', 'Nous n\'avons pas trouvé d\'utilisateur avec cet email, merci de rééssayer');
+                $this->addFlash('error', 'Nous n\'avons pas trouvé d\'utilisateur avec cet email, merci de rééssayer');
 
                 return $this->redirectToRoute('forgotPassword');
             }
@@ -225,7 +226,7 @@ class UserController extends controller
 
                 return $this->redirectToRoute('homepage');
             } else {
-                $this->addFlash('danger', 'la réinitialisation de votre mot de passe a échoué, veuillez renouveler votre demande');
+                $this->addFlash('error', 'la réinitialisation de votre mot de passe a échoué, veuillez renouveler votre demande');
 
                 return $this->redirectToRoute('forgotPassword');
             }
