@@ -211,17 +211,26 @@ class UserController extends controller
                     'token' => $token
                 ]);
 
-            $encoded = $encoder->encodePassword($user, $plainPassword);
+            if ($user) {
 
-            $user->setPassword($encoded);
+                $encoded = $encoder->encodePassword($user, $plainPassword);
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->flush();
+                $user->setPassword($encoded);
 
-            $this->addFlash('success', 'Votre mot de passe a été mis à jour');
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Votre mot de passe a été mis à jour');
 
 
-            return $this->redirectToRoute('homepage');
+                return $this->redirectToRoute('homepage');
+            } else {
+                $this->addFlash('danger', 'la réinitialisation de votre mot de passe a échoué, veuillez renouveler votre demande');
+
+                return $this->redirectToRoute('forgotPassword');
+            }
+
+
         }
 
 

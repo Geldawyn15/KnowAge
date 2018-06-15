@@ -157,3 +157,23 @@
 .modalLandingFormation{
     font-size: 1.2em;
 }
+
+#bodyforgotPassword {
+    font-family: 'Hind Siliguri', sans-serif;
+    background-color: #D5D6D2;
+    margin-top:8em;
+}
+
+#bodyresetPassword
+{
+    font-family: 'Hind Siliguri', sans-serif;
+    background-color: #D5D6D2;
+    margin-top:8em;
+}
+
+#bodyforgotSignalFormation
+{
+    font-family: 'Hind Siliguri', sans-serif;
+    background-color: #D5D6D2;
+    margin-top:8em;
+}
