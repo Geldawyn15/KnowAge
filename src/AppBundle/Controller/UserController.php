@@ -62,11 +62,9 @@ class UserController extends controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             if ($user->getprofilePicFile()) {
-                if (!empty($user->getprofilePic())) {
-                    $oldProfilePic = $user->getprofilePic();
-                    if (file_exists(__DIR__ .  '/../../../web' .$oldProfilePic)) {
-                        unlink(__DIR__ . '/../../../web' . $oldProfilePic);
-                    }
+                $oldProfilePic = $user->getprofilePic();
+                if (file_exists(__DIR__ .  '/../../../web' .$oldProfilePic)) {
+                    unlink(__DIR__ . '/../../../web' . $oldProfilePic);
                 }
                 $profilePic = $user->getprofilePicFile();
                 $user->setprofilePic($imgUpload->uploadProfilPicture($profilePic));
@@ -75,7 +73,7 @@ class UserController extends controller
             $entityManager->persist($user);
             $entityManager->flush();
             $user->setprofilePicFile(null);
-
+            $this->addFlash('success', 'Profil modifié');
             return $this->redirectToRoute('profil');
 
     }
@@ -100,11 +98,8 @@ class UserController extends controller
         if ($form->isSubmitted() && $form->isValid()) {
             $password = $passwordEncoder->encodePassword($user, $user->getnewPassword());
             $user->setPassword($password);
-
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
             $entityManager->flush();
-
             $this->addFlash('success', 'Mot de passe changé');
 
             return $this->redirectToRoute('profil');
@@ -118,7 +113,6 @@ class UserController extends controller
     /**
      * @Route("/favorite", name="favorite")
      * @Method({"GET", "POST"})
-     * @Security("has_role('ROLE_USER')")
      */
     public function favoriteAction(Request $request)
     {
@@ -128,18 +122,16 @@ class UserController extends controller
         if ($request->query->get('formationId')) {
             $formationId = $request->query->get('formationId');
             $favorited  = $request->query->get('favorited');
-            $formation = $em->getRepository('AppBundle:Formation')->findBy(['id' => $formationId]);
-            if ($favorited == 'false') {
-                $user->addFavoriteFormation($formation[0]);
+            $formation = $em->getRepository('AppBundle:Formation')->find(['id' => $formationId]);
+            if (!$favorited) {
+                $user->addFavoriteFormation($formation);
             } elseif ($favorited) {
-                $user->removeFavoriteFormation($formation[0]);
+                $user->removeFavoriteFormation($formation);
             }
         }
-
         $em->flush();
         return new Response();
     }
-
 
     /**
      * @Route("/forgotpassword", name="forgotPassword")
@@ -151,41 +143,28 @@ class UserController extends controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $data = $form->getData();
             $email = $data['email'];
-
             $userPasswordLost = $this->getDoctrine()
                 ->getRepository(User:: class)
                 ->findOneBy([
                 'email' => $email
             ]);
-
-            //if mail exists
             if ($userPasswordLost) {
                 $token = uniqid();
                 $userPasswordLost->setToken($token);
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
-
                 $url = $this->generateUrl('resetPassword', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
-
                 $subject = 'Mot de passe perdu, NoAge';
                 $to = $userPasswordLost->getEmail();
                 $mailer->sendForgotPasswordMail($to, $subject, $url);
-
                 $this->addFlash('success', 'Consultez votre boite mail. Un message vous a été envoyé avec un lien pour réinitialiser votre mot de passe  ');
-
-
-
             } else {
                 $this->addFlash('danger', 'Nous n\'avons pas trouvé d\'utilisateur avec cet email, merci de rééssayer');
-
                 return $this->redirectToRoute('forgotPassword');
             }
         }
-
-
         return $this->render('User/forgotPassword.html.twig', array(
             'form'=>$form->createView()
         ));
@@ -195,14 +174,11 @@ class UserController extends controller
      * @Route("/resetpassword/{token}", name="resetPassword")
      * @Method({"GET", "POST"})
      */
-
     public function resetPassword ($token, Request $request, UserPasswordEncoderInterface $encoder)
     {
         $form = $this->createForm(ResetPasswordType::class);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-
             $data = $form->getData();
             $plainPassword = $data['newPassword'];
             $user = $this->getDoctrine()
@@ -210,34 +186,22 @@ class UserController extends controller
                 ->findOneBy([
                     'token' => $token
                 ]);
-
             if ($user) {
-
                 $encoded = $encoder->encodePassword($user, $plainPassword);
-
                 $user->setPassword($encoded);
-
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->flush();
-
                 $this->addFlash('success', 'Votre mot de passe a été mis à jour');
-
-
                 return $this->redirectToRoute('homepage');
             } else {
                 $this->addFlash('danger', 'la réinitialisation de votre mot de passe a échoué, veuillez renouveler votre demande');
 
                 return $this->redirectToRoute('forgotPassword');
             }
-
-
         }
-
-
         return $this->render('User/resetPassword.html.twig', array(
             'form'=>$form->createView()
         ));
-
     }
 
 
