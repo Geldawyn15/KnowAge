@@ -97,11 +97,11 @@ class FrontController extends controller
         if ($request->query->get('formationId')) {
             $formationId = $request->query->get('formationId');
             $favorited  = $request->query->get('favorited');
-            $formation = $em->getRepository('AppBundle:Formation')->findBy(['id' => $formationId]);
-            if ($favorited == 'false') {
-                $user->addFavoriteFormation($formation[0]);
+            $formation = $em->getRepository('AppBundle:Formation')->find(['id' => $formationId]);
+            if (!$favorited) {
+                $user->addFavoriteFormation($formation);
             } elseif ($favorited) {
-                $user->removeFavoriteFormation($formation[0]);
+                $user->removeFavoriteFormation($formation);
             }
         }
 
