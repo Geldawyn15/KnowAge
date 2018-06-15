@@ -202,12 +202,12 @@ class FormationController extends controller
      *
      * @Route("/{id}", name="signalFormation")
      * * @Method({"GET", "POST"})
+     * * @Security("has_role('ROLE_USER')")
      */
     public function signalFormationAction(formation $formation, Request $request, Mailer $mailer, $id)
     {
         //Récupère les variables
         $user = $this->getUser();
-
 
 
         //traite le formulaire

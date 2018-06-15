@@ -39,7 +39,6 @@ class FrontController extends controller
             $searchs = explode(' ', trim($request->query->get('search')));
         }
 
-
         $repository = $this->getDoctrine()->getRepository(Formation::class);
         $formations = $repository->findFormation($searchs);
 

@@ -280,6 +280,8 @@ class Formation
         $this->category = $category;
     }
 
+
+
     /**
      * Get description
      *
