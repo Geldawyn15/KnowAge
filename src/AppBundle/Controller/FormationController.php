@@ -220,7 +220,7 @@ class FormationController extends controller
 
                 $mailer->signalFormationMail($message, $choice, $formation, $user);
 
-                $this->addFlash('success', 'L\'administrateur a été informé d\'un contenu inaproprié pour cette formation';);
+                $this->addFlash('success', 'L\'administrateur a été informé d\'un contenu inaproprié pour cette formation');
 
                 return $this->redirectToRoute('formation_show', array (
                     'id' => $id
