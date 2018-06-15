@@ -30,15 +30,15 @@ class FrontController extends controller
      */
     public function searchPageAction(Request $request)
     {
-<<<<<<< HEAD
+
         $user = $this->getUser();
         $searchs = explode(' ', trim($request->query->get('search')));
-=======
+
         if ($request->query->get('search')) {
 
             $searchs = explode(' ', trim($request->query->get('search')));
         }
->>>>>>> 3fa2c20cb840d453343921acf9176121cfcc466c
+
 
         $repository = $this->getDoctrine()->getRepository(Formation::class);
         $formations = $repository->findFormation($searchs);
