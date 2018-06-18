@@ -68,40 +68,33 @@ class FormationController extends controller
      */
     public function create2Action(Request $request, Formation $formation, $id)
     {
-
         if ($formation->getAuthor() != $this->getUser()) {
 
             throw $this->createNotFoundException('Vous n\'êtes pas autorisé à accéder à cette page');
         }
 
+        if ($content = $request->request->get('content')) {
+
             $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
-
-            $form = $this->createForm(FormationType::class, $formation);
-            $form->handleRequest($request);
-
-
-        if ($form->isSubmitted() && $form->isValid()) {
+            $formation->setContent($content);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($formation);
             $entityManager->flush();
 
-            //afficher les messages
             $this->addFlash('success', 'Votre formation est enregistrée avec succès');
-
 
             return $this->redirectToRoute('formation_show', array(
                 'id' => $id
             ));
         }
 
+        $this->addFlash('success', 'Votre formation est enregistrée avec succès');
+
         return $this->render('Formation/new2.html.twig', array(
-            'form'=>$form->createView(),
             'id' => $id,
         ));
     }
-
-
 
     /**
      * Finds and displays a formation entity.
@@ -136,6 +129,7 @@ class FormationController extends controller
             'formation' => $formation,
             'form' => $form->createView(),
             'shortText' => $shortText
+
         ));
     }
 
@@ -179,8 +173,7 @@ class FormationController extends controller
         }
 
         elseif ($formation->getAuthor() == $this->getUser()) {
-
-
+            
             $this->addFlash('danger', 'Vous ne pouvez pas acheter votre formation!');
 
             return $this->redirectToRoute('formation_show', ['id' => $formation->getId()]);
