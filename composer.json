@@ -37,6 +37,7 @@
         "symfony/swiftmailer-bundle": "^2.6.4",
         "symfony/symfony": "3.4.*",
         "symfony/validator": "^3.4",
+        "kms/froala-editor-bundle": "dev-master",
         "twig/twig": "^1.0||^2.0"
     },
     "require-dev": {
@@ -48,6 +49,7 @@
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "FOS\\CKEditorBundle\\Composer\\CKEditorScriptHandler::install",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
@@ -72,6 +74,8 @@
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
         },
+        "ckeditor-tag": "4.7.0",
+        "ckeditor-clear": "drop",
         "branch-alias": null
     }
 }
