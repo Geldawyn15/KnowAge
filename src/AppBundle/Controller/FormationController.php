@@ -84,12 +84,10 @@ class FormationController extends controller
 
             $this->addFlash('success', 'Votre formation est enregistrée avec succès');
 
-            return $this->redirectToRoute('formation_show', array(
+            return $this->redirectToRoute('landing_formation', array(
                 'id' => $id
             ));
         }
-
-        $this->addFlash('success', 'Votre formation est enregistrée avec succès');
 
         return $this->render('Formation/new2.html.twig', array(
             'id' => $id,
@@ -99,10 +97,10 @@ class FormationController extends controller
     /**
      * Finds and displays a formation entity.
      *
-     * @Route("/show/{id}", name="formation_show")
+     * @Route("/landing/{id}", name="landing_formation")
      * @Method({"GET", "POST"})
      */
-    public function showAction(Request $request, Formation $formation, Mailer $mailer)
+    public function landingAction(Request $request, Formation $formation, Mailer $mailer)
     {
 
         $form = $this->createForm(ContactTeacherType::class);
@@ -120,18 +118,35 @@ class FormationController extends controller
 
             $mailer->sendTeacherMail('romain.poilpret@gmail.com', $message, $subject, $email);
 
-            return $this->redirectToRoute('formation_show', array(
+            return $this->redirectToRoute('landing_formation', array(
                 'id' => $formation->getId(),
             ));
         }
 
-        return $this->render('Formation/show.html.twig', array(
+        return $this->render('Formation/landing_formation.html.twig', array(
             'formation' => $formation,
             'form' => $form->createView(),
             'shortText' => $shortText
 
         ));
     }
+
+    /**
+     * Displays a formation entity.
+     *
+     * @Route("/show/{id}", name="landing_formation")
+     * @Method({"GET", "POST"})
+     */
+    public function showAction($id) {
+
+        $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
+
+        return $this->render('Formation/show.html.twig', array(
+            'formation' => $formation,
+        ));
+
+    }
+
 
     /**
      * @Route("/formateur", name="formateur")
