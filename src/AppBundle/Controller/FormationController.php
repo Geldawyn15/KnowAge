@@ -134,7 +134,7 @@ class FormationController extends controller
     /**
      * Displays a formation entity.
      *
-     * @Route("/show/{id}", name="landing_formation")
+     * @Route("/show/{id}", name="show")
      * @Method({"GET", "POST"})
      */
     public function showAction($id) {
