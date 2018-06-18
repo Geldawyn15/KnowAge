@@ -196,11 +196,9 @@ class FormationController extends controller
      */
     public function signalFormationAction(formation $formation, Request $request, Mailer $mailer, $id)
     {
-        //Récupère les variables
+
         $user = $this->getUser();
 
-
-        //traite le formulaire
         $form = $this->createForm('AppBundle\Form\SignalFormationType');
         $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
@@ -212,10 +210,7 @@ class FormationController extends controller
 
                 $mailer->signalFormationMail($message, $choice, $formation, $user);
 
-
-                //afficher les messages
-                $messageFlash = 'L\'administrateur a été informé d\'un contenu inaproprié pour cette formation';
-                $this->addFlash('success', $messageFlash);
+                $this->addFlash('success', 'L\'administrateur a été informé d\'un contenu inaproprié pour cette formation');
 
                 return $this->redirectToRoute('formation_show', array (
                     'id' => $id
