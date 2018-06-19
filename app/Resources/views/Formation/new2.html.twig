@@ -21,11 +21,11 @@
         $(function() {
             $('textarea').froalaEditor({
                 height: 450,
-                imageUploadParams: {id: 'my_editor'},
                 imageUploadURL: '/formation/upload_picture',
                 imageUploadMethod: 'POST',
                 imageMaxSize: 5 * 1024 * 1024,
-                imageAllowedTypes: ['jpeg', 'jpg', 'png']
+                imageAllowedTypes: ['jpeg', 'jpg', 'png'],
+                fileUploadURL: '/formation/upload_file'
             })
         });
     </script>
