@@ -182,7 +182,7 @@ class FormationController extends controller
 
             $this->addFlash('success', 'Formation achetée !');
 
-            return $this->redirectToRoute('formation_show', array(
+            return $this->redirectToRoute('landing_formation', array(
                 'id' => $formation->getId()));
 
         }
@@ -191,14 +191,14 @@ class FormationController extends controller
             
             $this->addFlash('danger', 'Vous ne pouvez pas acheter votre formation!');
 
-            return $this->redirectToRoute('formation_show', ['id' => $formation->getId()]);
+            return $this->redirectToRoute('landing_foramtion', ['id' => $formation->getId()]);
         }
 
         elseif ($verfifPaiement) {
 
             $this->addFlash('danger', 'Formation déjà achetée!');
 
-            return $this->redirectToRoute('formation_show', ['id' => $formation->getId()]);
+            return $this->redirectToRoute('landing_formation', ['id' => $formation->getId()]);
         }
     }
 
@@ -227,7 +227,7 @@ class FormationController extends controller
 
                 $this->addFlash('success', 'L\'administrateur a été informé d\'un contenu inaproprié pour cette formation');
 
-                return $this->redirectToRoute('formation_show', array (
+                return $this->redirectToRoute('landing_formation', array (
                     'id' => $id
                 ));
 
