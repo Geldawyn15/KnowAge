@@ -15,6 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 
 /**
@@ -74,7 +75,7 @@ class FormationController extends controller
         }
 
         if ($content = $request->request->get('content')) {
-
+        dump($content);die;
             $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
             $formation->setContent($content);
 
@@ -92,6 +93,34 @@ class FormationController extends controller
         return $this->render('Formation/new2.html.twig', array(
             'id' => $id,
         ));
+    }
+
+    /**
+     * @Route("/upload_picture", name="upload_picture")
+     *
+     * @Security("has_role('ROLE_USER')")
+     *
+     */
+    public function pictureFormation(Request $request)
+    {
+        $allowedExts = ["gif", "jpeg", "jpg", "png"];
+        $temp = explode(".", $_FILES["file"]["name"]);
+        $extension = end($temp);
+
+        if (in_array($extension, $allowedExts)) {
+
+            $name = uniqid() . "." . $extension;
+            //dump(__DIR__);die;
+            $test = move_uploaded_file($_FILES["file"]["tmp_name"],  __DIR__ ."/../../../web/upload/contenuFormation/" . $name);
+
+            $response = ['link' => '/upload/contenuFormation/'. $name];
+            return new Response(stripslashes(json_encode($response)));
+
+
+
+        }
+
+
     }
 
     /**
@@ -191,7 +220,7 @@ class FormationController extends controller
             
             $this->addFlash('danger', 'Vous ne pouvez pas acheter votre formation!');
 
-            return $this->redirectToRoute('landing_foramtion', ['id' => $formation->getId()]);
+            return $this->redirectToRoute('landing_formation', ['id' => $formation->getId()]);
         }
 
         elseif ($verfifPaiement) {
@@ -205,7 +234,7 @@ class FormationController extends controller
     /**
      * Signals an inaproriate content in formation
      *
-     * @Route("/{id}", name="signalFormation")
+     * @Route("signal/{id}", name="signalFormation")
      * * @Method({"GET", "POST"})
      * * @Security("has_role('ROLE_USER')")
      */

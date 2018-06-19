@@ -17,14 +17,19 @@
         </form>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1//js/froala_editor.pkgd.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1//js/froala_editor.pkgd.min.js"></script>
     <script>
         $(function() {
             $('textarea').froalaEditor({
-                height: 450
+                height: 450,
+                imageUploadParams: {id: 'my_editor'},
+                imageUploadURL: '/formation/upload_picture',
+                imageUploadMethod: 'POST',
+                imageMaxSize: 5 * 1024 * 1024,
+                imageAllowedTypes: ['jpeg', 'jpg', 'png']
             })
         });
     </script>
+
 
     </body>
 {% endblock %}
