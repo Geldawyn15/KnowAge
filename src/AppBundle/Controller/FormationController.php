@@ -4,10 +4,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Formation;
 use AppBundle\Entity\Paiement;
-use AppBundle\Entity\User;
 use AppBundle\Form\addFormationType;
 use AppBundle\Form\ContactTeacherType;
-use AppBundle\Form\FormationType;
 use AppBundle\Service\ImgUploader;
 use AppBundle\Service\Mailer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -15,6 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 
 /**
@@ -93,6 +92,55 @@ class FormationController extends controller
             'id' => $id,
         ));
     }
+
+
+    /**
+     * @Route("/upload_picture", name="upload_picture")
+     *
+     * @Security("has_role('ROLE_USER')")
+     *
+     */
+    public function uploadPictureFormation(Request $request)
+    {
+        $allowedExts = ["gif", "jpeg", "jpg", "png"];
+        $temp = explode(".", $_FILES["file"]["name"]);
+        $extension = end($temp);
+
+        if (in_array($extension, $allowedExts)) {
+
+            $name = uniqid() . "." . $extension;
+            move_uploaded_file($_FILES["file"]["tmp_name"],  __DIR__ ."/../../../web/upload/contenuFormation/picture/" . $name);
+
+            $response = ['link' => '/upload/contenuFormation/picture/'. $name];
+            return new Response(stripslashes(json_encode($response)));
+        }
+
+    }
+
+
+    /**
+     * @Route("/upload_file", name="upload_file")
+     *
+     * @Security("has_role('ROLE_USER')")
+     *
+     */
+    public function uploadFileFormation(Request $request)
+    {
+
+        $allowedExts = array("txt", "pdf", "doc", "odt");
+        $temp = explode(".", $_FILES["file"]["name"]);
+        $extension = end($temp);
+
+        if (in_array($extension, $allowedExts)) {
+
+            $name = sha1(microtime()) . "." . $extension;
+            move_uploaded_file($_FILES["file"]["tmp_name"],  __DIR__ ."/../../../web/upload/contenuFormation/file/" . $name);
+
+            $response = ['link' => '/upload/contenuFormation/file/'. $name];
+            return new Response(stripslashes(json_encode($response)));
+        }
+    }
+
 
     /**
      * Finds and displays a formation entity.
@@ -191,7 +239,7 @@ class FormationController extends controller
             
             $this->addFlash('danger', 'Vous ne pouvez pas acheter votre formation!');
 
-            return $this->redirectToRoute('landing_foramtion', ['id' => $formation->getId()]);
+            return $this->redirectToRoute('landing_formation', ['id' => $formation->getId()]);
         }
 
         elseif ($verfifPaiement) {
@@ -205,7 +253,7 @@ class FormationController extends controller
     /**
      * Signals an inaproriate content in formation
      *
-     * @Route("/{id}", name="signalFormation")
+     * @Route("signal/{id}", name="signalFormation")
      * * @Method({"GET", "POST"})
      * * @Security("has_role('ROLE_USER')")
      */
