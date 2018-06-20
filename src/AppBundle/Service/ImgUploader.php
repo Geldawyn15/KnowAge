@@ -29,9 +29,7 @@ class ImgUploader
         $this->simpleImage
             ->fromFile($file)
             ->bestFit(Formation::PICTURE_WIDTH, Formation::PICTURE_HEIGHT)
-            ->toFile($file->getRealPath());
-
-        $file->move($this->targetDir,  $fileName);
+            ->toFile($this->targetDir. '/' . $fileName);
 
         return $this->publicPath.'/'.$fileName;
     }
@@ -45,10 +43,7 @@ class ImgUploader
         $this->simpleImage
             ->fromFile($file)
             ->bestFit(100, 100)
-            ->toFile($file->getRealPath());
-
-        $file->move($this->targetDir,  $fileName);
-
+            ->toFile($this->targetDir. '/' . $fileName);
 
         return $this->publicPath.'/'.$fileName;
     }

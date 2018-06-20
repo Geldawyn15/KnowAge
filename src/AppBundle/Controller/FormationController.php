@@ -4,20 +4,16 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Formation;
 use AppBundle\Entity\Paiement;
-use AppBundle\Entity\User;
 use AppBundle\Form\addFormationType;
 use AppBundle\Form\ContactTeacherType;
-use AppBundle\Form\FormationType;
 use AppBundle\Service\ImgUploader;
 use AppBundle\Service\Mailer;
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-
-
+use Symfony\Component\HttpFoundation\Response;
 
 
 /**
@@ -29,6 +25,8 @@ class FormationController extends controller
 {
 
     /**
+     * create a formation / first step
+     *
      * @Route("/new", name="new")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
@@ -53,7 +51,7 @@ class FormationController extends controller
             $entityManager->persist($formation);
             $entityManager->flush();
 
-            return $this->redirectToRoute('create2', array(
+            return $this->redirectToRoute('new2', array(
                 'id' => $formation->getId()
             ));
         }
@@ -65,54 +63,97 @@ class FormationController extends controller
     }
 
     /**
+     * Second step for create a formation
+     *
      * @Route("/new2/{id}", name="new2")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
      */
     public function create2Action(Request $request, Formation $formation, $id)
     {
-
         if ($formation->getAuthor() != $this->getUser()) {
 
             throw $this->createNotFoundException('Vous n\'êtes pas autorisé à accéder à cette page');
         }
 
+        if ($content = $request->request->get('content')) {
+
             $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
-
-            $form = $this->createForm(FormationType::class, $formation);
-            $form->handleRequest($request);
-
-
-        if ($form->isSubmitted() && $form->isValid()) {
+            $formation->setContent($content);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($formation);
             $entityManager->flush();
 
-            //afficher les messages
             $this->addFlash('success', 'Votre formation est enregistrée avec succès');
 
-
-            return $this->redirectToRoute('formation_show', array(
+            return $this->redirectToRoute('landing_formation', array(
                 'id' => $id
             ));
         }
 
         return $this->render('Formation/new2.html.twig', array(
-            'form'=>$form->createView(),
-            'id' => $id,
+            'formation' => $formation,
         ));
     }
 
+
+    /**
+     * Upload picture from Wysiwyg editor
+     *
+     * @Route("/upload_picture", name="upload_picture")
+     * @Security("has_role('ROLE_USER')")
+     *
+     */
+    public function uploadPictureFormation(Request $request)
+    {
+        $allowedExts = ["gif", "jpeg", "jpg", "png"];
+        $temp = explode(".", $_FILES["file"]["name"]);
+        $extension = end($temp);
+
+        if (in_array($extension, $allowedExts)) {
+
+            $name = uniqid() . "." . $extension;
+            move_uploaded_file($_FILES["file"]["tmp_name"],  __DIR__ ."/../../../web/upload/contenuFormation/picture/" . $name);
+            $response = ['link' => '/upload/contenuFormation/picture/'. $name];
+
+            return new Response(stripslashes(json_encode($response)));
+        }
+    }
+
+
+    /**
+     * Upload file from Wysiwyg editor
+     *
+     * @Route("/upload_file", name="upload_file")
+     * @Security("has_role('ROLE_USER')")
+     *
+     */
+    public function uploadFileFormation(Request $request)
+    {
+
+        $allowedExts = array("txt", "pdf", "doc", "odt");
+        $temp = explode(".", $_FILES["file"]["name"]);
+        $extension = end($temp);
+
+        if (in_array($extension, $allowedExts)) {
+
+            $name = sha1(microtime()) . "." . $extension;
+            move_uploaded_file($_FILES["file"]["tmp_name"],  __DIR__ ."/../../../web/upload/contenuFormation/file/" . $name);
+            $response = ['link' => '/upload/contenuFormation/file/'. $name];
+
+            return new Response(stripslashes(json_encode($response)));
+        }
+    }
 
 
     /**
      * Finds and displays a formation entity.
      *
-     * @Route("/show/{id}", name="formation_show")
+     * @Route("/landing/{id}", name="landing_formation")
      * @Method({"GET", "POST"})
      */
-    public function showAction(Request $request, Formation $formation, Mailer $mailer)
+    public function landingAction(Request $request, Formation $formation, Mailer $mailer)
     {
 
         $form = $this->createForm(ContactTeacherType::class);
@@ -130,27 +171,36 @@ class FormationController extends controller
 
             $mailer->sendTeacherMail('romain.poilpret@gmail.com', $message, $subject, $email);
 
-            return $this->redirectToRoute('formation_show', array(
+            return $this->redirectToRoute('landing_formation', array(
                 'id' => $formation->getId(),
             ));
         }
 
-        return $this->render('Formation/show.html.twig', array(
+        return $this->render('Formation/landing_formation.html.twig', array(
             'formation' => $formation,
             'form' => $form->createView(),
             'shortText' => $shortText
+
         ));
     }
 
     /**
-     * @Route("/formateur", name="formateur")
+     * Displays content of a formation entity.
+     *
+     * @Route("/show/{id}", name="show")
+     * @Method({"GET", "POST"})
      */
-    public function landingFormateurAction()
-    {
-        return $this->render('Formation/formateur.html.twig');
+    public function showAction($id) {
 
+        $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
+
+        return $this->render('Formation/show.html.twig', array(
+            'formation' => $formation,
+        ));
 
     }
+
+
 
     /**
      * @Route("/achat/{id}", name="formation_Achat")
@@ -176,33 +226,34 @@ class FormationController extends controller
 
             $this->addFlash('success', 'Formation achetée !');
 
-            return $this->redirectToRoute('formation_show', array(
+            return $this->redirectToRoute('landing_formation', array(
                 'id' => $formation->getId()));
 
         }
 
         elseif ($formation->getAuthor() == $this->getUser()) {
-
-
+            
             $this->addFlash('danger', 'Vous ne pouvez pas acheter votre formation!');
 
-            return $this->redirectToRoute('formation_show', ['id' => $formation->getId()]);
+            return $this->redirectToRoute('landing_formation', ['id' => $formation->getId()]);
         }
 
         elseif ($verfifPaiement) {
 
             $this->addFlash('danger', 'Formation déjà achetée!');
 
-            return $this->redirectToRoute('formation_show', ['id' => $formation->getId()]);
+            return $this->redirectToRoute('landing_formation', ['id' => $formation->getId()]);
         }
     }
+
+
 
     /**
      * Signals an inaproriate content in formation
      *
-     * @Route("/{id}", name="signalFormation")
-     * * @Method({"GET", "POST"})
-     * * @Security("has_role('ROLE_USER')")
+     * @Route("signal/{id}", name="signalFormation")
+     * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
      */
     public function signalFormationAction(formation $formation, Request $request, Mailer $mailer, $id)
     {
@@ -222,7 +273,7 @@ class FormationController extends controller
 
                 $this->addFlash('success', 'L\'administrateur a été informé d\'un contenu inaproprié pour cette formation');
 
-                return $this->redirectToRoute('formation_show', array (
+                return $this->redirectToRoute('landing_formation', array (
                     'id' => $id
                 ));
 

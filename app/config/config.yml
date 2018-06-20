@@ -69,11 +69,7 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
 
+kms_froala_editor:
+    language: "fr"
+    includeJQuery: false
 
-# app/config/config.yml
-# switch the toolbar configuration by using the full, standard or basic
-# or configure it your widget:
-fos_ck_editor:
-    configs:
-        my_config:
-            toolbar: full

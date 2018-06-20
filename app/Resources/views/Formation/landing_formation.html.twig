@@ -1,0 +1,144 @@
+
+{% extends 'layout.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block title %} Accueil formateur {% endblock %}
+{% block stylesheet %}<link rel="stylesheet" href="/assets/css/landingFormation.css">{% endblock %}
+
+{% block content %}
+    <body id="bodyLandingFormation">
+    <div class = "text-center">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    <div class="container-fluid height">
+        <div class="row justify-content-center">
+            <div class="col-md-9 mt-4 mb-4">
+                <h1 class="text-center TagLine"> {{ formation.title }}</h1>
+            </div>
+        </div>
+        <div class="row justify-content-center mb-2">
+            <div class="col-md-9">
+                <div class="card bg-dark text-white blurOver">
+                    <img class="card-img rounded tofade" src="{{ formation.picture }}" alt="Card image">
+                    <div class="card-img-overlay d-flex flex-column justify-content-center align-items-end noteLandingFormation">
+                        <div class="col-1 mt-1 mb-1 thumbLandingFormation">
+                            <h3 class=" text-center"><i class="fab fa-facebook-square"></i></h3>
+                        </div>
+                        <div class="col-1 mt-1 mb-1 thumbLandingFormation">
+                            <h3 class="text-center"><i class="fab fa-twitter-square"></i></h3>
+                        </div>
+                        <div class="col-1 mt-1 mb-1 thumbLandingFormation">
+                            <h3 class="text-center"><i class="fab fa-linkedin"></i></h3>
+                        </div>
+                        <div class="col-1 mt-1 mb-1 thumbLandingFormation">
+                            <h3 class="text-center"><i class="fab fa-viadeo-square"></i></h3>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="card text-center mb-5">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Résumé</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">FAQ</a>
+                            </li>  
+                            <!--Modal button start-->
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Contacter</a>
+                            </li>
+                            <!--Modal button end-->
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('signalFormation', {'id': formation.id}) }}">Signaler</a>
+                            </li>
+
+                        </ul>
+                        <!--Modal start-->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modalLandingFormation" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Contacter le formateur</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{ form_start(form) }}
+                                        <div class="form-group">
+                                            {{ form_label(form.email) }}
+                                            {{ form_widget(form.email) }}
+                                        </div>
+                                        <div class="form-group">
+                                            {{ form_label(form.objet) }}
+                                            {{ form_widget(form.objet) }}
+                                        </div>
+                                        <div class="form-group">
+                                            {{ form_label(form.message) }}
+                                            {{ form_widget(form.message) }}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                            <input type="submit" class="btn btn-primary" value="Envoyez"/>
+                                        </div>
+                                        {{ form_end(form) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Modal end-->
+
+                    </div>
+                    <div class="card-body">
+
+                        <h1 class="card-title">3 heures de vidéos pour tout comprendre </h1>
+                        <hr>
+                        <p class="card-text text-justify textLandingFormation"> {{ shortText }}... </p>
+                        </p>
+                        <!--Collapse start-->
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body enSavoirPlus">{{ formation.description  }}</div>
+                        </div>
+                        <!--Collapse end-->
+                        <p class="card-text text-right blocAuthor">
+                            <a href="#"><span class="text-capitalize author">Par {{ formation.author.name }} {{ formation.author.firstName}} </a></span>
+                            <span class=""> | </span>
+                            <span class="publicationdate">Publiée le {{  formation.createdAt | date('d M Y') }}</span>
+                        </p>
+
+                        <div class="row justify-content-around align-items-center mt-4">
+                            <div class="col-3 mb-4 mt-4">
+                                <div>
+                                    <a href="{{ path('formation_Achat', {'id': formation.id}) }}">Acheter maintenant</a>
+                                </div>
+                            </div>
+                            <div class="col-3 mb-4 mt-4   ">
+                                <button class="btn-lg btn-primary btn-block buttonFormation" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    En savoir plus
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-left align-items-end mt-4 border-bottom-2 noteLandingFormation">
+                            <div class="col-3 mt-1 mb-1">
+                                <h5 class="mt-1 textDisplay">Note : </h5>
+                                <h3 class="starColor"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"><i class="far fa-star"></i></i><i class="far fa-star"></i></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+{% endblock %}
+
