@@ -28,26 +28,25 @@ class FrontController extends controller
     public function searchPageAction(Request $request)
     {
         $user = $this->getUser();
-        $searchs = explode(' ', trim($request->query->get('search')));
-        if ($request->query->get('search')) {
 
-            $searchs = explode(' ', trim($request->query->get('search')));
+        if ($searchs = explode(' ', trim($request->query->get('search')))) {
+
+            $repository = $this->getDoctrine()->getRepository(Formation::class);
+            $formations = $repository->findFormation($searchs);
+
+            $paginator  = $this->get('knp_paginator');
+            $formations = $paginator->paginate(
+                $formations,
+                $request->query->getInt('page', 1),
+                3
+            );
         }
-
-        $repository = $this->getDoctrine()->getRepository(Formation::class);
-        $formations = $repository->findFormation($searchs);
-
-        $paginator  = $this->get('knp_paginator');
-        $formations = $paginator->paginate(
-            $formations,
-            $request->query->getInt('page', 1),
-            3
-        );
 
         return $this->render('Front/search.html.twig', array(
             'formations' => $formations,
             'user' => $user,
         ));
+
     }
 
 
@@ -63,7 +62,6 @@ class FrontController extends controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $data = $form->getData();
-
             $firstname = $data['firstname'];
             $name = $data['name'];
             $email = $data['email'];
@@ -71,14 +69,14 @@ class FrontController extends controller
 
             $mailer->sendContactMail($message, $email);
 
-
             return $this->redirectToRoute('con');
         }
+
         return $this->render('Front/contact.html.twig', array(
             'form' => $form->createView()
-
         ));
     }
+
 
     /**
      * @Route("/favorite", name="favorite")
@@ -102,6 +100,14 @@ class FrontController extends controller
 
         $em->flush();
         return new Response();
+    }
+
+    /**
+     * @Route("/formateur", name="formateur")
+     */
+    public function landingFormateurAction()
+    {
+        return $this->render('Front/formateur.html.twig');
     }
 
 }

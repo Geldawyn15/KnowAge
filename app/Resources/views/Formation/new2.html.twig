@@ -1,17 +1,36 @@
 
 {% extends 'layout.html.twig' %}
 {% block title %} Accueil formateur {% endblock %}
-{% block stylesheet %}{% endblock %}
+{% block stylesheet %}<link rel="stylesheet" href="/assets/css/formation.css">{% endblock %}
+{% block demerde %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/froala_style.min.css" rel="stylesheet" type="text/css" />
 
+
+{% endblock %}
 {% block content %}
     <body id="bodyLandingFormation">
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <input type="submit" value="Create" />
-    {{ form_end(form) }}
+
+        <form action="" method="post">
+            <textarea>  name="content"></textarea>
+            <input type="submit" value="Create" />
+        </form>
 
 
-    <a href="{{ path('new2', {'id': id }) }}">Back to the list</a>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1//js/froala_editor.pkgd.min.js"></script>
+    <script>
+        $(function() {
+            $('textarea').froalaEditor({
+                height: 450,
+                imageUploadURL: '/formation/upload_picture',
+                imageUploadMethod: 'POST',
+                imageMaxSize: 5 * 1024 * 1024,
+                imageAllowedTypes: ['jpeg', 'jpg', 'png'],
+                fileUploadURL: '/formation/upload_file'
+            })
+        });
+    </script>
 
 
     </body>
