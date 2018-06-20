@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-   {% if formations is defined %}
+   {% if formations %}
     <div class="container">
         <div class="row ">
             <div class="col-md-5" >
@@ -80,6 +80,11 @@
    {{ knp_pagination_render(formations) }}
 </div>
    {% endif %}
+
+   {%  if  formations is empty and search is not empty %}
+        <h3> Votre recherche n'a donné aucun résultat </h3>
+   {% endif %}
+
 <script>
    $(document).ready(function() {
        $('.favoriteSearch').click(function() {
