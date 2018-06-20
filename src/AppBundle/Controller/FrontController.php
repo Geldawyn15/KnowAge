@@ -31,13 +31,16 @@ class FrontController extends controller
     public function searchPageAction(Request $request)
     {
         $user = $this->getUser();
-
+        $formations = null;
+        $searchs = '';
 
         if ($request->query->get('search')) {
 
             $searchs = explode(' ', trim($request->query->get('search')));
+
             $repository = $this->getDoctrine()->getRepository(Formation::class);
             $formations = $repository->findFormation($searchs);
+
             $paginator  = $this->get('knp_paginator');
             $formations = $paginator->paginate(
                 $formations,
@@ -45,15 +48,13 @@ class FrontController extends controller
                 3
             );
 
-
-
-            return $this->redirectToRoute('search', array(
-                'formations' => $formations,
-                'user' => $user,
-            ));
         }
 
-        return $this->render('Front/search.html.twig');
+        return $this->render('Front/search.html.twig', array(
+            'formations' => $formations,
+            'user' => $user,
+            'search' => $searchs,
+        ));
 
     }
 
