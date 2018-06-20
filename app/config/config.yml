@@ -69,7 +69,4 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
 
-kms_froala_editor:
-    language: "fr"
-    includeJQuery: false
 
