@@ -136,41 +136,42 @@
     <h1>Formation Favori</h1>
     <div class="container formation">
         <div class="d-flex flex-column">
-            {% for payment in payments %}
+            {% for eachformation in favoriteformations %}
                 {% if loop.index is odd %}
                     <div class="row">
                 {% endif %}
-                <div class="col-6 mt-5">
-                    <div class="column">
-                        <!-- Post-->
-                        <div class="post-module">
-                            <!-- Thumbnail-->
-                            <div class="thumbnail">
-                                <img src="{{ payment.formation.picture }}" class="img-responsive" alt=""> </div>
-                            <!-- Post Content-->
-                            <div class="post-content">
-                                <div class="category">{{ payment.formation.category }}</div>
-                                <h1 class="title">{{ payment.formation.title}}</h1>
-                                <h2 class="sub_title">{{ payment.formation.author.firstname}} {{ payment.formation.author.name}}</h2>
-                                <p class="description"> {{ payment.formation.description }}</p>
-                                <div class="post-meta">
-                                    <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a>
-                                    <button class="favoriteSearch btn" data-formation-id="{{ payment.formation.id }}">
-                                        {% if user.isFormationFavorited(payment.formation) %}
-                                            <i id="favoriteSearch" class="fas fa-heart fa-2x"  style="color:Tomato"> </i>
-                                        {% else %}
-                                            <i id="favoriteSearch" class="far fa-heart fa-2x"  style="color:Tomato"> </i>
-                                        {% endif %}
+                    <div class="col-6 mt-5">
+                        <div class="column">
+                            <!-- Post-->
+                            <div class="post-module">
+                                <!-- Thumbnail-->
+                                <div class="thumbnail">
+                                    <img src="{{ eachformation.picture }}" class="img-responsive" alt=""> </div>
+                                <!-- Post Content-->
+                                <div class="post-content">
+                                    <div class="category">{{ eachformation.category }}</div>
+                                    <h1 class="title">{{ eachformation.title}}</h1>
+                                    <h2 class="sub_title">{{ eachformation.author.firstname}} {{eachformation.author.name}}</h2>
+                                    <p class="description"> {{ eachformation.description }}</p>
+                                    <div class="post-meta">
+                                        <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a>
+                                        <button class="favoriteSearch btn" data-formation-id="{{ eachformation.id }}">
+                                            {% if user.isFormationFavorited(eachformation) %}
+                                                <i id="favoriteSearch" class="fas fa-heart fa-2x"  style="color:Tomato"> </i>
+                                            {% else %}
+                                                <i id="favoriteSearch" class="far fa-heart fa-2x"  style="color:Tomato"> </i>
+                                            {% endif %}
 
-                                    </button>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 {% if loop.index is even or loop.last %}
                     </div>
                 {% endif %}
+
             {% endfor %}
         </div>
     </div>

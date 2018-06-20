@@ -40,12 +40,22 @@ class UserController extends controller
         $em = $this->getDoctrine()->getManager();
 
         $formationsCreated = $em->getRepository('AppBundle:Formation')->findBy(['author' => $user]);
+        $findingFavoriteFormations = $em->getRepository('AppBundle:Formation')->findAll();
         $payments = $em->getRepository('AppBundle:Paiement')->findBy(['user' => $user]);
+        $favoriteFormations = [];
+        foreach ($findingFavoriteFormations as $findingFavoriteFormation){
+            if ($user->isFormationFavorited($findingFavoriteFormation)){
+                $favoriteFormations[] = $findingFavoriteFormation;
+            }
+
+        }
+
 
         return $this->render('User/profil.html.twig', array(
             'formationscreated' => $formationsCreated,
             'payments' => $payments,
             'user' => $user,
+            'favoriteformations' => $favoriteFormations,
         ));
     }
 

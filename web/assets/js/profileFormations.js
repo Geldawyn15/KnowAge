@@ -40,6 +40,7 @@ $(document).ready(function() {
     });
 
     $('#showFavoriteFormateur').on('click', function() {
+
         var bought = document.getElementById("bought");
         var created = document.getElementById("cree");
         var favoriteformations = document.getElementById("favoriteFormation");
