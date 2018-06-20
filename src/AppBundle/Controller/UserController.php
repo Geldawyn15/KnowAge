@@ -41,6 +41,7 @@ class UserController extends controller
 
         $formationsCreated = $em->getRepository('AppBundle:Formation')->findBy(['author' => $user]);
         $payments = $em->getRepository('AppBundle:Paiement')->findBy(['user' => $user]);
+        //dump($formationsCreated);die;
 
         return $this->render('User/profil.html.twig', array(
             'formationscreated' => $formationsCreated,

@@ -27,6 +27,7 @@
             </div>
         </div>
     </div>
+   {% if formations is defined %}
     <div class="container">
         <div class="row ">
             <div class="col-md-5" >
@@ -78,6 +79,7 @@
 <div class="container">
    {{ knp_pagination_render(formations) }}
 </div>
+   {% endif %}
 <script>
    $(document).ready(function() {
        $('.favoriteSearch').click(function() {

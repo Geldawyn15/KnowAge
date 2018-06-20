@@ -32,23 +32,28 @@ class FrontController extends controller
     {
         $user = $this->getUser();
 
-        if ($searchs = explode(' ', trim($request->query->get('search')))) {
 
+        if ($request->query->get('search')) {
+
+            $searchs = explode(' ', trim($request->query->get('search')));
             $repository = $this->getDoctrine()->getRepository(Formation::class);
             $formations = $repository->findFormation($searchs);
-
             $paginator  = $this->get('knp_paginator');
             $formations = $paginator->paginate(
                 $formations,
                 $request->query->getInt('page', 1),
                 3
             );
+
+
+
+            return $this->redirectToRoute('search', array(
+                'formations' => $formations,
+                'user' => $user,
+            ));
         }
 
-        return $this->render('Front/search.html.twig', array(
-            'formations' => $formations,
-            'user' => $user,
-        ));
+        return $this->render('Front/search.html.twig');
 
     }
 
