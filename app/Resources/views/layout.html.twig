@@ -22,6 +22,7 @@
     <script src="/assets/js/profileFormations.js"></script>
 
 
+
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="/assets/css/styles.css">
     {% block stylesheet %}{% endblock %}
@@ -110,30 +111,37 @@
 </footer>
 <script>
 
-    {% for label, messages in app.flashes %}
+    toastr.options = {
+        "positionClass": "toast-bottom-full-width"
+    };
+
+    /* type pour Toastr => success, info, warning, error*/
+    {% for type, messages in app.flashes %}
+
+        let type = '{{ type }}';
+
         {% for message in messages %}
-            toastr.options = {
-                "closeButton": false,
-                "debug": false,
-                "newestOnTop": false,
-                "progressBar": false,
-                "positionClass": "toast-bottom-full-width",
-                "preventDuplicates": false,
-                "onclick": null,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "5000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
+
+            if (type === 'danger') {
+
+                toastr['error']('{{ message }}');
+
+            } else if (type === 'warning') {
+
+                toastr['warning']('{{ message }}');
+
+            } else if (type === 'success') {
+
+                toastr['success']('{{ message }}');
+
+            } else {
+
+                toastr['info']('{{ message }}');
+
             }
-            toastr.{{ label }}('{{ message }}');
-            /* type pour Toastr => success, info, warning, error*/
+
         {% endfor %}
     {% endfor %}
-
 
 </script>
 </body>

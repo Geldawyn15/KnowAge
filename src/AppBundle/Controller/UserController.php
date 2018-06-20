@@ -163,7 +163,7 @@ class UserController extends controller
                 $this->addFlash('success', 'Consultez votre boite mail. Un message vous a été envoyé avec un lien pour réinitialiser votre mot de passe  ');
             } else {
 
-                $this->addFlash('error', 'Nous n\'avons pas trouvé d\'utilisateur avec cet email, merci de rééssayer');
+                $this->addFlash('danger', 'Nous n\'avons pas trouvé d\'utilisateur avec cet email, merci de rééssayer');
 
                 return $this->redirectToRoute('forgotPassword');
             }
@@ -197,7 +197,7 @@ class UserController extends controller
                 $this->addFlash('success', 'Votre mot de passe a été mis à jour');
                 return $this->redirectToRoute('homepage');
             } else {
-                $this->addFlash('error', 'la réinitialisation de votre mot de passe a échoué, veuillez renouveler votre demande');
+                $this->addFlash('danger', 'la réinitialisation de votre mot de passe a échoué, veuillez renouveler votre demande');
 
                 return $this->redirectToRoute('forgotPassword');
             }

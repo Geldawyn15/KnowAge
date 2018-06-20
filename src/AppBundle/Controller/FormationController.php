@@ -235,7 +235,7 @@ class FormationController extends controller
 
 
 
-            $this->addFlash('error', 'Vous ne pouvez pas acheter votre formation!');
+            $this->addFlash('danger', 'Vous ne pouvez pas acheter votre formation!');
 
 
             return $this->redirectToRoute('landing_formation', ['id' => $formation->getId()]);
@@ -244,7 +244,7 @@ class FormationController extends controller
         elseif ($verfifPaiement) {
 
 
-            $this->addFlash('error', 'Formation déjà achetée!');
+            $this->addFlash('danger', 'Formation déjà achetée!');
 
             return $this->redirectToRoute('landing_formation', ['id' => $formation->getId()]);
         }
