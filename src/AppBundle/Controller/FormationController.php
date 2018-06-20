@@ -93,7 +93,7 @@ class FormationController extends controller
         }
 
         return $this->render('Formation/new2.html.twig', array(
-            'id' => $id,
+            'formation' => $formation,
         ));
     }
 

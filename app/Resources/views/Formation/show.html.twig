@@ -1,11 +1,18 @@
 {% extends 'layout.html.twig' %}
 {% block title %} {{ formation.title }}{% endblock %}
-{% block stylesheet %}<link href="../css/froala_style.min.css" rel="stylesheet" type="text/css" />{% endblock %}
+{% block stylesheet %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+{% endblock %}
 
 {% block content %}
 <div class="container-fluid">
     <div class="row">
-        <div class="col-10">
+        <div class="col-12">
+            <h1 class="text-center" style="margin-top: 170px;"> {{ formation.title }} </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
             <div class="fr-view">
                 {{ formation.content | raw }}
             </div>
