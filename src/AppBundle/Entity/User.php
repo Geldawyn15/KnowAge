@@ -409,6 +409,11 @@ class User implements UserInterface, \Serializable
         $this->token = $token;
     }
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
 
 }
 

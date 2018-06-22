@@ -189,7 +189,9 @@ class Formation
      */
     public function getCreatedAt()
     {
-        return $this->createdAt;
+        $date = $this->createdAt;
+
+        return $date->format('Y-m-d H:i:s');
     }
 
     /**
