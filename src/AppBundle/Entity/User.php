@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\CKEditorBundle\FOSCKEditorBundle;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -107,9 +108,15 @@ class User implements UserInterface, \Serializable
      */
     private $favoriteFormations;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", cascade={"persist"})
+     */
+    private $favoriteFormateurs;
+
     public function __construct()
     {
         $this->favoriteFormations = new ArrayCollection();
+        $this->$favoriteFormateurs = new ArrayCollection();
     }
 
     /**
@@ -307,6 +314,38 @@ class User implements UserInterface, \Serializable
         return $this->favoriteFormations->contains($formation);
     }
 
+    /**
+     * @return mixed
+     */
+    public function getFavoriteFormateurs()
+    {
+        return $this->favoriteFormateurs;
+    }
+
+    /**
+     * @param mixed $favoriteFormateurs
+     */
+    public function setFavoriteFormateurs($favoriteFormateurs)
+    {
+        $this->favoriteFormateurs = $favoriteFormateurs;
+    }
+    /**
+     * @param mixed $favoriteFormateur
+     */
+    public function addFavoriteFormateur($favoriteFormateur)
+    {
+        $this->favoriteFormateurs[] = $favoriteFormateur;
+    }
+    public function removeFavoriteFormateur($favoriteFormateur)
+    {
+        $this->favoriteFormateurs->removeElement($favoriteFormateur);
+    }
+
+    public function isFormateurFavorited(User $formateur)
+    {
+        return $this->favoriteFormateurs->contains($formateur);
+    }
+
 
     public function getRoles()
     {
@@ -408,6 +447,8 @@ class User implements UserInterface, \Serializable
     {
         $this->token = $token;
     }
+
+
 
 
 }
