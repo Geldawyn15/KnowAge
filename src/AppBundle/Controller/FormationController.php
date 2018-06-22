@@ -25,6 +25,8 @@ class FormationController extends controller
 {
 
     /**
+     * create a formation / first step
+     *
      * @Route("/new", name="new")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
@@ -61,6 +63,8 @@ class FormationController extends controller
     }
 
     /**
+     * Second step for create a formation
+     *
      * @Route("/new2/{id}", name="new2")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
@@ -89,14 +93,15 @@ class FormationController extends controller
         }
 
         return $this->render('Formation/new2.html.twig', array(
-            'id' => $id,
+            'formation' => $formation,
         ));
     }
 
 
     /**
-     * @Route("/upload_picture", name="upload_picture")
+     * Upload picture from Wysiwyg editor
      *
+     * @Route("/upload_picture", name="upload_picture")
      * @Security("has_role('ROLE_USER')")
      *
      */
@@ -110,17 +115,17 @@ class FormationController extends controller
 
             $name = uniqid() . "." . $extension;
             move_uploaded_file($_FILES["file"]["tmp_name"],  __DIR__ ."/../../../web/upload/contenuFormation/picture/" . $name);
-
             $response = ['link' => '/upload/contenuFormation/picture/'. $name];
+
             return new Response(stripslashes(json_encode($response)));
         }
-
     }
 
 
     /**
-     * @Route("/upload_file", name="upload_file")
+     * Upload file from Wysiwyg editor
      *
+     * @Route("/upload_file", name="upload_file")
      * @Security("has_role('ROLE_USER')")
      *
      */
@@ -135,8 +140,8 @@ class FormationController extends controller
 
             $name = sha1(microtime()) . "." . $extension;
             move_uploaded_file($_FILES["file"]["tmp_name"],  __DIR__ ."/../../../web/upload/contenuFormation/file/" . $name);
-
             $response = ['link' => '/upload/contenuFormation/file/'. $name];
+
             return new Response(stripslashes(json_encode($response)));
         }
     }
@@ -180,7 +185,7 @@ class FormationController extends controller
     }
 
     /**
-     * Displays a formation entity.
+     * Displays content of a formation entity.
      *
      * @Route("/show/{id}", name="show")
      * @Method({"GET", "POST"})
@@ -196,15 +201,6 @@ class FormationController extends controller
     }
 
 
-    /**
-     * @Route("/formateur", name="formateur")
-     */
-    public function landingFormateurAction()
-    {
-        return $this->render('Formation/formateur.html.twig');
-
-
-    }
 
     /**
      * @Route("/achat/{id}", name="formation_Achat")
@@ -250,12 +246,14 @@ class FormationController extends controller
         }
     }
 
+
+
     /**
      * Signals an inaproriate content in formation
      *
      * @Route("signal/{id}", name="signalFormation")
-     * * @Method({"GET", "POST"})
-     * * @Security("has_role('ROLE_USER')")
+     * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
      */
     public function signalFormationAction(formation $formation, Request $request, Mailer $mailer, $id)
     {

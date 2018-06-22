@@ -94,8 +94,8 @@
                             <h2 class="sub_title">{{ formationcreated.author.firstname}} {{ formationcreated.author.name}}</h2>
                             <p class="description"> {{ formationcreated.description }}</p>
                             <div class="post-meta">
-                                <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a>
-
+                                <a href="{{ path('show', {id: formationcreated.id}) }}" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a>
+                                <a href="{{ path('new2', {id: formationcreated.id}) }}" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Modifier la formation</a>
                             </div>
                         </div>
                     </div>
