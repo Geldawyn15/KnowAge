@@ -4,8 +4,6 @@ namespace AppBundle\Form;
 
 
 use AppBundle\Entity\Formation;
-use Doctrine\DBAL\Types\TextType;
-use KMS\FroalaEditorBundle\Form\Type\FroalaEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
