@@ -34,35 +34,34 @@ class UserController extends controller
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
      */
-    public function profilAction(Request $request, User $id)
+    public function profilAction(Request $request, User $user)
     {
         $em = $this->getDoctrine()->getManager();
         $currentUser = $this->getUser();
-        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
-            $formationsCreated = $em->getRepository('AppBundle:Formation')->findBy(['author' => $user]);
-            $findingFavoriteFormations = $em->getRepository('AppBundle:Formation')->findAll();
-            $findingFavoriteFormateurs = $em->getRepository('AppBundle:User')->findAll();
-            $payments = $em->getRepository('AppBundle:Paiement')->findBy(['user' => $user]);
-            $favoriteFormations = [];
-            $favoriteformateur = [];
-            foreach ($findingFavoriteFormations as $findingFavoriteFormation){
-                if ($user->isFormationFavorited($findingFavoriteFormation)){
-                    $favoriteFormations[] = $findingFavoriteFormation;
-                }
+        $formationsCreated = $em->getRepository('AppBundle:Formation')->findBy(['author' => $user]);
+        $findingFavoriteFormations = $em->getRepository('AppBundle:Formation')->findAll();
+        $findingFavoriteFormateurs = $em->getRepository('AppBundle:User')->findAll();
+        $payments = $em->getRepository('AppBundle:Paiement')->findBy(['user' => $user]);
+        $favoriteFormations = [];
+        $favoriteformateur = [];
+        foreach ($findingFavoriteFormations as $findingFavoriteFormation){
+            if ($user->isFormationFavorited($findingFavoriteFormation)){
+                $favoriteFormations[] = $findingFavoriteFormation;
             }
-            foreach ($findingFavoriteFormateurs as $findingFavoriteFormateur){
-                if ($user->isFormateurFavorited($findingFavoriteFormateur)){
-                    $favoriteformateur[] = $findingFavoriteFormateur;
-                }
+        }
+        foreach ($findingFavoriteFormateurs as $findingFavoriteFormateur){
+            if ($user->isFormateurFavorited($findingFavoriteFormateur)){
+                $favoriteformateur[] = $findingFavoriteFormateur;
             }
-            return $this->render('User/profil.html.twig', array(
-                'formationscreated' => $formationsCreated,
-                'payments' => $payments,
-                'currentuser' => $currentUser,
-                'user' => $user,
-                'favoriteformations' => $favoriteFormations,
-                'favoriteformateur' => $favoriteformateur,
-            ));
+        }
+        return $this->render('User/profil.html.twig', array(
+            'formationscreated' => $formationsCreated,
+            'payments' => $payments,
+            'currentuser' => $currentUser,
+            'user' => $user,
+            'favoriteformations' => $favoriteFormations,
+            'favoriteformateur' => $favoriteformateur,
+        ));
     }
 
     /**
