@@ -105,9 +105,9 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="roles", type="string", nullable=true)
+     * @ORM\Column(name="role", type="string", nullable=true)
      */
-    private $roles;
+    private $role;
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", cascade={"persist"})
@@ -314,10 +314,13 @@ class User implements UserInterface, \Serializable
         return $this->favoriteFormations->contains($formation);
     }
 
-
     public function getRoles()
     {
-        return [$this->roles];
+        if (!$this->role) {
+            return ['ROLE_USER'];
+        }
+
+        return [$this->role];
     }
 
     public function getSalt()
