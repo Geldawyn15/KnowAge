@@ -70,9 +70,10 @@ class Mailer
         $this->sendMail($object, $body, $to, $reply);
     }
 
-    public function sendForgotPasswordMail($to, $subject, $url)
+    public function sendForgotPasswordMail($to, $subject, $url, $userPasswordLost)
     {
         $body = $this->templating->render('Mail/forgotPasswordMail.html.twig', array(
+            'user' => $userPasswordLost,
             'subject' => $subject,
             'url' => $url,
         ));

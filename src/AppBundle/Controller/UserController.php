@@ -159,7 +159,7 @@ class UserController extends controller
                 $url = $this->generateUrl('resetPassword', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
                 $subject = 'Mot de passe perdu, NoAge';
                 $to = $userPasswordLost->getEmail();
-                $mailer->sendForgotPasswordMail($to, $subject, $url);
+                $mailer->sendForgotPasswordMail($to, $subject, $url, $userPasswordLost);
                 $this->addFlash('success', 'Consultez votre boite mail. Un message vous a été envoyé avec un lien pour réinitialiser votre mot de passe  ');
             } else {
                 $this->addFlash('danger', 'Nous n\'avons pas trouvé d\'utilisateur avec cet email, merci de rééssayer');

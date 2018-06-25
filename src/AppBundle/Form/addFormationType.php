@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 
@@ -47,7 +48,17 @@ class addFormationType extends AbstractType
             ))
             ->add('picture', FileType::class, array(
                 'constraints' => array(
-                    new NotBlank())
+                    new NotBlank(['message' => 'Ce chanmp ne peut etre vide']),
+                    new File([
+                        'maxSize' => '2M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Le format de votre image ({{ type }}) est invalide. Merci de sélectionner une image de type : {{ types }}.',
+                    ])
+
+                )
             ));
     }
 

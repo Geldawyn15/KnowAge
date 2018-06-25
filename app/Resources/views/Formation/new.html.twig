@@ -16,8 +16,16 @@
                 </div>
             </div>
         </div>
-        <div class="mb-3 container text-center FormCreate ">
+        <div class="mb-3 container text-center FormCreate">
+
             <div class="row">
+                {% if (form_errors(form.picture)) %}
+                    <div class="col-md-12">
+                    <div class="alert alert-danger" role="alert">
+                        {{ form_errors(form.picture) }}
+                    </div>
+                    </div>
+                {% endif %}
                 <div class="col-md-6 mb-3">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -66,7 +74,6 @@
                         </div>
                         <div class="custom-file">
                             {{ form_widget(form.picture) }}
-
                         </div>
                     </div>
                 </div>
