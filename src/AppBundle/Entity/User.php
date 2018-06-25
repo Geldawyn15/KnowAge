@@ -98,9 +98,16 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="token", type="string", nullable=true, unique=true)     *
+     * @ORM\Column(name="token", type="string", nullable=true, unique=true)
      */
     private $token;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="roles", type="string", nullable=true)
+     */
+    private $roles;
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", cascade={"persist"})
@@ -310,7 +317,7 @@ class User implements UserInterface, \Serializable
 
     public function getRoles()
     {
-        return ['ROLE_USER'];
+        return [$this->roles];
     }
 
     public function getSalt()
@@ -413,6 +420,9 @@ class User implements UserInterface, \Serializable
     {
         return $this->name;
     }
+
+
+
 
 
 }
