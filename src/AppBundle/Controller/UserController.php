@@ -65,7 +65,8 @@ class UserController extends controller
             if ($user->getprofilePicFile()) {
 
                 $oldProfilePic = $user->getprofilePic();
-                if (file_exists(__DIR__ .  '/../../../web' .$oldProfilePic)) {
+
+                if ($oldProfilePic && file_exists(__DIR__ .  '/../../../web' .$oldProfilePic)) {
                     unlink(__DIR__ . '/../../../web' . $oldProfilePic);
                 }
                 $profilePic = $user->getprofilePicFile();
@@ -160,7 +161,7 @@ class UserController extends controller
                 $url = $this->generateUrl('resetPassword', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
                 $subject = 'Mot de passe perdu, NoAge';
                 $to = $userPasswordLost->getEmail();
-                $mailer->sendForgotPasswordMail($to, $subject, $url);
+                $mailer->sendForgotPasswordMail($to, $subject, $url, $userPasswordLost);
                 $this->addFlash('success', 'Consultez votre boite mail. Un message vous a été envoyé avec un lien pour réinitialiser votre mot de passe  ');
             } else {
 
