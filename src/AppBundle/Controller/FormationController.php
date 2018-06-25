@@ -232,13 +232,17 @@ class FormationController extends controller
         }
 
         elseif ($formation->getAuthor() == $this->getUser()) {
-            
+
+
+
             $this->addFlash('danger', 'Vous ne pouvez pas acheter votre formation!');
+
 
             return $this->redirectToRoute('landing_formation', ['id' => $formation->getId()]);
         }
 
         elseif ($verfifPaiement) {
+
 
             $this->addFlash('danger', 'Formation déjà achetée!');
 

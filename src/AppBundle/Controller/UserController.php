@@ -41,6 +41,7 @@ class UserController extends controller
 
         $formationsCreated = $em->getRepository('AppBundle:Formation')->findBy(['author' => $user]);
         $payments = $em->getRepository('AppBundle:Paiement')->findBy(['user' => $user]);
+        //dump($formationsCreated);die;
 
         return $this->render('User/profil.html.twig', array(
             'formationscreated' => $formationsCreated,
@@ -62,6 +63,7 @@ class UserController extends controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             if ($user->getprofilePicFile()) {
+
                 $oldProfilePic = $user->getprofilePic();
 
                 if ($oldProfilePic && file_exists(__DIR__ .  '/../../../web' .$oldProfilePic)) {
@@ -162,7 +164,9 @@ class UserController extends controller
                 $mailer->sendForgotPasswordMail($to, $subject, $url, $userPasswordLost);
                 $this->addFlash('success', 'Consultez votre boite mail. Un message vous a été envoyé avec un lien pour réinitialiser votre mot de passe  ');
             } else {
+
                 $this->addFlash('danger', 'Nous n\'avons pas trouvé d\'utilisateur avec cet email, merci de rééssayer');
+
                 return $this->redirectToRoute('forgotPassword');
             }
         }

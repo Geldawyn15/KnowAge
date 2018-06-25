@@ -6,6 +6,7 @@ use AppBundle\Entity\Formation;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,12 +26,15 @@ class addFormationType extends AbstractType
                     new NotBlank(),
                 )
             ))
-            ->add('description', TextType::class, array(
+            ->add('description', TextareaType::class, array(
+                'attr' => array(
+                'rows' => '3',
+                'cols' => '1',),
                 'constraints' => array(
                     new NotBlank()
                 )
             ))
-            //->add('tags', addFormationTagType::class)
+
             ->add('category' ,EntityType::class, array(
                 'class'  => 'AppBundle:Category',
                 'constraints'=> array(

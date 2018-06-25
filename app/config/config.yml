@@ -69,7 +69,10 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
 
-kms_froala_editor:
-    language: "fr"
-    includeJQuery: false
+sonata_block:
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+
+
 

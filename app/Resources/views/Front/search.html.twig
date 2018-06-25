@@ -3,29 +3,43 @@
 
 {% block content %}
     <body>
+        {%  if formations is empty and search is empty %}
+            <div class="row">
+                <div class="col-10 text-center">
+                    <p class="emptySearch typo mb-5"> Entrez votre recherche ici : </p>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row emptySearchbar">
+                    <div class="col-md-12 text-center">
+                        <form method="Get" action="{{ path('search') }}">
+                            <div class="input-group mb-3">
+                                <input type="text" id="search" name="search" class="form-control" placeholder="Recherche..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <div class="input-group-append text-align-center">
+                                    <a> <button class="btnSearch btn btn-secondary" type="submit"><i class="fas fa-search"></i></button></a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {%  else %}
+
    <div class="container">
-        <div class="row searchbar pt-3 ">
+        <div class="row searchbar">
             <div class="col-md-12 text-center">
-                <div class="input-group mb-3">
-                    <form method="Get" action="{{ path('search') }}">
-                        <input type="text" id="search" name="search" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <form method="Get" action="{{ path('search') }}">
+                    <div class="input-group mb-3">
+                        <input type="text" id="search" name="search" class="form-control" placeholder="Recherche..." aria-label="Recipient's username" aria-describedby="basic-addon2">
                         <div class="input-group-append text-align-center">
                             <a> <button class="btnSearch btn btn-secondary" type="submit"><i class="fas fa-search"></i></button></a>
                         </div>
-                    </form>
-                </div>
-               <!-- <form action="" >
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Johnny" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btnSearch btn btn-primary" type="button"> <i class="fas fa-search"></i></button>
-                        </div>
                     </div>
-                </form> !-->
-
+                </form>
             </div>
         </div>
     </div>
+   {% if formations %}
     <div class="container">
         <div class="row ">
             <div class="col-md-5" >
@@ -36,7 +50,7 @@
 <div class="container">
     {% for formation in formations %}
     {% if  loop.index0  % 3 == 0 %}
-    <div class="row">
+    <div class="row mb-5">
         {% endif %}
         <div class="col-md-4 mt-5">
             <div class="column">
@@ -53,7 +67,7 @@
                         <h2 class="sub_title">par {{ formation.author.name }} {{  formation.author.firstName}}</h2>
                         <p class="description"> {{  formation.description }}</p>
                         <div class="post-meta">
-                            <a href="{{ path('show', {id: formation.id}) }}" class="btn btn-sm btn-outline-primary waves-effect mr-3">Voir la formation</a>
+                            <a href="{{ path('landing_formation', {id: formation.id}) }}" class="btn btn-sm btn-outline-primary waves-effect mr-3">Voir la formation</a>
                             <button class="favoriteSearch btn" data-formation-id=" {{ formation.id }} ">
                                 {% if user.isFormationFavorited(formation) %}
                                     <i id="favoriteSearch" class="fas fa-heart fa-2x"  style="color:Tomato"> </i>
@@ -77,6 +91,17 @@
 <div class="container">
    {{ knp_pagination_render(formations) }}
 </div>
+   {% endif %}
+        {% endif %}
+
+   {%  if  formations is empty and search is not empty %}
+       <div class="row text-center">
+           <div class="col-12 mb-5 typo">
+               <h3> Votre recherche n'a donné aucun résultat </h3>
+           </div>
+       </div>
+   {% endif %}
+
 <script>
    $(document).ready(function() {
        $('.favoriteSearch').click(function() {
