@@ -55,6 +55,4 @@ class SecurityController extends controller
             'error'         => $error,
         ));
     }
-
-
 }

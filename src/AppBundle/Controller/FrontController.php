@@ -10,9 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\Mailer;
 
-
-
-
 class FrontController extends controller
 {
     /**
@@ -34,6 +31,7 @@ class FrontController extends controller
      */
     public function searchPageAction(Request $request)
     {
+
         $user = $this->getUser();
         $formations = null;
         $searchs = '';
@@ -97,6 +95,8 @@ class FrontController extends controller
             $message = $data['message'];
 
             $mailer->sendContactMail($message, $email);
+
+            $this->addFlash('success', 'Formulaire envoyé !');
 
             return $this->redirectToRoute('contact');
         }
