@@ -79,7 +79,7 @@ class UserController extends controller
         if ($form->isSubmitted() && $form->isValid()) {
             if ($user->getprofilePicFile()) {
                 $oldProfilePic = $user->getprofilePic();
-                if (file_exists(__DIR__ .  '/../../../web' .$oldProfilePic)) {
+                if ( $oldProfilePic && file_exists(__DIR__ .  '/../../../web' .$oldProfilePic)) {
                     unlink(__DIR__ . '/../../../web' . $oldProfilePic);
                 }
                 $profilePic = $user->getprofilePicFile();
