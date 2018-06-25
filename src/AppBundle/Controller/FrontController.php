@@ -34,6 +34,7 @@ class FrontController extends controller
      */
     public function searchPageAction(Request $request)
     {
+
         $user = $this->getUser();
         $formations = null;
         $searchs = '';

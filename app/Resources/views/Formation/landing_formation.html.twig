@@ -32,15 +32,6 @@
         }(document, "script", "twitter-wjs"));</script>
 
     <body id="bodyLandingFormation">
-    <div class = "text-center">
-        {% for label, messages in app.flashes %}
-            {% for message in messages %}
-                <div class="alert alert-{{ label }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endfor %}
-    </div>
     <div class="container-fluid height">
         <div class="row justify-content-center">
             <div class="col-md-9 mt-4 mb-4">
