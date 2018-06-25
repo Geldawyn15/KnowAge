@@ -96,6 +96,8 @@ class FrontController extends controller
 
             $mailer->sendContactMail($message, $email);
 
+            $this->addFlash('success', 'Formulaire envoyé !');
+
             return $this->redirectToRoute('contact');
         }
 
