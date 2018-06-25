@@ -2,6 +2,10 @@
 # https://symfony.com/doc/current/security.html
 security:
 
+    access_control:
+
+       - { path: ^/admin, roles: ROLE_ADMIN }
+
     encoders:
         AppBundle\Entity\User: bcrypt
 
@@ -20,10 +24,8 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-
-
-
         main:
+
             anonymous: ~
             form_login:
                 login_path: login
@@ -36,6 +38,8 @@ security:
                             secret:   '%secret%'
                             lifetime: 604800 # 1 week in seconds
                             path:     /
+
+
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
