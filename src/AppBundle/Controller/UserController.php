@@ -34,7 +34,7 @@ class UserController extends controller
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
      */
-    public function profilAction(Request $request, $id)
+    public function profilAction(Request $request, User $id)
     {
         $em = $this->getDoctrine()->getManager();
         $currentUser = $this->getUser();
