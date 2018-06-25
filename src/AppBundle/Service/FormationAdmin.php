@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\Filter\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 
@@ -17,7 +18,7 @@ class  FormationAdmin extends AbstractAdmin
         $formMapper->add('title', TextType::class);
         $formMapper->add('description', TextType::class);
         $formMapper->add('price', TextType::class);
-        $formMapper->add('createdAt', TextType::class);
+        $formMapper->add('createdAt', DateType::class);
         $formMapper->add('category', TextType::class);
 
     }
