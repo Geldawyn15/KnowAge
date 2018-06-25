@@ -98,7 +98,7 @@ class FrontController extends controller
 
             $mailer->sendContactMail($message, $email);
 
-            return $this->redirectToRoute('con');
+            return $this->redirectToRoute('contact');
         }
 
         return $this->render('Front/contact.html.twig', array(
