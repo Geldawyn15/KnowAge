@@ -198,3 +198,13 @@ body {
     box-shadow: none;
     background: none;
 }
+
+.emptySearch {
+    margin-top: 200px;
+    color: #3A5199
+}
+
+.emptySearchbar{
+    border-radius: 12px;
+
+}

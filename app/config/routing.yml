@@ -5,6 +5,11 @@ app:
 logout:
     path: /logout
 
-kms_froala_editor:
-  resource: "@KMSFroalaEditorBundle/Resources/config/routing.yml"
-  prefix:   /froalaeditor
+admin_area:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin
+
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin

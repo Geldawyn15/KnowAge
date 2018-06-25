@@ -79,7 +79,7 @@ class Formation
 
     /**
      * @var string
-     * @ORM\Column(name="content", type="string", nullable=true)
+     * @ORM\Column(name="content", type="text", nullable=true)
      */
     private $content;
 
@@ -189,6 +189,7 @@ class Formation
      */
     public function getCreatedAt()
     {
+
         return $this->createdAt;
     }
 

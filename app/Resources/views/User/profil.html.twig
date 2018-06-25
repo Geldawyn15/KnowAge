@@ -7,7 +7,11 @@
 <body id="profile">
     <div class="d-flex justify-content-between">
         <div class="d-flex flex-column justify-content-center ml-5">
-            <div class="ml-1"><img src="{{ app.user.profilePic }} " style="height: 180px; width: 180px;"></div>
+            {%  if  app.user.profilePic is not empty %}
+                <div class="ml-1"><img src="{{ app.user.profilePic }} " style="height: 180px; width: 180px;"></div>
+            {% else %}
+                <div class="ml-1"><img src="https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png" style="height: 180px; width: 180px;"></div>
+            {%  endif %}
             <div class="d-flex mt-2">
                 <button id="formationShowBought" class="btn btn-outline-primary waves-effect mr-1">Etudiant</button>
                 <button id="formationShowCreated" class="btn btn-outline-primary waves-effect ml-1">Formateur</button>
@@ -29,7 +33,7 @@
                 </div>
                 <div>
                     <a href="{{ path('update_password') }}" role="button" aria-disabled="true">
-                        <button class="btn btn-outline-primary waves-effect mr-1">Modifier Password</button>
+                        <button class="btn btn-outline-primary waves-effect mr-1">Modifier mon mot de passe</button>
                     </a>
                 </div>
             </div>
@@ -43,7 +47,7 @@
     </div>
 <hr >
 <div id="cree" >
-    <h1>Formation Cree</h1>
+    <h1>Formation Crée</h1>
     <div class="container formation">
         <div class="d-flex flex-column">
             {% for formationcreated in formationscreated %}
@@ -64,8 +68,8 @@
                             <h2 class="sub_title">{{ formationcreated.author.firstname}} {{ formationcreated.author.name}}</h2>
                             <p class="description"> {{ formationcreated.description }}</p>
                             <div class="post-meta">
-                                <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a>
-
+                                <a href="{{ path('show', {id: formationcreated.id}) }}" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a>
+                                <a href="{{ path('new2', {id: formationcreated.id}) }}" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Modifier la formation</a>
                             </div>
                         </div>
                     </div>
@@ -80,7 +84,7 @@
 </div>
 
 <div id="bought">
-    <h1>Formation Suivee</h1>
+    <h1>Formation achetée</h1>
     <div class="container formation">
         <div class="d-flex flex-column">
             {% for payment in payments %}

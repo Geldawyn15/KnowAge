@@ -3,7 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Formation;
-use Knp\Bundle\PaginatorBundle\KnpPaginatorBundle;
+use AppBundle\Entity\Category;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -20,7 +20,11 @@ class FrontController extends controller
      */
     public function homepageAction(Request $request)
     {
-        return $this->render('Front/index.html.twig');
+        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
+
+        return $this->render('Front/index.html.twig', array(
+                'categories' => $categories,
+        ));
     }
 
 
@@ -32,9 +36,28 @@ class FrontController extends controller
     {
 
         $user = $this->getUser();
+        $formations = null;
+        $searchs = '';
 
 
-        if ($searchs = explode(' ', trim($request->query->get('search')))) {
+        if ($request->query->get('category_id')) {
+
+            $id = $request->query->get('category_id');
+            $query = $this->getDoctrine()->getRepository(Formation::class)->findBy(['category' => $id]);
+
+            $paginator  = $this->get('knp_paginator');
+
+            $formations = $paginator->paginate(
+                $query,
+                $request->query->getInt('page', 1),
+                4
+            );
+        }
+
+
+        if ($request->query->get('search')) {
+
+            $searchs = explode(' ', trim($request->query->get('search')));
 
             $repository = $this->getDoctrine()->getRepository(Formation::class);
             $formations = $repository->findFormation($searchs);
@@ -45,11 +68,13 @@ class FrontController extends controller
                 $request->query->getInt('page', 1),
                 3
             );
+
         }
 
         return $this->render('Front/search.html.twig', array(
             'formations' => $formations,
             'user' => $user,
+            'search' => $searchs,
         ));
 
     }
@@ -74,7 +99,7 @@ class FrontController extends controller
 
             $mailer->sendContactMail($message, $email);
 
-            return $this->redirectToRoute('con');
+            return $this->redirectToRoute('contact');
         }
 
         return $this->render('Front/contact.html.twig', array(
