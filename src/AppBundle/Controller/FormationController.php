@@ -5,12 +5,10 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Formation;
 use AppBundle\Entity\Paiement;
 use AppBundle\Form\addFormationType;
-use AppBundle\Form\ContactTeacherType;
 use AppBundle\Service\ImgUploader;
 use AppBundle\Service\Mailer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,7 +27,6 @@ class FormationController extends controller
      *
      * @Route("/new", name="new")
      * @Method({"GET", "POST"})
-     * @Security("has_role('ROLE_USER')")
      */
     public function createAction(Request $request, ImgUploader $imgUpload)
     {
@@ -67,7 +64,6 @@ class FormationController extends controller
      *
      * @Route("/new2/{id}", name="new2")
      * @Method({"GET", "POST"})
-     * @Security("has_role('ROLE_USER')")
      */
     public function create2Action(Request $request, Formation $formation, $id)
     {
@@ -102,7 +98,6 @@ class FormationController extends controller
      * Upload picture from Wysiwyg editor
      *
      * @Route("/upload_picture", name="upload_picture")
-     * @Security("has_role('ROLE_USER')")
      *
      */
     public function uploadPictureFormation(Request $request)
@@ -126,7 +121,6 @@ class FormationController extends controller
      * Upload file from Wysiwyg editor
      *
      * @Route("/upload_file", name="upload_file")
-     * @Security("has_role('ROLE_USER')")
      *
      */
     public function uploadFileFormation(Request $request)
@@ -147,42 +141,7 @@ class FormationController extends controller
     }
 
 
-    /**
-     * Finds and displays a formation entity.
-     *
-     * @Route("/landing/{id}", name="landing_formation")
-     * @Method({"GET", "POST"})
-     */
-    public function landingAction(Request $request, Formation $formation, Mailer $mailer)
-    {
 
-        $form = $this->createForm(ContactTeacherType::class);
-        $form->handleRequest($request);
-        $shortText = $formation->shortText(250);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $data = $form->getData();
-
-            $email = $data['email'];
-            $subject = $data['objet'];
-            $message = $data['message'];
-            $to = $formation->getAuthor()->getEmail();
-
-            $mailer->sendTeacherMail('romain.poilpret@gmail.com', $message, $subject, $email);
-
-            return $this->redirectToRoute('landing_formation', array(
-                'id' => $formation->getId(),
-            ));
-        }
-
-        return $this->render('Formation/landing_formation.html.twig', array(
-            'formation' => $formation,
-            'form' => $form->createView(),
-            'shortText' => $shortText
-
-        ));
-    }
 
     /**
      * Displays content of a formation entity.
@@ -205,7 +164,6 @@ class FormationController extends controller
     /**
      * @Route("/achat/{id}", name="formation_Achat")
      * @Method({"GET", "POST"})
-     * @Security("has_role('ROLE_USER')")
      */
     public function landingFormateurAchat(Formation $formation)
     {
@@ -257,7 +215,6 @@ class FormationController extends controller
      *
      * @Route("signal/{id}", name="signalFormation")
      * @Method({"GET", "POST"})
-     * @Security("has_role('ROLE_USER')")
      */
     public function signalFormationAction(formation $formation, Request $request, Mailer $mailer, $id)
     {

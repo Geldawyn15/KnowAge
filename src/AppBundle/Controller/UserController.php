@@ -10,12 +10,10 @@ use AppBundle\Form\UpdatePasswordType;
 use AppBundle\Form\UpdateProfileType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\ImgUploader;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Lock\Store\RedisStore;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use AppBundle\Entity\User;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -30,30 +28,42 @@ class UserController extends controller
 {
 
     /**
-     * @Route("/profil", name="profil")
+     * @Route("/profil/{id}", name="profil")
      * @Method({"GET", "POST"})
-     * @Security("has_role('ROLE_USER')")
      */
-    public function profilAction(Request $request)
+    public function profilAction(Request $request, User $user)
     {
-        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
-
+        $currentUser = $this->getUser();
         $formationsCreated = $em->getRepository('AppBundle:Formation')->findBy(['author' => $user]);
+        $findingFavoriteFormations = $em->getRepository('AppBundle:Formation')->findAll();
+        $findingFavoriteFormateurs = $em->getRepository('AppBundle:User')->findAll();
         $payments = $em->getRepository('AppBundle:Paiement')->findBy(['user' => $user]);
-        //dump($formationsCreated);die;
-
+        $favoriteFormations = [];
+        $favoriteformateur = [];
+        foreach ($findingFavoriteFormations as $findingFavoriteFormation){
+            if ($user->isFormationFavorited($findingFavoriteFormation)){
+                $favoriteFormations[] = $findingFavoriteFormation;
+            }
+        }
+        foreach ($findingFavoriteFormateurs as $findingFavoriteFormateur){
+            if ($user->isFormateurFavorited($findingFavoriteFormateur)){
+                $favoriteformateur[] = $findingFavoriteFormateur;
+            }
+        }
         return $this->render('User/profil.html.twig', array(
             'formationscreated' => $formationsCreated,
             'payments' => $payments,
+            'currentuser' => $currentUser,
             'user' => $user,
+            'favoriteformations' => $favoriteFormations,
+            'favoriteformateur' => $favoriteformateur,
         ));
     }
 
     /**
      * @Route("/updateprofil", name="update_profil")
      * @Method({"GET", "POST"})
-     * @Security("has_role('ROLE_USER')")
      */
     public function updateProfilAction(Request $request, ImgUploader $imgUpload)
     {
@@ -77,7 +87,7 @@ class UserController extends controller
             $entityManager->flush();
             $user->setprofilePicFile(null);
             $this->addFlash('success', 'Profil modifié');
-            return $this->redirectToRoute('profil');
+            return $this->redirectToRoute('profil', ['id' => $user->getId()]);
 
     }
 
@@ -90,7 +100,6 @@ class UserController extends controller
     /**
      * @Route("/updatepassword", name="update_password")
      * @Method({"GET", "POST"})
-     * @Security("has_role('ROLE_USER')")
      */
     public function updatePasswordAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -105,7 +114,7 @@ class UserController extends controller
             $entityManager->flush();
             $this->addFlash('success', 'Mot de passe changé');
 
-            return $this->redirectToRoute('profil');
+            return $this->redirectToRoute('profil', ['id' => $user->getId()]);
         }
 
         return $this->render('User/updatePassword.html.twig', array(
@@ -114,10 +123,10 @@ class UserController extends controller
     }
 
     /**
-     * @Route("/favorite", name="favorite")
+     * @Route("/favoriteformation", name="favoriteformation")
      * @Method({"GET", "POST"})
      */
-    public function favoriteAction(Request $request)
+    public function favoriteFormationAction(Request $request)
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -130,6 +139,29 @@ class UserController extends controller
                 $user->addFavoriteFormation($formation);
             } elseif ($favorited) {
                 $user->removeFavoriteFormation($formation);
+            }
+        }
+        $em->flush();
+        return new Response();
+    }
+
+    /**
+     * @Route("/favoriteformatuer", name="favoriteformatuer")
+     * @Method({"GET", "POST"})
+     */
+    public function favoriteFormateurAction(Request $request)
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+
+        if ($request->query->get('formateurId')) {
+            $formateurId = $request->query->get('formateurId');
+            $favorited  = $request->query->get('favorited');
+            $formateur = $em->getRepository('AppBundle:User')->find(['id' => $formateurId]);
+            if (!$favorited) {
+                $user->addFavoriteFormateur($formateur);
+            } elseif ($favorited) {
+                $user->removeFavoriteFormateur($formateur);
             }
         }
         $em->flush();
@@ -208,7 +240,4 @@ class UserController extends controller
             'form'=>$form->createView()
         ));
     }
-
-
-
 }
