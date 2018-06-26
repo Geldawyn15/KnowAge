@@ -23,7 +23,6 @@ class AppKernel extends Kernel
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-            new blackknight467\StarRatingBundle\StarRatingBundle(),
 
         ];
 

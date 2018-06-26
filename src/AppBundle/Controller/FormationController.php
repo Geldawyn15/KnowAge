@@ -123,8 +123,7 @@ class FormationController extends controller
      * @Route("/upload_file", name="upload_file")
      *
      */
-    public function uploadFileFormation(Request $request)
-    {
+    public function uploadFileFormation(Request $request)    {
 
         $allowedExts = array("txt", "pdf", "doc", "odt");
         $temp = explode(".", $_FILES["file"]["name"]);
@@ -156,7 +155,6 @@ class FormationController extends controller
         return $this->render('Formation/show.html.twig', array(
             'formation' => $formation,
         ));
-
     }
 
 
