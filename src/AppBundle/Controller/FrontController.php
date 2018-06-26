@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\Mailer;
+use AppBundle\Form\ContactTeacherType;
 
 class FrontController extends controller
 {
@@ -139,4 +140,41 @@ class FrontController extends controller
         return $this->render('Front/formateur.html.twig');
     }
 
+
+    /**
+     * Finds and displays a formation entity.
+     *
+     * @Route("/show/{id}", name="landing_formation")
+     * @Method({"GET", "POST"})
+     */
+    public function landingAction(Request $request, Formation $formation, Mailer $mailer)
+    {
+
+        $form = $this->createForm(ContactTeacherType::class);
+        $form->handleRequest($request);
+        $shortText = $formation->shortText(250);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = $form->getData();
+
+            $email = $data['email'];
+            $subject = $data['objet'];
+            $message = $data['message'];
+            $to = $formation->getAuthor()->getEmail();
+
+            $mailer->sendTeacherMail('romain.poilpret@gmail.com', $message, $subject, $email);
+
+            return $this->redirectToRoute('landing_formation', array(
+                'id' => $formation->getId(),
+            ));
+        }
+
+        return $this->render('Formation/landing_formation.html.twig', array(
+            'formation' => $formation,
+            'form' => $form->createView(),
+            'shortText' => $shortText
+
+        ));
+    }
 }
