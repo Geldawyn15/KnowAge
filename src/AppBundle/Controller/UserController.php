@@ -10,12 +10,10 @@ use AppBundle\Form\UpdatePasswordType;
 use AppBundle\Form\UpdateProfileType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\ImgUploader;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Lock\Store\RedisStore;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use AppBundle\Entity\User;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -32,7 +30,6 @@ class UserController extends controller
     /**
      * @Route("/profil/{id}", name="profil")
      * @Method({"GET", "POST"})
-     * @Security("has_role('ROLE_USER')")
      */
     public function profilAction(Request $request, User $user)
     {
@@ -67,7 +64,6 @@ class UserController extends controller
     /**
      * @Route("/updateprofil", name="update_profil")
      * @Method({"GET", "POST"})
-     * @Security("has_role('ROLE_USER')")
      */
     public function updateProfilAction(Request $request, ImgUploader $imgUpload)
     {
@@ -104,7 +100,6 @@ class UserController extends controller
     /**
      * @Route("/updatepassword", name="update_password")
      * @Method({"GET", "POST"})
-     * @Security("has_role('ROLE_USER')")
      */
     public function updatePasswordAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {

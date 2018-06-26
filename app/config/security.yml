@@ -39,6 +39,11 @@ security:
                             lifetime: 604800 # 1 week in seconds
                             path:     /
 
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/user, roles: [ROLE_ADMIN, ROLE_USER] }
+        - { path: ^/formation, roles: [ROLE_ADMIN, ROLE_USER] }
+
 
             # activate different ways to authenticate
 
