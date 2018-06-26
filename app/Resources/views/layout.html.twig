@@ -56,7 +56,12 @@
                     <a class="nav-link text-white" href="{{ path('contact') }}">Contact<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link text-white" href="{{ path('profil') }}">Mon Profil<span class="sr-only">(current)</span></a>
+                    {% if app.user %}
+                    <a class="nav-link text-white" href="{{ path('profil', {id: app.user.id}) }}">Mon Profil<span class="sr-only">(current)</span></a>
+                    {% else %}
+                        <a class="nav-link text-white" href="{{ path('login') }}">Mon Profil<span class="sr-only">(current)</span></a>
+
+                    {% endif %}
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{{ path('new') }}">Ajouter une Formation<span class="sr-only">(current)</span></a>

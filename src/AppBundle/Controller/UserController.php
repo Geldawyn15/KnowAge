@@ -30,23 +30,37 @@ class UserController extends controller
 {
 
     /**
-     * @Route("/profil", name="profil")
+     * @Route("/profil/{id}", name="profil")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
      */
-    public function profilAction(Request $request)
+    public function profilAction(Request $request, User $user)
     {
-        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
-
+        $currentUser = $this->getUser();
         $formationsCreated = $em->getRepository('AppBundle:Formation')->findBy(['author' => $user]);
+        $findingFavoriteFormations = $em->getRepository('AppBundle:Formation')->findAll();
+        $findingFavoriteFormateurs = $em->getRepository('AppBundle:User')->findAll();
         $payments = $em->getRepository('AppBundle:Paiement')->findBy(['user' => $user]);
-        //dump($formationsCreated);die;
-
+        $favoriteFormations = [];
+        $favoriteformateur = [];
+        foreach ($findingFavoriteFormations as $findingFavoriteFormation){
+            if ($user->isFormationFavorited($findingFavoriteFormation)){
+                $favoriteFormations[] = $findingFavoriteFormation;
+            }
+        }
+        foreach ($findingFavoriteFormateurs as $findingFavoriteFormateur){
+            if ($user->isFormateurFavorited($findingFavoriteFormateur)){
+                $favoriteformateur[] = $findingFavoriteFormateur;
+            }
+        }
         return $this->render('User/profil.html.twig', array(
             'formationscreated' => $formationsCreated,
             'payments' => $payments,
+            'currentuser' => $currentUser,
             'user' => $user,
+            'favoriteformations' => $favoriteFormations,
+            'favoriteformateur' => $favoriteformateur,
         ));
     }
 
@@ -77,7 +91,7 @@ class UserController extends controller
             $entityManager->flush();
             $user->setprofilePicFile(null);
             $this->addFlash('success', 'Profil modifié');
-            return $this->redirectToRoute('profil');
+            return $this->redirectToRoute('profil', ['id' => $user->getId()]);
 
     }
 
@@ -105,7 +119,7 @@ class UserController extends controller
             $entityManager->flush();
             $this->addFlash('success', 'Mot de passe changé');
 
-            return $this->redirectToRoute('profil');
+            return $this->redirectToRoute('profil', ['id' => $user->getId()]);
         }
 
         return $this->render('User/updatePassword.html.twig', array(
@@ -114,10 +128,10 @@ class UserController extends controller
     }
 
     /**
-     * @Route("/favorite", name="favorite")
+     * @Route("/favoriteformation", name="favoriteformation")
      * @Method({"GET", "POST"})
      */
-    public function favoriteAction(Request $request)
+    public function favoriteFormationAction(Request $request)
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -130,6 +144,29 @@ class UserController extends controller
                 $user->addFavoriteFormation($formation);
             } elseif ($favorited) {
                 $user->removeFavoriteFormation($formation);
+            }
+        }
+        $em->flush();
+        return new Response();
+    }
+
+    /**
+     * @Route("/favoriteformatuer", name="favoriteformatuer")
+     * @Method({"GET", "POST"})
+     */
+    public function favoriteFormateurAction(Request $request)
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+
+        if ($request->query->get('formateurId')) {
+            $formateurId = $request->query->get('formateurId');
+            $favorited  = $request->query->get('favorited');
+            $formateur = $em->getRepository('AppBundle:User')->find(['id' => $formateurId]);
+            if (!$favorited) {
+                $user->addFavoriteFormateur($formateur);
+            } elseif ($favorited) {
+                $user->removeFavoriteFormateur($formateur);
             }
         }
         $em->flush();
@@ -208,7 +245,4 @@ class UserController extends controller
             'form'=>$form->createView()
         ));
     }
-
-
-
 }
