@@ -1,22 +1,16 @@
 {% extends 'layout.html.twig' %}
 
 {% block title %} Profil {% endblock %}
-{% block stylesheet %}<link rel="stylesheet" href="/assets/css/profile.css">{% endblock %}
 
 {% block content %}
-<h2>
-    {% for label, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="alert alert-{{ label }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endfor %}
-</h2>
 <body id="profile">
     <div class="d-flex justify-content-between">
         <div class="d-flex flex-column justify-content-center ml-5">
-            <div class="ml-1"><img src="{{ user.profilePic }} " style="height: 180px; width: 180px;"></div>
+            {%  if  app.user.profilePic %}
+                <div class="ml-1"><img src="{{ app.user.profilePic }} " style="height: 180px; width: 180px;"></div>
+            {% else %}
+                <div class="ml-1"><img src="https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png" style="height: 180px; width: 180px;"></div>
+            {%  endif %}
             <div class="d-flex mt-2">
                 <button id="formationShowBought" class="btn btn-outline-primary waves-effect mr-1">Etudiant</button>
                 <button id="formationShowCreated" class="btn btn-outline-primary waves-effect ml-1">Formateur</button>
@@ -47,7 +41,7 @@
                 </div>
                 <div>
                     <a href="{{ path('update_password') }}" role="button" aria-disabled="true">
-                        <button class="btn btn-outline-primary waves-effect mr-1">Modifier Password</button>
+                        <button class="btn btn-outline-primary waves-effect mr-1">Modifier mon mot de passe</button>
                     </a>
                 </div>
             </div>
@@ -73,7 +67,7 @@
     </div>
 <hr >
 <div id="cree" >
-    <h1>Formation Cree</h1>
+    <h1>Formation Crée</h1>
     <div class="container formation">
         <div class="d-flex flex-column">
             {% for formationcreated in formationscreated %}
@@ -110,7 +104,7 @@
 </div>
 
 <div id="bought">
-    <h1>Formation Suivee</h1>
+    <h1>Formation achetée</h1>
     <div class="container formation">
         <div class="d-flex flex-column">
             {% for payment in payments %}

@@ -1,10 +1,5 @@
 {% extends 'layout.html.twig' %}
 {% block title %} Accueil {% endblock %}
-{% block stylesheet %}
-    <link rel="stylesheet" href="/assets/css/index.css">
-{% endblock %}
-
-
 
 {% block content %}
 <body id="index" >
@@ -54,81 +49,33 @@
         <div class="row justify-content-center Search">
             <div class="offset-md-1 col-12 text-center">
                 <h3 class="keyword text-left"> Par mots-clés </h3>
+                <form method="Get" action="{{ path('search') }}">
                     <div class="input-group mb-3">
-                        <form method="Get" action="{{ path('search') }}">
-                            <input type="text" id="search" name="search" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            <div class="input-group-append text-align-center">
-                                <a> <button class="btnSearch btn btn-secondary" type="submit"><i class="fas fa-search"></i></button></a>
-                            </div>
-                        </form>
+                        <input type="text" id="search" name="search" class="form-control" placeholder="Recherche..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append text-align-center">
+                            <a> <button class="btnSearch btn btn-secondary" type="submit"><i class="fas fa-search"></i></button></a>
+                        </div>
                     </div>
+                </form>
             </div>
+
         </div>
-        <div class="container-fluid">
+        <div class="container-fluid mb-5">
             <div id="thumbnails">
                 <h3 class="text-left category"> Par catégorie </h3>
             </div>
             <div class="row">
-                <div class="column">
-                    <div class="content">
-                        <img class="img-fluid tofade" src="https://i.imgur.com/xo6cjHe.jpg" alt="Mountains" style="width:100%">
-                        <p class="todisplay"> Famille </p>
+                {%  for category in categories %}
+                    <div class="column">
+                       <a href=" {{ path('search', {'category_id': category.id}) }}"> <div class="content">
+                            <img class="img-fluid tofade" src="https://i.imgur.com/14uH65r.jpg" alt="Mountains" style="width:100%">
+                            <p class="todisplay"> {{ category.category }} </p>
+                        </div> </a>
                     </div>
-                </div>
-                <div class="column ">
-                    <div class="content">
-                        <img class="img-fluid tofade" src="https://i.imgur.com/h9xwpKw.png" alt="Lights" style="width:100%">
-                        <p class="todisplay"> Maison </p>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="content">
-                        <img class="img-fluid tofade" src="https://i.imgur.com/GKacePt.png" alt="Nature" style="width:100%">
-                        <p class="todisplay"> Vacances </p>
-                    </div>
-                </div>
-
-                <div class="column">
-                    <div class="content">
-                        <img class="img-fluid tofade" src="https://i.imgur.com/1ko3YmL.png" alt="Car" style="width:100%">
-                        <p class="todisplay"> Robotique </p>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="content">
-                        <img class="img-fluid tofade" src="https://i.imgur.com/1tAXicv.jpg" alt="Car" style="width:100%">
-                        <p class="todisplay"> Marketing </p>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="content">
-                        <img class="img-fluid tofade" src="https://i.imgur.com/WAsBTwe.png" alt="Car" style="width:100%" >
-                        <p class="todisplay"> Commerce international </p>
-                    </div>
-                </div>
-
-                <div class="column">
-                    <div class="content">
-                        <img class="img-fluid tofade" src="https://i.imgur.com/e6aQJQB.jpg" alt="Car" style="width:100%">
-                        <p class="todisplay"> Biologie </p>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="content">
-                        <img class="img-fluid tofade" src="https://i.imgur.com/7frPtS2.jpg" alt="Car" style="width:100%">
-                        <p class="todisplay"> Culture </p>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="content">
-                        <img class="img-fluid tofade" src="https://i.imgur.com/QKS81Pm.png" alt="Car" style="width:100%">
-                        <p class="todisplay"> Import/Export </p>
-                    </div>
-                </div>
+                {%  endfor %}
             </div>
         </div>
     </div>
-
 
 
 

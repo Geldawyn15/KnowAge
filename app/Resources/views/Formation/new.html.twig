@@ -1,7 +1,6 @@
 {% extends 'layout.html.twig' %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block title %} Créer une formation {% endblock %}
-{% block stylesheet %}<link rel="stylesheet" href="/assets/css/create.css">{% endblock %}
 
 
 {% block content %}
@@ -17,8 +16,16 @@
                 </div>
             </div>
         </div>
-        <div class="mb-3 container text-center FormCreate ">
+        <div class="mb-3 container text-center FormCreate">
+
             <div class="row">
+                {% if (form_errors(form.picture)) %}
+                    <div class="col-md-12">
+                    <div class="alert alert-danger" role="alert">
+                        {{ form_errors(form.picture) }}
+                    </div>
+                    </div>
+                {% endif %}
                 <div class="col-md-6 mb-3">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -36,12 +43,6 @@
                 </div>
 
                 <div class="col-md-6">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Mots clés</span>
-                        </div>
-
-                    </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="inputGroupSelect01">Catégorie</label>
@@ -63,11 +64,10 @@
                 <div class="col-md-4 mb-3">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text inputCreate">Upload</span>
+                            <span class="input-group-text inputCreate">Vignette</span>
                         </div>
                         <div class="custom-file">
                             {{ form_widget(form.picture) }}
-
                         </div>
                     </div>
                 </div>

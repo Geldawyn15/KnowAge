@@ -6,11 +6,13 @@ use AppBundle\Entity\Formation;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 
@@ -24,12 +26,15 @@ class addFormationType extends AbstractType
                     new NotBlank(),
                 )
             ))
-            ->add('description', TextType::class, array(
+            ->add('description', TextareaType::class, array(
+                'attr' => array(
+                'rows' => '3',
+                'cols' => '1',),
                 'constraints' => array(
                     new NotBlank()
                 )
             ))
-            //->add('tags', addFormationTagType::class)
+
             ->add('category' ,EntityType::class, array(
                 'class'  => 'AppBundle:Category',
                 'constraints'=> array(
@@ -47,7 +52,17 @@ class addFormationType extends AbstractType
             ))
             ->add('picture', FileType::class, array(
                 'constraints' => array(
-                    new NotBlank())
+                    new NotBlank(['message' => 'Ce chanmp ne peut etre vide']),
+                    new File([
+                        'maxSize' => '2M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Le format de votre image ({{ type }}) est invalide. Merci de sélectionner une image de type : {{ types }}.',
+                    ])
+
+                )
             ));
     }
 
