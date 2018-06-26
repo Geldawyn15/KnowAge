@@ -21,6 +21,7 @@
     },
     "require": {
         "php": ">=5.5.9",
+        "blackknight467/star-rating-bundle": "2.*",
         "claviska/simpleimage": "^3.3",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
@@ -49,7 +50,6 @@
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "FOS\\CKEditorBundle\\Composer\\CKEditorScriptHandler::install",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
@@ -74,8 +74,6 @@
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
         },
-        "ckeditor-tag": "4.7.0",
-        "ckeditor-clear": "drop",
         "branch-alias": null
     }
 }
