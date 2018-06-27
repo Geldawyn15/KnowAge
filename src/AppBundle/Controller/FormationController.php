@@ -24,7 +24,6 @@ class FormationController extends controller
 
     /**
      * create a formation / first step
-     *
      * @Route("/new", name="new")
      * @Method({"GET", "POST"})
      */
