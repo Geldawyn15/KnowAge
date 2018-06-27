@@ -123,7 +123,7 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->favoriteFormations = new ArrayCollection();
-        $this->$favoriteFormateurs = new ArrayCollection();
+        $this->favoriteFormateurs = new ArrayCollection();
     }
 
     /**

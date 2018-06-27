@@ -1,19 +1,20 @@
 
 {% extends 'layout.html.twig' %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
-{% block title %} Accueil formateur {% endblock %}
+{% block title %} Accueil formation {% endblock %}
 {% block stylesheet %}<link rel="stylesheet" href="/assets/css2/landingFormation.css">{% endblock %}
 
 
 {% block content %}
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.0';
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+    <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.0';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 
     <script>window.twttr = (function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0],
@@ -52,9 +53,6 @@
                             <li class="nav-item">
                                 <a class="nav-link active" href="#">Résumé</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">FAQ</a>
-                            </li>  
                             <!--Modal button start-->
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Contacter</a>
@@ -111,7 +109,7 @@
                         </div>
                         <!--Collapse end-->
                         <p class="card-text text-right blocAuthor">
-                            <a href="#"><span class="text-capitalize author">Par {{ formation.author.name }} {{ formation.author.firstName}} </span></a>
+                            <a href="#"><span class="text-capitalize author">Par {{ formation.author.nickName }}  </span></a>
                             <span class=""> | </span>
                             <span class="publicationdate">Publiée le {{  formation.createdAt | date('d M Y') }}</span>
                         </p>
@@ -142,7 +140,7 @@
                                 <div class="fb-share-button" data-href="http://127.0.0.1:8000/formation/show/97" data-layout="button" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8000%2Fformation%2Fshow%2F97&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
                             </div>
                             <div class="col-1 mt-1 mb-1">
-                                <a class="twitter-share-button" href="https://twitter.com/intent/tweet" data-size="large">Tweet</a>
+                                <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=formation:" data-size="large">Tweet</a>
                             </div>
                         </div>
                     </div>
