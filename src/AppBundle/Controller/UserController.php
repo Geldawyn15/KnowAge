@@ -167,40 +167,4 @@ class UserController extends controller
         $em->flush();
         return new Response();
     }
-
-
-
-    /**
-     * @Route("/resetpassword/{token}", name="resetPassword")
-     * @Method({"GET", "POST"})
-     */
-    public function resetPassword ($token, Request $request, UserPasswordEncoderInterface $encoder)
-    {
-        $form = $this->createForm(ResetPasswordType::class);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $plainPassword = $data['newPassword'];
-            $user = $this->getDoctrine()
-                ->getRepository(User:: class)
-                ->findOneBy([
-                    'token' => $token
-                ]);
-            if ($user) {
-                $encoded = $encoder->encodePassword($user, $plainPassword);
-                $user->setPassword($encoded);
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->flush();
-                $this->addFlash('success', 'Votre mot de passe a été mis à jour');
-                return $this->redirectToRoute('homepage');
-            } else {
-                $this->addFlash('danger', 'la réinitialisation de votre mot de passe a échoué, veuillez renouveler votre demande');
-
-                return $this->redirectToRoute('forgotPassword');
-            }
-        }
-        return $this->render('User/resetPassword.html.twig', array(
-            'form'=>$form->createView()
-        ));
-    }
 }
