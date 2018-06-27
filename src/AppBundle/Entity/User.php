@@ -70,7 +70,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @Assert\Image(
-     *     mimeTypes={"image/png"},
+     *     mimeTypes={"image/jpeg", "image/png", "image/gif", "image/jpg"},
      *     mimeTypesMessage= " Merci de choisir une image  .jpeg ou .png")
      */
     private $profilePicFile;
@@ -88,7 +88,7 @@ class User implements UserInterface, \Serializable
     private $newPassword;
 
     /**
-     * @Assert\NotBlank()
+     *
      * @Assert\Length(max=4096)
      */
     private $plainPassword;

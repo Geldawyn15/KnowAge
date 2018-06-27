@@ -71,13 +71,15 @@ class UserController extends controller
         $user->setprofilePicFile(null);
         $form = $this->createForm(UpdateProfileType::class, $user);
         $form->handleRequest($request);
+        $rootDir = $this->getParameter('kernel.project_dir');
+
         if ($form->isSubmitted() && $form->isValid()) {
             if ($user->getprofilePicFile()) {
 
                 $oldProfilePic = $user->getprofilePic();
 
-                if ($oldProfilePic && file_exists(__DIR__ .  '/../../../web' .$oldProfilePic)) {
-                    unlink(__DIR__ . '/../../../web' . $oldProfilePic);
+                if ($oldProfilePic && file_exists($rootDir .'/web' .$oldProfilePic)) {
+                    unlink($rootDir .'/web' .$oldProfilePic);
                 }
                 $profilePic = $user->getprofilePicFile();
                 $user->setprofilePic($imgUpload->uploadProfilPicture($profilePic));
