@@ -69,12 +69,12 @@
                         <h2 class="sub_title">par {{ formation.author.nickName }}</h2>
                         <p class="description"> {{  formation.description }}</p>
                         <div class="post-meta">
-                            <a href="{{ path('landing_formation', {id: formation.id}) }}" class="btn btn-sm btn-outline-primary waves-effect mr-3">Voir la formation</a>
-                            <button class="favoriteSearch btn" data-formation-id=" {{ formation.id }} ">
+                            <a href="{{ path('show', {id: formation.id}) }}" class="btn btn-sm btn-outline-primary waves-effect mr-3">Voir la formation</a>
+                            <button class="favoriteFormation btn" data-formation-id=" {{ formation.id }} ">
                                 {% if user.isFormationFavorited(formation) %}
-                                    <i id="favoriteSearch" class="fas fa-heart fa-2x"  style="color:Tomato"> </i>
+                                    <i id="favoriteFormation" class="fas fa-heart fa-2x"  style="color:Tomato"> </i>
                                 {% else %}
-                                    <i id="favoriteSearch" class="far fa-heart fa-2x"  style="color:Tomato"> </i>
+                                    <i id="favoriteFormation" class="far fa-heart fa-2x"  style="color:Tomato"> </i>
                                 {% endif %}
                             </button>
                         </div>
@@ -106,18 +106,18 @@
 
 <script>
    $(document).ready(function() {
-       $('.favoriteSearch').click(function() {
+       $('.favoriteFormation').click(function() {
            var icon = $(this).find("i");
            if (icon.hasClass("far")) {
-               $.get( '/user/favorite', {
+               $.get('/user/favoriteformation', {
                    formationId: $(this).attr('data-formation-id'),
-                   favorited: false
+                   favorited: 0
                });
                return icon.removeClass("far").addClass("fas");
            } else {
-               $.get( '/user/favorite', {
+               $.get('/user/favorite', {
                    formationId: $(this).attr('data-formation-id'),
-                   favorited: true
+                   favorited: 1
                });
                return icon.removeClass("fas").addClass("far");
            }
