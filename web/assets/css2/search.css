@@ -295,7 +295,8 @@ nav{
     color: #f2b202;
 }
 
-body {
+#search {
+    margin-top: 12rem;
     background-color: #D5D6D2 ;
 }
 
