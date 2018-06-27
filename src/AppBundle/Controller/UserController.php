@@ -71,13 +71,15 @@ class UserController extends controller
         $user->setprofilePicFile(null);
         $form = $this->createForm(UpdateProfileType::class, $user);
         $form->handleRequest($request);
+        $rootDir = $this->getParameter('kernel.project_dir');
+
         if ($form->isSubmitted() && $form->isValid()) {
             if ($user->getprofilePicFile()) {
 
                 $oldProfilePic = $user->getprofilePic();
 
-                if ($oldProfilePic && file_exists(__DIR__ .  '/../../../web' .$oldProfilePic)) {
-                    unlink(__DIR__ . '/../../../web' . $oldProfilePic);
+                if ($oldProfilePic && file_exists($rootDir .'/web' .$oldProfilePic)) {
+                    unlink($rootDir .'/web' .$oldProfilePic);
                 }
                 $profilePic = $user->getprofilePicFile();
                 $user->setprofilePic($imgUpload->uploadProfilPicture($profilePic));
@@ -108,13 +110,23 @@ class UserController extends controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = $passwordEncoder->encodePassword($user, $user->getnewPassword());
-            $user->setPassword($password);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->flush();
-            $this->addFlash('success', 'Mot de passe changé');
 
-            return $this->redirectToRoute('profil', ['id' => $user->getId()]);
+            if ($passwordEncoder->isPasswordValid($user, $user->getPlainPassword())) {
+
+                $password = $passwordEncoder->encodePassword($user, $user->getnewPassword());
+                $user->setPassword($password);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->flush();
+                $this->addFlash('success', 'Le mot de passe a été modifié');
+
+                return $this->redirectToRoute('profil', ['id' => $user->getId()]);
+
+            } else {
+
+                $this->addFlash('danger', 'Mot de passe invalide !');
+                return $this->redirectToRoute('update_password');
+
+            }
         }
 
         return $this->render('User/updatePassword.html.twig', array(

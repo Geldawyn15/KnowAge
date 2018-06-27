@@ -107,8 +107,9 @@ class FormationController extends controller
 
         if (in_array($extension, $allowedExts)) {
 
+            $rootDir = $this->getParameter('kernel.project_dir');
             $name = uniqid() . "." . $extension;
-            move_uploaded_file($_FILES["file"]["tmp_name"],  __DIR__ ."/../../../web/upload/contenuFormation/picture/" . $name);
+            move_uploaded_file($_FILES["file"]["tmp_name"],  $rootDir."/web/upload/contenuFormation/picture/" . $name);
             $response = ['link' => '/upload/contenuFormation/picture/'. $name];
 
             return new Response(stripslashes(json_encode($response)));
@@ -130,8 +131,9 @@ class FormationController extends controller
 
         if (in_array($extension, $allowedExts)) {
 
+            $rootDir = $this->getParameter('kernel.project_dir');
             $name = sha1(microtime()) . "." . $extension;
-            move_uploaded_file($_FILES["file"]["tmp_name"],  __DIR__ ."/../../../web/upload/contenuFormation/file/" . $name);
+            move_uploaded_file($_FILES["file"]["tmp_name"],  $rootDir. "/web/upload/contenuFormation/file/" . $name);
             $response = ['link' => '/upload/contenuFormation/file/'. $name];
 
             return new Response(stripslashes(json_encode($response)));
@@ -150,12 +152,16 @@ class FormationController extends controller
     public function showAction($id) {
 
         $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
+        $payment = $this->getDoctrine()->getRepository(Paiement::class)->findBy(['user' => $this->getUser(), 'formation' => $formation]);
+
+        if (!$payment) {
+            throw $this->createNotFoundException('Vous n\'êtes pas autorisé à accéder à cette page');
+        }
 
         return $this->render('Formation/show.html.twig', array(
             'formation' => $formation,
         ));
     }
-
 
 
     /**

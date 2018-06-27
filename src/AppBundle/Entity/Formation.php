@@ -30,33 +30,33 @@ class Formation
 
     /**
      * @var string
-     * @ORM\Column(name="title", type="string", length=45, nullable=true)
+     * @ORM\Column(name="title", type="string", length=45, nullable=false)
      */
     private $title;
 
     /**
      * @var string
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=false)
      */
     private $description;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_at", type="datetime", nullable=true)
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
     private $createdAt;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="price", type="integer", nullable=true)
+     * @ORM\Column(name="price", type="integer", nullable=false)
      */
     private $price;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $author;
 
@@ -71,7 +71,7 @@ class Formation
     private $tags;
 
     /**
-     * @ORM\Column(name="picture", type="string",nullable=true)
+     * @ORM\Column(name="picture", type="string",nullable=false)
     */
     private $picture;
 
