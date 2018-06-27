@@ -210,8 +210,8 @@ class FormationController extends controller
     /**
      * Signals an inaproriate content in formation
      *
-     * @Route("signal/{id}", name="signalFormation")
-     * @Method({"GET", "POST"})
+     * @Route("/signal/{id}", name="signalFormation")
+     * @Method({"GET", "POST"})in/cpon
      */
     public function signalFormationAction(formation $formation, Request $request, Mailer $mailer, $id)
     {

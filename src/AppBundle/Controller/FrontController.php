@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Formation;
 use AppBundle\Entity\Category;
+use AppBundle\Form\ForgotPasswordType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -175,6 +176,45 @@ class FrontController extends controller
             'form' => $form->createView(),
             'shortText' => $shortText
 
+        ));
+    }
+
+    /**
+     * @Route("/forgotpassword", name="forgotPassword")
+     * @Method({"GET", "POST"})
+     */
+    public function forgotpassword(Request $request, Mailer $mailer)
+    {
+        $form = $this->createForm(ForgotPasswordType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $email = $data['email'];
+            $userPasswordLost = $this->getDoctrine()
+                ->getRepository(User:: class)
+                ->findOneBy([
+                    'email' => $email
+                ]);
+            if ($userPasswordLost) {
+                $token = uniqid();
+                $userPasswordLost->setToken($token);
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+                $url = $this->generateUrl('resetPassword', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
+                $subject = 'Mot de passe perdu, NoAge';
+                $to = $userPasswordLost->getEmail();
+                $mailer->sendForgotPasswordMail($to, $subject, $url, $userPasswordLost);
+                $this->addFlash('success', 'Consultez votre boite mail. Un message vous a été envoyé avec un lien pour réinitialiser votre mot de passe  ');
+            } else {
+
+                $this->addFlash('danger', 'Nous n\'avons pas trouvé d\'utilisateur avec cet email, merci de rééssayer');
+
+                return $this->redirectToRoute('forgotPassword');
+            }
+        }
+        return $this->render('User/forgotPassword.html.twig', array(
+            'form'=>$form->createView()
         ));
     }
 }
