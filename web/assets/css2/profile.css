@@ -124,7 +124,7 @@ nav{
 
 
 #profile{
-    padding-top: 12rem;
+    margin-top: 12rem;
     background-color: #D5D6D2;
 }
 .formation {
@@ -305,10 +305,10 @@ hr:before {
     display: block;
 }
 
-#favoriteFormation {
+#favoriteFormations {
     display: none;
 }
-#favoriteFormateur {
+#favoriteFormateurs {
     display: none;
 }
 

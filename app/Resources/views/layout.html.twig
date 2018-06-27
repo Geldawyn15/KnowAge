@@ -29,7 +29,7 @@
     {% block javascript %}{% endblock %}
 </head>
 
-<body id="">
+<body id="{% block body_id %}{% endblock %}">
 <nav class="navbar navbar-expand-lg fixed-top" data-spy="affix" data-offset-top="">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">
