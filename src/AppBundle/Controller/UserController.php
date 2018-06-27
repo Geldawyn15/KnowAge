@@ -108,13 +108,23 @@ class UserController extends controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = $passwordEncoder->encodePassword($user, $user->getnewPassword());
-            $user->setPassword($password);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->flush();
-            $this->addFlash('success', 'Mot de passe changé');
 
-            return $this->redirectToRoute('profil', ['id' => $user->getId()]);
+            if ($passwordEncoder->isPasswordValid($user, $user->getPlainPassword())) {
+
+                $password = $passwordEncoder->encodePassword($user, $user->getnewPassword());
+                $user->setPassword($password);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->flush();
+                $this->addFlash('success', 'Le mot de passe a été modifié');
+
+                return $this->redirectToRoute('profil', ['id' => $user->getId()]);
+
+            } else {
+
+                $this->addFlash('danger', 'Mot de passe invalide !');
+                return $this->redirectToRoute('update_password');
+
+            }
         }
 
         return $this->render('User/updatePassword.html.twig', array(
