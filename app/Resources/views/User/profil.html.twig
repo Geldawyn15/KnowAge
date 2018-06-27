@@ -3,9 +3,10 @@
 {% block title %} Profil {% endblock %}
 {% block stylesheet %}<link rel="stylesheet" href="/assets/css2/profile.css">{% endblock %}
 
+{% block body_id %}profile{% endblock %}
 
 {% block content %}
-<body id="profile">
+
     <div class="d-flex justify-content-between">
         <div class="d-flex flex-column justify-content-center ml-5">
             {%  if  app.user.profilePic %}
