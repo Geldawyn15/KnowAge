@@ -153,21 +153,15 @@ class FormationController extends controller
         $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
         $payment = $this->getDoctrine()->getRepository(Paiement::class)->findBy(['user' => $this->getUser(), 'formation' => $formation]);
 
-
-
         if (!$payment) {
-
             throw $this->createNotFoundException('Vous n\'êtes pas autorisé à accéder à cette page');
-
         }
-
 
         return $this->render('Formation/show.html.twig', array(
             'formation' => $formation,
         ));
 
     }
-
 
 
     /**
