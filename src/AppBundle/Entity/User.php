@@ -49,12 +49,7 @@ class User implements UserInterface, \Serializable
      */
     private $nickName;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=45, unique=true, nullable=true)
-     */
-    private $username;
+
 
     /**
      * @var string
@@ -198,23 +193,10 @@ class User implements UserInterface, \Serializable
         $this->nickName = $nickName;
     }
 
-    /**
-     * Set nickname
-     *
-     * @param string $nickname
-     *
-     * @return User
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
 
     /**
      * Get nickname
-     *
+     * @internal
      * @return string
      */
     public function getUsername()
