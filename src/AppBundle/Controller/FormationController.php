@@ -140,25 +140,6 @@ class FormationController extends controller
     }
 
 
-
-
-    /**
-     * Displays content of a formation entity.
-     *
-     * @Route("/show/{id}", name="show")
-     * @Method({"GET", "POST"})
-     */
-    public function showAction($id) {
-
-        $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
-
-        return $this->render('Formation/show.html.twig', array(
-            'formation' => $formation,
-        ));
-    }
-
-
-
     /**
      * @Route("/achat/{id}", name="formation_Achat")
      * @Method({"GET", "POST"})
