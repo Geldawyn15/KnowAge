@@ -170,6 +170,8 @@ class FormationController extends controller
             'user' => $this->getUser(),
             'formation' => $formation,
             ]);
+        //dump($formation);
+        //dump($this->getUser());die;
 
         if ($formation->getAuthor() !== ($user = $this->getUser()) && !$verfifPaiement)  {
 
@@ -190,9 +192,7 @@ class FormationController extends controller
         elseif ($formation->getAuthor() == $this->getUser()) {
 
 
-
             $this->addFlash('danger', 'Vous ne pouvez pas acheter votre formation!');
-
 
             return $this->redirectToRoute('landing_formation', ['id' => $formation->getId()]);
         }
