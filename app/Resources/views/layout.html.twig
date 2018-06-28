@@ -82,7 +82,13 @@
     </div>
 </nav>
 
+
 {% block content %}{% endblock %}
+
+        /* type pour Toastr => success, info, warning, error*/
+        {% for type, messages in app.flashes %}
+            var type = '{{ type }}';
+
 
 <footer class="footer-distributed">
     <div class="footer-right">
