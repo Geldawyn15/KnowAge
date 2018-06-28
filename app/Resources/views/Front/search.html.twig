@@ -105,7 +105,7 @@
    {% endif %}
         {% endif %}
 
-   {%  if  formations is empty and search is not empty %}
+   {% if search or id and formations is empty %}
        <div class="row text-center">
            <div class="col-12 mb-5 typo">
                <h3> Votre recherche n'a donné aucun résultat </h3>

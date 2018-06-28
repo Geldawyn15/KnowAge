@@ -41,6 +41,7 @@ class FrontController extends controller
         $user = $this->getUser();
         $formations = null;
         $searchs = '';
+        $id= '';
 
 
         if ($request->query->get('category_id')) {
@@ -50,11 +51,13 @@ class FrontController extends controller
 
             $paginator  = $this->get('knp_paginator');
 
+
             $formations = $paginator->paginate(
                 $query,
                 $request->query->getInt('page', 1),
                 4
             );
+
         }
 
 
@@ -78,6 +81,7 @@ class FrontController extends controller
             'formations' => $formations,
             'user' => $user,
             'search' => $searchs,
+            'id' => $id,
         ));
 
     }
