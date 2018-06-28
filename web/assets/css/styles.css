@@ -801,25 +801,7 @@ hr:before {
     font-size: 1.2em;
 }
 
-#bodyforgotPassword {
-    font-family: 'Hind Siliguri', sans-serif;
-    background-color: #D5D6D2;
-    margin-top:8em;
-}
 
-#bodyresetPassword
-{
-    font-family: 'Hind Siliguri', sans-serif;
-    background-color: #D5D6D2;
-    margin-top:8em;
-}
-
-#bodyforgotSignalFormation
-{
-    font-family: 'Hind Siliguri', sans-serif;
-    background-color: #D5D6D2;
-    margin-top:8em;
-}
 
 /* **************** end landingFormation **************** */
 
@@ -1361,3 +1343,25 @@ CUSTON BTN VALUES
     padding-top: 10rem;
 }
 /* **************** end updatePassoword **************** */
+
+
+/* **************** start signalFormation, forgotPassword, resetPassword **************** */
+
+#SignalFormation, #forgotPassword, #resetPassword
+{
+    font-family: 'Hind Siliguri', sans-serif;
+    background-color: #D5D6D2;
+    margin-top:8em;
+}
+
+/* **************** end signalFormation **************** */
+
+#resetPassword
+{
+    font-family: 'Hind Siliguri', sans-serif;
+    background-color: #D5D6D2;
+    margin-top:8em;
+}
+
+
+
