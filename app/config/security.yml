@@ -23,6 +23,7 @@ security:
         main:
             anonymous: ~
             form_login:
+
                 login_path: login
                 check_path: login
                 provider: our_db_provider

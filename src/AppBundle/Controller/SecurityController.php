@@ -7,6 +7,7 @@ use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -33,6 +34,17 @@ class SecurityController extends controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+
+            $token = new UsernamePasswordToken(
+                $user,
+                $password,
+                'main',
+                $user->getRoles()
+                );
+
+            $this->get('security.token_storage')->setToken($token);
+
+            $this->addFlash('success', 'Vous êtes connecté en tant que '.$user->getNickName());
 
             return $this->redirectToRoute('homepage');
         }

@@ -137,7 +137,7 @@ body{
 
 .FormCreate{
 
-    border: 1px solid #D3D3D3;
+    border: 2px solid darkblue;
     border-radius: 0.5em;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding-left: 1em;
