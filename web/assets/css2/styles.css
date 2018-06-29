@@ -21,7 +21,9 @@
 .navbar-brand{
     font-size: 35px;
 }
-
+nav{
+    width: 100%;
+}
 .navbar-nav {
     width: 100%;
     text-align: center;
@@ -801,199 +803,30 @@ hr:before {
     font-size: 1.2em;
 }
 
+#bodyforgotPassword {
+    font-family: 'Hind Siliguri', sans-serif;
+    background-color: #D5D6D2;
+    margin-top:8em;
+}
 
+#bodyresetPassword
+{
+    font-family: 'Hind Siliguri', sans-serif;
+    background-color: #D5D6D2;
+    margin-top:8em;
+}
+
+#bodyforgotSignalFormation
+{
+    font-family: 'Hind Siliguri', sans-serif;
+    background-color: #D5D6D2;
+    margin-top:8em;
+}
 
 /* **************** end landingFormation **************** */
 
 
 
-/* **************** start index **************** */
-#index {
-    background-color: #f1f1f1;
-}
-@media (max-width: 769px) {
-    .logo{
-        display: none;
-    }
-    .apprendre{
-        padding-top: 5px;
-    }
-}
-
-.thumbnail{
-    padding-top: 10px;
-}
-.vignette{
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.logo {
-    width: 50%;
-}
-
-.color {
-
-    background-color: #D5D6D2;
-}
-.color2 {
-    padding-top: 2%;
-    background-color: #3A5199e;
-}
-
-.color3 {
-    background-color: #D5D6D2;
-    padding-top: 10rem;
-}
-
-.Search {
-    margin-top: 40px;
-    width: 95%;
-}
-
-.keyword{
-
-    margin-bottom: 25px ;
-}
-
-.category {
-    margin-top: 25px;
-    margin-bottom: 25px;
-}
-.button {
-
-    align-items: center;
-    font-size: 20px;
-
-}
-
-.title {
-    vertical-align: middle;
-}
-
-.loginBtn {
-    margin: 5%;
-    color: #292c2f;
-
-}
-
-.tagline {
-    padding-top: 0.5em;
-    padding-bottom: 0;
-    color: #3A5199;
-    font-family: 'Lobster Two', cursive;
-}
-
-.head {
-
-    display: flex;
-    background-color: darkcyan;
-    height: 100px;
-
-}
-.bottomBtn {
-    display: inline-block;
-    line-height: 1.42857143;
-    text-align: center;
-    border: 1px solid transparent;
-    padding: 14px 24px;
-    font-size: 18px;
-    border-radius: 24px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    background: #3A5199;
-    color: #FFFFFF;
-}
-
-.bottomBtn:hover, .bottomBtn:focus, .bottomBtn:active, .bottomBtn.active {
-    background: #33A6CC;
-}
-
-#thumbnails {
-    max-width: 1000px;
-    margin: auto;
-}
-
-.tagline {
-    font-size: 50px;
-}
-
-/* Add padding BETWEEN each column */
-.column {
-    float: left;
-    width: 33.33%;
-    padding: 8px;
-}
-
-/* Clear floats after rows */
-.thumbs:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-/* Content */
-.content {
-    background-color: #999999;
-    position: relative;
-}
-
-
-.todisplay {
-    display: none;
-}
-.content:hover .todisplay {
-    position: absolute;
-    display: block;
-    width: 100%;
-    text-align: center;
-    top:40%;
-    font-family: 'Hind Siliguri', sans-serif;
-    font-weight: 700;
-    color: #292c2f;
-    font-size: xx-large;
-    text-transform: uppercase;
-    filter: blur(0px);
-}
-.content:hover .tofade {
-    filter: blur(4px);
-}
-
-.scroll-top {
-    width: 5%;
-    height: 5%;
-    position: fixed;
-    bottom: 25px;
-    right: 10rem;
-    display: none;
-    z-index: 200;
-    background-color: #3A5199;
-}
-.scroll-top:hover{
-    background-color: #2F2E33;
-}
-.scroll-top i {
-    display: inline-block;
-    color: #fff;
-}
-
-.btnSearch{
-    background-color: #3A5199;
-}
-
-#about{
-    max-width: 1000px;
-    margin: auto;
-    padding: 0 0 15px;
-}
-.left{
-    padding-right: 40px;
-    border-right: 1px solid #3A5199;
-}
-
-.typo {
-    font-family: 'Concert One', cursive;
-    font-size: xx-large
 }
 /* **************** end index **************** */
 
@@ -1343,25 +1176,3 @@ CUSTON BTN VALUES
     padding-top: 10rem;
 }
 /* **************** end updatePassoword **************** */
-
-
-/* **************** start signalFormation, forgotPassword, resetPassword **************** */
-
-#SignalFormation, #forgotPassword, #resetPassword
-{
-    font-family: 'Hind Siliguri', sans-serif;
-    background-color: #D5D6D2;
-    margin-top:8em;
-}
-
-/* **************** end signalFormation **************** */
-
-#resetPassword
-{
-    font-family: 'Hind Siliguri', sans-serif;
-    background-color: #D5D6D2;
-    margin-top:8em;
-}
-
-
-

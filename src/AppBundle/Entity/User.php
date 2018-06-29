@@ -4,9 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use FOS\CKEditorBundle\FOSCKEditorBundle;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -51,12 +49,7 @@ class User implements UserInterface, \Serializable
      */
     private $nickName;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=45, unique=true, nullable=true)
-     */
-    private $username;
+
 
     /**
      * @var string
@@ -72,7 +65,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @Assert\Image(
-     *     mimeTypes={"image/png"},
+     *     mimeTypes={"image/jpeg", "image/png", "image/gif", "image/jpg"},
      *     mimeTypesMessage= " Merci de choisir une image  .jpeg ou .png")
      */
     private $profilePicFile;
@@ -90,7 +83,7 @@ class User implements UserInterface, \Serializable
     private $newPassword;
 
     /**
-     * @Assert\NotBlank()
+     *
      * @Assert\Length(max=4096)
      */
     private $plainPassword;
@@ -200,23 +193,10 @@ class User implements UserInterface, \Serializable
         $this->nickName = $nickName;
     }
 
-    /**
-     * Set nickname
-     *
-     * @param string $nickname
-     *
-     * @return User
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
 
     /**
      * Get nickname
-     *
+     * @internal
      * @return string
      */
     public function getUsername()

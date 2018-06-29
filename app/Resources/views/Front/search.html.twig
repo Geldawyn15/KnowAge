@@ -1,8 +1,10 @@
 {% extends 'layout.html.twig' %}
 {% block title %} Recherche {% endblock %}
+{% block stylesheet %}<link rel="stylesheet" href="/assets/css2/search.css">{% endblock %}
 
+{% block body_id %}search{% endblock %}
 {% block content %}
-    <body>
+
         {%  if formations is empty and search is empty %}
             <div class="row">
                 <div class="col-10 text-center">
@@ -10,11 +12,12 @@
                 </div>
             </div>
             <div class="container">
-                <div class="row emptySearchbar">
+                <div class="row empty Search">
                     <div class="col-md-12 text-center">
                         <form method="Get" action="{{ path('search') }}">
                             <div class="input-group mb-3">
-                                <input type="text" id="search" name="search" class="form-control" placeholder="Recherche..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+
+                                <input type="text" id="searchbar" name="search" class="form-control" placeholder="Recherche..." aria-label="Recipient's username" aria-describedby="basic-addon2">
                                 <div class="input-group-append text-align-center">
                                     <a> <button class="btnSearch btn btn-secondary" type="submit"><i class="fas fa-search"></i></button></a>
                                 </div>
@@ -23,14 +26,21 @@
                     </div>
                 </div>
             </div>
-        {%  else %}
+        {% else %}
 
    <div class="container">
         <div class="row searchbar">
             <div class="col-md-12 text-center">
                 <form method="Get" action="{{ path('search') }}">
                     <div class="input-group mb-3">
-                        <input type="text" id="search" name="search" class="form-control" placeholder="Recherche..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+
+                        <input type="text" id="searchbar" name="search" class="form-control"
+                           {% if search %}
+                                value="{{ search.0 }}"
+                           {%  endif %}
+                               aria-label="Recipient's username" aria-describedby="basic-addon2">
+
+
                         <div class="input-group-append text-align-center">
                             <a> <button class="btnSearch btn btn-secondary" type="submit"><i class="fas fa-search"></i></button></a>
                         </div>
@@ -39,6 +49,7 @@
             </div>
         </div>
     </div>
+
    {% if formations %}
     <div class="container">
         <div class="row ">
@@ -64,12 +75,12 @@
                     <div class="post-content">
                         <div class="category">{{ formation.category }}</div>
                         <h1 class="title">{{ formation.title }}</h1>
-                        <h2 class="sub_title">par {{ formation.author.name }} {{  formation.author.firstName}}</h2>
+                        <h2 class="sub_title">par {{ formation.author.nickName }}</h2>
                         <p class="description"> {{  formation.description }}</p>
                         <div class="post-meta">
                             <a href="{{ path('landing_formation', {id: formation.id}) }}" class="btn btn-sm btn-outline-primary waves-effect mr-3">Voir la formation</a>
                             <button class="favoriteFormation btn" data-formation-id=" {{ formation.id }} ">
-                                {% if user.isFormationFavorited(formation) %}
+                                {% if app.user and user.isFormationFavorited(formation) %}
                                     <i id="favoriteFormation" class="fas fa-heart fa-2x"  style="color:Tomato"> </i>
                                 {% else %}
                                     <i id="favoriteFormation" class="far fa-heart fa-2x"  style="color:Tomato"> </i>
@@ -94,7 +105,7 @@
    {% endif %}
         {% endif %}
 
-   {%  if  formations is empty and search is not empty %}
+   {% if (search or id) and formations is empty %}
        <div class="row text-center">
            <div class="col-12 mb-5 typo">
                <h3> Votre recherche n'a donné aucun résultat </h3>
