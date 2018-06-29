@@ -4,12 +4,16 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Formation;
 use AppBundle\Entity\Category;
+use AppBundle\Entity\Rating;
+use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\Mailer;
 use AppBundle\Form\ContactTeacherType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class FrontController extends controller
 {
@@ -102,6 +106,7 @@ class FrontController extends controller
             return $this->redirectToRoute('contact');
         }
 
+
         return $this->render('Front/contact.html.twig', array(
             'form' => $form->createView()
         ));
@@ -177,4 +182,34 @@ class FrontController extends controller
 
         ));
     }
+
+
+    /**
+     * Rates a formation.
+     *
+     * @Route("/formation/{formation_id}/rating/{rate}", name="rating", requirements={"formation_id": "\d+"})
+     * @Security("has_role('ROLE_USER')")
+     *
+     * @ParamConverter("formation", options={"mapping": {"formation_id": "id"}})
+     *
+     * @Method({"GET", "POST"})
+     */
+    public function ratingAction(Formation $formation, $rate)
+    {
+        $user = $this->getUser();
+        $rating = new Rating();
+        $rating->setUser($user);
+        $rating->setFormation($formation);
+        $rating->setRate($rate);
+
+        $em = $this->getDoctrine()->getManager();
+        $formation = $em->getRepository('AppBundle:Formation')->find($formation);
+        $em->persist($rating);
+        $em->flush();
+
+        return $this->redirectToRoute('landing_formation', array(
+            'id' => $formation->getId(),
+        ));
+    }
+
 }
