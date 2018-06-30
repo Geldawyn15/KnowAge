@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Comment
  *
- * @ORM\Table(name="comment")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\CommentRepository")
+ * @ORM\Table(name="comments")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CommentsRepository")
  */
-class Comment
+class Comments
 {
     /**
      * @var int
@@ -24,7 +24,7 @@ class Comment
     /**
      * @var string
      *
-     * @ORM\Column(name="comment", type="string", length=255)
+     * @ORM\Column(name="comment", type="text")
      */
     private $comment;
 
@@ -32,7 +32,14 @@ class Comment
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $author_id;
+    private $author;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Formation")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $formation;
 
     /**
      * Get id
@@ -71,17 +78,34 @@ class Comment
     /**
      * @return mixed
      */
-    public function getAuthorId()
+    public function getAuthor()
     {
-        return $this->author_id;
+        return $this->author;
     }
 
     /**
-     * @param mixed $author_id
+     * @param mixed $author
      */
-    public function setAuthorId($author_id)
+    public function setAuthor($author)
     {
-        $this->author_id = $author_id;
+        $this->author = $author;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getFormation()
+    {
+        return $this->formation;
+    }
+
+    /**
+     * @param mixed $formation
+     */
+    public function setFormation($formation)
+    {
+        $this->formation = $formation;
+    }
+
 }
 

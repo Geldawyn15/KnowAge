@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Comment;
+use AppBundle\Entity\Comments;
 use AppBundle\Entity\Formation;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\User;
@@ -163,6 +165,9 @@ class FrontController extends controller
         $form->handleRequest($request);
         $shortText = $formation->shortText(250);
 
+        $comments = $this->getDoctrine()->getRepository(Comments::class)->findBy(['formation' => $formation->getId()]);
+
+        // envoi du mail au formateur
         if ($form->isSubmitted() && $form->isValid()) {
 
             $data = $form->getData();
@@ -178,11 +183,12 @@ class FrontController extends controller
                 'id' => $formation->getId(),
             ));
         }
-
+        // fin d'envoi du mail
         return $this->render('Formation/landing_formation.html.twig', array(
             'formation' => $formation,
             'form' => $form->createView(),
-            'shortText' => $shortText
+            'shortText' => $shortText,
+            'comments' => $comments
 
         ));
     }
