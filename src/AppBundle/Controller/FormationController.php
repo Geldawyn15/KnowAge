@@ -95,17 +95,9 @@ class FormationController extends controller
 
         if ($content = $request->request->get('content')) {
 
-            $page = new FormationPage();
-
-/*            $lastPage = $this->getDoctrine()->getRepository(FormationPage::class)
-                     ->findBy(['formation' => $formation], ['ordering' => 'DESC']);
-
-            $order = $lastPage ? $lastPage[0]->getOrdering() + 1 : 0;
-*/
-            $page->setOrdering($order)->setContent($content)->setFormation($formation);
-
-            // TODO
-            $formation->addPage($content);
+            $formationPage = new FormationPage($formation);
+            $formationPage->setContent($content);
+            $formation->addPage($formationPage);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();

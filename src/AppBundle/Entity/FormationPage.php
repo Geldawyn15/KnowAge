@@ -23,7 +23,7 @@ class FormationPage
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Formation")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Formation", inversedBy="pages")
      *
      */
     private $formation;
@@ -42,6 +42,10 @@ class FormationPage
      */
     private $ordering;
 
+    public function __construct(Formation $formation = null)
+    {
+        $this->formation = $formation;
+    }
 
     /**
      * Get id

@@ -84,21 +84,10 @@ class Formation
 
 
     /**
-     * @ORM\OneToMany(targetEntity="FormationPage", targetEntity="formation")
+     * @ORM\OneToMany(targetEntity="FormationPage", mappedBy="formation", cascade={"all"})
+     * @ORM\OrderBy({"ordering" = "ASC"})
      */
     private $pages;
-
-
-    // TODO ONE TO MANY (cascade all)
-    // TODO function addPage($formationPage)
-
-    public function addPage($formationPage)
-    {
-        $page = end($this->pages);
-
-
-    }
-
 
     public function __construct()
     {
@@ -106,6 +95,24 @@ class Formation
         $this->pages = new ArrayCollection();
     }
 
+
+    public function addPage(FormationPage $formationPage)
+    {
+        $formationPage->setFormation($this);
+
+        if (!$formationPage->getOrdering()) {
+            $lastPage = $this->pages->last();
+            if (!$lastPage){
+                $formationPage->setOrdering(1);
+            } else {
+                $order = $lastPage->getOrdering() + 1;
+                $formationPage->setOrdering($order);
+            }
+        }
+
+        $this->pages[] = $formationPage;
+
+    }
     /**
      * @return string
      */
@@ -121,9 +128,6 @@ class Formation
     {
         $this->content = $content;
     }
-
-
-
 
 
     /**
