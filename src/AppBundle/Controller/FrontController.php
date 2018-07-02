@@ -7,6 +7,7 @@ use AppBundle\Entity\Comments;
 use AppBundle\Entity\Formation;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\User;
+use AppBundle\Form\CommentType;
 use AppBundle\Form\ForgotPasswordType;
 use AppBundle\Form\ResetPasswordType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -161,16 +162,47 @@ class FrontController extends controller
     public function landingAction(Request $request, Formation $formation, Mailer $mailer)
     {
 
-        $form = $this->createForm(ContactTeacherType::class);
-        $form->handleRequest($request);
+        $entityManager = $this->getDoctrine()->getManager();
+
         $shortText = $formation->shortText(250);
 
-        $comments = $this->getDoctrine()->getRepository(Comments::class)->findBy(['formation' => $formation->getId()]);
+        $contactForm = $this->createForm(ContactTeacherType::class);
+        $contactForm->handleRequest($request);
 
-        // envoi du mail au formateur
-        if ($form->isSubmitted() && $form->isValid()) {
+        $comment = new Comments();
+        $commentForm = $this->createForm(CommentType::class, $comment);
+        $commentForm->handleRequest($request);
 
-            $data = $form->getData();
+        $comments = $this->getDoctrine()->getRepository(Comments::class)->findBy(['formation' => $formation->getId()], ['createdAt' => 'ASC']);
+        $paginator  = $this->get('knp_paginator');
+
+        $comments = $paginator->paginate(
+            $comments,
+            $request->query->getInt('page', 1),
+            3
+        );
+
+        // Post a comment
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+
+            $user = $this->getUser();
+
+            $comment->setAuthor($user);
+            $comment->setCreatedAt(new \DateTime('now'));
+            $comment->setFormation($formation);
+
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Commentaire envoyé');
+
+        }
+
+
+        // Send mail to teacher
+        if ($contactForm->isSubmitted() && $contactForm->isValid()) {
+
+            $data = $contactForm->getData();
 
             $email = $data['email'];
             $subject = $data['objet'];
@@ -183,10 +215,12 @@ class FrontController extends controller
                 'id' => $formation->getId(),
             ));
         }
-        // fin d'envoi du mail
+
+
         return $this->render('Formation/landing_formation.html.twig', array(
             'formation' => $formation,
-            'form' => $form->createView(),
+            'contactForm' => $contactForm->createView(),
+            'commentForm' => $commentForm->createView(),
             'shortText' => $shortText,
             'comments' => $comments
 

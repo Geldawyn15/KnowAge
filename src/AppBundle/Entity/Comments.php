@@ -41,6 +41,14 @@ class Comments
      */
     private $formation;
 
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     */
+    private $createdAt;
+
     /**
      * Get id
      *
@@ -105,6 +113,22 @@ class Comments
     public function setFormation($formation)
     {
         $this->formation = $formation;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \DateTime $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
     }
 
 }

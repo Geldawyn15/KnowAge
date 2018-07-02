@@ -1,6 +1,7 @@
 
 {% extends 'layout.html.twig' %}
-{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% form_theme contactForm 'bootstrap_4_layout.html.twig' %}
+{% form_theme commentForm 'bootstrap_4_layout.html.twig' %}
 {% block title %} Accueil formation {% endblock %}
 {% block stylesheet %}<link rel="stylesheet" href="/assets/css2/landingFormation.css">{% endblock %}
 
@@ -78,24 +79,24 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        {{ form_start(form) }}
+                                        {{ form_start(contactForm) }}
                                         <div class="form-group">
-                                            {{ form_label(form.email) }}
-                                            {{ form_widget(form.email) }}
+                                            {{ form_label(contactForm.email) }}
+                                            {{ form_widget(contactForm.email) }}
                                         </div>
                                         <div class="form-group">
-                                            {{ form_label(form.objet) }}
-                                            {{ form_widget(form.objet) }}
+                                            {{ form_label(contactForm.objet) }}
+                                            {{ form_widget(contactForm.objet) }}
                                         </div>
                                         <div class="form-group">
-                                            {{ form_label(form.message) }}
-                                            {{ form_widget(form.message) }}
+                                            {{ form_label(contactForm.message) }}
+                                            {{ form_widget(contactForm.message) }}
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                                             <input type="submit" class="btn btn-primary" value="Envoyez"/>
                                         </div>
-                                        {{ form_end(form) }}
+                                        {{ form_end(contactForm) }}
                                     </div>
                                 </div>
                             </div>
@@ -111,15 +112,26 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        {% for comment in comments %}
                                         <div>
-                                            <strong class="pull-left primary-font">{{ comment.author }}</strong>
-                                            </br>
-                                            <li class="ui-state-default">
-                                                {{ comment.comment }}
-                                            </li>
+                                            {{ form_start(commentForm) }}
+                                                {{ form_label(commentForm.comment) }}
+                                                {{ form_widget(commentForm.comment) }}
+                                                <input type="submit" class="btn btn-primary" value="Envoyez"/>
+                                            {{ form_end(commentForm) }}
+
+
+                                            {% for comment in comments %}
+                                                <strong class="pull-left primary-font">{{ comment.author }}</strong>
+                                                <small class="pull-right text-muted">
+                                                    <span class="glyphicon glyphicon-time"></span>{{ comment.createdAt|date('d-m-Y') }}</small>
+                                                </br>
+                                                <p class="ui-state-default text-center">
+                                                    {{ comment.comment }}
+                                                </p>
+                                            {%  endfor %}
+                                            {{ knp_pagination_render(comments) }}
                                         </div>
-                                        {%  endfor %}
+
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                                         </div>
