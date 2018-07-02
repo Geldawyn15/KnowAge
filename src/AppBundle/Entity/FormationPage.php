@@ -56,7 +56,7 @@ class FormationPage
     /**
      * Set formation
      *
-     * @param integer $formation
+     * @param $formation
      *
      * @return FormationPage
      */

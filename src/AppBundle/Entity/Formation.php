@@ -83,10 +83,27 @@ class Formation
     private $content;
 
 
+    /**
+     * @ORM\OneToMany(targetEntity="FormationPage", targetEntity="formation")
+     */
+    private $pages;
+
+
+    // TODO ONE TO MANY (cascade all)
+    // TODO function addPage($formationPage)
+
+    public function addPage($formationPage)
+    {
+        $page = end($this->pages);
+
+
+    }
+
 
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->pages = new ArrayCollection();
     }
 
     /**
@@ -290,6 +307,22 @@ class Formation
     public function shortText($lenght)
     {
         return $shortText = substr($this->getDescription(), 0, $lenght);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPages()
+    {
+        return $this->pages;
+    }
+
+    /**
+     * @param mixed $pages
+     */
+    public function setPages($pages)
+    {
+        $this->pages = $pages;
     }
 
 }
