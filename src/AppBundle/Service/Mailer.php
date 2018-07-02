@@ -80,6 +80,13 @@ class Mailer
         $this->sendMail($subject, $body, $to);
     }
 
+    public function sendBadRanking ($to, $subject, $userWhoRates, $formation)
+    {
+        $body = $this->templating->render('Mail/badRank.html.twig', array(
+            'userWhoRate' => $userWhoRates,
+            'formation' => $formation,
 
-
+        ));
+        $this->sendMail($subject, $body, $to);
+    }
 }

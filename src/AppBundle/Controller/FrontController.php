@@ -25,7 +25,7 @@ class FrontController extends controller
         $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
 
         return $this->render('Front/index.html.twig', array(
-                'categories' => $categories,
+            'categories' => $categories,
         ));
     }
 
@@ -47,7 +47,7 @@ class FrontController extends controller
             $id = $request->query->get('category_id');
             $query = $this->getDoctrine()->getRepository(Formation::class)->findBy(['category' => $id]);
 
-            $paginator  = $this->get('knp_paginator');
+            $paginator = $this->get('knp_paginator');
 
             $formations = $paginator->paginate(
                 $query,
@@ -64,7 +64,7 @@ class FrontController extends controller
             $repository = $this->getDoctrine()->getRepository(Formation::class);
             $formations = $repository->findFormation($searchs);
 
-            $paginator  = $this->get('knp_paginator');
+            $paginator = $this->get('knp_paginator');
             $formations = $paginator->paginate(
                 $formations,
                 $request->query->getInt('page', 1),
@@ -124,7 +124,7 @@ class FrontController extends controller
 
         if ($request->query->get('formationId')) {
             $formationId = $request->query->get('formationId');
-            $favorited  = $request->query->get('favorited');
+            $favorited = $request->query->get('favorited');
             $formation = $em->getRepository('AppBundle:Formation')->find(['id' => $formationId]);
             if (!$favorited) {
                 $user->addFavoriteFormation($formation);
@@ -159,6 +159,25 @@ class FrontController extends controller
         $form->handleRequest($request);
         $shortText = $formation->shortText(250);
 
+        //Affichage de la note moyenne
+        $em = $this->getDoctrine()->getManager();
+        $averageRateArray = $em->getRepository('AppBundle:Rating')->findBy(
+            ['formation' => $formation],
+            ['rate' => 'ASC']
+        );
+        $averagerate = 0;
+        $arrayrate = [];
+
+        for ($i = 0; $i < count($averageRateArray); $i++) {
+            $arrayrate[] = $averageRateArray[$i]->getRate();
+        }
+
+        if (count($arrayrate)) {
+            $arrayrate = array_filter($arrayrate);
+            $averagerate = array_sum($arrayrate) / count($arrayrate);
+        }
+        //Fin d'affichage de la note moyenne
+
         if ($form->isSubmitted() && $form->isValid()) {
 
             $data = $form->getData();
@@ -168,17 +187,20 @@ class FrontController extends controller
             $message = $data['message'];
             $to = $formation->getAuthor()->getEmail();
 
+
             $mailer->sendTeacherMail('romain.poilpret@gmail.com', $message, $subject, $email);
 
             return $this->redirectToRoute('landing_formation', array(
                 'id' => $formation->getId(),
+
             ));
         }
 
         return $this->render('Formation/landing_formation.html.twig', array(
             'formation' => $formation,
             'form' => $form->createView(),
-            'shortText' => $shortText
+            'shortText' => $shortText,
+            'average' => $averagerate,
 
         ));
     }
@@ -194,22 +216,47 @@ class FrontController extends controller
      *
      * @Method({"GET", "POST"})
      */
-    public function ratingAction(Formation $formation, $rate)
+    public function ratingAction(Formation $formation, $rate, Mailer $mailer)
     {
         $user = $this->getUser();
-        $rating = new Rating();
-        $rating->setUser($user);
-        $rating->setFormation($formation);
-        $rating->setRate($rate);
+        $userAlreadyRate = $this->getDoctrine()
+            ->getRepository(Rating:: class)
+            ->findOneBy([
+                'user' => $user,
+                'formation' => $formation,
+            ]);
 
-        $em = $this->getDoctrine()->getManager();
-        $formation = $em->getRepository('AppBundle:Formation')->find($formation);
-        $em->persist($rating);
-        $em->flush();
+        if (!$userAlreadyRate) {
 
-        return $this->redirectToRoute('landing_formation', array(
-            'id' => $formation->getId(),
-        ));
+            $rating = new Rating();
+            $rating->setUser($user);
+            $rating->setFormation($formation);
+            $rating->setRate($rate);
+
+            $em = $this->getDoctrine()->getManager();
+            $formation = $em->getRepository('AppBundle:Formation')->find($formation);
+            $em->persist($rating);
+            $em->flush();
+
+            //send Formateur if badRate
+            $subject = 'Un utilisateur a attribué une note inférieure à 3 pour votre formation';
+            $to = $formation->getAuthor()->getEmail();
+            $userWhoRates = $this->getUser();
+                if ($rate and $rate <3){
+                    $mailer->sendBadRanking($to, $subject, $userWhoRates, $formation);
+                }
+
+            $message = 'Vous avez attribué la note de ' .  $rate . ' / 5 à cette formation. Merci de votre contribution';
+            $this->addFlash('alert', $message);
+            return $this->redirectToRoute('landing_formation', array(
+                'id' => $formation->getId(),
+            ));
+        } else {
+            $this->addFlash('danger', 'Vous avez déjà noté cette formation');
+        } return $this->redirectToRoute('landing_formation', array(
+        'id' => $formation->getId(),
+    ));
     }
+
 
 }

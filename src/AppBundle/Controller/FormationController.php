@@ -151,8 +151,6 @@ class FormationController extends controller
             'user' => $this->getUser(),
             'formation' => $formation,
             ]);
-        //dump($formation);
-        //dump($this->getUser());die;
 
         if ($formation->getAuthor() !== ($user = $this->getUser()) && !$verfifPaiement)  {
 
