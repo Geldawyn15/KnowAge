@@ -22,9 +22,9 @@ class FormationPage
     private $id;
 
     /**
-     * @var int
-     *@ORM\ManyToOne(targetEntity="AppBundle\Entity\Formation")
-     * @ORM\Column(name="formation", type="integer")
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Formation")
+     *
      */
     private $formation;
 
