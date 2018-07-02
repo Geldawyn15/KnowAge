@@ -47,7 +47,7 @@ class FormationController extends controller
             $entityManager->persist($formation);
             $entityManager->flush();
 
-            return $this->redirectToRoute('new2', array(
+            return $this->redirectToRoute('create', array(
                 'id' => $formation->getId()
             ));
         }
@@ -57,6 +57,19 @@ class FormationController extends controller
         ));
 
     }
+
+
+    /**
+     * Homepage for create a formation
+     *
+     * @Route("/new2/{id}", name="create")
+     * @Method({"GET", "POST"})
+     */
+    public function homeCreateAction(Request $request, Formation $formation, $id)
+    {
+        return $this->render('Formation/homeCreate.html.twig');
+    }
+
 
     /**
      * Second step for create a formation
@@ -139,7 +152,6 @@ class FormationController extends controller
             return new Response(stripslashes(json_encode($response)));
         }
     }
-
 
 
 
