@@ -179,7 +179,7 @@ class FrontController extends controller
         $comments = $paginator->paginate(
             $comments,
             $request->query->getInt('page', 1),
-            3
+            9
         );
 
         // Post a comment
@@ -195,6 +195,10 @@ class FrontController extends controller
             $entityManager->flush();
 
             $this->addFlash('success', 'Commentaire envoyé');
+
+            return $this->redirectToRoute('landing_formation', array(
+                'id' => $formation->getId(),
+            ));
 
         }
 
