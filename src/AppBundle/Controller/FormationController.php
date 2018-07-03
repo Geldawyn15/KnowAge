@@ -80,6 +80,10 @@ class FormationController extends controller
     }
 
 
+
+
+                    // WYSIWYG editor and Upload's roads for file and picture //
+
     /**
      * Second step for create a formation
      *
@@ -163,6 +167,21 @@ class FormationController extends controller
         }
     }
 
+
+                            // End of WYSIWYG editor and Upload's roads for file and picture //
+
+
+
+    /**
+     * Create a formation's quizz
+     *
+     * @Route("/quiz", name="quiz")
+     *
+     */
+    public function quiz(Request $request)    {
+
+        return $this->render('Formation/quiz.html.twig');
+    }
 
 
     /**
