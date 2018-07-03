@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Formation;
+use AppBundle\Entity\FormationPage;
 use AppBundle\Entity\Paiement;
 use AppBundle\Form\addFormationType;
 use AppBundle\Service\ImgUploader;
@@ -62,12 +63,20 @@ class FormationController extends controller
     /**
      * Homepage for create a formation
      *
-     * @Route("/new2/{id}", name="create")
+     * @Route("/create/{id}", name="create")
      * @Method({"GET", "POST"})
      */
     public function homeCreateAction(Request $request, Formation $formation, $id)
     {
-        return $this->render('Formation/homeCreate.html.twig');
+        if ($formation->getAuthor() != $this->getUser()) {
+
+            throw $this->createNotFoundException('Vous n\'êtes pas autorisé à accéder à cette page');
+        }
+
+
+        return $this->render('Formation/homeCreate.html.twig', array(
+            'formation' => $formation
+        ));
     }
 
 
@@ -86,16 +95,17 @@ class FormationController extends controller
 
         if ($content = $request->request->get('content')) {
 
-            $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
-            $formation->setContent($content);
+            $formationPage = new FormationPage($formation);
+            $formationPage->setContent($content);
+            $formation->addPage($formationPage);
 
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($formation);
             $entityManager->flush();
 
             $this->addFlash('success', 'Votre formation est enregistrée avec succès');
 
-            return $this->redirectToRoute('landing_formation', array(
+            return $this->redirectToRoute('create', array(
+                'formation' => $formation,
                 'id' => $id
             ));
         }

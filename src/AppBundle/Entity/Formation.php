@@ -83,12 +83,36 @@ class Formation
     private $content;
 
 
+    /**
+     * @ORM\OneToMany(targetEntity="FormationPage", mappedBy="formation", cascade={"all"})
+     * @ORM\OrderBy({"ordering" = "ASC"})
+     */
+    private $pages;
 
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->pages = new ArrayCollection();
     }
 
+
+    public function addPage(FormationPage $formationPage)
+    {
+        $formationPage->setFormation($this);
+
+        if (!$formationPage->getOrdering()) {
+            $lastPage = $this->pages->last();
+            if (!$lastPage){
+                $formationPage->setOrdering(1);
+            } else {
+                $order = $lastPage->getOrdering() + 1;
+                $formationPage->setOrdering($order);
+            }
+        }
+
+        $this->pages[] = $formationPage;
+
+    }
     /**
      * @return string
      */
@@ -104,9 +128,6 @@ class Formation
     {
         $this->content = $content;
     }
-
-
-
 
 
     /**
@@ -290,6 +311,22 @@ class Formation
     public function shortText($lenght)
     {
         return $shortText = substr($this->getDescription(), 0, $lenght);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPages()
+    {
+        return $this->pages;
+    }
+
+    /**
+     * @param mixed $pages
+     */
+    public function setPages($pages)
+    {
+        $this->pages = $pages;
     }
 
 }
