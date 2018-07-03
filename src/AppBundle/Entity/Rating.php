@@ -32,9 +32,9 @@ class Rating
      *     maxMessage = "You cannot be taller than {{ limit }}cm to enter"
      * )
      *
-     * @ORM\Column(name="rate", type="integer", length=45, nullable=true)
+     * @ORM\Column(name="rating", type="integer", length=45, nullable=true)
      */
-    private $rate;
+    private $rating;
 
     /**
      * @var
@@ -67,17 +67,17 @@ class Rating
     /**
      * @return int
      */
-    public function getRate()
+    public function getRating()
     {
-        return $this->rate;
+        return $this->rating;
     }
 
     /**
      * @param int $rate
      */
-    public function setRate($rate)
+    public function setRating($rating)
     {
-        $this->rate = $rate;
+        $this->rating = $rating;
     }
 
     /**

@@ -170,13 +170,13 @@ class FrontController extends controller
 
         $averageRateArray = $entityManager->getRepository('AppBundle:Rating')->findBy(
             ['formation' => $formation],
-            ['rate' => 'ASC']
+            ['rating' => 'ASC']
         );
         $averagerate = 0;
         $arrayrate = [];
 
         for ($i = 0; $i < count($averageRateArray); $i++) {
-            $arrayrate[] = $averageRateArray[$i]->getRate();
+            $arrayrate[] = $averageRateArray[$i]->getRating();
         }
 
         if (count($arrayrate)) {
@@ -245,7 +245,7 @@ class FrontController extends controller
             $rating = new Rating();
             $rating->setUser($user);
             $rating->setFormation($formation);
-            $rating->setRate($rate);
+            $rating->setRating($rate);
 
             $em = $this->getDoctrine()->getManager();
             $formation = $em->getRepository('AppBundle:Formation')->find($formation);
