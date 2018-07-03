@@ -16,6 +16,9 @@ services:
 
     # makes classes in src/AppBundle available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
+    AppBundle\EventListener\ResponseListener:
+            tags:
+                - { name: kernel.event_listener, event: kernel.exception  }
     AppBundle\:
         resource: '../../src/AppBundle/*'
         # you can exclude directories or files
