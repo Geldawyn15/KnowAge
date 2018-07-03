@@ -6,6 +6,7 @@ use AppBundle\Entity\Formation;
 use AppBundle\Entity\FormationPage;
 use AppBundle\Entity\Paiement;
 use AppBundle\Form\addFormationType;
+use AppBundle\Form\QuizQuestionType;
 use AppBundle\Service\ImgUploader;
 use AppBundle\Service\Mailer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -178,9 +179,13 @@ class FormationController extends controller
      * @Route("/quiz", name="quiz")
      *
      */
-    public function quiz(Request $request)    {
+    public function quizAction(Request $request)    {
 
-        return $this->render('Formation/quiz.html.twig');
+        $form = $this->createForm(QuizQuestionType::class);
+
+        return $this->render('Formation/quiz.html.twig', array(
+            'form' => $form->createView()
+            ));
     }
 
 

@@ -1,4 +1,68 @@
 {% extends 'layout.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
 {% block title %}Créer un quiz{% endblock %}
 {% block stylesheet %}<link rel="stylesheet" href="/assets/css2/quiz.css">{% endblock %}
 
+{% block content %}
+<body id="{% block body_id %}quiz{% endblock %}">
+
+
+
+{{ form_start(form) }}
+
+{{ form_label(form.question1) }}
+{{ form_widget(form.question1) }}
+
+    {{ form_label(form.reponse1_1) }}
+    {{ form_widget(form.reponse1_1) }}
+    {{ form_label(form.reponse1_2) }}
+    {{ form_widget(form.reponse1_2) }}
+    {{ form_label(form.reponse1_3) }}
+    {{ form_widget(form.reponse1_3) }}
+
+{{ form_label(form.question2) }}
+{{ form_widget(form.question2) }}
+
+    {{ form_label(form.reponse2_1) }}
+    {{ form_widget(form.reponse2_1) }}
+    {{ form_label(form.reponse2_2) }}
+    {{ form_widget(form.reponse2_2) }}
+    {{ form_label(form.reponse2_3) }}
+    {{ form_widget(form.reponse2_3) }}
+
+{{ form_label(form.question3) }}
+{{ form_widget(form.question3) }}
+
+    {{ form_label(form.reponse3_1) }}
+    {{ form_widget(form.reponse3_1) }}
+    {{ form_label(form.reponse3_2) }}
+    {{ form_widget(form.reponse3_2) }}
+    {{ form_label(form.reponse3_3) }}
+    {{ form_widget(form.reponse3_3) }}
+
+{{ form_label(form.question4) }}
+{{ form_widget(form.question4) }}
+
+    {{ form_label(form.reponse4_1) }}
+    {{ form_widget(form.reponse4_1) }}
+    {{ form_label(form.reponse4_2) }}
+    {{ form_widget(form.reponse4_2) }}
+    {{ form_label(form.reponse4_3) }}
+    {{ form_widget(form.reponse4_3) }}
+
+{{ form_label(form.question5) }}
+{{ form_widget(form.question5) }}
+
+    {{ form_label(form.reponse5_1) }}
+    {{ form_widget(form.reponse5_1) }}
+    {{ form_label(form.reponse5_2) }}
+    {{ form_widget(form.reponse5_2) }}
+    {{ form_label(form.reponse5_3) }}
+    {{ form_widget(form.reponse5_3) }}
+
+    <input type="submit" class="btn btn-primary" value="Envoyez"/>
+
+    {{ form_end(form) }}
+
+{% endblock %}
