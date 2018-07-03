@@ -71,13 +71,15 @@ class UserController extends controller
         $user->setprofilePicFile(null);
         $form = $this->createForm(UpdateProfileType::class, $user);
         $form->handleRequest($request);
+        $rootDir = $this->getParameter('kernel.project_dir');
+
         if ($form->isSubmitted() && $form->isValid()) {
             if ($user->getprofilePicFile()) {
 
                 $oldProfilePic = $user->getprofilePic();
 
-                if ($oldProfilePic && file_exists(__DIR__ .  '/../../../web' .$oldProfilePic)) {
-                    unlink(__DIR__ . '/../../../web' . $oldProfilePic);
+                if ($oldProfilePic && file_exists($rootDir .'/web' .$oldProfilePic)) {
+                    unlink($rootDir .'/web' .$oldProfilePic);
                 }
                 $profilePic = $user->getprofilePicFile();
                 $user->setprofilePic($imgUpload->uploadProfilPicture($profilePic));
@@ -108,13 +110,23 @@ class UserController extends controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = $passwordEncoder->encodePassword($user, $user->getnewPassword());
-            $user->setPassword($password);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->flush();
-            $this->addFlash('success', 'Mot de passe changé');
 
-            return $this->redirectToRoute('profil', ['id' => $user->getId()]);
+            if ($passwordEncoder->isPasswordValid($user, $user->getPlainPassword())) {
+
+                $password = $passwordEncoder->encodePassword($user, $user->getnewPassword());
+                $user->setPassword($password);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->flush();
+                $this->addFlash('success', 'Le mot de passe a été modifié');
+
+                return $this->redirectToRoute('profil', ['id' => $user->getId()]);
+
+            } else {
+
+                $this->addFlash('danger', 'Mot de passe invalide !');
+                return $this->redirectToRoute('update_password');
+
+            }
         }
 
         return $this->render('User/updatePassword.html.twig', array(
@@ -166,78 +178,5 @@ class UserController extends controller
         }
         $em->flush();
         return new Response();
-    }
-
-    /**
-     * @Route("/forgotpassword", name="forgotPassword")
-     * @Method({"GET", "POST"})
-     */
-    public function forgotpassword(Request $request, Mailer $mailer)
-    {
-        $form = $this->createForm(ForgotPasswordType::class);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $email = $data['email'];
-            $userPasswordLost = $this->getDoctrine()
-                ->getRepository(User:: class)
-                ->findOneBy([
-                'email' => $email
-            ]);
-            if ($userPasswordLost) {
-                $token = uniqid();
-                $userPasswordLost->setToken($token);
-                $em = $this->getDoctrine()->getManager();
-                $em->flush();
-                $url = $this->generateUrl('resetPassword', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
-                $subject = 'Mot de passe perdu, NoAge';
-                $to = $userPasswordLost->getEmail();
-                $mailer->sendForgotPasswordMail($to, $subject, $url, $userPasswordLost);
-                $this->addFlash('success', 'Consultez votre boite mail. Un message vous a été envoyé avec un lien pour réinitialiser votre mot de passe  ');
-            } else {
-
-                $this->addFlash('danger', 'Nous n\'avons pas trouvé d\'utilisateur avec cet email, merci de rééssayer');
-
-                return $this->redirectToRoute('forgotPassword');
-            }
-        }
-        return $this->render('User/forgotPassword.html.twig', array(
-            'form'=>$form->createView()
-        ));
-    }
-
-    /**
-     * @Route("/resetpassword/{token}", name="resetPassword")
-     * @Method({"GET", "POST"})
-     */
-    public function resetPassword ($token, Request $request, UserPasswordEncoderInterface $encoder)
-    {
-        $form = $this->createForm(ResetPasswordType::class);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $plainPassword = $data['newPassword'];
-            $user = $this->getDoctrine()
-                ->getRepository(User:: class)
-                ->findOneBy([
-                    'token' => $token
-                ]);
-            if ($user) {
-                $encoded = $encoder->encodePassword($user, $plainPassword);
-                $user->setPassword($encoded);
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->flush();
-                $this->addFlash('success', 'Votre mot de passe a été mis à jour');
-                return $this->redirectToRoute('homepage');
-            } else {
-                $this->addFlash('danger', 'la réinitialisation de votre mot de passe a échoué, veuillez renouveler votre demande');
-
-                return $this->redirectToRoute('forgotPassword');
-            }
-        }
-        return $this->render('User/resetPassword.html.twig', array(
-            'form'=>$form->createView()
-        ));
     }
 }

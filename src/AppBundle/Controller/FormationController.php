@@ -24,7 +24,6 @@ class FormationController extends controller
 
     /**
      * create a formation / first step
-     *
      * @Route("/new", name="new")
      * @Method({"GET", "POST"})
      */
@@ -48,7 +47,7 @@ class FormationController extends controller
             $entityManager->persist($formation);
             $entityManager->flush();
 
-            return $this->redirectToRoute('new2', array(
+            return $this->redirectToRoute('create', array(
                 'id' => $formation->getId()
             ));
         }
@@ -58,6 +57,19 @@ class FormationController extends controller
         ));
 
     }
+
+
+    /**
+     * Homepage for create a formation
+     *
+     * @Route("/new2/{id}", name="create")
+     * @Method({"GET", "POST"})
+     */
+    public function homeCreateAction(Request $request, Formation $formation, $id)
+    {
+        return $this->render('Formation/homeCreate.html.twig');
+    }
+
 
     /**
      * Second step for create a formation
@@ -108,8 +120,9 @@ class FormationController extends controller
 
         if (in_array($extension, $allowedExts)) {
 
+            $rootDir = $this->getParameter('kernel.project_dir');
             $name = uniqid() . "." . $extension;
-            move_uploaded_file($_FILES["file"]["tmp_name"],  __DIR__ ."/../../../web/upload/contenuFormation/picture/" . $name);
+            move_uploaded_file($_FILES["file"]["tmp_name"],  $rootDir."/web/upload/contenuFormation/picture/" . $name);
             $response = ['link' => '/upload/contenuFormation/picture/'. $name];
 
             return new Response(stripslashes(json_encode($response)));
@@ -131,12 +144,34 @@ class FormationController extends controller
 
         if (in_array($extension, $allowedExts)) {
 
+            $rootDir = $this->getParameter('kernel.project_dir');
             $name = sha1(microtime()) . "." . $extension;
-            move_uploaded_file($_FILES["file"]["tmp_name"],  __DIR__ ."/../../../web/upload/contenuFormation/file/" . $name);
+            move_uploaded_file($_FILES["file"]["tmp_name"],  $rootDir. "/web/upload/contenuFormation/file/" . $name);
             $response = ['link' => '/upload/contenuFormation/file/'. $name];
 
             return new Response(stripslashes(json_encode($response)));
         }
+    }
+
+
+    /**
+     * Displays content of a formation entity.
+     *
+     * @Route("/show/{id}", name="show")
+     * @Method({"GET", "POST"})
+     */
+    public function showAction($id) {
+
+        $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
+        $payment = $this->getDoctrine()->getRepository(Paiement::class)->findBy(['user' => $this->getUser(), 'formation' => $formation]);
+
+        if (!$payment) {
+            throw $this->createNotFoundException('Vous n\'êtes pas autorisé à accéder à cette page');
+        }
+
+        return $this->render('Formation/show.html.twig', array(
+            'formation' => $formation,
+        ));
     }
 
 
@@ -190,8 +225,8 @@ class FormationController extends controller
     /**
      * Signals an inaproriate content in formation
      *
-     * @Route("signal/{id}", name="signalFormation")
-     * @Method({"GET", "POST"})
+     * @Route("/signal/{id}", name="signalFormation")
+     * @Method({"GET", "POST"})in/cpon
      */
     public function signalFormationAction(formation $formation, Request $request, Mailer $mailer, $id)
     {

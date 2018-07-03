@@ -1,6 +1,11 @@
 {% extends 'layout.html.twig' %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block title %} Update Profil {% endblock %}
+{% block stylesheet %}<link rel="stylesheet" href="/assets/css2/updateProfile.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+{% endblock %}
+
 
 {% block content %}
     <body id="updateProfile">
@@ -48,13 +53,6 @@
                     </div>
                     <div class="input-group mb-3">
                         {{ form_widget(form.profilePicFile) }}
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 offset-3">
-                    <div>
-                        {{ form_widget(form.plainPassword) }}
                     </div>
                 </div>
             </div>
