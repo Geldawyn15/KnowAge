@@ -176,12 +176,20 @@ class FormationController extends controller
     /**
      * Create a formation's quizz
      *
-     * @Route("/quiz", name="quiz")
+     * @Route("/quiz/{id}", name="quiz")
      *
      */
     public function quizAction(Request $request)    {
 
         $form = $this->createForm(QuizQuestionType::class);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+
+
+        }
 
         return $this->render('Formation/quiz.html.twig', array(
             'form' => $form->createView()
