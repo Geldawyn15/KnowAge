@@ -164,7 +164,6 @@ class FormationController extends controller
     }
 
 
-
     /**
      * Displays content of a formation entity.
      *
