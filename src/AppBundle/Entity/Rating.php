@@ -26,10 +26,10 @@ class Rating
      * @var int
      *
      * @Assert\Range(
-     *     min = 0,
+     *     min = 1,
      *     max = 5,
-     *     minMessage = "You must be at least {{ limit }}cm tall to enter",
-     *     maxMessage = "You cannot be taller than {{ limit }}cm to enter"
+     *     minMessage = "Vous ne pouvez entrer une note inférieure à {{ limit }}",
+     *     maxMessage = "Vous ne pouvez entrer une note supérieure à {{ limit }}"
      * )
      *
      * @ORM\Column(name="rating", type="integer", length=45, nullable=true)
@@ -38,13 +38,13 @@ class Rating
 
     /**
      * @var
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="id")     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")     *
      */
     private $user;
 
     /**
      * @var
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Formation", inversedBy="id")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Formation")
      */
     private $formation;
 

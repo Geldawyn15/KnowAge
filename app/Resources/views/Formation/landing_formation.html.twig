@@ -172,14 +172,13 @@
                         </div>
 
                         <div class="row justify-content-left align-items-end mt-4 border-bottom-2 noteLandingFormation justify-content-center">
-                            <div class="col-3 mt-1 mb-1 textDecoration">
+                            <div class="col-3 mt-1 mb-1">
                                 <h5 class="mt-1 textDisplay">Note :
                                 </h5>
-                                {% if not average %}
-                                    <p>Soyez le premier à noter cette formation</p>
-                                {% endif %}
-
-                                <a href="{{ path('rating', {'user_id':  app.user ,  'rate': 1, 'formation_id': formation.id }) }}" class="starColor">
+                                    {% if not average %}
+                                        <p>Soyez le premier à noter cette formation</p>
+                                    {% endif %}
+                                <a href="{{ path('rating', {'user_id':  app.user ,  'rate': 1, 'formation_id': formation.id }) }}" class="starColor tdcolor">
                                     {% if average >= 1%}
                                         <i class="fas fa-star"></i>
                                     {% else %}

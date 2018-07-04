@@ -194,30 +194,46 @@ class FrontController extends controller
             $comments,
             $request->query->getInt('page', 1),
             9
-        );        // Post a comment
-        if ($commentForm->isSubmitted() && $commentForm->isValid()) {            $user = $this->getUser();            $comment->setAuthor($user);
+        );
+
+        // Post a comment
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            $user = $this->getUser();
+            $comment->setAuthor($user);
             $comment->setCreatedAt(new \DateTime('now'));
-            $comment->setFormation($formation);            $entityManager->persist($comment);
-            $entityManager->flush();            $this->addFlash('success', 'Commentaire envoyé');            return $this->redirectToRoute('landing_formation', array(
+            $comment->setFormation($formation);
+            $entityManager->persist($comment);
+            $entityManager->flush();
+            $this->addFlash('success', 'Commentaire envoyé');
+
+            return $this->redirectToRoute('landing_formation', array(
                 'id' => $formation->getId(),
-            ));        }        // Send mail to teacher
-        if ($contactForm->isSubmitted() && $contactForm->isValid()) {            $data = $contactForm->getData();            $email = $data['email'];
+            ));
+        }
+
+        // Send mail to teacher
+        if ($contactForm->isSubmitted() && $contactForm->isValid()) {
+            $data = $contactForm->getData();            $email = $data['email'];
             $subject = $data['objet'];
             $message = $data['message'];
-            $to = $formation->getAuthor()->getEmail();            $mailer->sendTeacherMail('romain.poilpret@gmail.com', $message, $subject, $email);            return $this->redirectToRoute('landing_formation', array(
+            $to = $formation->getAuthor()->getEmail();
+            $mailer->sendTeacherMail('romain.poilpret@gmail.com', $message, $subject, $email);
+
+            return $this->redirectToRoute('landing_formation', array(
                 'id' => $formation->getId(),
             ));
-        }        return $this->render('Formation/landing_formation.html.twig', array(
-            'formation' => $formation,
-            'contactForm' => $contactForm->createView(),
-            'commentForm' => $commentForm->createView(),
-            'shortText' => $shortText,
-            'comments' => $comments,
-            'average' => $averagerate
-            ));
+
+            }
+
+        return $this->render('Formation/landing_formation.html.twig', array(
+                    'formation' => $formation,
+                    'contactForm' => $contactForm->createView(),
+                    'commentForm' => $commentForm->createView(),
+                    'shortText' => $shortText,
+                    'comments' => $comments,
+                    'average' => $averagerate
+        ));
     }
-
-
 
 
     /**
@@ -253,15 +269,12 @@ class FrontController extends controller
             $em->flush();
 
             //send Formateur if badRate
-            $subject = 'Un utilisateur a attribué une note inférieure à 3 pour votre formation';
-            $to = $formation->getAuthor()->getEmail();
             $userWhoRates = $this->getUser();
                 if ($rate and $rate <3){
-                    $mailer->sendBadRanking($to, $subject, $userWhoRates, $formation);
+                    $mailer->sendBadRanking($userWhoRates, $formation);
                 }
 
-            $message = 'Vous avez attribué la note de ' .  $rate . ' / 5 à cette formation. Merci de votre contribution';
-            $this->addFlash('success', $message);
+            $this->addFlash('success', 'Vous avez attribué la note de ' .  $rate . ' / 5 à cette formation. Merci de votre contribution');
             return $this->redirectToRoute('landing_formation', array(
                 'id' => $formation->getId(),
             ));
@@ -271,7 +284,6 @@ class FrontController extends controller
         'id' => $formation->getId(),
     ));
     }
-
 
 
     /**
