@@ -173,21 +173,73 @@
 
                         <div class="row justify-content-left align-items-end mt-4 border-bottom-2 noteLandingFormation justify-content-center">
                             <div class="col-3 mt-1 mb-1">
-                                <h5 class="mt-1 textDisplay">Note : </h5>
-                                <h3 class="starColor"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"><i class="far fa-star"></i></i><i class="far fa-star"></i></h3>
+                                <h5 class="mt-1 textDisplay">Note :
+                                </h5>
+                                    {% if not average %}
+                                        <p>Soyez le premier à noter cette formation</p>
+                                    {% endif %}
+                                <a href="{{ path('rating', {'user_id':  app.user ,  'rate': 1, 'formation_id': formation.id }) }}" class="starColor tdcolor">
+                                    {% if average >= 1%}
+                                        <i class="fas fa-star"></i>
+                                    {% else %}
+                                        <i class="far fa-star"></i>
+                                    {% endif %}
+                                </a>
+                                <a href="{{ path('rating', {'user_id':  app.user ,  'rate': 2, 'formation_id': formation.id }) }}" class="starColor">
+                                    {% if average >= 1.5 and average <2%}
+                                        <i class="fas fa-star-half"></i>
+                                    {% elseif average >=2 %}
+                                        <i class="fas fa-star"></i>
+                                    {% else %}
+                                        <i class="far fa-star"></i>
+                                    {% endif %}
+                                </a>
+                                <a href="{{ path('rating', {'user_id':  app.user ,  'rate': 3, 'formation_id': formation.id }) }}" class="starColor">
+                                    {% if average >= 2.5 and average <3 %}
+                                        <i class="fas fa-star-half"></i>
+                                    {% elseif average >=3 %}
+                                        <i class="fas fa-star"></i>
+                                    {% else %}
+                                        <i class="far fa-star"></i>
+                                    {% endif %}
+                                </a>
+                                <a href="{{ path('rating', {'user_id':  app.user ,  'rate': 4, 'formation_id': formation.id }) }}" class="starColor">
+                                    {% if average >= 3.5 and average <4 %}
+                                        <i class="fas fa-star-half"></i>
+                                    {% elseif average >=4 %}
+                                        <i class="fas fa-star"></i>
+                                    {% else %}
+                                        <i class="far fa-star"></i>
+                                    {% endif %}
+                                </a>
+                                <a href="{{ path('rating', {'user_id':  app.user ,  'rate': 5, 'formation_id': formation.id }) }}" class="starColor">
+                                    {% if average >= 4.5 and average <5%}
+                                        <i class="fas fa-star-half"></i>
+                                    {% elseif average >=5 %}
+                                        <i class="fas fa-star"></i>
+                                    {% else %}
+                                        <i class="far fa-star"></i>
+                                    {% endif %}
+                                </a>
+                                <H3>
+                                    {% if average %}
+                                        {{ average | round(1) }} / 5
+                                    {% endif %}
+                                </H3>
+
                             </div>
                             <div class="col-3 mt-1 mb-1">
                                 <h5 class="mt-1 textDisplay">Prix : </h5>
                                 <h3>{{ formation.price }} € </h3>
                             </div>
-                            <div class="row">
+                        <div class="row">
                             <div class="col-1 mt-1 mb-1">
                                 <div class="fb-share-button" data-href="http://127.0.0.1:8000/formation/show/97" data-layout="button" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8000%2Fformation%2Fshow%2F97&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
                             </div>
                             <div class="col-1 mt-1 mb-1">
                                 <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=formation:" data-size="large">Tweet</a>
                             </div>
-                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>
