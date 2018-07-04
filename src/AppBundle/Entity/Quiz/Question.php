@@ -29,9 +29,7 @@ class Question
     private $question;
 
     /**
-     *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Quiz\Response", mappedBy="response")
-     * @ORM\Column(name="responses", type="integer")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Quiz\Response", mappedBy="question")
      */
     private $responses;
 

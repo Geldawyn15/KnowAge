@@ -17,21 +17,22 @@ class QuizQuestionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-        for ($i = 1; $i < 4; $i++) {
+       // for ($i = 1; $i < 4; $i++) {
 
             $builder
-                    ->add('question'.$i, TextType::class, array(
+                    ->add('question', TextType::class, array(
                         'constraints' => array(
                             new NotBlank(),
                         )
-                    ))
-                        ->add('response'.$i.'-1', CollectionType::class, array(
+                    ));
+
+                     /*   ->add('responses', TextType::class, array(
                             'data_class' => ResponseType::class,
                             'constraints' => array(
                                 new NotBlank(),
                             )
-                        ))
-                                ->add('isValid'.$i.'-1', CheckboxType::class)
+                        ));
+                             //   ->add('isValid', CheckboxType::class);
 
                         ->add('response'.$i.'-2', TextType::class, array(
                             'data_class' => ResponseType::class,
@@ -47,9 +48,9 @@ class QuizQuestionType extends AbstractType
                                 new NotBlank(),
                             )
                         ))
-                        ->add('isValid'.$i.'-3', CheckboxType::class);
+                        ->add('isValid'.$i.'-3', CheckboxType::class); */
         }
-    }
+   // }
 
     public function configureOptions(OptionsResolver $resolver)
     {

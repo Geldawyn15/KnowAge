@@ -21,12 +21,12 @@ class Response
      */
     private $id;
 
+
     /**
      * @var string
-     *
-     * @ORM\Column(name="response", type="string", length=255)
+     * @ORM\Column(name="content", type="text")
      */
-    private $response;
+    private $content;
 
     /**
      * @var bool
@@ -38,7 +38,7 @@ class Response
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Quiz\Question", inversedBy="question")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Quiz\Question", inversedBy="responses")
      *
      */
     private $question;
@@ -55,29 +55,7 @@ class Response
         return $this->id;
     }
 
-    /**
-     * Set response
-     *
-     * @param string $response
-     *
-     * @return Response
-     */
-    public function setResponse($response)
-    {
-        $this->response = $response;
 
-        return $this;
-    }
-
-    /**
-     * Get response
-     *
-     * @return string
-     */
-    public function getResponse()
-    {
-        return $this->response;
-    }
 
     /**
      * Set isValid
@@ -117,6 +95,22 @@ class Response
     public function setQuestion($question)
     {
         $this->question = $question;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param string $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
     }
 }
 

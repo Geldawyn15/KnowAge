@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Formation;
 use AppBundle\Entity\FormationPage;
 use AppBundle\Entity\Paiement;
+use AppBundle\Entity\Quiz\Question;
 use AppBundle\Form\addFormationType;
 use AppBundle\Form\QuizQuestionType;
 use AppBundle\Service\ImgUploader;
@@ -179,15 +180,24 @@ class FormationController extends controller
      * @Route("/quiz/{id}", name="quiz")
      *
      */
-    public function quizAction(Request $request)    {
+    public function quizAction(Request $request, $id)    {
 
         $form = $this->createForm(QuizQuestionType::class);
         $form->handleRequest($request);
 
-
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $question = new Question();
+            $response = new \AppBundle\Entity\Quiz\Response();
+            dump($request);die;
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($question);
 
+            $em->flush();
+
+            return $this->redirectToRoute('create', array(
+                'id' => $id,
+            ));
 
         }
 
