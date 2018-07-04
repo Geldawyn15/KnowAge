@@ -1,0 +1,98 @@
+{% extends 'layout.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}Créer un quiz{% endblock %}
+{% block stylesheet %}<link rel="stylesheet" href="/assets/css2/quiz.css">{% endblock %}
+
+{% block content %}
+<body id="{% block body_id %}quiz{% endblock %}">
+
+
+
+{{ form_start(form) }}
+
+{{ form_label(form.question1) }}
+{{ form_widget(form.question1) }}
+
+    {{ form_label(form.answer1_1) }}
+    {{ form_widget(form.answer1_1) }}
+        {{ form_label(form.response1_1) }}
+        {{ form_widget(form.response1_1) }}
+    {{ form_label(form.answer1_2) }}
+    {{ form_widget(form.answer1_2) }}
+        {{ form_label(form.response1_2) }}
+        {{ form_widget(form.response1_3) }}
+    {{ form_label(form.answer1_3) }}
+    {{ form_widget(form.answer1_3) }}
+        {{ form_label(form.response1_3) }}
+        {{ form_widget(form.response1_3) }}
+
+{{ form_label(form.question2) }}
+{{ form_widget(form.question2) }}
+
+    {{ form_label(form.answer2_1) }}
+    {{ form_widget(form.answer2_1) }}
+        {{ form_label(form.response2_1) }}
+        {{ form_widget(form.response2_1) }}
+    {{ form_label(form.answer2_2) }}
+    {{ form_widget(form.answer2_2) }}
+        {{ form_label(form.response2_2) }}
+        {{ form_widget(form.response2_2) }}
+    {{ form_label(form.answer2_3) }}
+    {{ form_widget(form.answer2_3) }}
+        {{ form_label(form.response2_3) }}
+        {{ form_widget(form.response2_3) }}
+
+{{ form_label(form.question3) }}
+{{ form_widget(form.question3) }}
+
+    {{ form_label(form.answer3_1) }}
+    {{ form_widget(form.answer3_1) }}
+        {{ form_label(form.response3_1) }}
+        {{ form_widget(form.response3_1) }}
+    {{ form_label(form.answer3_2) }}
+    {{ form_widget(form.answer3_2) }}
+        {{ form_label(form.response3_2) }}
+        {{ form_widget(form.response3_2) }}
+    {{ form_label(form.answer3_3) }}
+    {{ form_widget(form.answer3_3) }}
+        {{ form_label(form.response3_3) }}
+        {{ form_widget(form.response3_3) }}
+
+{{ form_label(form.question4) }}
+{{ form_widget(form.question4) }}
+
+    {{ form_label(form.answer4_1) }}
+    {{ form_widget(form.answer4_1) }}
+        {{ form_label(form.response4_1) }}
+        {{ form_widget(form.response4_1) }}
+    {{ form_label(form.answer4_2) }}
+    {{ form_widget(form.answer4_2) }}
+        {{ form_label(form.response4_2) }}
+        {{ form_widget(form.response4_2) }}
+    {{ form_label(form.answer4_3) }}
+    {{ form_widget(form.answer4_3) }}
+        {{ form_label(form.response4_3) }}
+        {{ form_widget(form.response4_3) }}
+
+{{ form_label(form.question5) }}
+{{ form_widget(form.question5) }}
+
+    {{ form_label(form.answer5_1) }}
+    {{ form_widget(form.answer5_1) }}
+        {{ form_label(form.response5_1) }}
+        {{ form_widget(form.response5_1) }}
+    {{ form_label(form.answer5_2) }}
+    {{ form_widget(form.answer5_2) }}
+        {{ form_label(form.response5_2) }}
+        {{ form_widget(form.response5_2) }}
+    {{ form_label(form.answer5_3) }}
+    {{ form_widget(form.answer5_3) }}
+        {{ form_label(form.response5_3) }}
+        {{ form_widget(form.response5_3) }}
+
+    <input type="submit" class="btn btn-primary" value="Envoyez"/>
+
+    {{ form_end(form) }}
+
+{% endblock %}

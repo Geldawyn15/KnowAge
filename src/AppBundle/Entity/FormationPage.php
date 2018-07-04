@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class FormationPage
 {
+    const PAGE = 0;
+    const QUIZ = 1;
     /**
      * @var int
      *
@@ -41,6 +43,22 @@ class FormationPage
      * @ORM\Column(name="ordering", type="integer")
      */
     private $ordering;
+
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Quiz\Question", mappedBy="question")
+     *
+     */
+    private $questions;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="type", type="integer")
+     */
+    private $type;
 
     public function __construct(Formation $formation = null)
     {
@@ -127,6 +145,22 @@ class FormationPage
     public function getOrdering()
     {
         return $this->ordering;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
+
+    /**
+     * @param mixed $questions
+     */
+    public function setQuestions($questions)
+    {
+        $this->questions = $questions;
     }
 }
 
