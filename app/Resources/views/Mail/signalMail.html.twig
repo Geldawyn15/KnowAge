@@ -1,7 +1,7 @@
 {% block body %}
 
 
-    <h3>l'utilisateur {{ user.firstName }} {{ user.name }} a signalé un contenu inaproprié :</h3>
+    <h3>l'utilisateur {{ user.nickname }} a signalé un contenu inaproprié :</h3>
             <p>Formation concernée '{{ formation.title }}'.</p>
             <p>Auteur de la formation : {{ formation.author.firstname }} {{ formation.author.name }} </p>
             <p>Contactez le formateur :  {{ formation.author.email }}</p>

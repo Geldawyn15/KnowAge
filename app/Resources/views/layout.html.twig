@@ -84,7 +84,7 @@
 
 
 {% block content %}{% endblock %}
-
+x
 
 <footer class="footer-distributed">
     <div class="footer-right">
@@ -107,10 +107,15 @@
     </div>
 </footer>
 <script>
+    {% block toast %}
     toastr.options = {
-        "positionClass": "toast-bottom-full-width"
+        "positionClass": "toast-top-full-width",
+        "showDuration": "500",
+        "progressBar": true
     };
-    /* type pour Toastr => success, info, warning, danger*/
+
+    {% endblock %}
+    /* type pour Toastr => success, info, warning, error*/
     {% for type, messages in app.flashes %}
     var type = '{{ type }}';
     {% for message in messages %}

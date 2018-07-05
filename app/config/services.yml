@@ -15,7 +15,7 @@ services:
         public: false
 
     # makes classes in src/AppBundle available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
+    # this creates a service per class whose id is the fully-qualified class namegit
     AppBundle\:
         resource: '../../src/AppBundle/*'
         # you can exclude directories or files
