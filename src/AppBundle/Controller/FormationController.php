@@ -8,6 +8,7 @@ use AppBundle\Entity\Paiement;
 use AppBundle\Entity\Quiz\Question;
 use AppBundle\Form\addFormationType;
 use AppBundle\Form\QuizQuestionType;
+use AppBundle\Form\QuizType;
 use AppBundle\Service\ImgUploader;
 use AppBundle\Service\Mailer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -180,19 +181,59 @@ class FormationController extends controller
      * @Route("/quiz/{id}", name="quiz")
      *
      */
-    public function quizAction(Request $request, $id)    {
+    public function quizAction(Request $request, $id)
+    {
 
-        $form = $this->createForm(QuizQuestionType::class);
+        for ($i = 0; $i < 6; $i++) {
+
+
+
+
+
+        }
+
+
+
+        $question = new Question();
+        $question->setResponses([
+            new \AppBundle\Entity\Quiz\Response(),
+            new \AppBundle\Entity\Quiz\Response(),
+            new \AppBundle\Entity\Quiz\Response(),
+        ]);
+        $question->setContent('');
+
+        $question = new Question();
+
+        $question->setResponses([
+            new \AppBundle\Entity\Quiz\Response(),
+            new \AppBundle\Entity\Quiz\Response(),
+            new \AppBundle\Entity\Quiz\Response(),
+        ]);
+        $question->setContent('tata');
+
+        $question2 = new Question();
+        $question2->setResponses([
+            new \AppBundle\Entity\Quiz\Response(),
+            new \AppBundle\Entity\Quiz\Response(),
+            new \AppBundle\Entity\Quiz\Response(),
+        ]);
+        $question2->setContent('toto');
+
+
+        $form = $this->createForm(QuizType::class, ['questions' => [$question, $question2]]);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $question = new Question();
-            $response = new \AppBundle\Entity\Quiz\Response();
-            dump($request);die;
+            $responses = $question->getResponses();
+
+            foreach ($responses as $reponse){
+                $reponse->setQuestion($question);
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($question);
-
             $em->flush();
 
             return $this->redirectToRoute('create', array(

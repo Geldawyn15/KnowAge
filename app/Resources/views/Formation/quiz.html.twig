@@ -6,13 +6,16 @@
 {% block content %}
 <body id="{% block body_id %}quiz{% endblock %}">
 
+    {{ form_start(form) }}
 
 
-{{ form_start(form) }}
+
 
 
 
     <input type="submit" class="btn btn-primary" value="Envoyez"/>
-{{ form_end(form) }}
+
+
+    {{ form_end(form) }}
 
 {% endblock %}

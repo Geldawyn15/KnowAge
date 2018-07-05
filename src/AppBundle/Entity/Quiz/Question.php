@@ -24,12 +24,12 @@ class Question
     /**
      * @var string
      *
-     * @ORM\Column(name="question", type="string", length=255)
+     * @ORM\Column(name="content", type="string", length=255)
      */
-    private $question;
+    private $content;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Quiz\Response", mappedBy="question")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Quiz\Response", mappedBy="question", cascade={"persist"})
      */
     private $responses;
 
@@ -44,34 +44,11 @@ class Question
         return $this->id;
     }
 
-    /**
-     * Set question
-     *
-     * @param string $question
-     *
-     * @return Question
-     */
-    public function setQuestion($question)
-    {
-        $this->question = $question;
-
-        return $this;
-    }
-
-    /**
-     * Get question
-     *
-     * @return string
-     */
-    public function getQuestion()
-    {
-        return $this->question;
-    }
 
     /**
      * Set responses
      *
-     * @param integer $responses
+     * @param  $responses
      *
      * @return Question
      */
@@ -90,6 +67,22 @@ class Question
     public function getResponses()
     {
         return $this->responses;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param string $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
     }
 }
 

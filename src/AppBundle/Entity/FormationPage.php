@@ -46,6 +46,7 @@ class FormationPage
 
 
     /**
+     * @ORM\Column(name="questions", type="string")
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Quiz\Question", mappedBy="question")
      *
@@ -161,6 +162,22 @@ class FormationPage
     public function setQuestions($questions)
     {
         $this->questions = $questions;
+    }
+
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param int $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
     }
 }
 
