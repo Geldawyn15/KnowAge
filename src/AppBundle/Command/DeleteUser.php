@@ -12,16 +12,6 @@ use Symfony\Component\Console\Helper\ProgressBar;
 
 class DeleteUser extends ContainerAwareCommand
 {
-    /*
-    private $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        parent::__construct();
-
-        $this->entityManager = $entityManager;
-
-    }*/
 
     protected function configure()
     {
