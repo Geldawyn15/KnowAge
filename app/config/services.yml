@@ -38,6 +38,7 @@ services:
     AppBundle\Service\Mailer:
             class: AppBundle\Service\Mailer
 
+
     admin.formation:
             class: AppBundle\Service\FormationAdmin
             arguments: [~, AppBundle\Entity\Formation, ~]
