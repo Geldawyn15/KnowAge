@@ -183,57 +183,33 @@ class FormationController extends controller
      */
     public function quizAction(Request $request, $id)
     {
+        /** @var Question[] $questions */
+        $questions = [];
 
         for ($i = 0; $i < 6; $i++) {
 
-
-
-
-
+            $question = new Question();
+            $question->setResponses([
+                new \AppBundle\Entity\Quiz\Response(),
+                new \AppBundle\Entity\Quiz\Response(),
+                new \AppBundle\Entity\Quiz\Response(),
+            ]);
+            $questions[] = $question;
         }
 
-
-
-        $question = new Question();
-        $question->setResponses([
-            new \AppBundle\Entity\Quiz\Response(),
-            new \AppBundle\Entity\Quiz\Response(),
-            new \AppBundle\Entity\Quiz\Response(),
-        ]);
-        $question->setContent('');
-
-        $question = new Question();
-
-        $question->setResponses([
-            new \AppBundle\Entity\Quiz\Response(),
-            new \AppBundle\Entity\Quiz\Response(),
-            new \AppBundle\Entity\Quiz\Response(),
-        ]);
-        $question->setContent('tata');
-
-        $question2 = new Question();
-        $question2->setResponses([
-            new \AppBundle\Entity\Quiz\Response(),
-            new \AppBundle\Entity\Quiz\Response(),
-            new \AppBundle\Entity\Quiz\Response(),
-        ]);
-        $question2->setContent('toto');
-
-
-        $form = $this->createForm(QuizType::class, ['questions' => [$question, $question2]]);
-
+        $form = $this->createForm(QuizType::class, ['questions' => $questions]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $responses = $question->getResponses();
+            $em = $this->getDoctrine()->getManager();
 
-            foreach ($responses as $reponse){
-                $reponse->setQuestion($question);
+            foreach ($questions as $question) {
+                if ($question->getContent()) {
+                    $em->persist($question);
+                }
             }
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($question);
             $em->flush();
 
             return $this->redirectToRoute('create', array(

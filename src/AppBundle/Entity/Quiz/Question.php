@@ -54,6 +54,10 @@ class Question
      */
     public function setResponses($responses)
     {
+        foreach ($responses as $response) {
+            $response->setQuestion($this);
+        }
+
         $this->responses = $responses;
 
         return $this;

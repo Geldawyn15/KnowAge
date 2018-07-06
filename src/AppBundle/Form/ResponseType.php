@@ -16,8 +16,8 @@ class ResponseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content', TextType::class)
-            ->add('isValid', CheckboxType::class);
+            ->add('content', TextType::class, ['required' => false])
+            ->add('isValid', CheckboxType::class, ['required' => false]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
