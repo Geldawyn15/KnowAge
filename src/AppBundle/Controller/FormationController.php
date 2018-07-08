@@ -104,7 +104,7 @@ class FormationController extends controller
 
             $formationPage = new FormationPage($formation);
             $formationPage->setContent($content);
-            $formation->addPage($formationPage);
+            $formation->addPage($formationPage, 0);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
@@ -181,14 +181,17 @@ class FormationController extends controller
      * @Route("/quiz/{id}", name="quiz")
      *
      */
-    public function quizAction(Request $request, $id)
+    public function quizAction(Request $request, Formation $formation, $id)
     {
+        $formationPage = new FormationPage($formation, FormationPage::TYPE_QUIZ);
+        $formation->addPage($formationPage);
+
         /** @var Question[] $questions */
         $questions = [];
 
         for ($i = 0; $i < 6; $i++) {
 
-            $question = new Question();
+            $question = new Question($formationPage);
             $question->setResponses([
                 new \AppBundle\Entity\Quiz\Response(),
                 new \AppBundle\Entity\Quiz\Response(),
@@ -203,12 +206,7 @@ class FormationController extends controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
-
-            foreach ($questions as $question) {
-                if ($question->getContent()) {
-                    $em->persist($question);
-                }
-            }
+            $formationPage->setQuestions($questions);
 
             $em->flush();
 

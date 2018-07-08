@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity\Quiz;
 
+use AppBundle\Entity\FormationPage;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,6 +34,15 @@ class Question
      */
     private $responses;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\FormationPage", inversedBy="questions")
+     */
+    private $formationPage;
+
+    public function __construct(FormationPage $formationPage)
+    {
+        $this->formationPage = $formationPage;
+    }
 
     /**
      * Get id
@@ -87,6 +97,22 @@ class Question
     public function setContent($content)
     {
         $this->content = $content;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFormationPage()
+    {
+        return $this->formationPage;
+    }
+
+    /**
+     * @param mixed $formationPage
+     */
+    public function setFormationPage($formationPage)
+    {
+        $this->formationPage = $formationPage;
     }
 }
 

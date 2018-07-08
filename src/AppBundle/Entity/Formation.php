@@ -77,6 +77,7 @@ class Formation
 
 
     /**
+     * TODO REMOVE
      * @var string
      * @ORM\Column(name="content", type="text", nullable=true)
      */
