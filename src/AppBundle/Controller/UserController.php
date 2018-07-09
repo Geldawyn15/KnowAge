@@ -204,9 +204,12 @@ class UserController extends controller
 
             if ($passwordEncoder->isPasswordValid($user, $user->getPlainPassword())) {
 
-                $user->setIsDeleted();
+                $user->setIsDeleted(new \DateTime("now"));
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->flush();
+
+                $this->addFlash('success', 'Votre compte sera supprimé d\'ici 30 jours, pour 
+                le récuppérer veuillez contacter le webmaster');
 
                 return $this->redirectToRoute('logout');
 

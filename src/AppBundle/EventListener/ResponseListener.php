@@ -8,7 +8,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use \Symfony\Component\HttpFoundation\RedirectResponse;
 
-class ResponseListener implements EventSubscriberInterface
+class ResponseListener extends ContainerAwareCommand implements EventSubscriberInterface
 {
     private $session;
 

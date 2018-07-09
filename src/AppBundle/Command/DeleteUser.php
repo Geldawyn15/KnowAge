@@ -34,17 +34,17 @@ class DeleteUser extends ContainerAwareCommand
     {
         //grace à extends ContainerAwareCommand nous pouvons récuppérer le service doctrine
         $em = $this->getContainer()->get('doctrine')->getManager();
+
         //on va chercher la table user
         $user = $em->getRepository(User::class);
+
         // on éxécute les query du repo user
-        $countUserDeleted = $user->countDeletedUser();
         $deleteUserAction = $user->deletedUser();
 
 
-        // outputs multiple lines to the console (adding "\n" at the end of each line)
         $output->writeln([
             '============',
-            $countUserDeleted.' user(s) deleted',
+            $deleteUserAction.' user(s) deleted',
             '============',
         ]);
     }

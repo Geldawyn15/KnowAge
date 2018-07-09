@@ -467,11 +467,9 @@ class User implements UserInterface, \Serializable
      * @return \DateTime
      *
      */
-    public function setIsDeleted()
+    public function setIsDeleted($isDeleted)
     {
-        $dateNow = $this->isDeleted = new \DateTime("now");
-        $deleteDate = date_modify($dateNow, '+30 day');
-        return $deleteDate;
+        return $this->isDeleted = $isDeleted;
     }
 
 

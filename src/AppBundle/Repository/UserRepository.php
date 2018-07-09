@@ -29,17 +29,6 @@ class UserRepository extends EntityRepository
         return $result;
     }
 
-    public function countDeletedUser()
-    {
 
-
-        return $this->createQueryBuilder('u')
-            ->select('COUNT(u.isDeleted)')
-            ->andWhere("u.isDeleted IS NOT NULL")
-            ->andwhere("u.isDeleted < ?1")
-            ->setParameter(1, date_modify(new \DateTime("now"), '-31 day'))
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
 
 }
