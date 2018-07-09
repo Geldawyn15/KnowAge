@@ -6,16 +6,20 @@
 
 {% block content %}
 
-<body id="{% block body_id %}truc{% endblock %}">
+<body id="{% block body_id %}homeCreate{% endblock %}">
     <div class="toto">
         <h1 class="mtoto"> Choisissez une page</h1>
         <div class="mb-5">
             <form method="get" action="">
                 <a href="{{ path('new2', {'id': formation.id}) }}"> Ajouter une page via la WYSIWYG</a>
                 <a href=""> Ajouter une Page / Document</a>
-                <a href=""> Ajouter un quizz</a>
+                <a href="{{ path('quiz', {'id': formation.id}) }}"> Ajouter un quizz</a>
             </form>
         </div>
+    </div>
+
+    <div>
+        <a href="{{ path('landing_formation', {'id' : formation.id}) }}">Terminer </a>
     </div>
 
 

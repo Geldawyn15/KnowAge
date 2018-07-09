@@ -77,13 +77,6 @@ class Formation
 
 
     /**
-     * @var string
-     * @ORM\Column(name="content", type="text", nullable=true)
-     */
-    private $content;
-
-
-    /**
      * @ORM\OneToMany(targetEntity="FormationPage", mappedBy="formation", cascade={"all"})
      * @ORM\OrderBy({"ordering" = "ASC"})
      */
@@ -101,32 +94,15 @@ class Formation
         $formationPage->setFormation($this);
 
         if (!$formationPage->getOrdering()) {
-            $lastPage = $this->pages->last();
-            if (!$lastPage){
-                $formationPage->setOrdering(1);
+            if ($lastPage = $this->pages->last()) {
+                $formationPage->setOrdering($lastPage->getOrdering() + 1);
             } else {
-                $order = $lastPage->getOrdering() + 1;
-                $formationPage->setOrdering($order);
+                $formationPage->setOrdering(0);
             }
         }
 
         $this->pages[] = $formationPage;
 
-    }
-    /**
-     * @return string
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /**
-     * @param string
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
     }
 
 

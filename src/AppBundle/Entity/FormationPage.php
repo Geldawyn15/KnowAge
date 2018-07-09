@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Quiz\Question;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,6 +14,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class FormationPage
 {
+    const TYPE_PAGE = 0;
+    const TYPE_QUIZ = 1;
+
     /**
      * @var int
      *
@@ -31,7 +36,7 @@ class FormationPage
     /**
      * @var string
      *
-     * @ORM\Column(name="content", type="text")
+     * @ORM\Column(name="content", type="text", nullable=true)
      */
     private $content;
 
@@ -42,9 +47,24 @@ class FormationPage
      */
     private $ordering;
 
-    public function __construct(Formation $formation = null)
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Quiz\Question", mappedBy="formationPage", cascade={"all"})
+     */
+    private $questions;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="type", type="integer")
+     */
+    private $type;
+
+    public function __construct(Formation $formation = null, $type = null)
     {
         $this->formation = $formation;
+        $this->type = $type;
     }
 
     /**
@@ -127,6 +147,42 @@ class FormationPage
     public function getOrdering()
     {
         return $this->ordering;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
+
+    /**
+     * @param mixed $questions
+     */
+    public function setQuestions($questions)
+    {
+        $questions = array_filter($questions, function (Question $question) {
+            return $question->getContent();
+        });
+
+        $this->questions = new ArrayCollection($questions);
+    }
+
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param int $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
     }
 }
 

@@ -1,0 +1,21 @@
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}Créer un quiz{% endblock %}
+{% block stylesheet %}<link rel="stylesheet" href="/assets/css2/quiz.css">{% endblock %}
+
+{% block content %}
+<body id="{% block body_id %}quiz{% endblock %}">
+
+    {{ form_start(form) }}
+
+
+
+
+
+
+    <input type="submit" class="btn btn-primary" value="Envoyez"/>
+
+
+    {{ form_end(form) }}
+
+{% endblock %}

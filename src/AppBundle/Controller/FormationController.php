@@ -5,8 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Formation;
 use AppBundle\Entity\FormationPage;
 use AppBundle\Entity\Paiement;
-use AppBundle\Entity\User;
+use AppBundle\Entity\Quiz\Question;
 use AppBundle\Form\addFormationType;
+use AppBundle\Form\QuizType;
 use AppBundle\Service\ImgUploader;
 use AppBundle\Service\Mailer;
 use AppBundle\Service\UserManager;
@@ -15,7 +16,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 
 /**
@@ -83,6 +83,10 @@ class FormationController extends controller
     }
 
 
+
+
+                    // WYSIWYG editor and Upload's roads for file and picture //
+
     /**
      * Second step for create a formation
      *
@@ -98,14 +102,14 @@ class FormationController extends controller
 
         if ($content = $request->request->get('content')) {
 
-            $formationPage = new FormationPage($formation);
+            $formationPage = new FormationPage($formation, FormationPage::TYPE_PAGE);
             $formationPage->setContent($content);
             $formation->addPage($formationPage);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
 
-            $this->addFlash('success', 'Votre formation est enregistrée avec succès');
+            $this->addFlash('success', 'Votre page a bien été enregistrée ');
 
             return $this->redirectToRoute('create', array(
                 'formation' => $formation,
@@ -167,23 +171,85 @@ class FormationController extends controller
     }
 
 
+
+                            // End of WYSIWYG editor and Upload's roads for file and picture //
+
+
+
+    /**
+     * Create a formation's quizz
+     *
+     * @Route("/quiz/{id}", name="quiz")
+     *
+     */
+    public function quizAction(Request $request, Formation $formation, $id)
+    {
+        $formationPage = new FormationPage($formation, FormationPage::TYPE_QUIZ);
+        $formation->addPage($formationPage);
+
+        /** @var Question[] $questions */
+        $questions = [];
+
+        for ($i = 0; $i < 6; $i++) {
+
+            $question = new Question($formationPage);
+            $question->setResponses([
+                new \AppBundle\Entity\Quiz\Response(),
+                new \AppBundle\Entity\Quiz\Response(),
+                new \AppBundle\Entity\Quiz\Response(),
+            ]);
+            $questions[] = $question;
+        }
+
+        $form = $this->createForm(QuizType::class, ['questions' => $questions]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $formationPage->setQuestions($questions);
+
+            $em->flush();
+
+            return $this->redirectToRoute('create', array(
+                'id' => $id,
+            ));
+
+        }
+
+        return $this->render('Formation/quiz.html.twig', array(
+            'form' => $form->createView()
+            ));
+    }
+
+
     /**
      * Displays content of a formation entity.
      *
-     * @Route("/show/{id}", name="show")
+     * @Route("/show/{id}/{page_ordering}", name="show")
      * @Method({"GET", "POST"})
      */
-    public function showAction($id) {
+    public function showAction($id, $page_ordering) {
+
+
 
         $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
         $payment = $this->getDoctrine()->getRepository(Paiement::class)->findBy(['user' => $this->getUser(), 'formation' => $formation]);
+        $formationPage = $this->getDoctrine()->getRepository(FormationPage::class)->findOneBy(['formation' => $formation, 'ordering' => $page_ordering]);
+        $questions = $this->getDoctrine()->getRepository(Question::class)->findBy(['formationPage' => $formationPage ]);
+        $responses = $this->getDoctrine()->getRepository(\AppBundle\Entity\Quiz\Response::class)->findBy(['question' => $questions]);
 
-        if (!$payment) {
+
+        /* if (!$payment) {
             throw $this->createNotFoundException('Vous n\'êtes pas autorisé à accéder à cette page');
-        }
+        }*/
 
         return $this->render('Formation/show.html.twig', array(
             'formation' => $formation,
+            'formationPage' => $formationPage,
+            'questions' => $questions,
+            'responses' => $responses,
+
         ));
     }
 

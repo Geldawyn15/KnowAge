@@ -6,6 +6,7 @@ use AppBundle\Entity\Comment;
 use AppBundle\Entity\Comments;
 use AppBundle\Entity\Formation;
 use AppBundle\Entity\Category;
+use AppBundle\Entity\FormationPage;
 use AppBundle\Entity\Rating;
 use AppBundle\Entity\User;
 use AppBundle\Form\CommentType;
@@ -165,6 +166,9 @@ class FrontController extends controller
     public function landingAction(Request $request, Formation $formation, Mailer $mailer)    {
 
         $entityManager = $this->getDoctrine()->getManager();
+        $formationPage = $this->getDoctrine()->getRepository(FormationPage::class)->findOneBy(['formation' => $formation, 'ordering' => 0]);
+        $pageOrdering = $formationPage->getordering();
+        //dump($formationPage);die;
 
         //Affichage de la note moyenne
 
@@ -195,7 +199,6 @@ class FrontController extends controller
             $request->query->getInt('page', 1),
             9
         );
-
         // Post a comment
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             $user = $this->getUser();
@@ -208,6 +211,8 @@ class FrontController extends controller
 
             return $this->redirectToRoute('landing_formation', array(
                 'id' => $formation->getId(),
+                'page_ordering' => $pageOrdering,
+                'formation_page' => $formationPage,
             ));
         }
 
@@ -221,17 +226,23 @@ class FrontController extends controller
 
             return $this->redirectToRoute('landing_formation', array(
                 'id' => $formation->getId(),
+                'page_ordering' => $pageOrdering,
+                'formation_page' => $formationPage,
             ));
 
             }
 
-        return $this->render('Formation/landing_formation.html.twig', array(
+        return $this->render('Front/landing_formation.html.twig', array(
                     'formation' => $formation,
                     'contactForm' => $contactForm->createView(),
                     'commentForm' => $commentForm->createView(),
                     'shortText' => $shortText,
                     'comments' => $comments,
-                    'average' => $averagerate
+                    'average' => $averagerate,
+                    'page_ordering' => $pageOrdering,
+                    'formation_page' => $formationPage,
+
+
         ));
     }
 
