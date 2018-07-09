@@ -57,6 +57,15 @@
         <div class="col-md-6 offset-md-3 borderBot"></div>
     </div>
 </div>
+    <script>
+        {% block toast %}
+        toastr.options = {
+            "positionClass": "toast-top-center",
+            "showDuration": "500",
+            "progressBar": true
+        };
+        {% endblock %}
+    </script>
 {% endblock %}
 
 

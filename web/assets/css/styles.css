@@ -1115,11 +1115,12 @@ hr:before {
 .starColor{
     color:yellow;
     transition-duration: 0.4s;
+    text-decoration: none;
 }
 
 .starColor:hover{
-    color:black;
-    transition-duration: 0.4s;
+    color:blue;
+    text-decoration: none;
 }
 
 .colortext{
@@ -1363,5 +1364,10 @@ CUSTON BTN VALUES
     margin-top:8em;
 }
 
+
+.tdcolor
+{
+    text-decoration: none;
+}
 
 

@@ -102,14 +102,14 @@ class FormationController extends controller
 
         if ($content = $request->request->get('content')) {
 
-            $formationPage = new FormationPage($formation);
+            $formationPage = new FormationPage($formation, FormationPage::TYPE_PAGE);
             $formationPage->setContent($content);
-            $formation->addPage($formationPage, 0);
+            $formation->addPage($formationPage);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
 
-            $this->addFlash('success', 'Votre formation est enregistrée avec succès');
+            $this->addFlash('success', 'Votre page a bien été enregistrée ');
 
             return $this->redirectToRoute('create', array(
                 'formation' => $formation,
@@ -171,6 +171,7 @@ class FormationController extends controller
     }
 
 
+
                             // End of WYSIWYG editor and Upload's roads for file and picture //
 
 
@@ -225,20 +226,30 @@ class FormationController extends controller
     /**
      * Displays content of a formation entity.
      *
-     * @Route("/show/{id}", name="show")
+     * @Route("/show/{id}/{page_ordering}", name="show")
      * @Method({"GET", "POST"})
      */
-    public function showAction($id) {
+    public function showAction($id, $page_ordering) {
+
+
 
         $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
         $payment = $this->getDoctrine()->getRepository(Paiement::class)->findBy(['user' => $this->getUser(), 'formation' => $formation]);
+        $formationPage = $this->getDoctrine()->getRepository(FormationPage::class)->findOneBy(['formation' => $formation, 'ordering' => $page_ordering]);
+        $questions = $this->getDoctrine()->getRepository(Question::class)->findBy(['formationPage' => $formationPage ]);
+        $responses = $this->getDoctrine()->getRepository(\AppBundle\Entity\Quiz\Response::class)->findBy(['question' => $questions]);
 
-        if (!$payment) {
+
+        /* if (!$payment) {
             throw $this->createNotFoundException('Vous n\'êtes pas autorisé à accéder à cette page');
-        }
+        }*/
 
         return $this->render('Formation/show.html.twig', array(
             'formation' => $formation,
+            'formationPage' => $formationPage,
+            'questions' => $questions,
+            'responses' => $responses,
+
         ));
     }
 

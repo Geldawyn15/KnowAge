@@ -6,6 +6,8 @@ use AppBundle\Entity\Comment;
 use AppBundle\Entity\Comments;
 use AppBundle\Entity\Formation;
 use AppBundle\Entity\Category;
+use AppBundle\Entity\FormationPage;
+use AppBundle\Entity\Rating;
 use AppBundle\Entity\User;
 use AppBundle\Form\CommentType;
 use AppBundle\Form\ForgotPasswordType;
@@ -16,8 +18,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\Mailer;
 use AppBundle\Form\ContactTeacherType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
 
 class FrontController extends controller
 {
@@ -29,7 +34,7 @@ class FrontController extends controller
         $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
 
         return $this->render('Front/index.html.twig', array(
-                'categories' => $categories,
+            'categories' => $categories,
         ));
     }
 
@@ -52,9 +57,7 @@ class FrontController extends controller
             $id = $request->query->get('category_id');
             $query = $this->getDoctrine()->getRepository(Formation::class)->findBy(['category' => $id]);
 
-            $paginator  = $this->get('knp_paginator');
-
-
+            $paginator = $this->get('knp_paginator');
             $formations = $paginator->paginate(
                 $query,
                 $request->query->getInt('page', 1),
@@ -71,7 +74,7 @@ class FrontController extends controller
             $repository = $this->getDoctrine()->getRepository(Formation::class);
             $formations = $repository->findFormation($searchs);
 
-            $paginator  = $this->get('knp_paginator');
+            $paginator = $this->get('knp_paginator');
             $formations = $paginator->paginate(
                 $formations,
                 $request->query->getInt('page', 1),
@@ -114,6 +117,7 @@ class FrontController extends controller
             return $this->redirectToRoute('contact');
         }
 
+
         return $this->render('Front/contact.html.twig', array(
             'form' => $form->createView()
         ));
@@ -131,7 +135,7 @@ class FrontController extends controller
 
         if ($request->query->get('formationId')) {
             $formationId = $request->query->get('formationId');
-            $favorited  = $request->query->get('favorited');
+            $favorited = $request->query->get('favorited');
             $formation = $em->getRepository('AppBundle:Formation')->find(['id' => $formationId]);
             if (!$favorited) {
                 $user->addFavoriteFormation($formation);
@@ -159,77 +163,139 @@ class FrontController extends controller
      * @Route("/show/{id}", name="landing_formation")
      * @Method({"GET", "POST"})
      */
-    public function landingAction(Request $request, Formation $formation, Mailer $mailer)
-    {
+    public function landingAction(Request $request, Formation $formation, Mailer $mailer)    {
 
         $entityManager = $this->getDoctrine()->getManager();
+        $formationPage = $this->getDoctrine()->getRepository(FormationPage::class)->findOneBy(['formation' => $formation, 'ordering' => 0]);
+        $pageOrdering = $formationPage->getordering();
+        //dump($formationPage);die;
+
+        //Affichage de la note moyenne
+
+        $averageRateArray = $entityManager->getRepository('AppBundle:Rating')->findBy(
+            ['formation' => $formation],
+            ['rating' => 'ASC']
+        );
+        $averagerate = 0;
+        $arrayrate = [];
+
+        for ($i = 0; $i < count($averageRateArray); $i++) {
+            $arrayrate[] = $averageRateArray[$i]->getRating();
+        }
+
+        if (count($arrayrate)) {
+            $arrayrate = array_filter($arrayrate);
+            $averagerate = array_sum($arrayrate) / count($arrayrate);
+        }
+        //Fin d'affichage de la note moyenne
 
         $shortText = $formation->shortText(250);
-
         $contactForm = $this->createForm(ContactTeacherType::class);
-        $contactForm->handleRequest($request);
-
-        $comment = new Comments();
+        $contactForm->handleRequest($request);        $comment = new Comments();
         $commentForm = $this->createForm(CommentType::class, $comment);
-        $commentForm->handleRequest($request);
-
-        $comments = $this->getDoctrine()->getRepository(Comments::class)->findBy(['formation' => $formation->getId()], ['createdAt' => 'ASC']);
-        $paginator  = $this->get('knp_paginator');
-
-        $comments = $paginator->paginate(
+        $commentForm->handleRequest($request);        $comments = $this->getDoctrine()->getRepository(Comments::class)->findBy(['formation' => $formation->getId()], ['createdAt' => 'ASC']);
+        $paginator  = $this->get('knp_paginator');        $comments = $paginator->paginate(
             $comments,
             $request->query->getInt('page', 1),
             9
         );
-
         // Post a comment
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
-
             $user = $this->getUser();
-
             $comment->setAuthor($user);
             $comment->setCreatedAt(new \DateTime('now'));
             $comment->setFormation($formation);
-
             $entityManager->persist($comment);
             $entityManager->flush();
-
             $this->addFlash('success', 'Commentaire envoyé');
 
             return $this->redirectToRoute('landing_formation', array(
                 'id' => $formation->getId(),
+                'page_ordering' => $pageOrdering,
+                'formation_page' => $formationPage,
             ));
-
         }
-
 
         // Send mail to teacher
         if ($contactForm->isSubmitted() && $contactForm->isValid()) {
-
-            $data = $contactForm->getData();
-
-            $email = $data['email'];
+            $data = $contactForm->getData();            $email = $data['email'];
             $subject = $data['objet'];
             $message = $data['message'];
             $to = $formation->getAuthor()->getEmail();
-
             $mailer->sendTeacherMail('romain.poilpret@gmail.com', $message, $subject, $email);
 
             return $this->redirectToRoute('landing_formation', array(
                 'id' => $formation->getId(),
+                'page_ordering' => $pageOrdering,
+                'formation_page' => $formationPage,
             ));
-        }
 
+            }
 
-        return $this->render('Formation/landing_formation.html.twig', array(
-            'formation' => $formation,
-            'contactForm' => $contactForm->createView(),
-            'commentForm' => $commentForm->createView(),
-            'shortText' => $shortText,
-            'comments' => $comments
+        return $this->render('Front/landing_formation.html.twig', array(
+                    'formation' => $formation,
+                    'contactForm' => $contactForm->createView(),
+                    'commentForm' => $commentForm->createView(),
+                    'shortText' => $shortText,
+                    'comments' => $comments,
+                    'average' => $averagerate,
+                    'page_ordering' => $pageOrdering,
+                    'formation_page' => $formationPage,
+
 
         ));
     }
+
+
+    /**
+     * Rates a formation.
+     *
+     * @Route("/formation/{formation_id}/rating/{rate}", name="rating", requirements={"formation_id": "\d+"})
+     * @Security("has_role('ROLE_USER')")
+     *
+     * @ParamConverter("formation", options={"mapping": {"formation_id": "id"}})
+     *
+     * @Method({"GET", "POST"})
+     */
+    public function ratingAction(Formation $formation, $rate, Mailer $mailer)
+    {
+        $user = $this->getUser();
+        $userAlreadyRate = $this->getDoctrine()
+            ->getRepository(Rating:: class)
+            ->findOneBy([
+                'user' => $user,
+                'formation' => $formation,
+            ]);
+
+        if (!$userAlreadyRate) {
+
+            $rating = new Rating();
+            $rating->setUser($user);
+            $rating->setFormation($formation);
+            $rating->setRating($rate);
+
+            $em = $this->getDoctrine()->getManager();
+            $formation = $em->getRepository('AppBundle:Formation')->find($formation);
+            $em->persist($rating);
+            $em->flush();
+
+            //send Formateur if badRate
+            $userWhoRates = $this->getUser();
+                if ($rate and $rate <3){
+                    $mailer->sendBadRanking($userWhoRates, $formation);
+                }
+
+            $this->addFlash('success', 'Vous avez attribué la note de ' .  $rate . ' / 5 à cette formation. Merci de votre contribution');
+            return $this->redirectToRoute('landing_formation', array(
+                'id' => $formation->getId(),
+            ));
+        } else {
+            $this->addFlash('danger', 'Vous avez déjà noté cette formation');
+        } return $this->redirectToRoute('landing_formation', array(
+        'id' => $formation->getId(),
+    ));
+    }
+
 
     /**
      * @Route("/forgotpassword", name="forgotPassword")
@@ -304,4 +370,5 @@ class FrontController extends controller
             'form'=>$form->createView()
         ));
     }
+
 }

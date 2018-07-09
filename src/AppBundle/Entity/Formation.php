@@ -77,14 +77,6 @@ class Formation
 
 
     /**
-     * TODO REMOVE
-     * @var string
-     * @ORM\Column(name="content", type="text", nullable=true)
-     */
-    private $content;
-
-
-    /**
      * @ORM\OneToMany(targetEntity="FormationPage", mappedBy="formation", cascade={"all"})
      * @ORM\OrderBy({"ordering" = "ASC"})
      */
@@ -111,21 +103,6 @@ class Formation
 
         $this->pages[] = $formationPage;
 
-    }
-    /**
-     * @return string
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /**
-     * @param string
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
     }
 
 

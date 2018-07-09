@@ -12,12 +12,52 @@
             <h1 class="text-center" style="margin-top: 170px;"> {{ formation.title }} </h1>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="fr-view">
-                {{ formation.content | raw }}
+    {% if formationPage.content %}
+        <div class="row">
+            <div class="col-12">
+                <div class="fr-view">
+                        {{ formationPage.content | raw }}
+                </div>
             </div>
         </div>
-    </div>
+    {% endif %}
+
+        <div class="row">
+            <div class="col-12">
+                <div>
+                    <form action="#" method="get">
+                        <div>
+                            <p> {{ questions.0.content }}</p>
+                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.0.content }}</label>
+                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.1.content }}</label>
+                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.2.content }}</label>
+
+                            <p> {{ questions.1.content }}</p>
+                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.3.content }}</label>
+                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.4.content }}</label>
+                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.5.content }}</label>
+
+                            <p> {{ questions.2.content }}</p>
+                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.6.content }}</label>
+                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.7.content }}</label>
+                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.8.content }}</label>
+
+                            <p> {{ questions.3.content }}</p>
+                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.9.content }}</label>
+                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.10.content }}</label>
+                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.11.content }}</label>
+
+                            <p> {{ questions.4.content }}</p>
+                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.12.content }}</label>
+                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.13.content }}</label>
+                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.14.content }}</label>
+                        </div>
+
+                            <input type="submit" value="Envoyer le formulaire">
+                    </form>
+                </div>
+            </div>
+        </div>
+
 </div>
 {% endblock %}
