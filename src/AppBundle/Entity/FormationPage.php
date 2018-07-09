@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use AppBundle\Entity\Quiz\Question;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * FormationPage
@@ -61,8 +62,13 @@ class FormationPage
      */
     private $type;
 
+    private $quizSubmitted;
+
+    private $quizValid;
+
     public function __construct(Formation $formation = null, $type = null)
     {
+        $this->questions = new ArrayCollection();
         $this->formation = $formation;
         $this->type = $type;
     }
@@ -94,7 +100,6 @@ class FormationPage
     /**
      * Get formation
      *
-     * @return int
      */
     public function getFormation()
     {
@@ -154,7 +159,20 @@ class FormationPage
      */
     public function getQuestions()
     {
-        return $this->questions;
+        return $this->questions->toArray();
+    }
+
+    /**
+     * @param $id
+     * @return Question
+     */
+    public function getQuestion($id)
+    {
+        foreach ($this->questions as $question) {
+            if ($question->getId() == $id) {
+                return $question;
+            }
+        }
     }
 
     /**
@@ -183,6 +201,34 @@ class FormationPage
     public function setType($type)
     {
         $this->type = $type;
+    }
+
+    public function handleQuizResponses(Request $request)
+    {
+        foreach ($request->query->all() as $questionId => $responses) {
+            $this->getQuestion($questionId)->setResponsesChecked($responses);
+        }
+
+        $this->quizSubmitted = true;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuizSubmitted()
+    {
+        return $this->quizSubmitted;
+    }
+
+    public function isQuizValid()
+    {
+        foreach ($this->questions as $question) {
+            if (!$question->getResponses()->isValid()) {
+                return false;
+            }
+
+            return true;
+        }
     }
 }
 

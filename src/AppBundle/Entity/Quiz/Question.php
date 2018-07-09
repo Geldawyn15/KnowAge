@@ -30,6 +30,7 @@ class Question
     private $content;
 
     /**
+     * @var Response[]
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Quiz\Response", mappedBy="question", cascade={"persist"})
      */
     private $responses;
@@ -84,6 +85,19 @@ class Question
     }
 
     /**
+     * @param $id
+     * @return Response
+     */
+    public function getResponse($id)
+    {
+        foreach ($this->responses as $response) {
+            if ($response->getId() == $id) {
+                return $response;
+            }
+        }
+    }
+
+    /**
      * @return string
      */
     public function getContent()
@@ -113,6 +127,27 @@ class Question
     public function setFormationPage($formationPage)
     {
         $this->formationPage = $formationPage;
+    }
+
+    public function setResponsesChecked(array $responsesIds)
+    {
+        foreach ($responsesIds as $responseId) {
+            $this->getResponse($responseId)->check();
+        }
+    }
+
+    /**
+     * @return bool true si toutes les réponses à la question sont valides
+     */
+    public function isValid()
+    {
+        foreach ($this->responses as $response) {
+            if (!$response->isValid()) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
 

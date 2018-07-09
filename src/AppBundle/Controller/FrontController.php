@@ -53,7 +53,6 @@ class FrontController extends controller
 
 
         if ($request->query->get('category_id')) {
-
             $id = $request->query->get('category_id');
             $query = $this->getDoctrine()->getRepository(Formation::class)->findBy(['category' => $id]);
 
