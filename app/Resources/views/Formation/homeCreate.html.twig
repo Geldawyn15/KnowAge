@@ -1,11 +1,21 @@
 {% extends 'layout.html.twig' %}
 {% block title %}Menu formation{% endblock %}
 
+{% block h1 %}Je crée ma formation{% endblock %}
 
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb pl-3">
+            <li class="breadcrumb-item"><p>Informations sur la Formation</p></li>
+            <li class="breadcrumb-item active text-dark" aria-current="page"><a>Choisir un type de page</a></li>
+            <li class="breadcrumb-item">Ajouter du contenu</li>
+        </ol>
+    </nav>
+{% endblock %}
 
 {% block content %}
 
-<body id="{% block body_id %}truc{% endblock %}">
+
     <div class="toto">
         <h1 class="mtoto"> Choisissez une page</h1>
         <div class="mb-5">
