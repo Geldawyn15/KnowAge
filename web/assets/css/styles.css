@@ -1,5 +1,25 @@
 body {
-    padding-top: 122px;
+    padding-top: 160px;
+}
+
+h1 {
+    padding-bottom: 20px;
+    padding-left: 30px;
+}
+
+.bg-main{
+
+    background-color: purple;
+}
+
+.subHeader {
+
+    background-image: url("http://eticeo.com/wp-content/uploads/2016/11/SERVICE-FORMATION-2-1030x617.jpg");
+    background-position: 65% 60%
+}
+
+.breadcrumb {
+    background-color: transparent;
 }
 
 /* general settings */
@@ -24,7 +44,7 @@ body {
 }
 
 
-.HeaderCardButton {
+.Button1 {
 
     text-decoration: none;
     color: #fff;
@@ -33,13 +53,13 @@ body {
     border-radius: 8px;
 }
 
-.HeaderCardButton:hover {
+.Button1:hover {
     background-color: #001a35;
     text-decoration: none;
     color:white;
 }
 
-.HeaderCardButton:active {
+.Button1:active {
     background-color: #001a35;
     transform: translateY(4px);
 }
