@@ -16,14 +16,8 @@ class DeleteUser extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            // the name of the command (the part after "bin/console")
             ->setName('app:delete-user')
-
-            // the short description shown while running "php bin/console list"
             ->setDescription('supprime les utilisateurs dont la demande de suppression date de +30 jours')
-
-            // the full command description shown when running the command with
-            // the "--help" option
             ->setHelp('supprime les utilisateurs dont la demande de suppression date de +30 jours')
 
         ;
@@ -32,16 +26,9 @@ class DeleteUser extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        //grace à extends ContainerAwareCommand nous pouvons récuppérer le service doctrine
         $em = $this->getContainer()->get('doctrine')->getManager();
-
-        //on va chercher la table user
         $user = $em->getRepository(User::class);
-
-        // on éxécute les query du repo user
         $deleteUserAction = $user->deletedUser();
-
-
         $output->writeln([
             '============',
             $deleteUserAction.' user(s) deleted',

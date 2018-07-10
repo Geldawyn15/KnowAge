@@ -196,6 +196,7 @@ class UserController extends controller
 
         $user = $this->getUser();
 
+
         $form = $this->createForm(DeleteUserType::class, $user);
         $form->handleRequest($request);
 
@@ -214,9 +215,8 @@ class UserController extends controller
                 return $this->redirectToRoute('logout');
 
             } else {
-
-                $this->addFlash('danger', 'Mot de passe invalide !');
-                return $this->redirectToRoute('update_password');
+                $this->addFlash('danger', 'mot de passe incorrect');
+                return $this->redirectToRoute('deleteUser');
 
             }
         }

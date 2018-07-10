@@ -22,14 +22,7 @@ class DeleteUserType extends AbstractType
     {
         $builder
 
-            ->add('plainPassword', RepeatedType::class, array(
-                'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Mot de passe actuel'),
-                'second_options' => array('label' => 'Répéter le mot de passe actuel'),
-                'constraints' => array(
-                    new NotBlank(),
-                )
-            ));
+            ->add('plainPassword');
     }
 
     public function configureOptions(OptionsResolver $resolver)
