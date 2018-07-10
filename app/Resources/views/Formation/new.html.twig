@@ -8,7 +8,7 @@
 {% block breadcrumb %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb pl-3">
-            <li class="breadcrumb-item active"aria-current="page"><p>Informations sur la Formation</p></li>
+            <li class="breadcrumb-item active text-dark"aria-current="page"><p>Informations sur la Formation</p></li>
             <li class="breadcrumb-item"><a>Choisir un type de page</a></li>
             <li class="breadcrumb-item">Ajouter du contenu</li>
         </ol>
@@ -18,7 +18,7 @@
 
 {% block content %}
 <div class="container-fluid bg-main">
-    <div class="mb-3 container text-center py-5 bg-main ">
+    <div class="mb-3 mt-3 container text-center py-5 bg-main pt-3 ">
         <div class="row">
             {% if (form_errors(form.picture)) %}
                 <div class="col-md-12">
