@@ -71,12 +71,17 @@
         </div>
     </nav>
 
-    <div class="content">
+    {% block sub_header %}
+        <div class="">
+            <h1>{% block h1 %}{% endblock %}</h1>
+            {% block breadcrumb %}{% endblock %}
+        </div>
+    {% endblock %}
 
+    <div class="content">
 
         {% block content %}{% endblock %}
 
-        <h1>{% block h1 %}{% endblock %}</h1>
     </div>
 
     <footer class="footer-distributed">
