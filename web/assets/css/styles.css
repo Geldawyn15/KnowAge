@@ -3,12 +3,22 @@ body {
 }
 
 h1 {
-    padding-bottom: 50px;
+    padding-bottom: 20px;
+    padding-left: 30px;
 }
 
 .bg-main{
 
     background-color: sandybrown;
+}
+
+.subHeader {
+
+    background-color: brown;
+}
+
+.breadcrumb {
+    background-color: brown;
 }
 
 /* general settings */
