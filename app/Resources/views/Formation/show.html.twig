@@ -21,7 +21,7 @@
             </div>
         </div>
     {% endif %}
-
+    {% if page.questions %}
         <div class="row">
             <div class="col-12">
                 <div>
@@ -34,18 +34,24 @@
                                 <input type="checkbox" id="response_q{{ loop.index0 }}_2" name="{{ question.id }}[]" value="{{ question.responses.2.id }}" {% if question.responses.2.checked %}checked{% endif %} /><label for="response_q{{ loop.index0 }}_2">{{ question.responses.2.content }}</label>
                                 {% if page.quizSubmitted and not (question.valid) %}
                                     <p>ERROR</p>
+                                {% else %}
+                                    <p> Bonne réponse</p>
                                 {% endif %}
                                 <hr>
                             {% endfor %}
-
-
                         </div>
-
                             <input type="submit" value="Envoyer le formulaire">
                     </form>
                 </div>
             </div>
         </div>
+    {% endif %}
+    <div>
+        {% if page.ordering  %}
+            <a href={{ path('show', {'id': formation.id, 'page': page.ordering +1}) }}> Page suivante </a>
+        {% endif %}
+        <a href={{ path('show', {'id': formation.id, 'page': page.ordering -1}) }}> Page précédente </a>
+    </div>
 
 </div>
 {% endblock %}

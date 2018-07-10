@@ -100,9 +100,10 @@ class FormationController extends controller
             throw $this->createNotFoundException('Vous n\'êtes pas autorisé à accéder à cette page');
         }
 
+        $formationPage = new FormationPage($formation, FormationPage::TYPE_PAGE);
+
         if ($content = $request->request->get('content')) {
 
-            $formationPage = new FormationPage($formation, FormationPage::TYPE_PAGE);
             $formationPage->setContent($content);
             $formation->addPage($formationPage);
 
@@ -243,8 +244,10 @@ class FormationController extends controller
             throw $this->createNotFoundException('Vous n\'êtes pas autorisé à accéder à cette page');
         }*/
 
+
         return $this->render('Formation/show.html.twig', array(
             'page' => $page,
+            'formation' => $formation,
         ));
     }
 
