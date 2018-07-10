@@ -47,26 +47,6 @@ body {
 
 
 /* navbar */
-.navbar {
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-
-a.nav-link {
-    color: white;
-}
-
-a.nav-link:hover {
-    color: #0a4f73;
-    background-color: white;
-}
-
-
-
-
-.loginbtn {
-    font-size: 3em;
-}
 
 
 
