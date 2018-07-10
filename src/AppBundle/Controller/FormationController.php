@@ -236,6 +236,8 @@ class FormationController extends controller
 
         $page = $formation->getPage($page);
 
+
+
         if ($request->query->all()) {
             $page->handleQuizResponses($request);
         }
@@ -243,7 +245,6 @@ class FormationController extends controller
         /* if (!$payment) {
             throw $this->createNotFoundException('Vous n\'êtes pas autorisé à accéder à cette page');
         }*/
-
 
         return $this->render('Formation/show.html.twig', array(
             'page' => $page,

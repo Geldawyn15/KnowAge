@@ -47,11 +47,19 @@
         </div>
     {% endif %}
     <div>
-        {% if page.ordering  %}
-            <a href={{ path('show', {'id': formation.id, 'page': page.ordering +1}) }}> Page suivante </a>
-        {% endif %}
-        <a href={{ path('show', {'id': formation.id, 'page': page.ordering -1}) }}> Page précédente </a>
-    </div>
+        <div>
+            {% if formation.pageExist(page.ordering +1) AND page.isQuizValid %}
+                <a href={{ path('show', {'id': formation.id, 'page': page.ordering +1}) }}> Page suivante </a>
+            {% else %}
+                <a href="{{ path('landing_formation', {'id' : formation.id}) }}"> Terminer </a>
+            {% endif %}
+
+            {% if formation.pageExist(page.ordering -1) %}
+                <a href={{ path('show', {'id': formation.id, 'page': page.ordering -1}) }}> Page précédente </a>
+            {% else %}
+                <a href="{{ path('landing_formation', {'id' : formation.id}) }}"> Retour à l'acceuil de la formation </a>
+            {% endif %}
+        </div>
 
 </div>
 {% endblock %}

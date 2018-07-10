@@ -154,6 +154,7 @@ class FormationPage
         return $this->ordering;
     }
 
+
     /**
      * @return mixed
      */

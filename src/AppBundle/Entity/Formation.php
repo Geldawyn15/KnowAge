@@ -298,6 +298,15 @@ class Formation
         return $this->pages;
     }
 
+    public function pageExist($ordering)
+    {
+        if ($this->getPage($ordering)) {
+            return true;
+        }
+        return false;
+
+    }
+
     /**
      * @param mixed $pages
      */
