@@ -2,12 +2,23 @@
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block title %} Créer une formation {% endblock %}
 
+<div class="headerFormation">
 {% block h1 %} Je crée ma formation {% endblock %}
 
 {% block content %}
-    <div class="container-fluid ">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"aria-current="page"><p>Informations sur la Formation</p></li>
+            <li class="breadcrumb-item"><a>Choisir un type de page</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Ajouter du contenu</li>
+        </ol>
+    </nav>
+</div>
 
-        <div class="mb-3 container text-center FormCreate">
+    <div class="container-fluid bg-main">
+
+
+    <div class="mb-3 container text-center FormCreate">
             <div class="row">
                 {% if (form_errors(form.picture)) %}
                     <div class="col-md-12">
@@ -68,7 +79,7 @@
             </div>
             <div class="row justify-content-center ">
                 <div class="col-md-12 mb-4 text-center">
-                    <a class="pr-4 pl-4 pb-3 pt-3 text-nowrap text-truncate js-scrollTo Button1"> Etape suivante </a>
+                    <button type="submit" class="Button1"><i class="far fa-arrow-alt-circle-right"></i> Etape suivante </button>
                     {{ form_end(form) }}
                 </div>
             </div>
