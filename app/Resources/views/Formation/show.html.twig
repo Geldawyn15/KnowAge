@@ -32,10 +32,12 @@
                                 <input type="checkbox" id="response_q{{ loop.index0 }}_0" name="{{ question.id }}[]" value="{{ question.responses.0.id }}" {% if question.responses.0.checked %}checked{% endif %} /><label for="response_q{{ loop.index0 }}_0">{{ question.responses.0.content }}</label>
                                 <input type="checkbox" id="response_q{{ loop.index0 }}_1" name="{{ question.id }}[]" value="{{ question.responses.1.id }}" {% if question.responses.1.checked %}checked{% endif %} /><label for="response_q{{ loop.index0 }}_1">{{ question.responses.1.content }}</label>
                                 <input type="checkbox" id="response_q{{ loop.index0 }}_2" name="{{ question.id }}[]" value="{{ question.responses.2.id }}" {% if question.responses.2.checked %}checked{% endif %} /><label for="response_q{{ loop.index0 }}_2">{{ question.responses.2.content }}</label>
-                                {% if page.quizSubmitted and not (question.valid) %}
-                                    <p>ERROR</p>
-                                {% else %}
-                                    <p> Bonne réponse</p>
+                                {% if page.quizSubmitted %}
+                                    {% if question.valid %}
+                                        <p> Bonne réponse</p>
+                                    {% else %}
+                                        <p>ERROR</p>
+                                    {% endif %}
                                 {% endif %}
                                 <hr>
                             {% endfor %}
@@ -46,20 +48,20 @@
             </div>
         </div>
     {% endif %}
+{{ dump (page.isQuizValid) }}
     <div>
-        <div>
-            {% if formation.pageExist(page.ordering +1) AND page.isQuizValid %}
-                <a href={{ path('show', {'id': formation.id, 'page': page.ordering +1}) }}> Page suivante </a>
-            {% else %}
-                <a href="{{ path('landing_formation', {'id' : formation.id}) }}"> Terminer </a>
-            {% endif %}
+        {% if formation.pageExist(page.ordering +1) and page.isQuizValid %}
+            <a href={{ path('show', {'id': formation.id, 'page': page.ordering +1}) }}> Page suivante </a>
+        {% else %}
+            <a href="{{ path('landing_formation', {'id' : formation.id}) }}"> Terminer </a>
+        {% endif %}
 
-            {% if formation.pageExist(page.ordering -1) %}
-                <a href={{ path('show', {'id': formation.id, 'page': page.ordering -1}) }}> Page précédente </a>
-            {% else %}
-                <a href="{{ path('landing_formation', {'id' : formation.id}) }}"> Retour à l'acceuil de la formation </a>
-            {% endif %}
-        </div>
+        {% if formation.pageExist(page.ordering -1) %}
+            <a href={{ path('show', {'id': formation.id, 'page': page.ordering -1}) }}> Page précédente </a>
+        {% else %}
+            <a href="{{ path('landing_formation', {'id' : formation.id}) }}"> Retour à l'acceuil de la formation </a>
+        {% endif %}
+    </div>
 
 </div>
 {% endblock %}

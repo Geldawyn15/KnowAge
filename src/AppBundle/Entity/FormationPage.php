@@ -224,12 +224,12 @@ class FormationPage
     public function isQuizValid()
     {
         foreach ($this->questions as $question) {
-            if (!$question->getResponses()->isValid()) {
+            if (!$question->isValid()) {
                 return false;
             }
-
-            return true;
         }
+
+        return true;
     }
 }
 
