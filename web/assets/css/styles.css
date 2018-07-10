@@ -1,3 +1,361 @@
 body {
     padding-top: 122px;
 }
+
+/* general settings */
+
+/* body */
+
+/*polices */
+
+.categoryTitle {
+    font-size: 2em;
+}
+
+
+/*buttons */
+
+.scrollPosition {
+    position :fixed;
+    bottom:100px;
+    background-color: #0a4f73;
+    color:white;
+
+}
+
+
+.HeaderCardButton {
+
+    text-decoration: none;
+    color: #fff;
+    background-color: #0a4f73;
+    border: none;
+    border-radius: 8px;
+}
+
+.HeaderCardButton:hover {
+    background-color: #001a35;
+    text-decoration: none;
+    color:white;
+}
+
+.HeaderCardButton:active {
+    background-color: #001a35;
+    transform: translateY(4px);
+}
+
+
+
+/* navbar */
+.navbar {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+
+a.nav-link {
+    color: white;
+}
+
+a.nav-link:hover {
+    color: #0a4f73;
+    background-color: white;
+}
+
+
+
+
+.loginbtn {
+    font-size: 3em;
+}
+
+
+
+
+/* header */
+
+.card-transparency {
+    background-color: rgba(0, 0, 0, 0.2);
+
+    color:white;
+}
+
+.headerTitle {
+    position:relative;
+    bottom:50%;
+}
+
+
+.card-title {
+    background-color: black;
+}
+
+.emFontSize {
+    font-size: 0.5em;
+}
+
+
+
+.positionTitle {
+    width:100%;
+    position:absolute;
+    top:35%;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: rgba(128, 0, 128, 0.8);}
+
+.headerspan1 {
+    font-size: 3em;
+}
+
+.headerspan2 {
+    font-size: 1.5em;
+}
+
+
+.card-margin {
+    margin-top:-7.8em;
+    margin-bottom:1em;
+}
+
+.bgCardDark {
+    background-color: #063045;
+    padding: 1em;
+}
+
+
+/* banner numbers */
+
+.banner-numbers {
+    background-color: rgba(128, 0, 128, 0.8);
+    padding : 2em;
+    margin-top:3em;
+    margin-bottom:3em;
+
+    border: solid 1px lightgrey;
+    box-shadow: 5px 10px #888888;
+}
+
+
+
+/* search bar */
+.search-Banner {
+    background-color: #0a4f73;
+    padding-top : 1em;
+    padding-bottom : 1em;
+    border: solid 1px lightgrey;
+    box-shadow: 5px 10px #888888;
+}
+
+.search-Banner-title {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Portfolio Category  */
+
+
+.card-columns {
+    column-count: 3;
+}
+
+
+.portfolio-hover-content {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    margin-top: -12px;
+    text-align: center;
+    color: rgb(128, 0, 128);
+}
+
+.portfolio-hover-content i {
+    margin-top: -12px;
+}
+
+/* Hover effects */
+.portfolio-link {
+    cursor: pointer;
+}
+
+.portfolio-hover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    transition: all ease 0.5s;
+    opacity: 0;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.portfolio-hover:hover {
+    opacity: 1;
+}
+
+
+
+/*Footer */
+.footer-distributed {
+    background-color: #0a4f73;
+    width:100%;
+}
+
+
+/*FAQ */
+
+
+.img-FAQ {
+    opacity:0.6;
+}
+
+.bg-Color {
+    background-color: #0a4f73;
+}
+
+.card-header {
+    background-color: #001a35;
+
+}
+
+.btn-link {
+    color: white;
+}
+
+.btn-link:hover {
+    text-decoration: none;
+    font-weight:bold;
+    color:white;
+    -webkit-transition: all ease 0.8s;
+    -moz-transition: all ease 0.8s;
+    transition: all ease 0.8s;
+}
+
+.NoPaddingLeft {
+    padding-left: 0;
+}
+
+.accordion {
+    padding-right: 0;
+}
+
+.talKAboutUs {
+    font-size:0.8em;
+}
+
+.FAQBanner {
+    border: solid 1px lightgrey;
+    box-shadow: 5px 10px #888888;
+}
+
+
+
+/*Services NoAge, c'est simple et rapide*/
+.colorCircle {
+    color:rgb(128, 0, 128);
+}
+
+.SubtitleService {
+    font-weight: 700;
+    font-size:1.5rem;
+}
+
+.bgButtonColor {
+    background-color:#0a4f73;
+
+}
+
+.fa-facebook- {
+    color:grey;
+}
+
+.hoverMOdal:hover {
+    cursor: pointer;
+}
+
+
+/*Caroussel */
+.CarousselBgColor {
+    background-color: rgba(128, 0, 128, 0.2);
+}
+
+.carousel-control-prev-icon {
+    color: rgba(128, 0, 128, 0.2);
+}
+
+.carousel-control-next-icon {
+    color: rgba(128, 0, 128, 0.2);
+}
+
+
+/*Responsive settings
+/*Media /* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+}
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+
+    .card-margin {
+        margin-top:1em;
+        margin-bottom:1em;
+    }
+
+    .bigImageHeader {
+        display: none;
+    }
+
+    .positionTitle {
+        display:none;
+    }
+
+    header {
+        margin-top: 8em;
+    }
+
+    .buttonFAQTodisplay {
+        display: none;
+    }
+
+    .banner-numbers {
+        margin-top:0;
+        margin-bottom:0;
+    }
+
+    #search {
+        margin-top:0;
+        margin-bottom:0;
+    }
+
+    .CategoryBanner {
+        margin-top:0;
+        margin-bottom:0;
+    }
+
+    .FAQBanner {
+        margin-top:0;
+        margin-bottom:0;
+    }
+
+    .categoryTitle {
+        display:none;
+    }
+
+    .card-columns {
+        column-count: 2;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+}
