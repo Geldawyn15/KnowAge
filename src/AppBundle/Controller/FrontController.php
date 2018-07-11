@@ -60,7 +60,7 @@ class FrontController extends controller
             $formations = $paginator->paginate(
                 $query,
                 $request->query->getInt('page', 1),
-                4
+                9
             );
 
         }
@@ -77,7 +77,7 @@ class FrontController extends controller
             $formations = $paginator->paginate(
                 $formations,
                 $request->query->getInt('page', 1),
-                3
+                9
             );
 
         }
