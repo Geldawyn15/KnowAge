@@ -1,6 +1,5 @@
 body {
-    padding-top: 110px;
-}
+    padding-top: 110px;}
 
 h1 {
     padding-bottom: 20px;
@@ -11,6 +10,9 @@ h1 {
 
 }
 
+.content{
+    min-height: 600px;
+}
 .navbar{
     background-color: #2E024A;
 }
@@ -204,7 +206,7 @@ h1 {
 
 
 /*Footer */
-.footer-distributed {
+.footer-fixed {
     background-color: #402C4A;
     width:100%;
 }
