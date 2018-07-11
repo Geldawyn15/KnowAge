@@ -7,11 +7,21 @@ h1 {
     padding-left: 30px;
     color: black;
     font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+
+}
+
+.typo-main{
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .bg-main{
 
-    background-color: #cbb09c;
+    background-color: slategray;
+}
+
+.bg-second{
+    background-color: darkgrey;
 }
 
 .subHeader {
@@ -207,7 +217,8 @@ h1 {
     background-color: #0a4f73;
 }
 
-.card-header {
+/* PAS DE CSS SUR LES CLASS BOOTSTRAP !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+.card-headerNON {
     background-color: #001a35;
 
 }
