@@ -379,5 +379,4 @@ class FrontController extends controller
     {
         return $this->render('Front/legalMention.html.twig');
     }
-
 }

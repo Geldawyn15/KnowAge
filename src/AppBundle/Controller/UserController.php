@@ -2,7 +2,6 @@
 
 namespace AppBundle\Controller;
 
-
 use AppBundle\Form\DeleteUserType;
 use AppBundle\Form\ForgotPasswordType;
 use AppBundle\Form\InitializePasswordType;
@@ -55,7 +54,6 @@ class UserController extends controller
                 $favoriteformateur[] = $findingFavoriteFormateur;
             }
         }
-
 
         return $this->render('User/profil.html.twig', array(
             'formationscreated' => $formationsCreated,
