@@ -7,16 +7,30 @@ h1 {
     padding-left: 30px;
     color: black;
     font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+
+}
+
+.navbar{
+    background-color: #402C4A;
+}
+
+.typo-main{
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .bg-main{
 
-    background-color: purple;
+    background-color: #F3EAE3;
+}
+
+.bg-second{
+    background-color: #8C7776;
 }
 
 .subHeader {
 
-    background-image: url("http://eticeo.com/wp-content/uploads/2016/11/SERVICE-FORMATION-2-1030x617.jpg");
+    background-image: url();
     background-position: 49% 60%;
 
 }
@@ -191,7 +205,7 @@ h1 {
 
 /*Footer */
 .footer-distributed {
-    background-color: #0a4f73;
+    background-color: #402C4A;
     width:100%;
 }
 
@@ -207,7 +221,8 @@ h1 {
     background-color: #0a4f73;
 }
 
-.card-header {
+/* PAS DE CSS SUR LES CLASS BOOTSTRAP !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+.card-headerNON {
     background-color: #001a35;
 
 }
