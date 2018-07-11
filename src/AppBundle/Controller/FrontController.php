@@ -2,7 +2,6 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Comment;
 use AppBundle\Entity\Comments;
 use AppBundle\Entity\Formation;
 use AppBundle\Entity\Category;
