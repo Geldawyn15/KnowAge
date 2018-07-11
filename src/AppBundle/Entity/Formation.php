@@ -77,6 +77,7 @@ class Formation
 
 
     /**
+     * @var FormationPage[]
      * @ORM\OneToMany(targetEntity="FormationPage", mappedBy="formation", cascade={"all"})
      * @ORM\OrderBy({"ordering" = "ASC"})
      */
@@ -297,6 +298,15 @@ class Formation
         return $this->pages;
     }
 
+    public function pageExist($ordering)
+    {
+        if ($this->getPage($ordering)) {
+            return true;
+        }
+        return false;
+
+    }
+
     /**
      * @param mixed $pages
      */
@@ -305,5 +315,15 @@ class Formation
         $this->pages = $pages;
     }
 
+    public function getPage($ordering)
+    {
+        foreach ($this->pages as $page) {
+            if ($page->getOrdering() == $ordering) {
+                return $page;
+            }
+        }
+
+        return null;
+    }
 }
 
