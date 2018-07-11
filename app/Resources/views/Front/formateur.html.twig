@@ -2,11 +2,10 @@
 {% extends 'layout.html.twig' %}
 {% block title %} Accueil formateur {% endblock %}
 
-
+{% block sub_header %}{% endblock %}
 
 {% block content %}
-
-    <body id="">
+    <body>
         <div class="container-fluid color3 blocContainer">
             <div class="row mb-4 mt-4 ">
                 <div class="col-md-12 mt-4 mb-4 TagLine">
@@ -18,8 +17,6 @@
                 </div>
             </div>
             <div class="row ">
-                <!--<img src="http://via.placeholder.com/800x400" alt="Video" class="img-responsive center-block mt-2"> -->
-
                 <div class="container center-block embed-responsive embed-responsive-16by9 mt-4  blocContainer video1 ">
                     <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/Q71zL6S9YYc?ecver=2" allowfullscreen>
                     </iframe>
@@ -41,7 +38,6 @@
                 <a href="{{ path('new') }}"  class="btn btn-primary mt-4 btn-lg buttonFormation"> <i class="fas fa-user-plus"></i> Ajouter une formation</a>
             </div>
         </div>
-        <hr>
     </body>
 
 {% endblock %}
