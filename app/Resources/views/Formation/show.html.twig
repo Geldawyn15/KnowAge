@@ -1,5 +1,5 @@
 {% extends 'layout.html.twig' %}
-{% block title %} {{ formation.title }}{% endblock %}
+{% block title %} {{ page.formation.title }}{% endblock %}
 {% block stylesheet %}
     <link rel="stylesheet" href="/assets/css2/formation.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/froala_style.min.css" rel="stylesheet" type="text/css" />
@@ -9,55 +9,59 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <h1 class="text-center" style="margin-top: 170px;"> {{ formation.title }} </h1>
+            <h1 class="text-center" style="margin-top: 170px;"> {{ page.formation.title }} - page {{ page.ordering + 1 }}</h1>
         </div>
     </div>
-    {% if formationPage.content %}
+    {% if page.content %}
         <div class="row">
             <div class="col-12">
                 <div class="fr-view">
-                        {{ formationPage.content | raw }}
+                        {{ page.content | raw }}
                 </div>
             </div>
         </div>
     {% endif %}
-
+    {% if page.questions %}
         <div class="row">
             <div class="col-12">
                 <div>
                     <form action="#" method="get">
                         <div>
-                            <p> {{ questions.0.content }}</p>
-                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.0.content }}</label>
-                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.1.content }}</label>
-                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.2.content }}</label>
-
-                            <p> {{ questions.1.content }}</p>
-                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.3.content }}</label>
-                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.4.content }}</label>
-                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.5.content }}</label>
-
-                            <p> {{ questions.2.content }}</p>
-                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.6.content }}</label>
-                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.7.content }}</label>
-                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.8.content }}</label>
-
-                            <p> {{ questions.3.content }}</p>
-                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.9.content }}</label>
-                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.10.content }}</label>
-                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.11.content }}</label>
-
-                            <p> {{ questions.4.content }}</p>
-                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.12.content }}</label>
-                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.13.content }}</label>
-                                <input type="checkbox" id="response1" name="response1" value="1"  /><label for="response1">{{ responses.14.content }}</label>
+                            {% for question in page.questions %}
+                                <p> {{ question.content }}</p>
+                                <input type="checkbox" id="response_q{{ loop.index0 }}_0" name="{{ question.id }}[]" value="{{ question.responses.0.id }}" {% if question.responses.0.checked %}checked{% endif %} /><label for="response_q{{ loop.index0 }}_0">{{ question.responses.0.content }}</label>
+                                <input type="checkbox" id="response_q{{ loop.index0 }}_1" name="{{ question.id }}[]" value="{{ question.responses.1.id }}" {% if question.responses.1.checked %}checked{% endif %} /><label for="response_q{{ loop.index0 }}_1">{{ question.responses.1.content }}</label>
+                                <input type="checkbox" id="response_q{{ loop.index0 }}_2" name="{{ question.id }}[]" value="{{ question.responses.2.id }}" {% if question.responses.2.checked %}checked{% endif %} /><label for="response_q{{ loop.index0 }}_2">{{ question.responses.2.content }}</label>
+                                {% if page.quizSubmitted %}
+                                    {% if question.valid %}
+                                        <p> Bonne réponse</p>
+                                    {% else %}
+                                        <p>ERROR</p>
+                                    {% endif %}
+                                {% endif %}
+                                <hr>
+                            {% endfor %}
                         </div>
-
                             <input type="submit" value="Envoyer le formulaire">
                     </form>
                 </div>
             </div>
         </div>
+    {% endif %}
+{{ dump (page.isQuizValid) }}
+    <div>
+        {% if formation.pageExist(page.ordering +1) and page.isQuizValid %}
+            <a href={{ path('show', {'id': formation.id, 'page': page.ordering +1}) }}> Page suivante </a>
+        {% else %}
+            <a href="{{ path('landing_formation', {'id' : formation.id}) }}"> Terminer </a>
+        {% endif %}
+
+        {% if formation.pageExist(page.ordering -1) %}
+            <a href={{ path('show', {'id': formation.id, 'page': page.ordering -1}) }}> Page précédente </a>
+        {% else %}
+            <a href="{{ path('landing_formation', {'id' : formation.id}) }}"> Retour à l'acceuil de la formation </a>
+        {% endif %}
+    </div>
 
 </div>
 {% endblock %}

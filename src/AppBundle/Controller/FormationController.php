@@ -100,9 +100,10 @@ class FormationController extends controller
             throw $this->createNotFoundException('Vous n\'êtes pas autorisé à accéder à cette page');
         }
 
+        $formationPage = new FormationPage($formation, FormationPage::TYPE_PAGE);
+
         if ($content = $request->request->get('content')) {
 
-            $formationPage = new FormationPage($formation, FormationPage::TYPE_PAGE);
             $formationPage->setContent($content);
             $formation->addPage($formationPage);
 
@@ -226,30 +227,28 @@ class FormationController extends controller
     /**
      * Displays content of a formation entity.
      *
-     * @Route("/show/{id}/{page_ordering}", name="show")
+     * @Route("/show/{id}/{page}", name="show")
      * @Method({"GET", "POST"})
      */
-    public function showAction($id, $page_ordering) {
-
-
-
-        $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
+    public function showAction(Request $request, Formation $formation, $page)
+    {
         $payment = $this->getDoctrine()->getRepository(Paiement::class)->findBy(['user' => $this->getUser(), 'formation' => $formation]);
-        $formationPage = $this->getDoctrine()->getRepository(FormationPage::class)->findOneBy(['formation' => $formation, 'ordering' => $page_ordering]);
-        $questions = $this->getDoctrine()->getRepository(Question::class)->findBy(['formationPage' => $formationPage ]);
-        $responses = $this->getDoctrine()->getRepository(\AppBundle\Entity\Quiz\Response::class)->findBy(['question' => $questions]);
 
+        $page = $formation->getPage($page);
+
+
+
+        if ($request->query->all()) {
+            $page->handleQuizResponses($request);
+        }
 
         /* if (!$payment) {
             throw $this->createNotFoundException('Vous n\'êtes pas autorisé à accéder à cette page');
         }*/
 
         return $this->render('Formation/show.html.twig', array(
+            'page' => $page,
             'formation' => $formation,
-            'formationPage' => $formationPage,
-            'questions' => $questions,
-            'responses' => $responses,
-
         ));
     }
 

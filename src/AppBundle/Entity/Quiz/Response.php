@@ -43,6 +43,11 @@ class Response
      */
     private $question;
 
+    /**
+     * @var bool
+     * checké ou non dans les réponses
+     */
+    private $checked = false;
 
 
     /**
@@ -111,6 +116,24 @@ class Response
     public function setContent($content)
     {
         $this->content = $content;
+    }
+
+    public function check()
+    {
+        $this->checked = true;
+    }
+
+    public function isChecked()
+    {
+        return $this->checked;
+    }
+
+    /**
+     * @return bool true si la réponse (checked) est cohérente avec isValid de l'entité
+     */
+    public function isValid()
+    {
+        return $this->isValid && $this->checked || !$this->isValid && !$this->checked;
     }
 }
 
