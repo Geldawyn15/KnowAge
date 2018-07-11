@@ -1,9 +1,10 @@
 {% extends 'layout.html.twig' %}
 
 {% block title %} Profil {% endblock %}
-{% block stylesheet %}<link rel="stylesheet" href="/assets/css2/profile.css">{% endblock %}
 
 {% block body_id %}profile{% endblock %}
+
+{% block sub_header %} {% endblock %}
 
 {% block content %}
 
@@ -14,12 +15,8 @@
             {% else %}
                 <div class="ml-1"><img src="https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png" style="height: 180px; width: 180px;"></div>
             {%  endif %}
-            <div class="d-flex mt-2">
-                <button id="formationShowBought" class="btn btn-outline-primary waves-effect mr-1">Etudiant</button>
-                <button id="formationShowCreated" class="btn btn-outline-primary waves-effect ml-1">Formateur</button>
-            </div>
-        </div>
 
+        </div>
         <div class="d-flex flex-column ml-5 profileinfo">
             {% if user.name %}
             <div class="d-flex p-2" ><label> Nom: </label><p class="pl-2"> {{ user.name }} </p></div>
@@ -35,7 +32,6 @@
         </div>
         {% if user == app.user %}
         <div class="d-flex flex-column ml-5 justify-content-between">
-
             <div class="d-flex flex-row">
                 <div>
                     <a href="{{ path('update_profil') }}" role="button" aria-disabled="true">
@@ -51,193 +47,208 @@
             {% else %}
             <div class="d-flex flex-column ml-5 justify-content-around">
             {% endif %}
-            <div> <button id="showFavoriteFormation" class="btn btn-outline-primary waves-effect ">Mes Formations</button></div>
-            <div> <button id="showFavoriteFormateur" class="btn btn-outline-primary waves-effect ">Mes Formateurs</button></div>
-        </div>
 
-        <div class="d-flex flex-column ml-5 justify-content-center">
-            {% if app.user != user %}
-            <button data-formateur-id="{{ user.id }}" class="favoriteFormateur btn">
-                {% if currentuser.isFormateurFavorited(user) %}
-                    <i class="fas fa-heart fa-5x favorite"></i>
-                {% else %}
-                    <i class="far fa-heart fa-5x favorite"></i>
-                {% endif %}
-            </button>
-            {% endif %}
-        </div>
-
-    </div>
-<hr >
-<div id="cree" >
-    <h1>Formation Crée</h1>
-    <div class="container formation">
-        <div class="d-flex flex-column">
-            {% for formationcreated in formationscreated %}
-            {% if loop.index is odd %}
-            <div class="row">
-                {% endif %}
-            <div class="col-6 mt-5">
-                <div class="column">
-                    <!-- Post-->
-                    <div class="post-module">
-                        <!-- Thumbnail-->
-                        <div class="thumbnail">
-                            <img src="{{ formationcreated.picture }}" class="img-responsive" alt=""> </div>
-                        <!-- Post Content-->
-                        <div class="post-content">
-                            <div class="category">{{ formationcreated.category }}</div>
-                            <h1 class="title">{{ formationcreated.id }} - {{ formationcreated.title}}</h1>
-                            <h2 class="sub_title">{{ formationcreated.author.firstname}} {{ formationcreated.author.name}}</h2>
-                            <p class="description"> {{ formationcreated.description }}</p>
-                            <div class="post-meta">
-                                <a href="{{ path('show', {id: formationcreated.id}) }}" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a>
-                                <a href="{{ path('new2', {id: formationcreated.id}) }}" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Modifier la formation</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
-                {% if loop.index is even or loop.last %}
-                    </div>
+            <div class="d-flex flex-column ml-5 justify-content-center">
+                {% if app.user != user %}
+                <button data-formateur-id="{{ user.id }}" class="favoriteFormateur btn">
+                    {% if currentuser.isFormateurFavorited(user) %}
+                        <i class="fas fa-heart fa-5x favorite"></i>
+                    {% else %}
+                        <i class="far fa-heart fa-5x favorite"></i>
+                    {% endif %}
+                </button>
                 {% endif %}
-            {% endfor %}
+            </div>
         </div>
     </div>
-</div>
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" href="#etudiant" role="tab" data-toggle="tab">Etudiant</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#formateur" role="tab" data-toggle="tab">Formateur</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#favoriteFormateurs" role="tab" data-toggle="tab">Mes Formateurs</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#favoriteFormations" role="tab" data-toggle="tab">Mes Formations</a>
+        </li>
+    </ul>
 
-<div id="bought">
-    <h1>Formation achetée</h1>
-    <div class="container formation">
-        <div class="d-flex flex-column">
-            {% for payment in payments %}
-                {% if loop.index is odd %}
-                    <div class="row">
-                {% endif %}
-                <div class="col-6 mt-5">
-                    <div class="column">
-                        <!-- Post-->
-                        <div class="post-module">
-                            <!-- Thumbnail-->
-                            <div class="thumbnail">
-                                <img src="{{ payment.formation.picture }}" class="img-responsive" alt=""> </div>
-                            <!-- Post Content-->
-                            <div class="post-content">
-                                <div class="category">{{ payment.formation.category }}</div>
-                                <h1 class="title">{{ payment.formation.title}}</h1>
-                                <h2 class="sub_title">{{ payment.formation.author.firstname}} {{ payment.formation.author.name}}</h2>
-                                <p class="description"> {{ payment.formation.description }}</p>
-                                <div class="post-meta">
-                                    <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a>
-                                    <button class="favoriteFormation btn" data-formation-id="{{ payment.formation.id }}">
-                                        {% if user.isFormationFavorited(payment.formation) %}
-                                            <i id="favoriteFormation" class="fas fa-heart fa-2x"  style="color:Tomato"> </i>
-                                        {% else %}
-                                            <i id="favoriteFormation" class="far fa-heart fa-2x"  style="color:Tomato"> </i>
-                                        {% endif %}
-
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% if loop.index is even or loop.last %}
-                    </div>
-                {% endif %}
-            {% endfor %}
-        </div>
-    </div>
-</div>
-
-<div id="favoriteFormations">
-    <h1>Formation Favori</h1>
-    <div class="container formation">
-        <div class="d-flex flex-column">
-            {% for eachformation in favoriteformations %}
-                {% if loop.index is odd %}
-                    <div class="row">
-                {% endif %}
-                    <div class="col-6 mt-5">
-                        <div class="column">
-                            <!-- Post-->
-                            <div class="post-module">
-                                <!-- Thumbnail-->
-                                <div class="thumbnail">
-                                    <img src="{{ eachformation.picture }}" class="img-responsive" alt=""> </div>
-                                <!-- Post Content-->
-                                <div class="post-content">
-                                    <div class="category">{{ eachformation.category }}</div>
-                                    <h1 class="title">{{ eachformation.title}}</h1>
-                                    <h2 class="sub_title">{{ eachformation.author.firstname}} {{eachformation.author.name}}</h2>
-                                    <p class="description"> {{ eachformation.description }}</p>
-                                    <div class="post-meta">
-                                        <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a>
-                                        <button class="favoriteFormation btn" data-formation-id="{{ eachformation.id }}">
-                                            {% if user.isFormationFavorited(eachformation) %}
-                                                <i id="favoriteFormation" class="fas fa-heart fa-2x"  style="color:Tomato"> </i>
-                                            {% else %}
-                                                <i id="favoriteFormation" class="far fa-heart fa-2x"  style="color:Tomato"> </i>
-                                            {% endif %}
-
-                                        </button>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane in active" id="etudiant">
+            <h1>Formation Crée</h1>
+            <div class="container formation">
+                <div class="d-flex flex-column">
+                    {% for formationcreated in formationscreated %}
+                        {% if loop.index is odd %}
+                            <div class="row">
+                        {% endif %}
+                        <div class="col-6 mt-5">
+                            <div class="column">
+                                <!-- Post-->
+                                <div class="post-module">
+                                    <!-- Thumbnail-->
+                                    <div class="thumbnail">
+                                        <img src="{{ formationcreated.picture }}" class="img-responsive" alt=""> </div>
+                                    <!-- Post Content-->
+                                    <div class="post-content">
+                                        <div class="category">{{ formationcreated.category }}</div>
+                                        <h1 class="title">{{ formationcreated.id }} - {{ formationcreated.title}}</h1>
+                                        <h2 class="sub_title">{{ formationcreated.author.firstname}} {{ formationcreated.author.name}}</h2>
+                                        <p class="description"> {{ formationcreated.description }}</p>
+                                        <div class="post-meta">
+                                            <a href="{{ path('landing_formation', {id: formationcreated.id}) }}" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a>
+                                            <a href="{{ path('new2', {id: formationcreated.id}) }}" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Modifier la formation</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                {% if loop.index is even or loop.last %}
-                    </div>
-                {% endif %}
-
-            {% endfor %}
+                        {% if loop.index is even or loop.last %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+        <div role="tabpanel" class="tab-pane " id="formateur">
+            <h1>Formation achetée</h1>
+            <div class="container formation">
+                <div class="d-flex flex-column">
+                    {% for payment in payments %}
+                        {% if loop.index is odd %}
+                            <div class="row">
+                        {% endif %}
+                        <div class="col-6 mt-5">
+                            <div class="column">
+                                <!-- Post-->
+                                <div class="post-module">
+                                    <!-- Thumbnail-->
+                                    <div class="thumbnail">
+                                        <img src="{{ payment.formation.picture }}" class="img-responsive" alt=""> </div>
+                                    <!-- Post Content-->
+                                    <div class="post-content">
+                                        <div class="category">{{ payment.formation.category }}</div>
+                                        <h1 class="title">{{ payment.formation.title}}</h1>
+                                        <h2 class="sub_title">{{ payment.formation.author.firstname}} {{ payment.formation.author.name}}</h2>
+                                        <p class="description"> {{ payment.formation.description }}</p>
+                                        <div class="post-meta">
+                                            <a href="{{ path('landing_formation', {id: formation.id}) }}" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a>
+                                            <button class="favoriteFormation btn" data-formation-id="{{ payment.formation.id }}">
+                                                {% if user.isFormationFavorited(payment.formation) %}
+                                                    <i id="favoriteFormation" class="fas fa-heart fa-2x"  style="color:Tomato"> </i>
+                                                {% else %}
+                                                    <i id="favoriteFormation" class="far fa-heart fa-2x"  style="color:Tomato"> </i>
+                                                {% endif %}
 
-<div id="favoriteFormateurs">
-    <h1>Formateur Favori</h1>
-    <div class="container formation">
-        <div class="d-flex flex-column">
-            {% for eachformateur in favoriteformateur %}
-                {% if  loop.index0  % 3 == 0 %}
-                    <div class="row">
-                {% endif %}
-                <div class="col-md-4 mt-5">
-                    <div class="column">
-                        <!-- Post-->
-                        <div class="post-module">
-                            <!-- Thumbnail-->
-                            <div class="thumbnail">
-                                <img src="{{ eachformateur.profilePic }}" class="img-responsive" alt=""> </div>
-                            <!-- Post Content-->
-                            <div class="post-content">
-                                {% if eachformateur.name and eachformateur.firstName %}
-                                    <h1 class="title">{{ eachformateur.firstName }} {{ eachformateur.name }} </h1>
-                                {% else %}
-                                    <h1 class="title">{{ eachformateur.nickName }}</h1>
-                                {% endif %}
-                                <h2 class="sub_title">{{ eachformateur.email }}</h2>
-                                <div class="post-meta">
-                                    <button class="favoriteFormateur btn" data-formateur-id=" {{ eachformateur.id }} ">
-                                        {% if user.isFormateurFavorited(eachformateur) %}
-                                            <i id="favoriteFormateur" class="fas fa-heart fa-2x"  style="color:Tomato"> </i>
-                                        {% else %}
-                                            <i id="favoriteFormateur" class="far fa-heart fa-2x"  style="color:Tomato"> </i>
-                                        {% endif %}
-                                    </button>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        {% if loop.index is even or loop.last %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
                 </div>
-                {% if loop.index is even or loop.last %}
-                    </div>
-                {% endif %}
-            {% endfor %}
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane " id="favoriteFormateurs">
+            <h1>Formateur Favori</h1>
+            <div class="container formation">
+                <div class="d-flex flex-column">
+                    {% for eachformateur in favoriteformateur %}
+                        {% if  loop.index0  % 3 == 0 %}
+                            <div class="row">
+                        {% endif %}
+                        <div class="col-md-4 mt-5">
+                            <div class="column">
+                                <!-- Post-->
+                                <div class="post-module">
+                                    <!-- Thumbnail-->
+                                    <div class="thumbnail">
+                                        <img src="{{ eachformateur.profilePic }}" class="img-responsive" alt=""> </div>
+                                    <!-- Post Content-->
+                                    <div class="post-content">
+                                        {% if eachformateur.name and eachformateur.firstName %}
+                                            <h1 class="title">{{ eachformateur.firstName }} {{ eachformateur.name }} </h1>
+                                        {% else %}
+                                            <h1 class="title">{{ eachformateur.nickName }}</h1>
+                                        {% endif %}
+                                        <h2 class="sub_title">{{ eachformateur.email }}</h2>
+                                        <div class="post-meta">
+                                            <button class="favoriteFormateur btn" data-formateur-id=" {{ eachformateur.id }} ">
+                                                {% if user.isFormateurFavorited(eachformateur) %}
+                                                    <i id="favoriteFormateur" class="fas fa-heart fa-2x"  style="color:Tomato"> </i>
+                                                {% else %}
+                                                    <i id="favoriteFormateur" class="far fa-heart fa-2x"  style="color:Tomato"> </i>
+                                                {% endif %}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% if loop.index is even or loop.last %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane " id="favoriteFormations">
+            <h1>Formation Favori</h1>
+            <div class="container formation">
+                <div class="d-flex flex-column">
+                    {% for eachformation in favoriteformations %}
+                        {% if loop.index is odd %}
+                            <div class="row">
+                        {% endif %}
+                        <div class="col-6 mt-5">
+                            <div class="column">
+                                <!-- Post-->
+                                <div class="post-module">
+                                    <!-- Thumbnail-->
+                                    <div class="thumbnail">
+                                        <img src="{{ eachformation.picture }}" class="img-responsive" alt=""> </div>
+                                    <!-- Post Content-->
+                                    <div class="post-content">
+                                        <div class="category">{{ eachformation.category }}</div>
+                                        <h1 class="title">{{ eachformation.title}}</h1>
+                                        <h2 class="sub_title">{{ eachformation.author.firstname}} {{eachformation.author.name}}</h2>
+                                        <p class="description"> {{ eachformation.description }}</p>
+                                        <div class="post-meta">
+                                            <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a>
+                                            <button class="favoriteFormation btn" data-formation-id="{{ eachformation.id }}">
+                                                {% if user.isFormationFavorited(eachformation) %}
+                                                    <i id="favoriteFormation" class="fas fa-heart fa-2x"  style="color:Tomato"> </i>
+                                                {% else %}
+                                                    <i id="favoriteFormation" class="far fa-heart fa-2x"  style="color:Tomato"> </i>
+                                                {% endif %}
+
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% if loop.index is even or loop.last %}
+                            </div>
+                        {% endif %}
+
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
-</div>
+
+
+
+
 
 <script>
     $(document).ready(function() {

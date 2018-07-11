@@ -6,31 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{{ asset('/assets/images/favicon.png') }}">
 
-    <link href="https://fonts.googleapis.com/css?family=Lobster+Two:400,400i,700,700i" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Hind+Siliguri:300,400,500,600,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Concert+One" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
-
-    <!--StarRating Add the css in your page head-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/starrating/css/rating.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
     <script src="{{ asset('assets/js/scroll.js') }}"></script>
     <script src="{{ asset('assets/js/search.js') }}"></script>
     <script src="{{ asset('assets/js/fluid.js') }}"></script>
     <script src="{{ asset('assets/js/profileFormations.js') }}"></script>
-
-
-    <!--Add the javascript to your page head-->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
-
 
     <title>{% block title %}No Age{% endblock %}</title>
 
@@ -39,33 +29,32 @@
 </head>
 
 <body id="{% block body_id %}{% endblock %}">
-<nav class="navbar navbar-expand-lg fixed-top" data-spy="affix" data-offset-top="">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">
-            <img src="/assets/images/favicon-96x96.png" width="96" height="96" class="d-inline-block align-top" alt="">
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top " data-spy="affix" data-offset-top="">
+        <a class="navbar-brand text-white" href="#">
+            <img src="/assets/images/favicon-96x96.png" width="45" height="45">
+            No Age
         </a>
-        <a class="navbar-brand text-white" href="/">No Age</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse  " id="navbarSupportedContent">
-            <ul class="nav navbar-nav justify-content-end ">
+        <div class="collapse navbar-collapse " id="navbarToggler">
+            <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ path('homepage') }} ">Accueil<span class="sr-only">(current)</span></a>
+                    <a class="nav-link " href="{{ path('homepage') }} ">Accueil<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ path('search') }}">Recherche<span class="sr-only">(current)</span></a>
+                    <a class="nav-link " href="{{ path('search') }}">Recherche<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ path('contact') }}">Contact<span class="sr-only">(current)</span></a>
+                    <a class="nav-link " href="{{ path('contact') }}">Contact<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item ">
                     {% if app.user %}
-                        <a class="nav-link text-white" href="{{ path('profil', {id: app.user.id}) }}">Mon Profil<span class="sr-only">(current)</span></a>
+                        <a class="nav-link " href="{{ path('profil', {id: app.user.id}) }}">Mon Profil<span class="sr-only">(current)</span></a>
                     {% endif %}
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ path('new') }}">Ajouter une Formation<span class="sr-only">(current)</span></a>
+                    <a class="nav-link " href="{{ path('new') }}">Ajouter une Formation<span class="sr-only">(current)</span></a>
                 </li>
                 {% if app.user %}
                     <li class="nav-item loginbtn ">
@@ -79,57 +68,66 @@
 
             </ul>
         </div>
-    </div>
-</nav>
+    </nav>
 
 
-{% block content %}{% endblock %}
-
-<footer class="footer-distributed">
-    <div class="footer-right">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-    </div>
-
-    <div class="footer-left">
-        <p class="footer-links">
-            <a href="{{ path('homepage') }}">Accueil</a>
-            ·
-            <a href="{{ path('contact') }}">Contact</a>
-            ·
-            <a href="{{ path('legalMention') }}">Mentions légales</a>
-            ·
-            <a href="#">Conditions générales de vente</a>
-        </p>
-        <p>No Age &copy; 2018</p>
-    </div>
-</footer>
-<script>
-    {% block toast %}
-    toastr.options = {
-        "positionClass": "toast-top-full-width",
-        "showDuration": "500",
-        "progressBar": true
-    };
-
+    {% block sub_header %}
+        <div class="subHeader py-3">
+            <h1>{% block h1 %}{% endblock %}</h1>
+            {% block breadcrumb %}{% endblock %}
+        </div>
     {% endblock %}
-    /* type pour Toastr => success, info, warning, error*/
-    {% for type, messages in app.flashes %}
-    var type = '{{ type }}';
-    {% for message in messages %}
-    if (type === 'danger') {
-        toastr['error']('{{ message }}');
-    } else if (type === 'warning') {
-        toastr['warning']('{{ message }}');
-    } else if (type === 'success') {
-        toastr['success']('{{ message }}');
-    } else {
-        toastr['info']('{{ message }}');
-    }
-    {% endfor %}
-    {% endfor %}
-</script>
+
+    <div class="content">
+
+        {% block content %}{% endblock %}
+
+    </div>
+
+    <footer class="footer-distributed">
+        <div class="footer-right">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+
+        <div class="footer-left">
+            <p class="footer-links">
+                <a href="{{ path('homepage') }}">Accueil</a>
+                ·
+                <a href="{{ path('contact') }}">Contact</a>
+                ·
+                <a href="#">Mentions légales</a>
+                ·
+                <a href="#">Conditions générales de vente</a>
+            </p>
+            <p>No Age &copy; 2018</p>
+        </div>
+    </footer>
+    <script>
+        {% block toast %}
+        toastr.options = {
+            "positionClass": "toast-top-full-width",
+            "showDuration": "500",
+            "progressBar": true
+        };
+        {% endblock %}
+        /* type pour Toastr => success, info, warning, error*/
+        {% for type, messages in app.flashes %}
+        var type = '{{ type }}';
+        {% for message in messages %}
+        if (type === 'danger') {
+            toastr['error']('{{ message }}');
+        } else if (type === 'warning') {
+            toastr['warning']('{{ message }}');
+        } else if (type === 'success') {
+            toastr['success']('{{ message }}');
+        } else {
+            toastr['info']('{{ message }}');
+        }
+        {% endfor %}
+        {% endfor %}
+    </script>
 </body>
 
 </html>

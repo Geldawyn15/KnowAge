@@ -1,31 +1,40 @@
 {% extends 'layout.html.twig' %}
 {% block title %}Menu formation{% endblock %}
-{% block stylesheet %}<link rel="stylesheet" href="/assets/css2/homeCreate.css">{% endblock %}
 
+{% block h1 %}Je crée ma formation{% endblock %}
 
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb pl-3">
+            <li class="breadcrumb-item"><p>Informations sur la Formation</p></li>
+            <li class="breadcrumb-item active text-dark" aria-current="page"><a>Choisir un type de page</a></li>
+            <li class="breadcrumb-item">Ajouter du contenu</li>
+        </ol>
+    </nav>
+{% endblock %}
 
 {% block content %}
 
-<body id="{% block body_id %}homeCreate{% endblock %}">
-    <div class="toto">
-        <h1 class="mtoto"> Choisissez une page</h1>
-        <div class="mb-5">
-            <form method="get" action="">
-                <a href="{{ path('new2', {'id': formation.id}) }}"> Ajouter une page via la WYSIWYG</a>
-                <a href=""> Ajouter une Page / Document</a>
-                <a href="{{ path('quiz', {'id': formation.id}) }}"> Ajouter un quizz</a>
-            </form>
+    <div class="container-fluid bg-main mt-3">
+        <div class="row justify-content-center">
+            <div class="card-deck justify-content-center text-center py-5">
+                <div class="col-3 card card-transparency">
+                    <div class="card-body mb-5">
+                        <h3 class="card-title text-uppercase font-weight-bold text-nowrap text-truncate">Nouvelle Page</h3>
+                        <p class="card-text mt-4 mb-5 bgCardDark">Vous detenez un savoir faire ? Partagez le avec le monde entier et gagnez de l'argent.blabalbalbalablabla </p>
+                        <a class="px-4 py-3 text-nowrap text-truncate Button1" href="{{ path('new2', {'id': formation.id}) }}">Ajouter une page</a>
+                    </div>
+                </div>
+                <div class="col-3 card card-transparency">
+                    <div class="card-body mb-5">
+                        <h3 class="card-title text-uppercase font-weight-bold text-nowrap text-truncate">Nouveau Quiz</h3>
+                        <p class="card-text mt-4 mb-5 bgCardDark">Aprenez à votre rythme, sans contrainte. Elargissez vos connaissances. Ouvrez vous de nouveaux horizons </p>
+                        <a class="px-4 py-3 text-nowrap text-truncate  Button1" href="{{ path('quiz', {'id': formation.id}) }}" role="button">Ajouter un quiz</a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <div>
-        <a href="{{ path('landing_formation', {'id' : formation.id}) }}">Terminer </a>
-    </div>
-
-
-
-</body>
-
-
+        <div class="offset-5 col-2 py-5">
+            <a class="px-4 py-3 text-nowrap text-truncate text-white text-center Button1" href="{{ path('landing_formation', {'id' : formation.id}) }}" role="button">Terminer la formation</a>
 
 {% endblock %}
