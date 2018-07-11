@@ -58,7 +58,7 @@ class addFormationType extends AbstractType
                             'image/jpeg',
                             'image/png',
                         ],
-                        'mimeTypesMessage' => 'Le format de votre image ({{ type }}) est invalide. Merci de sélectionner une image de type : {{ types }}.',
+                        'mimeTypesMessage' => 'Le format de votre image est invalide. Merci de sélectionner une image au format : jpeg/jpg ou png.',
                     ])
 
                 )
