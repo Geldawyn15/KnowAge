@@ -77,7 +77,7 @@ class FrontController extends controller
             $formations = $paginator->paginate(
                 $formations,
                 $request->query->getInt('page', 1),
-                3
+                9
             );
 
         }
