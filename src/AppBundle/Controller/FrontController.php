@@ -53,7 +53,6 @@ class FrontController extends controller
 
 
         if ($request->query->get('category_id')) {
-
             $id = $request->query->get('category_id');
             $query = $this->getDoctrine()->getRepository(Formation::class)->findBy(['category' => $id]);
 
@@ -61,7 +60,7 @@ class FrontController extends controller
             $formations = $paginator->paginate(
                 $query,
                 $request->query->getInt('page', 1),
-                4
+                9
             );
 
         }
@@ -78,7 +77,7 @@ class FrontController extends controller
             $formations = $paginator->paginate(
                 $formations,
                 $request->query->getInt('page', 1),
-                3
+                9
             );
 
         }
@@ -168,7 +167,7 @@ class FrontController extends controller
         $entityManager = $this->getDoctrine()->getManager();
         $formationPage = $this->getDoctrine()->getRepository(FormationPage::class)->findOneBy(['formation' => $formation, 'ordering' => 0]);
         $pageOrdering = $formationPage->getordering();
-        //dump($formationPage);die;
+
 
         //Affichage de la note moyenne
 
