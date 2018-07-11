@@ -2,27 +2,19 @@
 namespace AppBundle\Command;
 
 use AppBundle\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Helper\ProgressBar;
-
-
 
 class DeleteUser extends ContainerAwareCommand
 {
-
     protected function configure()
     {
         $this
             ->setName('app:delete-user')
             ->setDescription('supprime les utilisateurs dont la demande de suppression date de +30 jours')
-            ->setHelp('supprime les utilisateurs dont la demande de suppression date de +30 jours')
-
-        ;
+            ->setHelp('supprime les utilisateurs dont la demande de suppression date de +30 jours');
     }
-
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {

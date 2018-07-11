@@ -471,10 +471,5 @@ class User implements UserInterface, \Serializable
     {
         return $this->isDeleted = $isDeleted;
     }
-
-
-
-
-
 }
 

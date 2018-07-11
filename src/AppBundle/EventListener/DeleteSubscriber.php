@@ -10,7 +10,6 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-
 class DeleteSubscriber  implements EventSubscriberInterface
 {
     /**
@@ -42,14 +41,12 @@ class DeleteSubscriber  implements EventSubscriberInterface
         );
     }
 
-
     public function onKernelController(FilterControllerEvent $event)
     {
         if ($token = $this->tokenStorage->getToken()) {
 
             if (is_object($user = $token->getUser())) {
                 // e.g. anonymous authentication
-
 
                 if ($user->getIsDeleted()) {
 
@@ -60,14 +57,8 @@ class DeleteSubscriber  implements EventSubscriberInterface
                         return new RedirectResponse('/login');
 
                     });
-
                 }
             }
-
         }
-
-
     }
-
-
 }

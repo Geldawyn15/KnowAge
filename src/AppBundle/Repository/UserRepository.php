@@ -1,17 +1,12 @@
 <?php
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\User;
-use Doctrine\ORM\Query\Expr;
-use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Doctrine\ORM\EntityRepository;
 
 class UserRepository extends EntityRepository
 {
-    //Creation de la query pour récupérer les user avec une date (isDeleted) < à 30 jours par rapport à la date du jour
     public function deletedUser()
     {
-
         $queryBuilder = $this->createQueryBuilder('u')
             ->delete('AppBundle:User', 'u')
             ->andWhere("u.isDeleted IS NOT NULL")
@@ -25,10 +20,6 @@ class UserRepository extends EntityRepository
         $query = $queryBuilder->getQuery();
         $result = $query->getResult();
 
-        // retourne les user avec une date isDeleted passer de 31 jours
         return $result;
     }
-
-
-
 }

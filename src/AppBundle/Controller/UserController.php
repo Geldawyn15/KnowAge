@@ -192,14 +192,9 @@ class UserController extends controller
      */
     public function deleteUser(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-
-
         $user = $this->getUser();
-
-
         $form = $this->createForm(DeleteUserType::class, $user);
         $form->handleRequest($request);
-
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -217,18 +212,11 @@ class UserController extends controller
             } else {
                 $this->addFlash('danger', 'mot de passe incorrect');
                 return $this->redirectToRoute('deleteUser');
-
             }
         }
 
         return $this->render('User/deleteUser.html.twig', array(
             'form'=>$form->createView()
         ));
-
-
-
-
-
-
     }
 }
