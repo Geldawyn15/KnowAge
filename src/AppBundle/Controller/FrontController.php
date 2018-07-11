@@ -167,7 +167,7 @@ class FrontController extends controller
         $entityManager = $this->getDoctrine()->getManager();
         $formationPage = $this->getDoctrine()->getRepository(FormationPage::class)->findOneBy(['formation' => $formation, 'ordering' => 0]);
         $pageOrdering = $formationPage->getordering();
-        //dump($formationPage);die;
+
 
         //Affichage de la note moyenne
 
