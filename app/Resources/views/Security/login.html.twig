@@ -1,16 +1,51 @@
 {% extends 'layout.html.twig' %}
 {% block title %} Se connecter {% endblock %}
-{% block stylesheet %}
-    <link href="https://fonts.googleapis.com/css?family=Libre+Barcode+39" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css2/login_signup.css">
-
-{% endblock %}
-
+{% block h1 %}SE CONNECTER{% endblock %}
 
 {% block content %}
     {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div xmlns="http://www.w3.org/1999/html">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <form>
+                        <div class="form-group">
+                            <span class="fas fa-envelope"></span>
+                            <label for="exampleInputEmail1">Email</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                        <div class="form-group">
+                            <i class="fas fa-key"></i>
+                            <label for="exampleInputPassword1">Mot de passe</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1">
+                        </div>
+
+                        <div class="form-group form-check">
+
+                            <input type="checkbox" class="form-check-input" id="remember_me" name="_remember_me">
+                            <label class="form-check-label" for="remember_me">Se souvenir de moi</label>
+                            <a href="{{ path('forgotPassword') }}" class="ml-5">Mot de passe oublié</a>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="submit" class="Button1">Se connecter</button>
+                            </div>
+                            <div class="col-6">
+                                <a href="{{ path('signup') }}" class=" btn btn-block text-white btn-outline-secondary waves-effect" role="button">créer son compte</a>
+
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+<!--
 <div class="container-fluid bg_01">
     <div class="row loginSignupLigne1 no-gutters ">
         <div class="col-md-6 offset-md-3 borderTop"></div>
@@ -57,6 +92,7 @@
         <div class="col-md-6 offset-md-3 borderBot"></div>
     </div>
 </div>
+-->
     <script>
         {% block toast %}
         toastr.options = {
