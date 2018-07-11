@@ -28,7 +28,10 @@ h1 {
 }
 
 /* general settings */
-
+.favoriteFormation, .favoriteFormateur {
+    background-color:transparent;
+    color:Tomato;
+}
 /* body */
 
 /*polices */

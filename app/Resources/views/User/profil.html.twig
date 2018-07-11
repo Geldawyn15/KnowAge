@@ -139,9 +139,9 @@
                                             <a href="{{ path('landing_formation', {id: formation.id}) }}" class="btn btn-sm btn-outline-secondary  mr-3">Voir la formation</a>
                                             <button class="favoriteFormation btn" data-formation-id="{{ payment.formation.id }}">
                                                 {% if user.isFormationFavorited(payment.formation) %}
-                                                    <i id="favoriteFormation" class="fas fa-heart fa-2x"  style="color:Tomato"> </i>
+                                                    <i id="favoriteFormation" class="fas fa-heart fa-2x"> </i>
                                                 {% else %}
-                                                    <i id="favoriteFormation" class="far fa-heart fa-2x"  style="color:Tomato"> </i>
+                                                    <i id="favoriteFormation" class="far fa-heart fa-2x"> </i>
                                                 {% endif %}
 
                                             </button>
@@ -183,9 +183,9 @@
                                         <div class="post-meta">
                                             <button class="favoriteFormateur btn" data-formateur-id=" {{ eachformateur.id }} ">
                                                 {% if user.isFormateurFavorited(eachformateur) %}
-                                                    <i id="favoriteFormateur" class="fas fa-heart fa-2x"  style="color:Tomato"> </i>
+                                                    <i id="favoriteFormateur" class="fas fa-heart fa-2x"> </i>
                                                 {% else %}
-                                                    <i id="favoriteFormateur" class="far fa-heart fa-2x"  style="color:Tomato"> </i>
+                                                    <i id="favoriteFormateur" class="far fa-heart fa-2x"> </i>
                                                 {% endif %}
                                             </button>
                                         </div>
@@ -223,11 +223,11 @@
                                         <p class="description"> {{ eachformation.description }}</p>
                                         <div class="post-meta">
                                             <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a>
-                                            <button class="favoriteFormation btn" data-formation-id="{{ eachformation.id }}">
+                                            <button class="favoriteFormation btn"  data-formation-id="{{ eachformation.id }}">
                                                 {% if user.isFormationFavorited(eachformation) %}
-                                                    <i id="favoriteFormation" class="fas fa-heart fa-2x"  style="color:Tomato"> </i>
+                                                    <i id="favoriteFormation" class="fas fa-heart fa-2x"> </i>
                                                 {% else %}
-                                                    <i id="favoriteFormation" class="far fa-heart fa-2x"  style="color:Tomato"> </i>
+                                                    <i id="favoriteFormation" class="far fa-heart fa-2x"> </i>
                                                 {% endif %}
 
                                             </button>
