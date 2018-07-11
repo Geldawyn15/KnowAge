@@ -1,21 +1,21 @@
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% extends 'layout.html.twig' %}
+{% block title %}Ajouter un quiz{% endblock %}
 
-{% block title %}Créer un quiz{% endblock %}
-{% block stylesheet %}<link rel="stylesheet" href="/assets/css2/quiz.css">{% endblock %}
+{% block h1 %}Je crée ma formation{% endblock %}
+
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb pl-3">
+            <li class="breadcrumb-item"><p>Informations sur la Formation</p></li>
+            <li class="breadcrumb-item active text-dark" aria-current="page"><a>Choisir un type de page</a></li>
+            <li class="breadcrumb-item">Ajouter du contenu</li>
+        </ol>
+    </nav>
+{% endblock %}
 
 {% block content %}
-<body id="{% block body_id %}quiz{% endblock %}">
-
     {{ form_start(form) }}
-
-
-
-
-
-
-    <input type="submit" class="btn btn-primary" value="Envoyez"/>
-
-
+        <input type="submit" class="btn btn-primary" value="Envoyez"/>
     {{ form_end(form) }}
-
 {% endblock %}
