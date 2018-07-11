@@ -1,68 +1,62 @@
 {% extends 'layout.html.twig' %}
 {% block title %} Recherche {% endblock %}
+{% block sub_header %}{% endblock %}
 
-{% block body_id %}search{% endblock %}
 {% block content %}
 
         {%  if formations is empty and search is empty %}
-            <div class="row">
-                <div class="col-10 text-center">
-                    <p class="emptySearch typo mb-5"> Entrez votre recherche ici : </p>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row empty Search">
-                    <div class="col-md-12 text-center">
-                        <form method="Get" action="{{ path('search') }}">
+            <div class="container my-4" id="search">
+                <div class="row justify-content-center">
+                    <div class="col-md-7 col-sm-10 col-xs-12 px-5 pt-5 search-Banner" >
+                        <h2 class="text-center text-white text-uppercase no-wrap search-Banner-title py-2 mx-2"> Trouver<br> une formation </h2>
+                        <h5 class="keyword text-left  mr2 ml-2 text-muted"> Par mots-clés </h5>
+                        <form class= "mb-5 mx-2" method="Get" action="{{ path('search') }}">
                             <div class="input-group mb-3">
-
-                                <input type="text" id="searchbar" name="search" class="form-control" placeholder="Recherche..." aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                <div class="input-group-append text-align-center">
-                                    <a> <button class="btnSearch btn btn-secondary" type="submit"><i class="fas fa-search"></i></button></a>
-                                </div>
+                                <input type="text" id="search" name="search" class="form-control" placeholder="Entrez un ou des mots clés..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <span class="input-group-append text-align-center">
+                                    <a>
+                                        <button class="btnSearch btn btn-secondary" type="submit">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </a>
+                                </span>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
+
         {% else %}
 
-   <div class="container">
-        <div class="row searchbar">
-            <div class="col-md-12 text-center">
-                <form method="Get" action="{{ path('search') }}">
-                    <div class="input-group mb-3">
-
-                        <input type="text" id="searchbar" name="search" class="form-control"
-                           {% if search %}
-                                value="{{ search.0 }}"
-                           {%  endif %}
-                               aria-label="Recipient's username" aria-describedby="basic-addon2">
-
-
-                        <div class="input-group-append text-align-center">
-                            <a> <button class="btnSearch btn btn-secondary" type="submit"><i class="fas fa-search"></i></button></a>
-                        </div>
+            <div class="container my-4" id="search">
+                <div class="row justify-content-center">
+                    <div class="col-md-7 col-sm-10 col-xs-12 px-5 pt-5 search-Banner" >
+                        <h2 class="text-center text-white text-uppercase no-wrap search-Banner-title py-2 mx-2"> Trouver<br> une formation </h2>
+                        <h5 class="keyword text-left  mr2 ml-2 text-muted"> Par mots-clés </h5>
+                        <form class= "mb-5 mx-2" method="Get" action="{{ path('search') }}">
+                            <div class="input-group mb-3">
+                                <input type="text" id="search" name="search" class="form-control" {% if search %} value="{{ search.0 }}"{%  endif %} placeholder="Entrez un ou des mots clés..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <span class="input-group-append text-align-center">
+                                    <a>
+                                        <button class="btnSearch btn btn-secondary" type="submit">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </a>
+                                </span>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
-    </div>
 
    {% if formations %}
-    <div class="container">
-        <div class="row ">
-            <div class="col-md-5" >
-                <h2 class="searchTitle text-center mb-5 mt-5 typo"> Résultat de la recherche :</h2>
-            </div>
-        </div>
-    </div>
-<div class="container">
+
+<div class="container bg-main">
     {% for formation in formations %}
     {% if  loop.index0  % 3 == 0 %}
     <div class="row mb-5">
         {% endif %}
-        <div class="col-md-4 mt-5">
+        <div class="col-md-4 my-5 ">
             <div class="column">
                 <!-- Post-->
                 <div class="post-module">
