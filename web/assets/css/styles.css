@@ -10,8 +10,8 @@ h1 {
 }
 
 .bg-main{
-
     background-color: purple;
+    box-shadow: 5px 10px #888888;
 }
 
 .subHeader {
