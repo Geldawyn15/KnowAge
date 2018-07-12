@@ -1,35 +1,48 @@
 {% extends 'layout.html.twig' %}
-{% block title %} {{ page.formation.title }}{% endblock %}
 
 {% block sub_header %}{% endblock %}
 
+{% block stylesheet %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block title %} {{ page.formation.title }}{% endblock %}
+
+{% block h1 %}{{ page.formation.title }}{% endblock %}
+
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb pl-3">
+            <li class="breadcrumb-item"><p>{{ page.formation.title }}</p></li>
+            <li class="breadcrumb-item"><a>Page : {{ page.ordering+1 }}</a></li>
+            <li class="breadcrumb-item"><a>{% if page.type == 0 %} Formation {% else %} Questionnaire {% endif %} </a></li>
+        </ol>
+    </nav>
+{% endblock %}
+
+
 {% block content %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <h1 class="text-center" style="margin-top: 170px;"> {{ page.formation.title }} - page {{ page.ordering + 1 }}</h1>
-        </div>
-    </div>
+
     {% if page.content %}
-        <div class="row">
+        <div class="row my-5">
             <div class="col-12">
-                <div class="fr-view">
+                <div class="fr-view bg-main py-5">
                         {{ page.content | raw }}
                 </div>
             </div>
         </div>
     {% endif %}
+
     {% if page.questions %}
-        <div class="row">
-            <div class="col-12">
-                <div>
-                    <form action="#" method="get">
-                        <div>
+        <div class="container-fluid bg-main">
+            <div class="row  my-4 py-4">
+                <div class="offset-2 col-8">
+                    <form action="#" method="get" style="border: 2px solid black;">
+                        <div class="px-4 py-4">
                             {% for question in page.questions %}
                                 <p> {{ question.content }}</p>
-                                <input type="checkbox" id="response_q{{ loop.index0 }}_0" name="{{ question.id }}[]" value="{{ question.responses.0.id }}" {% if question.responses.0.checked %}checked{% endif %} /><label for="response_q{{ loop.index0 }}_0">{{ question.responses.0.content }}</label>
-                                <input type="checkbox" id="response_q{{ loop.index0 }}_1" name="{{ question.id }}[]" value="{{ question.responses.1.id }}" {% if question.responses.1.checked %}checked{% endif %} /><label for="response_q{{ loop.index0 }}_1">{{ question.responses.1.content }}</label>
-                                <input type="checkbox" id="response_q{{ loop.index0 }}_2" name="{{ question.id }}[]" value="{{ question.responses.2.id }}" {% if question.responses.2.checked %}checked{% endif %} /><label for="response_q{{ loop.index0 }}_2">{{ question.responses.2.content }}</label>
+                                <div><input type="checkbox" id="response_q{{ loop.index0 }}_0" name="{{ question.id }}[]" value="{{ question.responses.0.id }}" {% if question.responses.0.checked %}checked{% endif %} /><label for="response_q{{ loop.index0 }}_0">{{ question.responses.0.content }}</label></div>
+                                <div><input type="checkbox" id="response_q{{ loop.index0 }}_1" name="{{ question.id }}[]" value="{{ question.responses.1.id }}" {% if question.responses.1.checked %}checked{% endif %} /><label for="response_q{{ loop.index0 }}_1">{{ question.responses.1.content }}</label></div>
+                                <div><input type="checkbox" id="response_q{{ loop.index0 }}_2" name="{{ question.id }}[]" value="{{ question.responses.2.id }}" {% if question.responses.2.checked %}checked{% endif %} /><label for="response_q{{ loop.index0 }}_2">{{ question.responses.2.content }}</label></div>
                                 {% if page.quizSubmitted %}
                                     {% if question.valid %}
                                         <p> Bonne réponse</p>
@@ -40,26 +53,26 @@
                                 <hr>
                             {% endfor %}
                         </div>
-                            <input type="submit" value="Envoyer le formulaire">
+                        <input type="submit" class="px-4 py-3 mt-3 text-nowrap text-truncate js-scrollTo Button1"  style="float: right" value="Envoyer">
                     </form>
                 </div>
             </div>
         </div>
     {% endif %}
-{{ dump (page.isQuizValid) }}
-    <div>
+
+    <div class="mb-5">
         {% if formation.pageExist(page.ordering +1) and page.isQuizValid %}
-            <a href={{ path('show', {'id': formation.id, 'page': page.ordering +1}) }}> Page suivante </a>
+            <a class="px-4 py-3 text-nowrap text-truncate js-scrollTo Button1" role="button" style="float: right;" href="{{ path('show', {'id': formation.id, 'page': page.ordering +1}) }}"> Page suivante </a>
         {% else %}
-            <a href="{{ path('landing_formation', {'id' : formation.id}) }}"> Terminer </a>
+            <a class="px-4 py-3 text-nowrap text-truncate js-scrollTo Button1" role="button" style="float: right;" href="{{ path('landing_formation', {'id' : formation.id}) }}"> Terminer </a>
         {% endif %}
 
         {% if formation.pageExist(page.ordering -1) %}
-            <a href={{ path('show', {'id': formation.id, 'page': page.ordering -1}) }}> Page précédente </a>
+            <a class="px-4 py-3 text-nowrap text-truncate js-scrollTo Button1" role="button" href={{ path('show', {'id': formation.id, 'page': page.ordering -1}) }}> Page précédente </a>
         {% else %}
-            <a href="{{ path('landing_formation', {'id' : formation.id}) }}"> Retour à l'acceuil de la formation </a>
+            <a class="px-4 py-3 text-nowrap text-truncate js-scrollTo Button1" role="button" href="{{ path('landing_formation', {'id' : formation.id}) }}"> Retour à l'acceuil de la formation </a>
         {% endif %}
     </div>
 
-</div>
+
 {% endblock %}
