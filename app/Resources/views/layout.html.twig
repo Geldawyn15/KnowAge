@@ -29,41 +29,40 @@
     {% block javascript %}{% endblock %}
 </head>
 
-<body id="{% block body_id %}{% endblock %}">
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top " data-spy="affix" data-offset-top="">
-        <a class="navbar-brand text-white" href="#">
-            <img src="/assets/images/favicon-96x96.png" width="45" height="45">
-            No Age
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="{{ path('homepage') }}">
+            <img src="/assets/images/favicon-96x96.png" width="45" height="45"> KnowAge
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse " id="navbarToggler">
+        <div class="collapse navbar-collapse" id="navbarToggler">
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link " href="{{ path('homepage') }} ">Accueil<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ path('homepage') }} ">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="{{ path('search') }}">Recherche<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ path('search') }}">Recherche</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="{{ path('contact') }}">Contact<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item ">
-                    {% if app.user %}
-                        <a class="nav-link " href="{{ path('profil', {id: app.user.id}) }}">Mon Profil<span class="sr-only">(current)</span></a>
-                    {% endif %}
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="{{ path('new') }}">Ajouter une Formation<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ path('contact') }}">Contact</a>
                 </li>
                 {% if app.user %}
-                    <li class="nav-item loginbtn ">
-                        <a href="{{ path('logout') }}" role="button" aria-disabled="true"><button class="loginBtn text-white btn btn-outline-secondary waves-effect btn-lg">Se déconnecter</button></a>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ path('profil', {id: app.user.id}) }}">Mon Profil</a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('new') }}">Ajouter une Formation</a>
+                </li>
+                {% if app.user %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white btn btn-outline-secondary" href="{{ path('logout') }}" role="button">Se déconnecter</a>
                     </li>
                 {% else %}
-                    <li class="nav-item loginbtn ">
-                        <a href="{{ path('login') }}" role="button" aria-disabled="true"><button class="loginBtn text-white btn btn-outline-secondary waves-effect btn-lg">Se Connecter</button></a>
+                    <li class="nav-item">
+                        <a class="nav-link text-white btn btn-outline-secondary" href="{{ path('login') }}" role="button">Se Connecter</a>
                     </li>
                 {% endif %}
 
@@ -73,7 +72,7 @@
 
 
     {% block sub_header %}
-        <div class="subHeader py-3">
+        <div class="bg-second py-3">
             <h1 class="text-uppercase">{% block h1 %}{% endblock %}</h1>
             {% block breadcrumb %}{% endblock %}
         </div>
@@ -86,35 +85,20 @@
     </div>
 
 
-    <footer class="=text-muted bg-dark">
-        <div class="container mb-0">
-            <div class="d-flex row">
-                <div class="mr-auto">
-                    <p class="footer-links">
-                        <a href="{{ path('homepage') }}">Accueil</a>
-                        ·
-                        <a href="{{ path('contact') }}">Contact</a>
-                        ·
-                        <a href="#">Mentions légales</a>
-                        ·
-                        <a href="#">Conditions générales de vente</a>
-                    </p>
-                </div>
-                <div class="ml-auto">
-                    <a class="mr-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a class="ml-1 mr-1     " href="#"><i class="fab fa-twitter"></i></a>
-                    <a class="ml-1" href="#"><i class="fab fa-linkedin-in"></i></a>
-                </div>
+    <footer class="bg-dark py-2 text-center">
+        <div class="container">
+            <div class="mb-2">
+                <a href="{{ path('homepage') }}">Accueil</a>
+                ·
+                <a href="{{ path('contact') }}">Contact</a>
+                ·
+                <a href="{{ path('legalMention') }}">Mentions légales</a>
+                ·
+                <a href="#">Conditions générales de vente</a>
             </div>
-            <div class="d-flex row justify-content-center">
-                <div class="text-white">
-                    <p>No Age &copy; 2018</p>
-                </div>
-            </div>
+            <div class="text-white">No Age &copy; 2018</div>
         </div>
     </footer>
-
-
 
     <script>
         {% block toast %}

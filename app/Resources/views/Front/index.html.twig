@@ -1,270 +1,121 @@
 {% extends 'layout.html.twig' %}
-{% block title %} Accueil {% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block sub_header %}{% endblock %}
+
 {% block content %}
-    <header>
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <img class="bigImageHeader" src="https://i.imgur.com/v7vcgA8.jpg" alt="Smiley face" height="auto" width="100%">
-                <div class="positionTitle text-center">
-                    <H1 class="mt-4 text-uppercase font-weight-bold display-2">apprenez <em class="text-dark font-italic text-capitalize emFontSize">à votre rythme...</em></H1>
-                    <span class=""> </span>
-                </div>
-                <div class="card-deck justify-content-center text-center card-margin">
-                    <div class="col-md-3 col-xs-4 card card-transparency">
-                        <div class="card-body mb-5">
-                            <h3 class="card-title text-uppercase font-weight-bold text-nowrap text-truncate">Formateur</h3>
-                            <p class="card-text mt-4 mb-5 bgCardDark">Vous detenez un savoir faire ? Partagez le avec le monde entier et gagnez de l'argent.blabalbalbalablabla </p>
-                            <a class="pr-4 pl-4 pb-3 pt-3 text-nowrap text-truncate Button1" href="{{ path('formateur') }}">Je veux former</a>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-xs-4 card card-transparency">
-                        <div class="card-body mb-5">
-                            <h3 class="card-title text-uppercase font-weight-bold text-nowrap text-truncate">aprenant</h3>
-                            <p class="card-text mt-4 mb-5 bgCardDark">Aprenez à votre rythme, sans contrainte. Elargissez vos connaissances. Ouvrez vous de nouveaux horizons </p>
-                            <a class="pr-4 pl-4 pb-3 pt-3 text-nowrap text-truncate js-scrollTo Button1" href="#search" role="button">Je veux apprendre</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <header class="marketing bg-marketing text-center py-5">
+        <h1 class="py-3 bg-white-semi_transparent">APPRENEZ <em class="text-dark">à votre rythme...</em></h1>
     </header>
 
-
-    <button class="btn  scroll-top" data-scroll="up" type="button">
-        <i class="fa fa-chevron-up"></i>
-    </button>
-
-    <!-- section 1 bannnières chiffres clés-->
-    <div class="container banner-numbers">
-        <div class="row text-center">
-            <div class="col-md-3">
-                <i class="fas fa-table-tennis fa-3x text-white"></i>
-                <h1 class="title-banner counter" data-count="150">0</h1>
-                <h5 class="sub-title-banner">Sports</h5>
-            </div>
-            <div class="col-md-3">
-                <i class="fas fa-users fa-3x text-white"></i>
-                <h1 class="title-banner counter" data-count="175">0</h1>
-                <h5 class="sub-title-banner">Membres</h5>
-            </div>
-            <div class="col-md-3">
-                <i class="fas fa-globe fa-3x text-white"></i>
-                <h1 class="title-banner counter" data-count="40">0</h1>
-                <h5 class="sub-title-banner">Pays</h5>
-            </div>
-            <div class="col-md-3">
-                <i class="far fa-smile fa-3x text-white"></i>
-                <h1 class="title-banner counter" data-count="2300">0</h1>
-                <h5 class="sub-title-banner">Formations</h5>
-            </div>
-        </div>
-    </div>
-    <!-- fin de section 1 -->
-
-    <!-- search -->
-    <div class="container mt-4 mb-4" id="search">
-        <div class="row justify-content-center">
-            <div class="col-md-7 col-sm-10 col-xs-12 pl-5 pr-5 pt-5 search-Banner" >
-                <h2 class="text-center text-white text-uppercase no-wrap search-Banner-title pt-2 pb-2 mr2 ml-2"> Trouver<br> une formation </h2>
-                <h5 class="keyword text-left  mr2 ml-2 text-muted"> Par mots-clés </h5>
-                <form class= "mb-5 mr2 ml-2" method="Get" action="{{ path('search') }}">
-                    <div class="input-group mb-3">
-                        <input type="text" id="search" name="search" class="form-control" placeholder="Entrez un ou des mots clés..." aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <span class="input-group-append text-align-center">
-                            <a>
-                                <button class="btnSearch btn btn-secondary" type="submit">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </a>
-                        </span>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- fin de banner -->
-
-    <!-- Portfolio category-->
-    <div class="container mt-5 CategoryBanner">
+    <div class="container pb-5" style="margin-top: -110px;">
         <div class="row">
-            <h1 class="text-uppercase ml-4">Catégories</h1>
+            <div class="col-8 offset-2">
+                <div class="card-deck text-center">
+                    <div class="card">
+                        <div class="card-header h3">Formateur</div>
+                        <div class="card-body">
+                            <p class="card-text">Vous detenez un savoir faire ? Partagez le avec le monde entier et gagnez de l'argent.blabalbalbalablabla </p>
+                            <a class="btn btn-lg btn-primary my-3" href="{{ path('formateur') }}">Je veux former</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header h3">Apprenant</div>
+                        <div class="card-body">
+                            <p class="card-text">Aprenez à votre rythme, sans contrainte. Elargissez vos connaissances. Ouvrez vous de nouveaux horizons </p>
+                            <a class="btn btn-lg btn-primary my-3 js-scrollTo" href="#search">Je veux apprendre</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+
+    {% include 'Front/search.widget.html.twig' %}
+
+    <div class="container py-5">
+        <h1 class="text-uppercase pb-3">Catégories</h1>
         <div class="card-columns">
             {%  for category in categories %}
                 <div class="card">
-                    <a class="portfolio-link" href="{{ path('search', {'category_id': category.id}) }}">
+                    <a href="{{ path('search', {'category_id': category.id}) }}">
                         <div class="portfolio-hover">
-                            <div class="portfolio-hover-content text-center">
-                                <i class="fas fa-plus fa-3x text-center"></i>
+                            <div class="portfolio-hover-content">
+                                <i class="fas fa-plus fa-3x"></i>
                                 <h5>{{ category.category }}</h5>
                             </div>
                         </div>
-                        <img class="card-img-top img-fluid" src="https://i.imgur.com/7qDiqn6.jpg?1" alt="Card image cap">
+                        {# TODO checker images #}
+                        <img class="card-img-top img-fluid" src="{{ category.picture|default('https://i.imgur.com/7qDiqn6.jpg?1') }}" alt="Card image cap">
                     </a>
                 </div>
-
             {%  endfor %}
         </div>
     </div>
-    <!-- End of portfolio -->
-
 
     <!-- FAQ-->
-    <div class="container mt-5 mb-5 ">
-        <div class="row">
-            <h1 class="text-uppercase ml-4">FAQ</h1>
-        </div>
-        <div class="row bg-Color FAQBanner">
-            <div class="col-md-6 ml-0 NoPaddingLeft">
-                <img class="pl-0 img-responsive img-FAQ" src="https://i.imgur.com/fgiywFD.jpg" alt="" width="100%"/>
-            </div>
-            <div class="col-md-6 mt-5 pr-4 accordion">
+    <div class="bg-grey py-5">
+        <div class="container">
+            <h1 class="text-uppercase pb-3">FAQ</h1>
+
+            <div class="accordion">
                 <div class="card">
-                    <div class="card-header" id="headingOne">
+                    <div class="card-header">
                         <h5 class="mb-0">
-                            <div class="row justify-content-between ">
-                                <button class="btn btn-link text-nowrap text-truncate" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    Est-ce qu'il y a des cours gratuits ?
-                                </button>
-                                <button class="btn btn-link buttonFAQTodisplay" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <i class="fas fa-arrows-alt-v fa-1x"></i>
-                                </button>
-                            </div>
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne">Est-ce qu'il y a des cours gratuits ?</button>
                         </h5>
                     </div>
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div id="collapseOne" class="collapse show">
                         <div class="card-body">
                             Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                         </div>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-header" id="headingTwo">
+                    <div class="card-header">
                         <h5 class="mb-0">
-                            <div class="row justify-content-between">
-                                <button class="btn btn-link collapsed text-nowrap text-truncate" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    Combien de temps dure une formation ?
-                                </button>
-                                <button class="btn btn-link buttonFAQTodisplay" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                    <i class="fas fa-arrows-alt-v fa-1x"></i>
-                                </button>
-                            </div>
+                            <button class="btn btn-link collapsed text-nowrap text-truncate" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Combien de temps dure une formation ?</button>
                         </h5>
                     </div>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div id="collapseTwo" class="collapse">
                         <div class="card-body">
                             Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                         </div>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-header" id="headingThree">
+                    <div class="card-header">
                         <h5 class="mb-0">
-                            <div class="row justify-content-between">
-                                <button class="btn btn-link collapsed text-nowrap text-truncate" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    Combien coute une formation ?
-                                </button>
-                                <button class="btn btn-link buttonFAQTodisplay" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                                    <i class="fas fa-arrows-alt-v fa-1x arrow"></i>
-                                </button>
-                            </div>
+                            <button class="btn btn-link collapsed text-nowrap text-truncate" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Combien coute une formation ?</button>
                         </h5>
                     </div>
-                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div id="collapseThree" class="collapse">
                         <div class="card-body">
                             Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                         </div>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-header" id="headingFour">
+                    <div class="card-header">
                         <h5 class="mb-0">
-                            <div class="row justify-content-between">
-                                <button class="btn btn-link collapsed text-nowrap text-truncate" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                    Est-ce que je peux reprendre une formation non terminée ?
-                                </button>
-                                <button class="btn btn-link buttonFAQTodisplay" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-                                    <i class="fas fa-arrows-alt-v fa-1x arrow"></i>
-                                </button>
-                            </div>
+                            <button class="btn btn-link collapsed text-nowrap text-truncate" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Est-ce que je peux reprendre une formation non terminée ?</button>
                         </h5>
                     </div>
-                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                    <div id="collapseFour" class="collapse">
                         <div class="card-body">
                             Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
-
     <!--Fin du FAQ -->
 
-
-    <!--Nos atouts Modal -->
-    <!-- Exemple Modal1 -->
-    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Exemple Modal2 -->
-    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Exemple Modal3 -->
-    <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <button class="btn scroll-top" data-scroll="up" type="button" style="position:fixed; bottom: 80px; right: 0">
+        <i class="fa fa-chevron-up"></i>
+    </button>
 
     <!-- -->
 

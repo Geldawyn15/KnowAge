@@ -4,127 +4,75 @@
 
 {% block content %}
 
-        {%  if formations is empty and search is empty %}
-            <div class="container my-4" id="search">
-                <div class="row justify-content-center">
-                    <div class="col-md-7 col-sm-10 col-xs-12 px-5 pt-5 search-Banner" >
-                        <h2 class="text-center text-white text-uppercase no-wrap search-Banner-title py-2 mx-2"> Trouver<br> une formation </h2>
-                        <h5 class="keyword text-left  mr2 ml-2 text-muted"> Par mots-clés </h5>
-                        <form class= "mb-5 mx-2" method="Get" action="{{ path('search') }}">
-                            <div class="input-group mb-3">
-                                <input type="text" id="search" name="search" class="form-control" placeholder="Entrez un ou des mots clés..." aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                <span class="input-group-append text-align-center">
-                                    <a>
-                                        <button class="btnSearch btn btn-secondary" type="submit">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                    </a>
-                                </span>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+    {% include 'Front/search.widget.html.twig' %}
 
-        {% else %}
+    <div class="container py-4">
 
-            <div class="container my-4" id="search">
-                <div class="row justify-content-center">
-                    <div class="col-md-7 col-sm-10 col-xs-12 px-5 pt-5 search-Banner" >
-                        <h2 class="text-center text-white text-uppercase no-wrap search-Banner-title py-2 mx-2"> Trouver<br> une formation </h2>
-                        <h5 class="keyword text-left  mr2 ml-2 text-muted"> Par mots-clés </h5>
-                        <form class= "mb-5 mx-2" method="Get" action="{{ path('search') }}">
-                            <div class="input-group mb-3">
-                                <input type="text" id="search" name="search" class="form-control" {% if search %} value="{{ search.0 }}"{%  endif %} placeholder="Entrez un ou des mots clés..." aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                <span class="input-group-append text-align-center">
-                                    <a>
-                                        <button class="btnSearch btn btn-secondary" type="submit">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                    </a>
-                                </span>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
 
-   {% if formations %}
+        {% if formations %}
 
-<div class="container-fluid bg-main">
-    {% for formation in formations %}
-    {% if loop.index0 % 3 == 0 %}
-    <div class="row mb-5">
-        {% endif %}
-        <div class="col-md-4 my-4 py-3">
-            <div class="column">
-                <!-- Post-->
-                <div class="post-module">
-                    <!-- Thumbnail-->
-                    <div class="thumbnail">
-                        <img src="{{ formation.picture }}" class="img-responsive" alt="">
-                    </div>
-                    <!-- Post Content-->
-                    <div class="post-content">
-                        <div class="category">{{ formation.category }}</div>
-                            <h1 class="title">{{ formation.title }}</h1>
-                            <h2 class="sub_title">par {{ formation.author.nickName }}</h2>
-                            <p class="description"> {{ formation.description }}</p>
-                        <div class="post-meta">
-                                <a href="{{ path('landing_formation', {id: formation.id}) }}" class="btn btn-sm btn-outline-secondary mr-3">Voir la formation</a>
-                            <button class="favoriteFormation btn" data-formation-id="{{ formation.id }}">
-                                {% if app.user and user.isFormationFavorited(formation) %}
-                                    <i id="favoriteFormation" class="fas fa-heart fa-2x"> </i>
-                                {% else %}
-                                    <i id="favoriteFormation" class="far fa-heart fa-2x"> </i>
+            {% for formation in formations %}
+                {% if loop.index0 % 3 == 0 %}<div class="row mb-5">{% endif %}
+                <div class="col-4">
+                    <div class="card">
+                        <div style="position: relative;">
+                            <button class="btn favorite" data-formation-id="{{ formation.id }}" style="position:absolute; right: 0">
+                                {% if app.user %}
+                                    {% if app.user.isFormationFavorited(formation) %}
+                                        <i id="js-favorite" class="fas fa-heart fa-2x"></i>
+                                    {% else %}
+                                        <i id="js-favorite" class="far fa-heart fa-2x"></i>
+                                    {% endif %}
                                 {% endif %}
                             </button>
+                            <img class="card-img-top" src="{{ formation.picture }}">
+                            <div class="py-2 px-3 text-white bg-yellow" style="position:absolute; bottom: 0"><b>{{ formation.category }}</b></div>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">{{ formation.title }}</h3>
+                            <p class="card-text"> {{ formation.description }}</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <a href="{{ path('landing_formation', {id: formation.id}) }}" class="btn btn-sm btn-outline-secondary mr-3">Voir la formation</a>
+                            <small class="text-muted">{{ formation.author.nickName }}</small>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        {% if loop.index % 3 == 0 %}
-            </div>
-        {% endif %}
-    {% endfor %}
+                {% if loop.index % 3 == 0 %}</div>{% endif %}
+            {% endfor %}
 
 
-</div>
+            {{ knp_pagination_render(formations) }}
 
-<div class="container">
-   {{ knp_pagination_render(formations) }}
-</div>
-   {% endif %}
+
         {% endif %}
 
-   {% if (search or id) and formations is empty %}
-       <div class="row text-center">
-           <div class="col-12 mb-5">
-               <h3> Votre recherche n'a donné aucun résultat </h3>
-           </div>
-       </div>
-   {% endif %}
+        {% if (search or id) and formations is empty %}
+            <div class="text-center mb-5">
+                <p class="h3">Votre recherche n'a donné aucun résultat</p>
+            </div>
+        {% endif %}
 
-<script>
-   $(document).ready(function() {
-       $('.favoriteFormation').click(function() {
-           var icon = $(this).find("i");
-           if (icon.hasClass("far")) {
-               $.get('/user/favoriteformation', {
-                   formationId: $(this).attr('data-formation-id'),
-                   favorited: 0
+        <script>
+           $(document).ready(function() {
+               $('.favorite').click(function() {
+                   let icon = $(this).find("i");
+                   if (icon.hasClass("far")) {
+                       $.get('/user/favoriteformation', {
+                           formationId: $(this).attr('data-formation-id'),
+                           favorited: 0
+                       });
+                       icon.removeClass("far").addClass("fas");
+                   } else {
+                       $.get('/user/favoriteformation', {
+                           formationId: $(this).attr('data-formation-id'),
+                           favorited: 1
+                       });
+                       icon.removeClass("fas").addClass("far");
+                   }
                });
-               return icon.removeClass("far").addClass("fas");
-           } else {
-               $.get('/user/favorite', {
-                   formationId: $(this).attr('data-formation-id'),
-                   favorited: 1
-               });
-               return icon.removeClass("fas").addClass("far");
-           }
-       });
-   });
-</script>
+           });
+        </script>
+    </div>
 
 {% endblock %}
