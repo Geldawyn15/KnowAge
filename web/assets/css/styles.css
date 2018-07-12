@@ -1,22 +1,37 @@
 body {
-    padding-top: 110px;
-}
+    padding-top: 110px;}
 
 h1 {
     padding-bottom: 20px;
     padding-left: 30px;
     color: black;
     font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+
+}
+
+.content{
+    min-height: 572px;
+}
+.navbar{
+    background-color: #2E024A;
+}
+
+.typo-main{
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .bg-main{
-    background-color: purple;
+    background-color: #F0E7E9;
     box-shadow: 5px 10px #888888;
+
+}
+
+.bg-second {
+    background-color: #756A82;
 }
 
 .subHeader {
-
-    background-image: url("http://eticeo.com/wp-content/uploads/2016/11/SERVICE-FORMATION-2-1030x617.jpg");
     background-position: 49% 60%;
 
 }
@@ -48,7 +63,6 @@ h1 {
     bottom:100px;
     background-color: #0a4f73;
     color:white;
-
 }
 
 
@@ -65,12 +79,37 @@ h1 {
     background-color: #001a35;
     text-decoration: none;
     color:white;
+    cursor: pointer;
 }
 
 .Button1:active {
     background-color: #001a35;
     transform: translateY(4px);
 }
+
+.Button2 {
+
+    text-decoration: none;
+    color: #fff;
+    background-color: #001a35;
+    border: solid 1px #001a35;
+    border-radius: 8px;
+}
+
+.Button2:hover {
+    background-color:rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    color:white;
+    cursor: pointer;
+    border: solid 1px #001a35;
+}
+
+.Button2:active {
+    background-color: #0a4f73;
+    transform: translateY(4px);
+}
+
+
 
 
 /* header */
@@ -193,8 +232,8 @@ h1 {
 
 
 /*Footer */
-.footer-distributed {
-    background-color: #0a4f73;
+.footer-fixed {
+    background-color: #402C4A;
     width:100%;
 }
 
@@ -210,7 +249,8 @@ h1 {
     background-color: #0a4f73;
 }
 
-.card-header {
+/* PAS DE CSS SUR LES CLASS BOOTSTRAP !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+.card-headerNON {
     background-color: #001a35;
 
 }
@@ -499,7 +539,7 @@ h1 {
 .container .column {
     width: 100%;
     /* padding: 0 25px; */
--webkti-box-sizing: border-box;
+-webkit-box-sizing: border-box;
 -moz-box-sizing: border-box;
 box-sizing: border-box;
 float: left;
@@ -533,4 +573,38 @@ float: left;
 }
 .container .info span .fa {
     color: #f2b202;
+}
+
+/*landingcolor:yellow;Formation */
+.starColor {
+    text-decoration: none;
+    color:yellow;
+}
+
+.starColor:hover {
+    text-decoration: none;
+    color:yellowgreen;
+}
+
+.boxShadow {
+    border: solid 1px lightgrey;
+    box-shadow: 5px 10px #888888;
+    background-color:#0a4f73;
+
+}
+
+.bgColorModal {
+    background-color: rgba(0,0,0, 0.6);
+}
+
+.minHeight {
+    min-height: 4em;
+}
+
+.navTabPosition {
+    margin-top:-5em;
+}
+
+.card-header {
+    background-color:#0a4f73;
 }

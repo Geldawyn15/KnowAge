@@ -2,12 +2,13 @@
 
 namespace AppBundle\Controller;
 
-
+use AppBundle\Form\DeleteUserType;
 use AppBundle\Form\ForgotPasswordType;
 use AppBundle\Form\InitializePasswordType;
 use AppBundle\Form\ResetPasswordType;
 use AppBundle\Form\UpdatePasswordType;
 use AppBundle\Form\UpdateProfileType;
+use AppBundle\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -39,8 +40,10 @@ class UserController extends controller
         $findingFavoriteFormations = $em->getRepository('AppBundle:Formation')->findAll();
         $findingFavoriteFormateurs = $em->getRepository('AppBundle:User')->findAll();
         $payments = $em->getRepository('AppBundle:Paiement')->findBy(['user' => $user]);
+
         $favoriteFormations = [];
         $favoriteformateur = [];
+
         foreach ($findingFavoriteFormations as $findingFavoriteFormation){
             if ($user->isFormationFavorited($findingFavoriteFormation)){
                 $favoriteFormations[] = $findingFavoriteFormation;
@@ -51,6 +54,7 @@ class UserController extends controller
                 $favoriteformateur[] = $findingFavoriteFormateur;
             }
         }
+
         return $this->render('User/profil.html.twig', array(
             'formationscreated' => $formationsCreated,
             'payments' => $payments,
@@ -178,5 +182,39 @@ class UserController extends controller
         }
         $em->flush();
         return new Response();
+    }
+
+    /**
+     * @Route("/deleteUser", name="deleteUser")
+     *
+     */
+    public function deleteUser(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(DeleteUserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($passwordEncoder->isPasswordValid($user, $user->getPlainPassword())) {
+
+                $user->setIsDeleted(new \DateTime("now"));
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Votre compte sera supprimé d\'ici 30 jours, pour 
+                le récuppérer veuillez contacter le webmaster');
+
+                return $this->redirectToRoute('logout');
+
+            } else {
+                $this->addFlash('danger', 'mot de passe incorrect');
+                return $this->redirectToRoute('deleteUser');
+            }
+        }
+
+        return $this->render('User/deleteUser.html.twig', array(
+            'form'=>$form->createView()
+        ));
     }
 }

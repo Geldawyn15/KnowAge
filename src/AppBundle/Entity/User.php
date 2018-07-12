@@ -113,6 +113,17 @@ class User implements UserInterface, \Serializable
      */
     private $favoriteFormateurs;
 
+
+    /**
+     * @Assert\DateTime
+     * @ORM\Column(name="is_deleted", type="datetime", nullable=true)
+     */
+    private $isDeleted;
+
+
+
+
+
     public function __construct()
     {
         $this->favoriteFormations = new ArrayCollection();
@@ -444,11 +455,21 @@ class User implements UserInterface, \Serializable
         return $this->name;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getIsDeleted()
+    {
+        return $this->isDeleted;
+    }
 
-
-
-
-
-
+    /**
+     * @return \DateTime
+     *
+     */
+    public function setIsDeleted($isDeleted)
+    {
+        return $this->isDeleted = $isDeleted;
+    }
 }
 

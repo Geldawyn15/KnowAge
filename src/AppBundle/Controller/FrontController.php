@@ -369,4 +369,12 @@ class FrontController extends controller
         ));
     }
 
+    /**
+     * @Route("/legalmention", name="legalMention")
+     *
+     */
+    public function showLegalMention (Request $request)
+    {
+        return $this->render('Front/legalMention.html.twig');
+    }
 }
