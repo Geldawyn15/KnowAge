@@ -16,6 +16,12 @@
 
 {% block content %}
     {{ form_start(form) }}
+        {{ form_label(form.questions[0].content) }}
+        {{ form_widget(form.questions[0].content) }}
+            {{ form_label(form.questions[0].responses[0].content) }}
+
+    <h1> JOHN DOE DEV WILL DOE THIS LATER. </h1>
+
         <input type="submit" class="btn btn-primary" value="Envoyez"/>
     {{ form_end(form) }}
 {% endblock %}

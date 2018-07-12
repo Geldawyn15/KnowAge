@@ -35,12 +35,12 @@
             <div class="d-flex flex-row">
                 <div>
                     <a href="{{ path('update_profil') }}" role="button" aria-disabled="true">
-                        <button class="btn btn-outline-primary waves-effect mr-1">Modifier mon Profil</button>
+                        <button class="btn btn-outline-secondary waves-effect mr-1">Modifier mon Profil</button>
                     </a>
                 </div>
                 <div>
                     <a href="{{ path('update_password') }}" role="button" aria-disabled="true">
-                        <button class="btn btn-outline-primary waves-effect mr-1">Modifier mon mot de passe</button>
+                        <button class="btn btn-outline-secondary waves-effect mr-1">Modifier mon mot de passe</button>
                     </a>
                 </div>
             </div>
@@ -64,21 +64,21 @@
     </div>
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" href="#etudiant" role="tab" data-toggle="tab">Etudiant</a>
+            <a class="nav-link active text-dark" href="#etudiant" role="tab" data-toggle="tab">Etudiant</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#formateur" role="tab" data-toggle="tab">Formateur</a>
+            <a class="nav-link text-dark" href="#formateur" role="tab" data-toggle="tab">Formateur</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#favoriteFormateurs" role="tab" data-toggle="tab">Mes Formateurs</a>
+            <a class="nav-link text-dark" href="#favoriteFormateurs" role="tab" data-toggle="tab">Mes Formateurs</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#favoriteFormations" role="tab" data-toggle="tab">Mes Formations</a>
+            <a class="nav-link text-dark" href="#favoriteFormations" role="tab" data-toggle="tab">Mes Formations</a>
         </li>
     </ul>
 
-    <div class="tab-content bg-main">
-        <div role="tabpanel" class="tab-pane in active" id="etudiant">
+    <div class="tab-content bg-main ">
+        <div role="tabpanel" class="tab-pane in active " id="etudiant">
             <h1>Formation Crée</h1>
             <div class="container formation">
                 <div class="d-flex flex-column">
@@ -101,7 +101,7 @@
                                         <p class="description"> {{ formationcreated.description }}</p>
                                         <div class="post-meta">
                                             <a href="{{ path('landing_formation', {id: formationcreated.id}) }}" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a>
-                                            <a href="{{ path('new2', {id: formationcreated.id}) }}" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Modifier la formation</a>
+                                            <a href="{{ path('new2', {id: formationcreated.id}) }}" class="btn btn-sm btn-outline-secondary  mr-3">Modifier la formation</a>
                                         </div>
                                     </div>
                                 </div>
@@ -136,12 +136,12 @@
                                         <h2 class="sub_title">{{ payment.formation.author.firstname}} {{ payment.formation.author.name}}</h2>
                                         <p class="description"> {{ payment.formation.description }}</p>
                                         <div class="post-meta">
-                                            <a href="{{ path('landing_formation', {id: formation.id}) }}" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a>
+                                            <a href="{{ path('landing_formation', {id: formation.id}) }}" class="btn btn-sm btn-outline-secondary  mr-3">Voir la formation</a>
                                             <button class="favoriteFormation btn" data-formation-id="{{ payment.formation.id }}">
                                                 {% if user.isFormationFavorited(payment.formation) %}
-                                                    <i id="favoriteFormation" class="fas fa-heart fa-2x"  style="color:Tomato"> </i>
+                                                    <i id="favoriteFormation" class="fas fa-heart fa-2x"> </i>
                                                 {% else %}
-                                                    <i id="favoriteFormation" class="far fa-heart fa-2x"  style="color:Tomato"> </i>
+                                                    <i id="favoriteFormation" class="far fa-heart fa-2x"> </i>
                                                 {% endif %}
 
                                             </button>
@@ -183,9 +183,9 @@
                                         <div class="post-meta">
                                             <button class="favoriteFormateur btn" data-formateur-id=" {{ eachformateur.id }} ">
                                                 {% if user.isFormateurFavorited(eachformateur) %}
-                                                    <i id="favoriteFormateur" class="fas fa-heart fa-2x"  style="color:Tomato"> </i>
+                                                    <i id="favoriteFormateur" class="fas fa-heart fa-2x"> </i>
                                                 {% else %}
-                                                    <i id="favoriteFormateur" class="far fa-heart fa-2x"  style="color:Tomato"> </i>
+                                                    <i id="favoriteFormateur" class="far fa-heart fa-2x"> </i>
                                                 {% endif %}
                                             </button>
                                         </div>
@@ -223,11 +223,11 @@
                                         <p class="description"> {{ eachformation.description }}</p>
                                         <div class="post-meta">
                                             <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a>
-                                            <button class="favoriteFormation btn" data-formation-id="{{ eachformation.id }}">
+                                            <button class="favoriteFormation btn"  data-formation-id="{{ eachformation.id }}">
                                                 {% if user.isFormationFavorited(eachformation) %}
-                                                    <i id="favoriteFormation" class="fas fa-heart fa-2x"  style="color:Tomato"> </i>
+                                                    <i id="favoriteFormation" class="fas fa-heart fa-2x"> </i>
                                                 {% else %}
-                                                    <i id="favoriteFormation" class="far fa-heart fa-2x"  style="color:Tomato"> </i>
+                                                    <i id="favoriteFormation" class="far fa-heart fa-2x"> </i>
                                                 {% endif %}
 
                                             </button>
