@@ -249,7 +249,7 @@ h1 {
 }
 
 /* PAS DE CSS SUR LES CLASS BOOTSTRAP !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-.card-header {
+.card-headerNON {
     background-color: #001a35;
 
 }
@@ -604,6 +604,6 @@ float: left;
     margin-top:-5em;
 }
 
-.card-header {
+.card-headerNON {
     background-color:#0a4f73;
 }
