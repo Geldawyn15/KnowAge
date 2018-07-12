@@ -8,6 +8,7 @@ h1 {
     font-weight: bold;
     font-family: 'IBM Plex Sans', sans-serif;
 
+
 }
 
 .content{
@@ -32,7 +33,7 @@ h1 {
 
 .subHeader {
 
-    background-image: url();
+    background-color: #756A82;
     background-position: 49% 60%;
 
 }
@@ -248,7 +249,7 @@ h1 {
 }
 
 /* PAS DE CSS SUR LES CLASS BOOTSTRAP !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-.card-headerNON {
+.card-header {
     background-color: #001a35;
 
 }
