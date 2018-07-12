@@ -1,5 +1,9 @@
 body {
-    padding-top: 110px;
+    padding-top: 71px;
+}
+
+nav{
+    height: 71px;
 }
 
 h1 {
@@ -283,6 +287,14 @@ h1 {
 
 
 /*Responsive settings
+
+/*Media /* Extra small devices (phones small, 320px and down) */
+@media only screen and (max-width: 320px) {
+
+    /*-------Page login-----*/
+
+}
+
 /*Media /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
 
