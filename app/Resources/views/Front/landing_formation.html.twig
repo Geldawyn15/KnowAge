@@ -123,17 +123,17 @@
                             <div class="row justify-content-around align-items-center mt-4">
                                 <div class="col-md-3 mb-md-4 mt-md-4">
                                     <div>
-                                        <button class="pr-4 pl-4 pb-3 pt-3 text-nowrap text-truncate btn-block Button2" href="{{ path('formation_Achat', {id: formation.id}) }}"><i class="fas fa-shopping-cart mr-2"></i>Acheter</button>
+                                        <a class="pr-4 pl-4 pb-3 pt-3 text-nowrap text-truncate btn btn-block Button2" href="{{ path('formation_Achat', {id: formation.id}) }}"><i class="fas fa-shopping-cart mr-2"></i>Acheter</a>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-md-4 mt-md  -4">
+                                    <div>
+                                        <a class="pr-4 pl-4 pb-3 pt-3 text-nowrap text-truncate btn btn-block Button2 text-white" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-arrows-alt-v mr-2"></i>En savoir plus</a>
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-md-4 mt-md-4">
                                     <div>
-                                        <button class="pr-4 pl-4 pb-3 pt-3 text-nowrap text-truncate btn-block Button2 text-white" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-arrows-alt-v mr-2"></i>En savoir plus</button>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 mb-md-4 mt-md-4">
-                                    <div>
-                                        <button class="pr-4 pl-4 pb-3 pt-3 text-nowrap text-truncate btn-block Button2" href={{ path('show', {'id': formation.id, 'page': formation_page.ordering}) }}><i class="fas fa-angle-double-right mr-2"></i> Reprendre</button>
+                                        <a class="pr-4 pl-4 pb-3 pt-3 text-nowrap text-truncate btn btn-block Button2" href={{ path('show', {'id': formation.id, 'page': formation_page.ordering}) }}><i class="fas fa-angle-double-right mr-2"></i> Reprendre</a>
                                     </div>
                                 </div>
                             </div>
