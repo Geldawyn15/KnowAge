@@ -16,19 +16,21 @@ use Symfony\Component\HttpFoundation\Request;
 class FormationRepository extends EntityRepository
 {
 
-    public function findFormation(array $searchs)
+    public function findFormation(string $query)
     {
+        $words = explode(' ', trim($query));
 
         $query = $this->createQueryBuilder('a');
 
-        foreach ($searchs as $i => $search) {
+        foreach ($words as $i => $word) {
 
             $query->orWhere('a.title LIKE :title'.$i)
                   ->orWhere('a.description LIKE :description'.$i)
-                  ->setParameter('title'.$i, '%' . $search . '%')
-                  ->setParameter('description'.$i, '%' . $search . '%');
+                  ->setParameter('title'.$i, '%' . $word . '%')
+                  ->setParameter('description'.$i, '%' . $word . '%');
 
         }
+
         return $query;
     }
 }

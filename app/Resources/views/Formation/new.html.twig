@@ -6,7 +6,7 @@
 {% block h1 %}Je crée ma formation{% endblock %}
 
 {% block breadcrumb %}
-    <nav aria-label="breadcrumb">
+    <nav aria-label="breadcrumb bg-white-semi_transparent">
         <ol class="breadcrumb pl-3">
             <li class="breadcrumb-item active text-dark"aria-current="page"><p>Informations sur la Formation</p></li>
             <li class="breadcrumb-item"><a>Choisir un type de page</a></li>
@@ -17,72 +17,86 @@
 
 
 {% block content %}
-<div class="container-fluid bg-main">
-    <div class="mb-3 mt-3 container text-center py-5 bg-main pt-3 ">
-        <div class="row">
-            {% if (form_errors(form.picture)) %}
-                <div class="col-md-12">
-                <div class="alert alert-danger" role="alert">
-                    {{ form_errors(form.picture) }}
-                </div>
-                </div>
-            {% endif %}
-        </div>
-        <div class ="row justify-content-center">
-            <div class="col-md-10 mt-4">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-default">Titre</span>
+
+    <div class="container py-3">
+         <div class="row">
+             <div class= "col-md-12">
+                <div class="card-deck text-center">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="typo-main font-weight-bold">Les informations essentielles à votre formation :</h3>
+                        </div>
+                        <div class="card-body bg-main">
+                            <div class="text-center">
+                                <div class="row">
+                                    {% if (form_errors(form.picture)) %}
+                                        <div class="col-md-12">
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ form_errors(form.picture) }}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class ="row justify-content-center">
+                                    <div class="col-md-10 mt-4">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroup-sizing-default">Titre</span>
+                                            </div>
+                                            {{ form_start(form) }}
+                                            {{ form_widget(form.title) }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class = "row justify-content-center">
+                                    <div class="col-md-10 mb-3">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Description</span>
+                                            </div>
+                                            {{ form_widget(form.description) }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class = "row justify-content-center">
+                                    <div class="col-md-5">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="inputGroupSelect01">Catégorie</label>
+                                            </div>
+                                            {{ form_widget(form.category) }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="inputGroupSelect03">Prix</label>
+                                            </div>
+                                            {{ form_widget(form.price) }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-md-10 mb-10">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text inputCreate">Vignette</span>
+                                                <span class="custom-file ml-4">{{ form_widget(form.picture) }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center ">
+                                    <div class="col-md-12 mb-4 text-center">
+                                        <button type="submit" class="px-4 py-3 text-nowrap text-truncate Button1"><i class="far fa-arrow-alt-circle-right"></i> Etape suivante </button>
+                                        {{ form_end(form) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    {{ form_start(form) }}
-                    {{ form_widget(form.title) }}
                 </div>
-            </div>
-        </div>
-        <div class = "row justify-content-center">
-            <div class="col-md-10 mb-3">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Description</span>
-                    </div>
-                    {{ form_widget(form.description) }}
-                </div>
-            </div>
-        </div>
-        <div class = "row justify-content-center">
-            <div class="col-md-5">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect01">Catégorie</label>
-                    </div>
-                    {{ form_widget(form.category) }}
-                </div>
-            </div>
-            <div class="col-md-5">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect03">Prix</label>
-                    </div>
-                    {{ form_widget(form.price) }}
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-10 mb-10">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text inputCreate">Vignette</span>
-                        <span class="custom-file ml-4">{{ form_widget(form.picture) }}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-center ">
-            <div class="col-md-12 mb-4 text-center">
-                <button type="submit" class="Button1"><i class="far fa-arrow-alt-circle-right"></i> Etape suivante </button>
-                {{ form_end(form) }}
-            </div>
         </div>
     </div>
-</div>
+
 {% endblock %}

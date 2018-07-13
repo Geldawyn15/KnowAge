@@ -40,52 +40,35 @@ class FrontController extends controller
 
     /**
      * @Route("/search", name="search")
-     * @Method({"GET", "POST"})
      */
-    public function searchPageAction(Request $request)
+    public function search(Request $request)
     {
-
         $user = $this->getUser();
         $formations = null;
-        $searchs = '';
-        $id= '';
+        $search = $request->query->get('search');
+        $categoryId = $request->query->get('category_id');
 
-
-        if ($request->query->get('category_id')) {
-            $id = $request->query->get('category_id');
-            $query = $this->getDoctrine()->getRepository(Formation::class)->findBy(['category' => $id]);
-
-            $paginator = $this->get('knp_paginator');
-            $formations = $paginator->paginate(
-                $query,
-                $request->query->getInt('page', 1),
-                9
-            );
-
+        if ($categoryId) {
+            $formations = $this->getDoctrine()->getRepository(Formation::class)->findBy(['category' => $categoryId]);
         }
 
-
-        if ($request->query->get('search')) {
-
-            $searchs = explode(' ', trim($request->query->get('search')));
-
+        if ($search) {
             $repository = $this->getDoctrine()->getRepository(Formation::class);
-            $formations = $repository->findFormation($searchs);
+            $formations = $repository->findFormation($search);
+        }
 
-            $paginator = $this->get('knp_paginator');
-            $formations = $paginator->paginate(
+        if ($formations) {
+            $formations = $this->get('knp_paginator')->paginate(
                 $formations,
                 $request->query->getInt('page', 1),
                 9
             );
-
         }
 
         return $this->render('Front/search.html.twig', array(
             'formations' => $formations,
-            'user' => $user,
-            'search' => $searchs,
-            'id' => $id,
+            'search' => $search,
+            'id' => $categoryId,
         ));
 
     }

@@ -1,0 +1,19 @@
+<div class="bg-grey py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-8 offset-2">
+                <h2 class="text-uppercase">Trouver une formation</h2>
+                <form method="get" action="{{ path('search') }}">
+                    <div class="input-group mb-3">
+                        <input type="text" value="{{ search | default('') }}" id="search" name="search" class="form-control" placeholder="Entrez un ou plusieurs mots clés...">
+                        <span class="input-group-append">
+                            <button class="btn btn-secondary" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

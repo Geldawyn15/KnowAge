@@ -1,62 +1,62 @@
 {% extends 'layout.html.twig' %}
 {% block title %} Se connecter {% endblock %}
-{% block stylesheet %}
-    <link href="https://fonts.googleapis.com/css?family=Libre+Barcode+39" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css2/login_signup.css">
-
-{% endblock %}
-
+{% block h1 %}SE CONNECTER{% endblock %}
 
 {% block content %}
     {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div xmlns="http://www.w3.org/1999/html">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
-<div class="container-fluid bg_01">
-    <div class="row loginSignupLigne1 no-gutters ">
-        <div class="col-md-6 offset-md-3 borderTop"></div>
-    </div>
+    <section>
+        <div class="container">
+            <div class="row align-item-center">
+                <div class="col">
 
-    <div class="row no-gutters borderMid loginSignupLigne2 ">
-        <div class="col-md-6 offset-md-3">
-            <form action="{{ path('login') }} " method="post" class="borderTable loginForm loginSignupformHover" id="effect">
+                    <form action="{{ path('login') }} " method="post">
+                        <!-- Champ email -->
+                        <div class="form-group">
+                            <span class="fas fa-envelope"></span>
+                            <label for="Email1">Email</label>
+                            <input type="email" class="form-control" id="Email1" name="_username" value="{{ last_username }}" aria-describedby="emailHelp">
+                        </div>
 
-                <div class="form-row no-gutters ligneTable1 align-items-end">
-                    <div class="col-md-8 offset-md-2 typo px-3">
-                        <h2 class="text-white">Se connecter</h2>
-                    </div>
+                        <!-- Champ mdp -->
+                        <div class="form-group">
+                            <i class="fas fa-key"></i>
+                            <label for="Password">Mot de passe</label>
+                            <input type="password" name="_password" class="form-control" id="Password">
+                        </div>
+
+                        <!-- Liens remember me / mdp forgotten -->
+                        <div class="form-group form-check pl-0">
+                            <div class="row justify-content-center">
+                                <div class="col-md-3 text-center">
+                                    <input type="checkbox" class="form-check-input" id="remember_me" name="_remember_me">
+                                    <label class="form-check-label" for="remember_me">Se souvenir de moi</label>
+                                </div>
+                                <div class="col-md-3 text-center">
+                                    <a href="{{ path('forgotPassword') }}">Mot de passe oublié</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Button submit / create compte-->
+                        <div class="form-group form-check pl-0">
+                            <div class="row justify-content-center">
+                                <div class="col-md-3 text-center">
+                                    <button type="submit" class="btn-block Button1 py-2 mt-1">Se connecter</button>
+                                </div>
+                                <div class="col-md-3 text-center">
+                                    <a href="{{ path('signup') }}" class="btn-block Button1 py-2 mt-1" role="button">Créer son compte</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
                 </div>
-                <div class="form-row no-gutters ligneTable3 align-items-center">
-                    <div class="col-md-4 offset-md-2 px-3">
-                        <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="Email">
-                    </div>
-                    <div class="col-md-4 mt-1 px-3">
-                        <input type="password" id="password" name="_password" class="form-control" placeholder="Mot de passe">
-                    </div>
-                </div>
-                <div class="form-row no-gutters ligneTable4 align-items-start">
-                    <div class="col-md-4 offset-md-2 mt-1 px-3">
-                        <a href="{{ path('signup') }}" class=" btn btn-block text-white btn-outline-secondary waves-effect" role="button">créer son compte</a>
-                    </div>
-                    <div class="col-md-4 mt-1 px-3">
-                        <button type="submit" class="btn btn-block text-white btn-outline-secondary waves-effect">Se connecter</button>
-                    </div>
-                    <div class="col-md-4 offset-md-2 mt-1 px-3">
-                        <input type="checkbox" id="remember_me" name="_remember_me"  />
-                        <label for="remember_me">Se souvenir de moi</label>
-                    </div>
-                    <div class="col-md-4 mt-1 px-3">
-                        <a href="{{ path('forgotPassword') }}">Mot de passe oublié</a>
-                    </div>
-
-
-                </div>
-            </form>
+            </div>
         </div>
-    </div>
-    <div class="row loginSignupLigne3 no-gutters ">
-        <div class="col-md-6 offset-md-3 borderBot"></div>
-    </div>
-</div>
+    </section>
+
     <script>
         {% block toast %}
         toastr.options = {
