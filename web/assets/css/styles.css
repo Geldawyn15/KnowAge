@@ -22,6 +22,15 @@ nav{
     background-size: cover;
 }
 
+.bg-sub_header{
+    background: url("https://i.imgur.com/v7vcgA8.jpg") center center;
+    background-size: cover;
+    background-position: 60% 40%;
+    opacity: 0.75;
+    height: 220px;
+
+}
+
 .bg-white-semi_transparent {
     background-color: rgba(255, 255, 255, 0.5);
 }
@@ -34,6 +43,11 @@ nav{
     background-color: #F2B202;
 }
 
+/* TYPO */
+
+.typo-main {
+    font-family: 'IBM Plex Sans', sans-serif;
+}
 
 
 
@@ -58,6 +72,12 @@ nav{
     min-height: 680px;
 }
 
+.breadcrumb {
+    background-color: transparent;
+    color: black;
+    font-weight: bold;
+}
+
 
 /*
 h1 {
@@ -77,9 +97,7 @@ h1 {
 }
 */
 /*
-.typo-main {
-    font-family: 'IBM Plex Sans', sans-serif;
-}
+
 */
 
 /*
