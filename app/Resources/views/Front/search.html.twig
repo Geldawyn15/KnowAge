@@ -3,11 +3,11 @@
 {% block sub_header %}{% endblock %}
 
 {% block content %}
+<div class="content">
 
     {% include 'Front/search.widget.html.twig' %}
 
     <div class="container py-4">
-
 
         {% if formations %}
 
@@ -55,7 +55,7 @@
 
         <script>
            $(document).ready(function() {
-               $('.favorite').click(function() {
+               $('.js-favorite').click(function() {
                    let icon = $(this).find("i");
                    if (icon.hasClass("far")) {
                        $.get('/user/favoriteformation', {
@@ -74,5 +74,6 @@
            });
         </script>
     </div>
+</div>
 
 {% endblock %}
