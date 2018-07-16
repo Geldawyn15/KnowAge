@@ -15,13 +15,43 @@
 {% endblock %}
 
 {% block content %}
-    {{ form_start(form) }}
-        {{ form_label(form.questions[0].content) }}
-        {{ form_widget(form.questions[0].content) }}
-            {{ form_label(form.questions[0].responses[0].content) }}
+    <div class="container">
+        <div class="row">
+            <div class="offset-1 col-9 mt-5">
+                {{ form_start(form) }}
 
-    <h1> JOHN DOE DEV WILL DOE THIS LATER. </h1>
+                 {% for i in 0..4 %}
 
-        <input type="submit" class="btn btn-primary" value="Envoyez"/>
-    {{ form_end(form) }}
+                     {{ form_label(form.questions[i].content, 'Question '~ loop.index ) }}
+                     {{ form_widget(form.questions[i].content) }}
+                     <div class="ml-5 my-3">
+                         {{ form_label(form.questions[i].responses[0].content, 'Réponse 1 :') }}
+                         {{ form_widget(form.questions[i].responses[0].content) }}
+                         <div class="ml-5 my-3">
+                             {{ form_label(form.questions[i].responses[0].isValid) }}
+                             {{ form_widget(form.questions[i].responses[0].isValid) }}
+                         </div>
+                         {{ form_label(form.questions[i].responses[1].content ,'Réponse 2 :') }}
+                         {{ form_widget(form.questions[i].responses[1].content) }}
+                         <div class="ml-5 my-3">
+                             {{ form_label(form.questions[i].responses[1].isValid) }}
+                             {{ form_widget(form.questions[i].responses[1].isValid) }}
+                         </div>
+                         {{ form_label(form.questions[i].responses[2].content,'Réponse 3 :') }}
+                         {{ form_widget(form.questions[i].responses[2].content) }}
+                         <div class="ml-5 my-3">
+                             {{ form_label(form.questions[i].responses[2].isValid) }}
+                             {{ form_widget(form.questions[i].responses[2].isValid) }}
+                         </div>
+                     </div>
+                 {% endfor %}
+
+                <input type="submit" class="btn btn-primary my-5" value="Envoyez le quiz"/>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+
 {% endblock %}
