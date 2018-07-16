@@ -172,10 +172,13 @@ class FrontController extends controller
 
         $shortText = $formation->shortText(250);
         $contactForm = $this->createForm(ContactTeacherType::class);
-        $contactForm->handleRequest($request);        $comment = new Comments();
+        $contactForm->handleRequest($request);
+        $comment = new Comments();
         $commentForm = $this->createForm(CommentType::class, $comment);
-        $commentForm->handleRequest($request);        $comments = $this->getDoctrine()->getRepository(Comments::class)->findBy(['formation' => $formation->getId()], ['createdAt' => 'ASC']);
-        $paginator  = $this->get('knp_paginator');        $comments = $paginator->paginate(
+        $commentForm->handleRequest($request);
+        $comments = $this->getDoctrine()->getRepository(Comments::class)->findBy(['formation' => $formation->getId()], ['createdAt' => 'ASC']);
+        $paginator  = $this->get('knp_paginator');
+        $comments = $paginator->paginate(
             $comments,
             $request->query->getInt('page', 1),
             9
