@@ -15,27 +15,108 @@
 {% endblock %}
 
 {% block content %}
-    {{ form_start(form) }}
-        {{ form_label(form.questions[0].content) }}
-        {{ form_widget(form.questions[0].content) }}
-            {{ form_label(form.questions[0].responses[0].content) }}
-            {{ form_widget(form.questions[0].responses[0].content) }}
-                {{ form_label(form.questions[0].responses[0].isValid) }}
-                {{ form_widget(form.questions[0].responses[0].isValid) }}
-            {{ form_label(form.questions[0].responses[1].content) }}
-            {{ form_widget(form.questions[0].responses[1].content) }}
-                {{ form_label(form.questions[0].responses[1].isValid) }}
-                {{ form_widget(form.questions[0].responses[1].isValid) }}
-            {{ form_label(form.questions[0].responses[2].content) }}
-            {{ form_widget(form.questions[0].responses[2].content) }}
-                {{ form_label(form.questions[0].responses[2].isValid) }}
-                {{ form_widget(form.questions[0].responses[2].isValid) }}
+    <div class="container">
+        <div class="row">
+            <div class="offset-1 col-9 mt-5">
+                {{ form_start(form) }}
+
+                {{ form_label(form.questions[0].content, 'Question 1 :') }}
+                {{ form_widget(form.questions[0].content) }}
+                    {{ form_label(form.questions[0].responses[0].content, 'Réponse 1 :') }}
+                    {{ form_widget(form.questions[0].responses[0].content) }}
+                        {{ form_label(form.questions[0].responses[0].isValid) }}
+                        {{ form_widget(form.questions[0].responses[0].isValid) }}
+                    {{ form_label(form.questions[0].responses[1].content ,'Réponse 2 :') }}
+                    {{ form_widget(form.questions[0].responses[1].content) }}
+                        {{ form_label(form.questions[0].responses[1].isValid) }}
+                        {{ form_widget(form.questions[0].responses[1].isValid) }}
+                    {{ form_label(form.questions[0].responses[2].content,'Réponse 3 :') }}
+                    {{ form_widget(form.questions[0].responses[2].content) }}
+                        {{ form_label(form.questions[0].responses[2].isValid) }}
+                        {{ form_widget(form.questions[0].responses[2].isValid) }}
+
+                {{ form_label(form.questions[1].content, 'Question 2 :') }}
+                {{ form_widget(form.questions[1].content) }}
+                    {{ form_label(form.questions[1].responses[0].content,'Réponse 1 :') }}
+                    {{ form_widget(form.questions[1].responses[0].content) }}
+                        {{ form_label(form.questions[1].responses[0].isValid) }}
+                        {{ form_widget(form.questions[1].responses[0].isValid) }}
+                    {{ form_label(form.questions[1].responses[1].content,'Réponse 2 :') }}
+                    {{ form_widget(form.questions[1].responses[1].content) }}
+                        {{ form_label(form.questions[1].responses[1].isValid) }}
+                        {{ form_widget(form.questions[1].responses[1].isValid) }}
+                    {{ form_label(form.questions[1].responses[2].content,'Réponse 3 :') }}
+                    {{ form_widget(form.questions[1].responses[2].content) }}
+                        {{ form_label(form.questions[1].responses[2].isValid) }}
+                        {{ form_widget(form.questions[1].responses[2].isValid) }}
+
+                {{ form_label(form.questions[2].content, 'Question 3 :') }}
+                {{ form_widget(form.questions[2].content) }}
+                    {{ form_label(form.questions[2].responses[0].content,'Réponse 1 :') }}
+                    {{ form_widget(form.questions[2].responses[0].content) }}
+                        {{ form_label(form.questions[2].responses[0].isValid) }}
+                        {{ form_widget(form.questions[2].responses[0].isValid) }}
+                    {{ form_label(form.questions[2].responses[1].content,'Réponse 2 :') }}
+                    {{ form_widget(form.questions[2].responses[1].content) }}
+                        {{ form_label(form.questions[2].responses[1].isValid) }}
+                        {{ form_widget(form.questions[2].responses[1].isValid) }}
+                    {{ form_label(form.questions[2].responses[2].content,'Réponse 3 :') }}
+                    {{ form_widget(form.questions[2].responses[2].content) }}
+                        {{ form_label(form.questions[2].responses[2].isValid) }}
+                        {{ form_widget(form.questions[2].responses[2].isValid) }}
+
+                {{ form_label(form.questions[3].content, 'Question 4 :') }}
+                {{ form_widget(form.questions[3].content) }}
+                    {{ form_label(form.questions[3].responses[0].content,'Réponse 1 :') }}
+                    {{ form_widget(form.questions[3].responses[0].content) }}
+                        {{ form_label(form.questions[3].responses[0].isValid) }}
+                        {{ form_widget(form.questions[3].responses[0].isValid) }}
+                    {{ form_label(form.questions[3].responses[1].content,'Réponse 2 :') }}
+                    {{ form_widget(form.questions[3].responses[1].content) }}
+                        {{ form_label(form.questions[3].responses[1].isValid) }}
+                        {{ form_widget(form.questions[3].responses[1].isValid) }}
+                    {{ form_label(form.questions[3].responses[2].content,'Réponse 3 :') }}
+                    {{ form_widget(form.questions[3].responses[2].content) }}
+                        {{ form_label(form.questions[3].responses[2].isValid) }}
+                        {{ form_widget(form.questions[3].responses[2].isValid) }}
+
+                {{ form_label(form.questions[4].content, 'Question 5 :') }}
+                {{ form_widget(form.questions[4].content) }}
+                    {{ form_label(form.questions[4].responses[0].content,'Réponse 1 :') }}
+                    {{ form_widget(form.questions[4].responses[0].content) }}
+                        {{ form_label(form.questions[4].responses[0].isValid) }}
+                        {{ form_widget(form.questions[4].responses[0].isValid) }}
+                    {{ form_label(form.questions[4].responses[1].content,'Réponse 2 :') }}
+                    {{ form_widget(form.questions[4].responses[1].content) }}
+                        {{ form_label(form.questions[4].responses[1].isValid) }}
+                        {{ form_widget(form.questions[4].responses[1].isValid) }}
+                    {{ form_label(form.questions[4].responses[2].content,'Réponse 3 :') }}
+                    {{ form_widget(form.questions[4].responses[2].content) }}
+                        {{ form_label(form.questions[4].responses[2].isValid) }}
+                        {{ form_widget(form.questions[4].responses[2].isValid) }}
 
 
-    {{ form_widget(form.questions[0].responses[2].content) }}
+                {{ form_label(form.questions[5].content, 'Question 6 :') }}
+                {{ form_widget(form.questions[5].content) }}
+                    {{ form_label(form.questions[5].responses[0].content,'Réponse 1 :') }}
+                    {{ form_widget(form.questions[5].responses[0].content) }}
+                        {{ form_label(form.questions[5].responses[0].isValid) }}
+                        {{ form_widget(form.questions[5].responses[0].isValid) }}
+                    {{ form_label(form.questions[5].responses[1].content,'Réponse 2 :') }}
+                    {{ form_widget(form.questions[5].responses[1].content) }}
+                        {{ form_label(form.questions[5].responses[1].isValid) }}
+                        {{ form_widget(form.questions[5].responses[1].isValid) }}
+                    {{ form_label(form.questions[5].responses[2].content,'Réponse 3 :') }}
+                    {{ form_widget(form.questions[5].responses[2].content) }}
+                        {{ form_label(form.questions[5].responses[2].isValid) }}
+                        {{ form_widget(form.questions[5].responses[2].isValid) }}
 
-    <h1> JOHN DOE DEV WILL DOE THIS LATER. </h1>
+                <input type="submit" class="btn btn-primary" value="Envoyez"/>
 
-        <input type="submit" class="btn btn-primary" value="Envoyez"/>
-    {{ form_end(form) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+
 {% endblock %}

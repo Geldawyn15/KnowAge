@@ -45,7 +45,7 @@
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">{{ formation.title }}</h5>
-                                <small class="text-muted"><span>Crée par </span><span> le {{  formation.createdAt | date('d M Y') }}</span></small>
+                                <small class="text-muted"><span>Crée par </span> {{ app.user.Nickname }}<span> le {{  formation.createdAt | date('d M Y') }}</span></small>
                                 <p class="card-text">{{ formation.description  }}</p>
                                 <div class="d-flex justify-content-around mb-5">
                                     <a class="btn btn-md btn-primary" href="{{ path('formation_Achat', {id: formation.id}) }}"><i class="fas fa-shopping-cart mr-1"></i>Acheter</a>
