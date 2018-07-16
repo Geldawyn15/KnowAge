@@ -19,6 +19,20 @@
         {{ form_label(form.questions[0].content) }}
         {{ form_widget(form.questions[0].content) }}
             {{ form_label(form.questions[0].responses[0].content) }}
+            {{ form_widget(form.questions[0].responses[0].content) }}
+                {{ form_label(form.questions[0].responses[0].isValid) }}
+                {{ form_widget(form.questions[0].responses[0].isValid) }}
+            {{ form_label(form.questions[0].responses[1].content) }}
+            {{ form_widget(form.questions[0].responses[1].content) }}
+                {{ form_label(form.questions[0].responses[1].isValid) }}
+                {{ form_widget(form.questions[0].responses[1].isValid) }}
+            {{ form_label(form.questions[0].responses[2].content) }}
+            {{ form_widget(form.questions[0].responses[2].content) }}
+                {{ form_label(form.questions[0].responses[2].isValid) }}
+                {{ form_widget(form.questions[0].responses[2].isValid) }}
+
+
+    {{ form_widget(form.questions[0].responses[2].content) }}
 
     <h1> JOHN DOE DEV WILL DOE THIS LATER. </h1>
 

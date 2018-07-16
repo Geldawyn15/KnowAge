@@ -1,21 +1,14 @@
-
 {% extends 'layout.html.twig' %}
 {% block title %} Accueil formateur {% endblock %}
 
-{% block sub_header %}{% endblock %}
+{% block h1 %}Rejoignez nous{% endblock %}
 
+{% block breadcrumb %}
+
+{% endblock %}
 {% block content %}
     <body>
         <div class="container-fluid color3 blocContainer">
-            <div class="row mb-4 mt-4 ">
-                <div class="col-md-12 mt-4 mb-4 TagLine">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1 class="text-center TagLine">Votre savoir faire vaut de l'or</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="row ">
                 <div class="container center-block embed-responsive embed-responsive-16by9 mt-4  blocContainer video1 ">
                     <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/Q71zL6S9YYc?ecver=2" allowfullscreen>
@@ -33,9 +26,8 @@
             </div>
         </div>
         <div class="container fluid blocContainer">
-            <div class="col-md-12 mb-4 mt-4 text-center">
-                <!--<button class="btn active mt-4 mb-4 button text-white bg-" role="button" aria-pressed="true" type="submit">Ajouter une formation</button>-->
-                <a href="{{ path('new') }}"  class="btn btn-primary mt-4 btn-lg buttonFormation"> <i class="fas fa-user-plus"></i> Ajouter une formation</a>
+            <div class="col-md-12 my-4 text-center">
+                <a href="{{ path('new') }}"  class="btn btn-primary my-4 btn-lg buttonFormation"> <i class="fas fa-user-plus"></i> Ajouter une formation</a>
             </div>
         </div>
     </body>
