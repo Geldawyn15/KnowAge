@@ -60,7 +60,7 @@ nav{
 }
 
 /* coeur */
-.favorite {
+.favoriteFormation, .favoriteFormateur {
     background-color:transparent;
     color:Tomato;
 }

@@ -71,10 +71,10 @@
             <a class="nav-link text-dark" href="#formateur" role="tab" data-toggle="tab">Formateur</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" href="#favoriteFormateurs" role="tab" data-toggle="tab">Mes Formateurs</a>
+            <a class="nav-link text-dark" href="#favoriteFormations" role="tab" data-toggle="tab">Mes Formations</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" href="#favoriteFormations" role="tab" data-toggle="tab">Mes Formations</a>
+            <a class="nav-link text-dark" href="#favoriteFormateurs" role="tab" data-toggle="tab">Mes Formateurs</a>
         </li>
     </ul>
 
@@ -106,40 +106,6 @@
                 {% endfor %}
             </div>
         </div>
-        <div role="tabpanel" class="tab-pane" id="favoriteFormateurs">
-            <div class="container py-4">
-                <h1>Formateur Favori</h1>
-                {% for eachformateur in favoriteformateur %}
-                    {% if loop.index0 % 3 == 0 %}<div class="row mb-5">{% endif %}
-                    <div class="col-4">
-                        <div class="card">
-                            <div style="position: relative;">
-                                <button class="btn favorite" data-formation-id="{{eachformateur.id}}" style="position:absolute; right: 0">
-                                    {% if user.isFormateurFavorited(eachformateur) %}
-                                        <i id="js-favorite" class="fas fa-heart fa-2x"></i>
-                                    {% else %}
-                                        <i id="js-favorite" class="far fa-heart fa-2x"></i>
-                                    {% endif %}
-                                </button>
-                                <img class="card-img-top" src="{{eachformateur.profilePic}}">
-                            </div>
-                            <div class="card-body">
-                                {% if eachformateur.name and eachformateur.firstName %}
-                                    <h3 class="title">{{ eachformateur.firstName }} {{ eachformateur.name }} </h3>
-                                {% else %}
-                                    <h3 class="title">{{ eachformateur.nickName }}</h3>
-                                {% endif %}
-                                <p class="sub_title">{{ eachformateur.email }}</p>
-                            </div>
-                            <div class="card-footer d-flex justify-content-between align-items-center">
-                                <a href="" class="btn btn-sm btn-outline-secondary mr-3">Voir la formation</a>
-                            </div>
-                        </div>
-                    </div>
-                    {% if loop.index % 3 == 0 or loop.last%}</div>{% endif %}
-                {% endfor %}
-            </div>
-        </div>
         <div role="tabpanel" class="tab-pane" id="formateur">
             <div class="container py-4">
                 <h1>Formation Achetée</h1>
@@ -148,13 +114,15 @@
                     <div class="col-4">
                         <div class="card">
                             <div style="position: relative;">
-                                <button class="btn favorite" data-formation-id="{{payment.formation.id}}" style="position:absolute; right: 0">
+                                {% if  app.user == user %}
+                                <button class="btn favoriteFormation" data-formation-id="{{payment.formation.id}}" style="position:absolute; right: 0">
                                     {% if user.isFormationFavorited(payment.formation) %}
                                         <i id="js-favorite" class="fas fa-heart fa-2x"></i>
-                                    {% else %}
+                                    {% else%}
                                         <i id="js-favorite" class="far fa-heart fa-2x"></i>
                                     {% endif %}
                                 </button>
+                                {% endif %}
                                 <img class="card-img-top" src="{{payment.formation.picture}}">
                                 <div class="py-2 px-3 text-white bg-yellow" style="position:absolute; bottom: 0"><b>{{payment.formation.category}}</b></div>
                             </div>
@@ -173,49 +141,76 @@
             </div>
         </div>
         <div role="tabpanel" class="tab-pane" id="favoriteFormations">
-            <h1>Formation Favori</h1>
-            <div class="container formation">
-                <div class="d-flex flex-column">
-                    {% for eachformation in favoriteformations %}
-                        {% if loop.index is odd %}
-                            <div class="row">
-                        {% endif %}
-                        <div class="col-6 mt-5">
-                            <div class="column">
-                                <!-- Post-->
-                                <div class="post-module">
-                                    <!-- Thumbnail-->
-                                    <div class="thumbnail">
-                                        <img src="{{ eachformation.picture }}" class="img-responsive" alt=""> </div>
-                                    <!-- Post Content-->
-                                    <div class="post-content">
-                                        <div class="category">{{ eachformation.category }}</div>
-                                        <h1 class="title">{{ eachformation.title}}</h1>
-                                        <h2 class="sub_title">{{ eachformation.author.firstname}} {{eachformation.author.name}}</h2>
-                                        <p class="description"> {{ eachformation.description }}</p>
-                                        <div class="post-meta">
-                                            <a href="#" class="btn btn-sm btn-outline-secondary waves-effect mr-3">Voir la formation</a>
-                                            <button class="favoriteFormation btn"  data-formation-id="{{ eachformation.id }}">
-                                                {% if user.isFormationFavorited(eachformation) %}
-                                                    <i id="favoriteFormation" class="fas fa-heart fa-2x"> </i>
-                                                {% else %}
-                                                    <i id="favoriteFormation" class="far fa-heart fa-2x"> </i>
-                                                {% endif %}
-
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+            <div class="container py-4">
+                <h1>Formation Favori</h1>
+                {% for eachformation in favoriteformations %}
+                    {% if loop.index0 % 3 == 0 %}<div class="row mb-5">{% endif %}
+                    <div class="col-4">
+                        <div class="card">
+                            <div style="position: relative;">
+                                {% if app.user == user %}
+                                <button class="btn favoriteFormation" data-formation-id="{{eachformation.id}}" style="position:absolute; right: 0">
+                                    {% if user.isFormationFavorited(eachformation) %}
+                                        <i id="js-favorite" class="fas fa-heart fa-2x"></i>
+                                    {% else %}
+                                        <i id="js-favorite" class="far fa-heart fa-2x"></i>
+                                    {% endif %}
+                                </button>
+                                {% endif %}
+                                <img class="card-img-top" src="{{eachformation.picture}}">
+                                <div class="py-2 px-3 text-white bg-yellow" style="position:absolute; bottom: 0"><b>{{eachformation.category}}</b></div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">{{eachformation.title}}</h3>
+                                <p class="card-text"> {{eachformation.description}}</p>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between align-items-center">
+                                <a href="{{path('landing_formation', {id: eachformation.id})}}" class="btn btn-sm btn-outline-secondary mr-3">Voir la formation</a>
+                                <small class="text-muted">{{ eachformation.author.nickName }}</small>
                             </div>
                         </div>
-                        {% if loop.index is even or loop.last %}
-                            </div>
-                        {% endif %}
-
-                    {% endfor %}
-                </div>
+                    </div>
+                    {% if loop.index % 3 == 0 or loop.last%}</div>{% endif %}
+                {% endfor %}
             </div>
         </div>
+        <div role="tabpanel" class="tab-pane" id="favoriteFormateurs">
+            <div class="container py-4">
+                <h1>Formateur Favori</h1>
+                {% for eachformateur in favoriteformateur %}
+                    {% if loop.index0 % 3 == 0 %}<div class="row mb-5">{% endif %}
+                    <div class="col-4">
+                        <div class="card">
+                            <div style="position: relative;">
+                                {% if app.user == user %}
+                                <button class="btn favoriteFormateur" data-formation-id="{{eachformateur.id}}" style="position:absolute; right: 0">
+                                    {% if user.isFormateurFavorited(eachformateur) %}
+                                        <i id="js-favorite" class="fas fa-heart fa-2x"></i>
+                                    {% else %}
+                                        <i id="js-favorite" class="far fa-heart fa-2x"></i>
+                                    {% endif %}
+                                </button>
+                                {% endif %}
+                                <img class="card-img-top" src="{{eachformateur.profilePic}}">
+                            </div>
+                            <div class="card-body">
+                                {% if eachformateur.name and eachformateur.firstName %}
+                                    <h3 class="title">{{ eachformateur.firstName }} {{ eachformateur.name }} </h3>
+                                {% else %}
+                                    <h3 class="title">{{ eachformateur.nickName }}</h3>
+                                {% endif %}
+                                <p class="sub_title">{{ eachformateur.email }}</p>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between align-items-center">
+                                <a href="{{path('profil', {id: eachformateur.id})}}" class="btn btn-sm btn-outline-secondary mr-3">Voir leur profil</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% if loop.index % 3 == 0 or loop.last%}</div>{% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
     </div>
 
 <script>

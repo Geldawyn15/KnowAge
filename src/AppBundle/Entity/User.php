@@ -27,6 +27,12 @@ class User implements UserInterface, \Serializable
      */
     private $id;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nickName", type="string", length=45)
+     */
+    private $nickName;
 
     /**
      * @var string
@@ -41,15 +47,6 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="firstName", type="string", length=45, nullable=true)
      */
     private $firstName;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nickName", type="string", length=45)
-     */
-    private $nickName;
-
-
 
     /**
      * @var string
