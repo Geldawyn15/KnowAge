@@ -173,7 +173,7 @@
 
 
                         {% for comment in comments %}
-                            <strong class="pull-left primary-font">{{ comment.author }}</strong>
+                            <strong class="pull-left primary-font">{{ comment.author.nickname }}</strong>
                             <small class="pull-right text-muted">
                                 <span class="glyphicon glyphicon-time"></span>{{ comment.createdAt|date('d-m-Y') }}</small>
                             <br>

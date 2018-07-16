@@ -183,6 +183,8 @@ class FrontController extends controller
             $request->query->getInt('page', 1),
             9
         );
+
+
         // Post a comment
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             $user = $this->getUser();
