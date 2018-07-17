@@ -8,6 +8,15 @@ nav{
 
 
 /*--- BG ---- */
+
+bg-purple{
+    background-color: #89537d;
+}
+
+.card-header{
+    background-color: #c6b4ae;
+}
+
 .bg-main {
     background-color: #F0E7E9;
     /* box-shadow: 5px 10px #888888; */
@@ -53,10 +62,21 @@ nav{
 
 /* COMPONENTS */
 
+.navbar{
+    background-color:#2E264E ;
+}
+
+footer{
+    background-color:#2E264E ;
+}
+
+a{
+    color: navajowhite;
+}
+
 /* header marketing*/
 .marketing {
     height: 400px;
-
 }
 
 /* coeur */
@@ -79,35 +99,6 @@ nav{
 }
 
 
-/*
-h1 {
-    padding-bottom: 20px;
-    padding-left: 30px;
-    color: black;
-    font-weight: bold;
-    font-family: 'IBM Plex Sans', sans-serif;
-
-}
-*/
-
-
-/*
-.navbar{
-    background-color: #2E024A;
-}
-*/
-/*
-
-*/
-
-/*
-.breadcrumb {
-    background-color: transparent;
-    color: black;
-    font-weight: bold;
-}
-*/
-
 /* general settings */
 
 /* body */
@@ -118,6 +109,10 @@ h1 {
 
 /*buttons */
 
+
+
+
+
 .scrollPosition {
     position :fixed;
     bottom:100px;
@@ -125,14 +120,17 @@ h1 {
     color:white;
 }
 
+.btn-style{
+    color: navajowhite;
+}
 
 .Button1 {
 
     text-decoration: none;
-    color: #fff;
-    background-color: #0a4f73;
+    background-color: #2E264E;
     border: none;
     border-radius: 8px;
+    color: navajowhite;
 }
 
 .Button1:hover {
