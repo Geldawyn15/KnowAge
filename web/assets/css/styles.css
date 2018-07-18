@@ -1,5 +1,5 @@
 body {
-    padding-top: 71px;
+    padding-top: 70px;
 }
 
 nav{
@@ -8,13 +8,18 @@ nav{
 
 
 /*--- BG ---- */
+
+.card-header{
+    background-color: #CCAD92;
+}
+
 .bg-main {
     background-color: #F0E7E9;
     /* box-shadow: 5px 10px #888888; */
 }
 
 .bg-second {
-    background-color: #756A82;
+    background-color: #CCAD92;
 }
 
 .bg-marketing {
@@ -53,14 +58,25 @@ nav{
 
 /* COMPONENTS */
 
+.navbar{
+    background-color: #4a394e;
+}
+
+footer{
+    background-color: #4a394e ;
+}
+
+a{
+    color: navajowhite;
+}
+
 /* header marketing*/
 .marketing {
     height: 400px;
-
 }
 
 /* coeur */
-.favorite {
+.favoriteFormation, .favoriteFormateur {
     background-color:transparent;
     color:Tomato;
 }
@@ -69,7 +85,7 @@ nav{
 
 /* TODO sticky footer*/
 .content {
-    min-height: 600px;
+    min-height: 690px;
 }
 
 .breadcrumb {
@@ -77,46 +93,10 @@ nav{
     color: black;
     font-weight: bold;
 }
-
-
-/*
-h1 {
-    padding-bottom: 20px;
-    padding-left: 30px;
-    color: black;
-    font-weight: bold;
-    font-family: 'IBM Plex Sans', sans-serif;
-
-}
-*/
-
-
-/*
-.navbar{
-    background-color: #2E024A;
-}
-*/
-/*
-
-*/
-
-/*
-.breadcrumb {
-    background-color: transparent;
-    color: black;
-    font-weight: bold;
-}
-*/
-
-/* general settings */
-
-/* body */
-
-/*polices */
-
 
 
 /*buttons */
+
 
 .scrollPosition {
     position :fixed;
@@ -125,14 +105,17 @@ h1 {
     color:white;
 }
 
+.btn-style{
+    color: white;
+}
 
 .Button1 {
 
     text-decoration: none;
-    color: #fff;
-    background-color: #0a4f73;
+    background-color: #2E264E;
     border: none;
     border-radius: 8px;
+    color: navajowhite;
 }
 
 .Button1:hover {
@@ -184,11 +167,7 @@ h1 {
     bottom:50%;
 }
 
-/*
 
-    background-color: rgba(255, 255, 255, 0.5);
-    color: rgba(128, 0, 128, 0.8);
-*/
 .headerspan1 {
     font-size: 3em;
 }
@@ -201,19 +180,6 @@ h1 {
 .bgCardDark {
     background-color: #063045;
     padding: 1em;
-}
-
-
-/* banner numbers */
-
-.banner-numbers {
-    background-color: rgba(128, 0, 128, 0.8);
-    padding : 2em;
-    margin-top:3em;
-    margin-bottom:3em;
-
-    border: solid 1px lightgrey;
-    box-shadow: 5px 10px #888888;
 }
 
 
@@ -267,129 +233,6 @@ h1 {
     opacity: 1;
 }
 
-
-.img-FAQ {
-    opacity:0.6;
-}
-
-.talKAboutUs {
-    font-size:0.8em;
-}
-
-
-
-/*Services NoAge, c'est simple et rapide*/
-.colorCircle {
-    color:rgb(128, 0, 128);
-}
-
-.SubtitleService {
-    font-weight: 700;
-    font-size:1.5rem;
-}
-
-.bgButtonColor {
-    background-color:#0a4f73;
-
-}
-
-.fa-facebook- {
-    color:grey;
-}
-
-.hoverMOdal:hover {
-    cursor: pointer;
-}
-
-
-/*Caroussel */
-.CarousselBgColor {
-    background-color: rgba(128, 0, 128, 0.2);
-}
-
-.carousel-control-prev-icon {
-    color: rgba(128, 0, 128, 0.2);
-}
-
-.carousel-control-next-icon {
-    color: rgba(128, 0, 128, 0.2);
-}
-
-
-/*Responsive settings
-
-/*Media /* Extra small devices (phones small, 320px and down) */
-@media only screen and (max-width: 320px) {
-
-    /*-------Page login-----*/
-
-}
-
-/*Media /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-
-}
-
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-
-}
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (max-width: 768px) {
-
-    .positionTitle {
-        display:none;
-    }
-
-    .card-columns {
-        column-count: 2;
-    }
-}
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-}
-
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-
-}
-
-/* page Search */
-
-.hover .post-content .description {
-    display: block !important;
-    height: auto !important;
-    opacity: 1 !important;
-}
-
-.container .info {
-    width: 300px;
-    margin: 50px auto;
-    text-align: center;
-}
-.container .info h1 {
-    margin: 0 0 15px;
-    padding: 0;
-    font-size: 24px;
-    font-weight: bold;
-    color: #333333;
-}
-.container .info span {
-    color: #666666;
-    font-size: 12px;
-}
-.container .info span a {
-    color: #000000;
-    text-decoration: none;
-}
-.container .info span .fa {
-    color: #f2b202;
-}
-
 /*landingcolor:yellow;Formation */
 .starColor {
     text-decoration: none;
@@ -418,8 +261,4 @@ h1 {
 
 .navTabPosition {
     margin-top:-5em;
-}
-
-.card-headerNON {
-    background-color:#0a4f73;
 }

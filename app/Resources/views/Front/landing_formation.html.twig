@@ -7,206 +7,113 @@
 
 
 {% block content %}
-<body id="bodyLandingFormation">
-    <div class="container-fluid">
-            <div class="row justify-content-center mb-4 mt-4">
-                <div class="col-md-9">
-                    <div class="card w-100 text-center mb-5 boxShadow">
-                        <img class="card-img" src="{{ formation.picture }}" alt="Card image" >
-                        <div class="card-header">
-                            <ul class="nav nav-tabs card-header-tabs navTabPosition">
-                                <!--Modal button start-->
-                                <li class="nav-item">
-                                    <a class="nav-link active mr-1 " href="#">Résumé</a>
-                                </li>
-                                <!--Modal button start-->
-                                <li class="nav-item">
-                                    <a class="nav-link bgColorModal mr-1 text-white" href="#" data-toggle="modal" data-target="#contact" data-whatever="@mdo">Contacter</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link bgColorModal mr-1 text-white" href="#" data-toggle="modal" data-target="#comment" data-whatever="@mdo">Commentaires</a>
-                                </li>
-                                <!--Modal button end-->
-                                <li class="nav-item">
-                                    <a class="nav-link bgColorModal text-white" href="{{ path('signalFormation', {'id': formation.id}) }}">Signaler</a>
-                                </li>
-                            </ul>
-                            <!--Modal start-->
-                            <div class="modal fade" id="contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg modalLandingFormation" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Contacter le formateur</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            {{ form_start(contactForm) }}
-                                            <div class="form-group">
-                                                {{ form_label(contactForm.email) }}
-                                                {{ form_widget(contactForm.email) }}
-                                            </div>
-                                            <div class="form-group">
-                                                {{ form_label(contactForm.objet) }}
-                                                {{ form_widget(contactForm.objet) }}
-                                            </div>
-                                            <div class="form-group">
-                                                {{ form_label(contactForm.message) }}
-                                                {{ form_widget(contactForm.message) }}
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                                                <input type="submit" class="btn btn-primary" value="Envoyez"/>
-                                            </div>
-                                            {{ form_end(contactForm) }}
-                                        </div>
+    <body id="bodyLandingFormation">
+    <div class="bg-grey py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-deck">
+                        <div class="card">
+                            <img class="card-img-top" src="{{ formation.picture }}" alt="Card image cap" >
+                            <div class="card-img-overlay">
+                                <div class="card-title">
+                                    <div class="fb-share-button mr-2 mb-2" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large" data-mobile-iframe="true">
+                                        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Facebook</a>
                                     </div>
+                                    <div>
+                                        <a class="twitter-share-button mt-2 ml-2" href="https://twitter.com/intent/tweet?text=formation:" data-size="large">Tweet</a>
+                                    </div>
+                                    <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: fr_FR</script>
+                                    <script type="IN/Share"></script>
                                 </div>
                             </div>
-
-                            <div class="modal fade" id="comment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg modalLandingFormation" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Commentaires</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div>
-                                                {{ form_start(commentForm) }}
-                                                    {{ form_label(commentForm.comment) }}
-                                                    {{ form_widget(commentForm.comment) }}
-                                                    <input type="submit" class="btn btn-primary" value="Envoyez"/>
-                                                {{ form_end(commentForm) }}
-
-
-                                                {% for comment in comments %}
-                                                    <strong class="pull-left primary-font">{{ comment.author }}</strong>
-                                                    <small class="pull-right text-muted">
-                                                        <span class="glyphicon glyphicon-time"></span>{{ comment.createdAt|date('d-m-Y') }}</small>
-                                                    <br>
-                                                    <p class="ui-state-default text-center">
-                                                        {{ comment.comment }}
-                                                    </p>
-                                                {%  endfor %}
-                                                {{ knp_pagination_render(comments) }}
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--Modal end-->
-
                         </div>
-                        <div class="card-body">
-                            <p class="card-text text-justify bg-white rounded ml-md-5 mr-md-5 pl-2 pr-2 minHeight"> {{ shortText }}... </p>
-
-                            <!--Collapse start-->
-                            <div class="collapse" id="collapseExample">
-                                <div class="card card-body mt-5 ml-5 mr-5 pl-2 pr-2 enSavoirPlus">{{ formation.description  }}</div>
+                        <div class="card">
+                            <div class="card-header">
+                                <ul class="nav nav-tabs card-header-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#" >Résumé</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#" data-toggle="modal" data-target="#contact" data-whatever="@mdo">Contacter</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#" data-toggle="modal" data-target="#comment" data-whatever="@mdo">Commentaire</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ path('signalFormation', {'id': formation.id}) }}">Signaler</a>
+                                    </li>
+                                </ul>
                             </div>
-                            <!--Collapse end-->
-                            <p class="card-text text-right text-white mr-5">
-                                <a href="#"><span class="text-capitalize text-white">Par {{ formation.author.nickName }}  </span></a>
-                                <span class=""> | </span>
-                                <span class="publicationdate">Publiée le {{  formation.createdAt | date('d M Y') }}</span>
-                            </p>
-
-                            <div class="row justify-content-around align-items-center mt-4">
-                                <div class="col-md-3 mb-md-4 mt-md-4">
-                                    <div>
-                                        <a class="pr-4 pl-4 pb-3 pt-3 text-nowrap text-truncate btn btn-block Button2" href="{{ path('formation_Achat', {id: formation.id}) }}"><i class="fas fa-shopping-cart mr-2"></i>Acheter</a>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 mb-md-4 mt-md  -4">
-                                    <div>
-                                        <a class="pr-4 pl-4 pb-3 pt-3 text-nowrap text-truncate btn btn-block Button2 text-white" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-arrows-alt-v mr-2"></i>En savoir plus</a>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 mb-md-4 mt-md-4">
-                                    <div>
-                                        <a class="pr-4 pl-4 pb-3 pt-3 text-nowrap text-truncate btn btn-block Button2" href={{ path('show', {'id': formation.id, 'page': formation_page.ordering}) }}><i class="fas fa-angle-double-right mr-2"></i> Reprendre</a>
-                                    </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ formation.title }}</h5>
+                                <small class="text-muted"><span>Crée par </span><a href="{{ path('profil', {'id': app.user.id}) }}"> {{ formation.author.nickName }}</a><span> le {{  formation.createdAt | date('d M Y') }}</span></small>
+                                <p class="card-text">{{ formation.description  }}</p>
+                                <div class="d-flex justify-content-around my-5">
+                                    <a class="btn Button1" href="{{ path('formation_Achat', {id: formation.id}) }}"><i class="fas fa-shopping-cart mr-1"></i>Acheter</a>
+                                    <a class="btn Button1" href="{{ path('show', {'id': formation.id, 'page': formation_page.ordering}) }}"><i class="fas fa-angle-double-right mr-1"></i> Reprendre</a>
                                 </div>
                             </div>
-
-                            <div class="row justify-content-around align-items-end mt-4">
-                                <div class="col-md-3 mt-1 mb-1 ">
-                                    <h5 class="mt-1 textDisplay bg-white rounded">Note :
+                            <div class="card-footer">
+                                <div class="d-flex justify-content-around">
+                                    <span>
+                                    Note :
                                         {% if average %}
                                             {{ average | round(1) }} / 5
                                         {% endif %}
-                                    </h5>
-                                    <h5 class="text-white">
+
+                                    </span>
+                                    <span>
+                                        <a href="{{ path('rating', {'user_id':  app.user ,  'rate': 1, 'formation_id': formation.id }) }}" class="starColor tdcolor">
+                                            {% if average >= 1%}
+                                                <i class="fas fa-star"></i>
+                                            {% else %}
+                                                <i class="far fa-star"></i>
+                                            {% endif %}
+                                        </a>
+                                        <a href="{{ path('rating', {'user_id':  app.user ,  'rate': 2, 'formation_id': formation.id }) }}" class="starColor">
+                                            {% if average >= 1.5 and average <2%}
+                                                <i class="fas fa-star-half"></i>
+                                            {% elseif average >=2 %}
+                                                <i class="fas fa-star"></i>
+                                            {% else %}
+                                                <i class="far fa-star"></i>
+                                            {% endif %}
+                                        </a>
+                                        <a href="{{ path('rating', {'user_id':  app.user ,  'rate': 3, 'formation_id': formation.id }) }}" class="starColor">
+                                            {% if average >= 2.5 and average <3 %}
+                                                <i class="fas fa-star-half"></i>
+                                            {% elseif average >=3 %}
+                                                <i class="fas fa-star"></i>
+                                            {% else %}
+                                                <i class="far fa-star"></i>
+                                            {% endif %}
+                                        </a>
+                                        <a href="{{ path('rating', {'user_id':  app.user ,  'rate': 4, 'formation_id': formation.id }) }}" class="starColor">
+                                            {% if average >= 3.5 and average <4 %}
+                                                <i class="fas fa-star-half"></i>
+                                            {% elseif average >=4 %}
+                                                <i class="fas fa-star"></i>
+                                            {% else %}
+                                                <i class="far fa-star"></i>
+                                            {% endif %}
+                                        </a>
+                                        <a href="{{ path('rating', {'user_id':  app.user ,  'rate': 5, 'formation_id': formation.id }) }}" class="starColor">
+                                            {% if average >= 4.5 and average <5%}
+                                                <i class="fas fa-star-half"></i>
+                                            {% elseif average >=5 %}
+                                                <i class="fas fa-star"></i>
+                                            {% else %}
+                                                <i class="far fa-star"></i>
+                                            {% endif %}
+                                        </a>
+                                    </span>
+                                    <span>Prix : {{ formation.price }} €</span>
+                                </div>
+                                <div class="mt-2">
                                     {% if not average %}
-                                            <p>Soyez le premier à noter cette formation</p>
-                                        {% endif %}
-                                    <a href="{{ path('rating', {'user_id':  app.user ,  'rate': 1, 'formation_id': formation.id }) }}" class="starColor tdcolor">
-                                        {% if average >= 1%}
-                                            <i class="fas fa-star"></i>
-                                        {% else %}
-                                            <i class="far fa-star"></i>
-                                        {% endif %}
-                                    </a>
-                                    <a href="{{ path('rating', {'user_id':  app.user ,  'rate': 2, 'formation_id': formation.id }) }}" class="starColor">
-                                        {% if average >= 1.5 and average <2%}
-                                            <i class="fas fa-star-half"></i>
-                                        {% elseif average >=2 %}
-                                            <i class="fas fa-star"></i>
-                                        {% else %}
-                                            <i class="far fa-star"></i>
-                                        {% endif %}
-                                    </a>
-                                    <a href="{{ path('rating', {'user_id':  app.user ,  'rate': 3, 'formation_id': formation.id }) }}" class="starColor">
-                                        {% if average >= 2.5 and average <3 %}
-                                            <i class="fas fa-star-half"></i>
-                                        {% elseif average >=3 %}
-                                            <i class="fas fa-star"></i>
-                                        {% else %}
-                                            <i class="far fa-star"></i>
-                                        {% endif %}
-                                    </a>
-                                    <a href="{{ path('rating', {'user_id':  app.user ,  'rate': 4, 'formation_id': formation.id }) }}" class="starColor">
-                                        {% if average >= 3.5 and average <4 %}
-                                            <i class="fas fa-star-half"></i>
-                                        {% elseif average >=4 %}
-                                            <i class="fas fa-star"></i>
-                                        {% else %}
-                                            <i class="far fa-star"></i>
-                                        {% endif %}
-                                    </a>
-                                    <a href="{{ path('rating', {'user_id':  app.user ,  'rate': 5, 'formation_id': formation.id }) }}" class="starColor">
-                                        {% if average >= 4.5 and average <5%}
-                                            <i class="fas fa-star-half"></i>
-                                        {% elseif average >=5 %}
-                                            <i class="fas fa-star"></i>
-                                        {% else %}
-                                            <i class="far fa-star"></i>
-                                        {% endif %}
-                                    </a>
-                                    </h5>
-                                </div>
-                                <div class="col-md-3 mt-1 mb-1 border rounded border-white">
-                                    <h5 class="mt-1 text-white ">Prix : </h5>
-                                    <h3 class="text-white textDisplay">{{ formation.price }} € </h3>
-                                </div>
-                                <div class="col-md-3 mt-1 mb-1 ">
-                                    <div class="row d-flex justify-content-center">
-                                        <span class="fb-share-button mr-2 mb-2" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large" data-mobile-iframe="true">
-                                            <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Facebook</a>
-                                        </span>
-                                        <span>
-                                            <a class="twitter-share-button mt-2 ml-2" href="https://twitter.com/intent/tweet?text=formation:" data-size="large">Tweet</a>
-                                        </span>
-                                    </div>
+                                        <p class ="ml-5">Soyez le premier à noter cette formation</p>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -215,9 +122,83 @@
             </div>
         </div>
     </div>
+
+    <!--Modal start-->
+    <div class="modal fade" id="contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modalLandingFormation" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Contacter le formateur</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(contactForm) }}
+                    <div class="form-group">
+                        {{ form_label(contactForm.email) }}
+                        {{ form_widget(contactForm.email) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(contactForm.objet) }}
+                        {{ form_widget(contactForm.objet) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(contactForm.message) }}
+                        {{ form_widget(contactForm.message) }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <input type="submit" class="btn btn-primary" value="Envoyez"/>
+                    </div>
+                    {{ form_end(contactForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="comment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modalLandingFormation" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Commentaires</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        {{ form_start(commentForm) }}
+                        {{ form_label(commentForm.comment) }}
+                        {{ form_widget(commentForm.comment) }}
+                        <input type="submit" class="btn btn-primary" value="Envoyez"/>
+                        {{ form_end(commentForm) }}
+
+
+                        {% for comment in comments %}
+                            <strong class="pull-left primary-font"><a href="{{ path('profil', {'id': app.user.id}) }}">{{ comment.author.nickname }} </a></strong>
+                            <small class="pull-right text-muted">
+                                <span class="glyphicon glyphicon-time"></span>{{ comment.createdAt|date('d-m-Y') }}</small>
+                            <br>
+                            <p class="ui-state-default text-center">
+                                {{ comment.comment }}
+                            </p>
+                        {%  endfor %}
+                        {{ knp_pagination_render(comments) }}
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal end-->
+
+
     <div id="fb-root"></div>
     <script>(function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
+            let js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
             js = d.createElement(s); js.id = id;
             js.src = 'https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.0';
@@ -225,7 +206,7 @@
         }(document, 'script', 'facebook-jssdk'));
     </script>
     <script>window.twttr = (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0],
+            let js, fjs = d.getElementsByTagName(s)[0],
                 t = window.twttr || {};
             if (d.getElementById(id)) return t;
             js = d.createElement(s);
@@ -241,6 +222,6 @@
             return t;
         }(document, "script", "twitter-wjs"));
     </script>
-</body>
+    </body>
 {% endblock %}
 

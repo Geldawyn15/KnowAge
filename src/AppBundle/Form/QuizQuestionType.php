@@ -16,7 +16,7 @@ class QuizQuestionType extends AbstractType
     {
 
             $builder
-                    ->add('content', TextType::class, ['required' => false])
+                    ->add('content', TextType::class, ['required' => false, 'label' => 'Questions :'])
                     ->add('responses', CollectionType::class, array(
                         'entry_type' => ResponseType::class,
                     ));

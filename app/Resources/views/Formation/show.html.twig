@@ -1,7 +1,4 @@
 {% extends 'layout.html.twig' %}
-
-{% block sub_header %}{% endblock %}
-
 {% block stylesheet %}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/froala_style.min.css" rel="stylesheet" type="text/css" />
 {% endblock %}
@@ -14,10 +11,13 @@
         <ol class="breadcrumb pl-3">
             <li class="breadcrumb-item"><p>{{ page.formation.title }}</p></li>
             <li class="breadcrumb-item"><a>Page : {{ page.ordering+1 }}</a></li>
-            <li class="breadcrumb-item"><a>{% if page.type == 0 %} Formation {% else %} Questionnaire {% endif %} </a></li>
+            <li class="breadcrumb-item"><a>{% if page.type == 0 %} Page {% else %} Questionnaire {% endif %} </a></li>
         </ol>
     </nav>
 {% endblock %}
+
+
+
 
 
 {% block content %}
@@ -25,7 +25,7 @@
     {% if page.content %}
         <div class="row my-5">
             <div class="col-12">
-                <div class="fr-view bg-main py-5">
+                <div class="fr-view bg-main py-5 px-5">
                         {{ page.content | raw }}
                 </div>
             </div>
@@ -45,9 +45,9 @@
                                 <div><input type="checkbox" id="response_q{{ loop.index0 }}_2" name="{{ question.id }}[]" value="{{ question.responses.2.id }}" {% if question.responses.2.checked %}checked{% endif %} /><label for="response_q{{ loop.index0 }}_2">{{ question.responses.2.content }}</label></div>
                                 {% if page.quizSubmitted %}
                                     {% if question.valid %}
-                                        <p> Bonne réponse</p>
+                                        <p class="typo-main font-weight-bold pt-2 text-success"> Bonne réponse !</p>
                                     {% else %}
-                                        <p>ERROR</p>
+                                        <p class="typo-main font-weight-bold pt-2 text-danger">Mauvaise réponse !</p>
                                     {% endif %}
                                 {% endif %}
                                 <hr>

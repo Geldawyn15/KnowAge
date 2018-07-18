@@ -191,7 +191,7 @@ class FormationController extends controller
         /** @var Question[] $questions */
         $questions = [];
 
-        for ($i = 0; $i < 6; $i++) {
+        for ($i = 0; $i < 5; $i++) {
 
             $question = new Question($formationPage);
             $question->setResponses([
@@ -211,6 +211,8 @@ class FormationController extends controller
             $formationPage->setQuestions($questions);
 
             $em->flush();
+
+            $this->addFlash('success', 'Votre page a bien été enregistrée ');
 
             return $this->redirectToRoute('create', array(
                 'id' => $id,

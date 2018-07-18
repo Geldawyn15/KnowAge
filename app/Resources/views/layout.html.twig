@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{{ asset('/assets/images/favicon.png') }}">
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('bundles/starrating/css/rating.css') }}" />
@@ -30,7 +29,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+    <nav class="navbar navbar-expand-lg bg-beige fixed-top ">
         <a class="navbar-brand" href="{{ path('homepage') }}">
             <img src="/assets/images/favicon-96x96.png" width="45" height="45"> KnowAge
         </a>
@@ -58,11 +57,11 @@
                 </li>
                 {% if app.user %}
                     <li class="nav-item">
-                        <a class="nav-link text-white btn btn-outline-secondary" href="{{ path('logout') }}" role="button">Se déconnecter</a>
+                        <a class="nav-link btn btn-outline-secondary" style="color:navajowhite;" href="{{ path('logout') }}" role="button">Se déconnecter</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link text-white btn btn-outline-secondary" href="{{ path('login') }}" role="button">Se Connecter</a>
+                        <a class="nav-link btn btn-outline-secondary" style="color:navajowhite;" href="{{ path('login') }}" role="button">Se Connecter</a>
                     </li>
                 {% endif %}
 
@@ -78,14 +77,14 @@
         </div>
     {% endblock %}
 
-    <div class="content">
+
 
         {% block content %}{% endblock %}
 
-    </div>
 
 
-    <footer class="bg-dark py-2 text-center">
+
+    <footer class="py-2 text-center">
         <div class="container">
             <div class="mb-2">
                 <a href="{{ path('homepage') }}">Accueil</a>
@@ -104,8 +103,9 @@
         {% block toast %}
         toastr.options = {
             "positionClass": "toast-top-full-width",
-            "showDuration": "500",
-            "progressBar": true
+            "showDuration": "300",
+            "progressBar": true,
+            "closeButton": true
         };
         {% endblock %}
         /* type pour Toastr => success, info, warning, error*/

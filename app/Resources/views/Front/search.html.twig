@@ -9,11 +9,11 @@
 
 
 {% block content %}
+<div class="content mt-5">
 
     {% include 'Front/search.widget.html.twig' %}
 
     <div class="container py-4">
-
 
         {% if formations %}
 
@@ -31,7 +31,7 @@
                                     {% endif %}
                                 {% endif %}
                             </button>
-                            <img class="card-img-top" src="{{ formation.picture }}">
+                            <img class="card-img-top" style="width: 348px; height: 218px;" src="{{ formation.picture }}">
                             <div class="py-2 px-3 text-white bg-yellow" style="position:absolute; bottom: 0"><b>{{ formation.category }}</b></div>
                         </div>
                         <div class="card-body">
@@ -40,28 +40,28 @@
                         </div>
                         <div class="card-footer d-flex justify-content-between align-items-center">
                             <a href="{{ path('landing_formation', {id: formation.id}) }}" class="btn btn-sm btn-outline-secondary mr-3">Voir la formation</a>
-                            <small class="text-muted">{{ formation.author.nickName }}</small>
+                            <small class="text-muted"><a href="{{ path('profil', {'id': formation.author.id}) }}"> {{ formation.author.nickName }}</a></small>
                         </div>
                     </div>
                 </div>
                 {% if loop.index % 3 == 0 %}</div>{% endif %}
             {% endfor %}
 
-
+        <div class="row col-9 mt-5">
             {{ knp_pagination_render(formations) }}
-
+        </div>
 
         {% endif %}
 
         {% if (search or id) and formations is empty %}
             <div class="text-center mb-5">
-                <p class="h3">Votre recherche n'a donné aucun résultat</p>
+                <p class="h3 typo-main font-weight-bold">Votre recherche n'a donné aucun résultat</p>
             </div>
         {% endif %}
 
         <script>
            $(document).ready(function() {
-               $('.favorite').click(function() {
+               $('.js-favorite').click(function() {
                    let icon = $(this).find("i");
                    if (icon.hasClass("far")) {
                        $.get('/user/favoriteformation', {
@@ -80,5 +80,6 @@
            });
         </script>
     </div>
+</div>
 
 {% endblock %}
