@@ -70,6 +70,13 @@ a{
     color: navajowhite;
 }
 
+a:hover {
+    color: white;
+}
+
+#btn-Faq:hover {
+    color: white;
+}
 /* header marketing*/
 .marketing {
     height: 400px;
