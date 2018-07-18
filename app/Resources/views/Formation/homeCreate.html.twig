@@ -16,22 +16,22 @@
 {% block content %}
 
     <div class="container pb-1 pt-4">
-        <h3 class=" card-header typo-main font-weight-bold text-center mt-5"> Ajouter du contenu à ma formation</h3>
-        <div class="row py-5">
+        <h3 class="card-header typo-main font-weight-bold text-center mt-5"> Ajouter du contenu à ma formation</h3>
+        <div class="row bg-grey py-5">
             <div class="col-8 offset-2">
                 <div class="card-deck text-center">
                     <div class="card">
                         <div class="card-header typo-main h3">Nouvelle pages</div>
                         <div class="card-body">
                             <p class="card-text">Vous detenez un savoir faire ? Partagez le avec le monde entier et gagnez de l'argent.blabalbalbalablabla </p>
-                            <a class="btn btn-lg btn-primary my-3" href="{{ path('new2', {'id': formation.id}) }}">Ajouter une page</a>
+                            <a class="btn btn-lg Button1 my-3" href="{{ path('new2', {'id': formation.id}) }}">Ajouter une page</a>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-header typo-main h3">Nouveau quiz</div>
                         <div class="card-body">
                             <p class="card-text">Aprenez à votre rythme, sans contrainte. Elargissez vos connaissances. Ouvrez vous de nouveaux horizons </p>
-                            <a class="btn btn-lg btn-primary my-3" href="{{ path('quiz', {'id': formation.id}) }}">Ajouter un quiz</a>
+                            <a class="btn btn-lg Button1 my-3" href="{{ path('quiz', {'id': formation.id}) }}">Ajouter un quiz</a>
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
         </div>
 
         <div class="offset-5 col-2 py-5">
-            <a class="px-4 py-3 text-nowrap text-truncate text-white text-center Button1" href="{{ path('landing_formation', {'id' : formation.id}) }}" role="button">Terminer la formation</a>
+            <a class="px-4 py-3 text-nowrap text-truncate text-white text-center Button2" href="{{ path('landing_formation', {'id' : formation.id}) }}" role="button">Terminer la formation</a>
         </div>
     </div>
 
