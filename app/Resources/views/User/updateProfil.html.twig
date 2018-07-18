@@ -2,6 +2,8 @@
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block title %} Update Profil {% endblock %}
 
+{% block h1 %}Modifier mon profil{% endblock %}
+
 
 {% block content %}
     <body id="updateProfile">
@@ -48,6 +50,7 @@
                         {{ form_widget(form.email) }}
                     </div>
                     <div class="input-group mb-3">
+                        <label class="input-group-text">Photo de profil</label>
                         {{ form_widget(form.profilePicFile) }}
                     </div>
                 </div>
