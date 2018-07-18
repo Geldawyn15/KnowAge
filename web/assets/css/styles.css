@@ -1,5 +1,5 @@
 body {
-    padding-top: 71px;
+    padding-top: 77px;
 }
 
 nav{
@@ -69,7 +69,7 @@ nav{
 
 /* TODO sticky footer*/
 .content {
-    min-height: 680px;
+    min-height: 690px;
 }
 
 .breadcrumb {
