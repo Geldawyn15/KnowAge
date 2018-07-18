@@ -45,9 +45,9 @@
                                 <div><input type="checkbox" id="response_q{{ loop.index0 }}_2" name="{{ question.id }}[]" value="{{ question.responses.2.id }}" {% if question.responses.2.checked %}checked{% endif %} /><label for="response_q{{ loop.index0 }}_2">{{ question.responses.2.content }}</label></div>
                                 {% if page.quizSubmitted %}
                                     {% if question.valid %}
-                                        <p> Bonne réponse</p>
+                                        <p class="typo-main font-weight-bold pt-2 text-success"> Bonne réponse !</p>
                                     {% else %}
-                                        <p>ERROR</p>
+                                        <p class="typo-main font-weight-bold pt-2 text-danger">Mauvaise réponse !</p>
                                     {% endif %}
                                 {% endif %}
                                 <hr>

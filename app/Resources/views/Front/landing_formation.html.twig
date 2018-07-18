@@ -49,9 +49,9 @@
                                 <h5 class="card-title">{{ formation.title }}</h5>
                                 <small class="text-muted"><span>Crée par </span><a href="{{ path('profil', {'id': app.user.id}) }}"> {{ formation.author.nickName }}</a><span> le {{  formation.createdAt | date('d M Y') }}</span></small>
                                 <p class="card-text">{{ formation.description  }}</p>
-                                <div class="d-flex justify-content-around mb-5">
-                                    <a class="btn btn-md btn-primary" href="{{ path('formation_Achat', {id: formation.id}) }}"><i class="fas fa-shopping-cart mr-1"></i>Acheter</a>
-                                    <a class="btn btn-md btn-primary" href="{{ path('show', {'id': formation.id, 'page': formation_page.ordering}) }}"><i class="fas fa-angle-double-right mr-1"></i> Reprendre</a>
+                                <div class="d-flex justify-content-around my-5">
+                                    <a class="btn Button1" href="{{ path('formation_Achat', {id: formation.id}) }}"><i class="fas fa-shopping-cart mr-1"></i>Acheter</a>
+                                    <a class="btn Button1" href="{{ path('show', {'id': formation.id, 'page': formation_page.ordering}) }}"><i class="fas fa-angle-double-right mr-1"></i> Reprendre</a>
                                 </div>
                             </div>
                             <div class="card-footer">
