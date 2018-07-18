@@ -51,14 +51,14 @@
 
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active text-dark" href="#etudiant" role="tab" data-toggle="tab">Etudiant ({{payments|length}})</a>
+            <a class="nav-link active text-dark" href="#etudiant" role="tab" data-toggle="tab">Formations achetées ({{payments|length}})</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" href="#formateur" role="tab" data-toggle="tab">Formateur ({{formationscreated|length}})</a>
+            <a class="nav-link text-dark" href="#formateur" role="tab" data-toggle="tab">Formation crées ({{formationscreated|length}})</a>
         </li>
         <li class="nav-item">
             {% if app.user == user %}
-                <a class="nav-link text-dark" href="#favoriteFormations" role="tab" data-toggle="tab">Mes Formations ({{favoriteformations|length}})</a>
+                <a class="nav-link text-dark" href="#favoriteFormations" role="tab" data-toggle="tab">Mes Formations favorites ({{favoriteformations|length}})</a>
             {% else %}
                 <a class="nav-link text-dark" href="#favoriteFormations" role="tab" data-toggle="tab">Leurs Formations ({{favoriteformations|length}})</a>
 
@@ -73,10 +73,9 @@
         </li>
     </ul>
 
-    <div class="tab-content bg-main">
+    <div class="tab-content bg-main mb-5">
         <div role="tabpanel" class="tab-pane show active" id="etudiant">
             <div class="container py-4">
-                <h1>Formation Achetée</h1>
                 {% for payment in payments %}
                     {% if loop.index0 % 3 == 0 %}<div class="row mb-5">{% endif %}
                     <div class="col-4">
@@ -110,7 +109,6 @@
         </div>
         <div role="tabpanel" class="tab-pane" id="formateur">
             <div class="container py-4">
-                <h1>Formation Crée</h1>
                 {% for formationcreated in formationscreated %}
                     {% if loop.index0 % 3 == 0 %}<div class="row mb-5">{% endif %}
                     <div class="col-4">
@@ -137,7 +135,6 @@
         </div>
         <div role="tabpanel" class="tab-pane" id="favoriteFormations">
             <div class="container py-4">
-                <h1>Formation Favori</h1>
                 {% for eachformation in favoriteformations %}
                     {% if loop.index0 % 3 == 0 %}<div class="row mb-5">{% endif %}
                     <div class="col-4">
@@ -171,7 +168,6 @@
         </div>
         <div role="tabpanel" class="tab-pane" id="favoriteFormateurs">
             <div class="container py-4">
-                <h1>Formateur Favori</h1>
                 {% for eachformateur in favoriteformateur %}
                     {% if loop.index0 % 3 == 0 %}<div class="row mb-5">{% endif %}
                     <div class="col-4">
