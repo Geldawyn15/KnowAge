@@ -97,7 +97,9 @@ a{
 
 /*buttons */
 
-
+.scroll-top{
+    color: #4a394e;
+}
 .scrollPosition {
     position :fixed;
     bottom:100px;
