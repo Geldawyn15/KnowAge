@@ -1,67 +1,53 @@
 {% extends 'layout.html.twig' %}
-
 {% block title %} Profil {% endblock %}
 
-{% block body_id %}profile{% endblock %}
-
-{% block sub_header %} {% endblock %}
+{% block h1 %}Profil{% endblock %}
 
 {% block content %}
 
-    <div class="d-flex justify-content-between">
-        <div class="d-flex flex-column justify-content-center ml-5">
-            {%  if  app.user.profilePic %}
-                <div class="ml-1"><img src="{{ app.user.profilePic }} " style="height: 180px; width: 180px;"></div>
-            {% else %}
-                <div class="ml-1"><img src="https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png" style="height: 180px; width: 180px;"></div>
-            {%  endif %}
-
-        </div>
-        <div class="d-flex flex-column ml-5 profileinfo">
-            {% if user.name %}
-            <div class="d-flex p-2" ><label> Nom: </label><p class="pl-2"> {{ user.name }} </p></div>
-            {% endif %}
-
-
-            {% if  user.firstName %}
-            <div class="d-flex p-2"><label> Prenom: </label><p class="pl-2"> {{ user.firstName }} </p></div>
-            {% endif%}
-
-            <div class="d-flex p-2"><label> Pseudo: </label><p class="pl-2"><p>{{ user.nickname }}</p></div>
-            <div class="d-flex  p-2"><label> Email: </label><p class="pl-2"><p>{{ user.email }}</p></div>
-        </div>
-        {% if user == app.user %}
-        <div class="d-flex flex-column ml-5 justify-content-between">
-            <div class="d-flex flex-row">
-                <div>
-                    <a href="{{ path('update_profil') }}" role="button" aria-disabled="true">
-                        <button class="btn btn-outline-secondary waves-effect mr-1">Modifier mon Profil</button>
-                    </a>
+<div class="container mt-5 py-3">
+    <div class="card mb-5">
+        <div class="row py-3 justify-content-center bg-second">
+            <div class="col-4 mx-1 my-1">
+                {%  if  app.user.profilePic %}
+                    <div><img class="w-100" style="border: 2px solid grey;" src="{{ app.user.profilePic }}" ></div>
+                {% else %}
+                    <div class="ml-1 image-responsive"><img src="https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png" style="height: 180px; width: 180px;"></div>
+                {%  endif %}
+            </div>
+            <div class="col-3 px-3 align-middle" style="display: flex;align-items: center">
+                <div class="card-block ml-5 px-3">
+                    <p class="card-title">
+                        {% if user.name %}
+                            <div><p class="typo-main"><span class="font-weight-bold"> Nom: </span> {{ user.name }} </p></div>
+                        {% endif %}
+                        {% if  user.firstName %}
+                            <div><p class="typo-main"><span class="font-weight-bold"> Prenom:</span> {{ user.firstName }} </p></div>
+                        {% endif%}
+                    </p>
+                <p class="card-text typo-main"><span class="font-weight-bold">Pseudo:</span> {{ user.nickname }}</p>
+                <p class="card-text typo-main"><span class="font-weight-bold">Email:</span> {{ user.email }}</p>
+            </div>
+            </div>
+                <div class="py-4" style="display: flex;align-items: center">
+                    <div class="my-3 ml-4">
+                        <a href="{{ path('update_profil') }}" role="button" aria-disabled="true">
+                            <button class="btn btn-outline-secondary waves-effect mr-1">Modifier mon Profil</button>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="{{ path('update_password') }}" role="button" aria-disabled="true">
+                            <button class="btn btn-outline-secondary waves-effect mr-1">Modifier mon mot de passe</button>
+                        </a>
+                    </div>
                 </div>
-                <div>
-                    <a href="{{ path('update_password') }}" role="button" aria-disabled="true">
-                        <button class="btn btn-outline-secondary waves-effect mr-1">Modifier mon mot de passe</button>
-                    </a>
                 </div>
             </div>
-            {% else %}
-            <div class="d-flex flex-column ml-5 justify-content-around">
-            {% endif %}
 
-            </div>
-            <div class="d-flex flex-column ml-5 justify-content-center">
-                {% if app.user != user %}
-                <button data-formateur-id="{{ user.id }}" class="favoriteFormateur btn">
-                    {% if currentuser.isFormateurFavorited(user) %}
-                        <i class="fas fa-heart fa-5x favorite"></i>
-                    {% else %}
-                        <i class="far fa-heart fa-5x favorite"></i>
-                    {% endif %}
-                </button>
-                {% endif %}
-            </div>
         </div>
     </div>
+</div>
+
 
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">

@@ -42,7 +42,7 @@ class ImgUploader
 
         $this->simpleImage
             ->fromFile($file)
-            ->bestFit(100, 100)
+            ->bestFit(400, 400)
             ->toFile($this->targetDir. '/' . $fileName);
 
         return $this->publicPath.'/'.$fileName;
