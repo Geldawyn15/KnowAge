@@ -66,11 +66,6 @@ class Formation
     private $category;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag")
-     */
-    private $tags;
-
-    /**
      * @ORM\Column(name="picture", type="string",nullable=false)
     */
     private $picture;
@@ -85,7 +80,6 @@ class Formation
 
     public function __construct()
     {
-        $this->tags = new ArrayCollection();
         $this->pages = new ArrayCollection();
     }
 
@@ -228,22 +222,6 @@ class Formation
     public function setAuthor($author)
     {
         $this->author = $author;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
-
-    /**
-     * @param mixed $tags
-     */
-    public function setTags($tags)
-    {
-        $this->tags = $tags;
     }
 
     /**
