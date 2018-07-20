@@ -1,14 +1,9 @@
 /vendor/
-/temp/*
 *.cache
-app/db.php
 .idea/
 /web/upload/*
-/web/assets/images/Category/.gitkeep
 /.web-server-pid
 /app/config/parameters.yml
-/build/
-/phpunit.xml
 /var/*
 !/var/cache
 /var/cache/*
