@@ -449,7 +449,14 @@ class User implements UserInterface, \Serializable
 
     public function __toString()
     {
-        return $this->name;
+        return $this->getFullName() ?: $this->nickName;
+    }
+
+    public function getFullName()
+    {
+        if ($this->firstName) {
+            return $this->firstName.' '.$this->name;
+        }
     }
 
     /**
