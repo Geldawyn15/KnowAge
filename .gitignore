@@ -1,7 +1,6 @@
 /vendor/
 *.cache
 .idea/
-/web/upload/*
 /.web-server-pid
 /app/config/parameters.yml
 /var/*
