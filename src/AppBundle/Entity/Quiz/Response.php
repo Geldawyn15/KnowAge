@@ -38,7 +38,7 @@ class Response
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Quiz\Question", inversedBy="responses")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Quiz\Question", inversedBy="responses",cascade={"all"})
      *
      */
     private $question;
