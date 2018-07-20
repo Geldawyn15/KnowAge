@@ -4,6 +4,7 @@
 app/db.php
 .idea/
 /web/upload/*
+/web/assets/images/Category/.gitkeep
 /.web-server-pid
 /app/config/parameters.yml
 /build/
@@ -19,5 +20,4 @@ app/db.php
 /var/sessions/*
 !var/sessions/.gitkeep
 !var/SymfonyRequirements.php
-/vendor/
 /web/bundles/
