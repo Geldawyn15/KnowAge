@@ -31,7 +31,7 @@ class Question
 
     /**
      * @var Response[]
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Quiz\Response", mappedBy="question", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Quiz\Response", mappedBy="question", cascade={"all"})
      */
     private $responses;
 

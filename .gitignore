@@ -1,13 +1,8 @@
 /vendor/
-/temp/*
 *.cache
-app/db.php
 .idea/
-/web/upload/*
 /.web-server-pid
 /app/config/parameters.yml
-/build/
-/phpunit.xml
 /var/*
 !/var/cache
 /var/cache/*
@@ -19,5 +14,4 @@ app/db.php
 /var/sessions/*
 !var/sessions/.gitkeep
 !var/SymfonyRequirements.php
-/vendor/
 /web/bundles/

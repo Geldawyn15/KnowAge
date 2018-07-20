@@ -10,6 +10,8 @@ class ImgUploader
 {
     private $targetDir;
 
+    private $profilPictureDir;
+
     private $simpleImage;
 
     private $publicPath;
