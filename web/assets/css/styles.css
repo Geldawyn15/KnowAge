@@ -3,7 +3,7 @@ body {
 }
 
 nav{
-    height: 71px;
+    height: 70px;
 }
 
 
@@ -64,6 +64,8 @@ nav{
 
 footer{
     background-color: #4a394e ;
+    height: 40px;
+
 }
 
 a{
@@ -92,7 +94,19 @@ a:hover {
 
 /* TODO sticky footer*/
 .content {
-    min-height: 690px;
+    min-height: calc(100vh - 330px);
+}
+
+.content-login {
+    min-height: calc(100vh - 378px);
+}
+
+.content-signup {
+    min-height: calc(100vh - 426px);
+}
+
+.content-legal_mention {
+    min-height: calc(100vh - 546px);
 }
 
 .breadcrumb {
