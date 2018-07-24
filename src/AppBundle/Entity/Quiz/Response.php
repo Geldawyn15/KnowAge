@@ -60,7 +60,10 @@ class Response
         return $this->id;
     }
 
-
+    public function getIsValid()
+    {
+        return $this->isValid;
+    }
 
     /**
      * Set isValid
