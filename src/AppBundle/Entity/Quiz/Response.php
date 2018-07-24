@@ -30,7 +30,7 @@ class Response
 
     /**
      * @var bool
-     *
+     * TODO ptit soucis de nommage => isRightResponse ?
      * @ORM\Column(name="isValid", type="boolean")
      */
     private $isValid;
@@ -60,7 +60,10 @@ class Response
         return $this->id;
     }
 
-
+    public function getIsValid()
+    {
+        return $this->isValid;
+    }
 
     /**
      * Set isValid
@@ -74,16 +77,6 @@ class Response
         $this->isValid = $isValid;
 
         return $this;
-    }
-
-    /**
-     * Get isValid
-     *
-     * @return bool
-     */
-    public function getIsValid()
-    {
-        return $this->isValid;
     }
 
     /**
