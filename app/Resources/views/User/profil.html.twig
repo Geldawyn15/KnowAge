@@ -28,25 +28,37 @@
                 <p class="card-text typo-main"><span class="font-weight-bold">Pseudo:</span> {{ user.nickname }}</p>
                 <p class="card-text typo-main"><span class="font-weight-bold">Email:</span> {{ user.email }}</p>
             </div>
-            </div>
-                <div class="py-4" style="display: flex;align-items: center">
-                    <div class="my-3 ml-4">
-                        <a href="{{ path('update_profil') }}" role="button" aria-disabled="true">
-                            <button class="btn Button1 mr-1">Modifier mon Profil</button>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="{{ path('update_password') }}" role="button" aria-disabled="true">
-                            <button class="btn Button1 mr-1">Modifier mon mot de passe</button>
-                        </a>
-                    </div>
-                </div>
-                </div>
-            </div>
-
         </div>
+        <div class="d-flex flex-column justify-content-center">
+            <div class="py-4" style="display: flex; align-items: center">
+                <div class="my-3 ml-4">
+                    <a href="{{ path('update_profil') }}" role="button" aria-disabled="true">
+                        <button class="btn Button1 mr-1">Modifier mon Profil</button>
+                    </a>
+                </div>
+                <div>
+                    <a href="{{ path('update_password') }}" role="button" aria-disabled="true">
+                        <button class="btn Button1 mr-1">Modifier mon mot de passe</button>
+                    </a>
+                </div>
+            </div>
+            <div class="d-flex  ml-5 justify-content-center">
+                {% if app.user != user %}
+                    <button data-formateur-id="{{ user.id }}" class="btn favoriteFormateur js-favorite">
+                        {% if currentuser.isFormateurFavorited(user) %}
+                            <i class="fas fa-heart fa-5x"></i>
+                        {% else %}
+                            <i class="far fa-heart fa-5x"></i>
+                        {% endif %}
+                    </button>
+                {% endif %}
+            </div>
+        </div>
+
     </div>
 </div>
+    </div>
+
 
 
     <ul class="nav nav-tabs" role="tablist">
@@ -58,17 +70,16 @@
         </li>
         <li class="nav-item">
             {% if app.user == user %}
-                <a class="nav-link text-dark" href="#favoriteFormations" role="tab" data-toggle="tab">Mes Formations favorites ({{favoriteformations|length}})</a>
+                <a class="nav-link text-dark" href="#favoriteFormations" role="tab" data-toggle="tab">Formations favorites ({{favoriteformations|length}})</a>
             {% else %}
-                <a class="nav-link text-dark" href="#favoriteFormations" role="tab" data-toggle="tab">Leurs Formations ({{favoriteformations|length}})</a>
-
+                <a class="nav-link text-dark" href="#favoriteFormations" role="tab" data-toggle="tab">Leurs Formations favorites ({{favoriteformations|length}})</a>
             {% endif %}
         </li>
         <li class="nav-item">
             {% if app.user == user %}
-                <a class="nav-link text-dark" href="#favoriteFormateurs" role="tab" data-toggle="tab">Mes Formateurs ({{favoriteformateur|length}})</a>
+                <a class="nav-link text-dark" href="#favoriteFormateurs" role="tab" data-toggle="tab">Formateurs favoris ({{favoriteformateur|length}})</a>
             {% else %}
-                <a class="nav-link text-dark" href="#favoriteFormateurs" role="tab" data-toggle="tab">Leurs Formateurs ({{favoriteformateur|length}})</a>
+                <a class="nav-link text-dark" href="#favoriteFormateurs" role="tab" data-toggle="tab">Leurs Formateurs favoris ({{favoriteformateur|length}})</a>
             {% endif %}
         </li>
     </ul>
@@ -82,11 +93,11 @@
                         <div class="card">
                             <div style="position: relative;">
                                 {% if  app.user == user %}
-                                    <button class="btn favoriteFormation" data-formation-id="{{payment.formation.id}}" style="position:absolute; right: 0">
+                                    <button class="btn favoriteFormation js-favorite" data-formation-id="{{payment.formation.id}}" style="position:absolute; right: 0">
                                         {% if user.isFormationFavorited(payment.formation) %}
-                                            <i id="js-favorite" class="fas fa-heart fa-2x"></i>
+                                            <i class="fas fa-heart fa-2x"></i>
                                         {% else%}
-                                            <i id="js-favorite" class="far fa-heart fa-2x"></i>
+                                            <i class="far fa-heart fa-2x"></i>
                                         {% endif %}
                                     </button>
                                 {% endif %}
@@ -141,11 +152,11 @@
                         <div class="card">
                             <div style="position: relative;">
                                 {% if app.user == user %}
-                                <button class="btn favoriteFormation" data-formation-id="{{eachformation.id}}" style="position:absolute; right: 0">
+                                <button class="btn favoriteFormation js-favorite" data-formation-id="{{eachformation.id}}" style="position:absolute; right: 0">
                                     {% if user.isFormationFavorited(eachformation) %}
-                                        <i id="js-favorite" class="fas fa-heart fa-2x"></i>
+                                        <i  class="fas fa-heart fa-2x"></i>
                                     {% else %}
-                                        <i id="js-favorite" class="far fa-heart fa-2x"></i>
+                                        <i  class="far fa-heart fa-2x"></i>
                                     {% endif %}
                                 </button>
                                 {% endif %}
@@ -174,11 +185,11 @@
                         <div class="card">
                             <div style="position: relative;">
                                 {% if app.user == user %}
-                                <button class="btn favoriteFormateur" data-formation-id="{{eachformateur.id}}" style="position:absolute; right: 0">
+                                <button class="btn favoriteFormateur js-favorite" data-formation-id="{{eachformateur.id}}" style="position:absolute; right: 0">
                                     {% if user.isFormateurFavorited(eachformateur) %}
-                                        <i id="js-favorite" class="fas fa-heart fa-2x"></i>
+                                        <i  class="fas fa-heart fa-2x"></i>
                                     {% else %}
-                                        <i id="js-favorite" class="far fa-heart fa-2x"></i>
+                                        <i  class="far fa-heart fa-2x"></i>
                                     {% endif %}
                                 </button>
                                 {% endif %}
@@ -201,13 +212,12 @@
                 {% endfor %}
             </div>
         </div>
-
     </div>
 
 <script>
     $(document).ready(function() {
         $('.favoriteFormation').click(function() {
-            var icon = $(this).find("i");
+           let icon = $(this).find("i");
             if (icon.hasClass("far")) {
                 $.get('/user/favoriteformation', {
                     formationId: $(this).attr('data-formation-id'),
@@ -223,7 +233,7 @@
             }
         });
         $('.favoriteFormateur').click(function() {
-            var icon = $(this).find("i");
+            let icon = $(this).find("i");
             if (icon.hasClass("far")) {
                 $.get('/user/favoriteformatuer', {
                     formateurId: $(this).attr('data-formateur-id'),

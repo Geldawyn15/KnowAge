@@ -85,7 +85,8 @@ a:hover {
 }
 
 /* coeur */
-.favoriteFormation, .favoriteFormateur {
+
+.js-favorite {
     background-color:transparent;
     color:Tomato;
 }
