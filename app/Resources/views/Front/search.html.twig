@@ -22,7 +22,7 @@
                 <div class="col-4">
                     <div class="card">
                         <div style="position: relative;">
-                            <button class="btn js-favorite" data-formation-id="{{ formation.id }}" style="position:absolute; right: 0">
+                            <button class="btn js-favorite favorite" data-formation-id="{{ formation.id }}" style="position:absolute; right: 0">
                                 {% if app.user %}
                                     {% if app.user.isFormationFavorited(formation) %}
                                         <i class="fas fa-heart fa-2x"></i>
