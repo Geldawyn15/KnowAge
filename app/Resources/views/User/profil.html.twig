@@ -110,7 +110,7 @@
                             </div>
                             <div class="card-footer d-flex justify-content-between align-items-center">
                                 <a href="{{path('landing_formation', {id: payment.formation.id})}}" class="btn btn-sm btn-outline-secondary mr-3">Voir la formation</a>
-                                <small class="text-muted">{{ payment.formation.author.nickName }}</small>
+                                <small class="text-muted"><a href="{{ path('profil', {'id': payment.formation.author.id}) }}" class="font-weight-bold" style="color: #4a394e">Créé par {{ payment.formation.author.nickName }}</a></small>
                             </div>
                         </div>
                     </div>
@@ -169,7 +169,7 @@
                             </div>
                             <div class="card-footer d-flex justify-content-between align-items-center">
                                 <a href="{{path('landing_formation', {id: eachformation.id})}}" class="btn btn-sm btn-outline-secondary mr-3">Voir la formation</a>
-                                <small class="text-muted">{{ eachformation.author.nickName }}</small>
+                                <small class="text-muted"><a href="{{ path('profil', {'id': eachformation.author.id}) }}" class="font-weight-bold" style="color: #4a394e">Créé par {{eachformation.author.nickName}}</a></small>
                             </div>
                         </div>
                     </div>
